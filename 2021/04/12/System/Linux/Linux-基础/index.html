@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux-基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录Linux操作系统使用的相关基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-基础">
+<meta property="og:url" content="http://example.com/2021/04/12/System/Linux/Linux-%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录Linux操作系统使用的相关基础知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png">
+<meta property="article:published_time" content="2021-04-12T05:20:54.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:37:55.188Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-System/Linux/Linux-基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/12/System/Linux/Linux-%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2021-04-12T05:20:54.000Z" itemprop="datePublished">2021-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux-基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录Linux操作系统使用的相关基础知识</p>
+<span id="more"></span>
+
+<h1 id="VMware安装CentOS"><a href="#VMware安装CentOS" class="headerlink" title="VＭware安装CentOS"></a>VＭware安装CentOS</h1><ul>
+<li> 下载：<a target="_blank" rel="noopener" href="https://www.centos.org/download/"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a>，选择DVD ISO</li>
+<li> 安装：打开VMware，新建虚拟机，自定义安装CentOS<blockquote>
+<ol>
+<li>创建虚拟机：</li>
+<li>选择兼容版本,默认即可,点击下一步;</li>
+<li>选择稍后安装操作系统,点击下一步;</li>
+<li>选择需要安装的操作系统：Linux 版本:安装的版本,点击下一步;</li>
+<li>命名虚拟机,选择安装位置,点击下一步;</li>
+<li>配置处理器,选择处理器,默认,也可根据自身需要修改,点击下一步;</li>
+<li>配置虚拟机内存,最少628M,不多于自身主机内存的一半,点击下一步;</li>
+<li>配置网络,选择使用网络地址转换(Nat),点击下一步;</li>
+<li>配置I/O,默认(LSI Logic).点击下一步;</li>
+<li>配置磁盘类型,默认(SCSI),点击下一步;</li>
+<li>选择磁盘,选择创建新的磁盘空间;点击下一步;</li>
+<li>指定磁盘大小,默认20G,可根据自身需要修改,点击下一步;</li>
+<li>指定磁盘文件,默认选择,点击下一步;</li>
+<li>配置硬件,默认即可,可根据自身需要选择,点击下一步;</li>
+<li>点击完成.</li>
+<li>安装CenrOS：</li>
+<li>右键单击创建的虚拟机,进入设置;</li>
+<li>选择CD/DVD,选择使用ISO映像文件,浏览找到ISO文件目录,打开ISO文件,点击确认;</li>
+<li>开启虚拟机,进行安装;</li>
+<li>选择Install CentOS,Enter;</li>
+<li>选择系统语言,点击继续;</li>
+<li>设置时间日期,地区选Asia,时区选上海,点击完成;</li>
+<li>软件选择,选择最小化安装,点击完成;</li>
+<li>安装目标位置,选择自动配置分区,点击完成;</li>
+<li>点击开始安装;</li>
+<li>设置root密码,点击完成;</li>
+<li>结束后重启,进入系统后,使用root登录.</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="配置网络："><a href="#配置网络：" class="headerlink" title="配置网络："></a>配置网络：</h2><ul>
+<li><p>测试网络: ping <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>;</p>
+</li>
+<li><p>输入: ip addr,查看网络配置文件，一般为/etc/sysconfig/network-scripts/###fcfg-ens33;</p>
+</li>
+<li><p>修改网络配置文件:vi /etc/sysconfig/network-scripts/# ###fcfg-ens33,修改”ONBOOT=yes”，保存退出;</p>
+</li>
+<li><p>关闭防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld # 临时关闭防火墙</span><br><span class="line">systemctl disable firewalld # 禁止开机启动</span><br></pre></td></tr></table></figure></li>
+<li><p>重启网络服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br><span class="line">隔天打开若无法连接，可以查看虚拟机相关服务是否打开</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="网络连接模式"><a href="#网络连接模式" class="headerlink" title="网络连接模式"></a>网络连接模式</h3><ul>
+<li><p><strong>桥连接模式</strong>：虚拟机IP与本机在同一个网端，通讯通畅，但是会出现IP冲突的危险</p>
+</li>
+<li><p><strong>NAT连接模式</strong>：网络地址转换方式，Linux可以访问外网，不会出现IP冲突<br><img src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" alt="NAT_Net_Model"></p>
+<blockquote>
+<p>配置IP</p>
+<blockquote>
+<p>自动获取：</p>
+<blockquote>
+<p>系统 -&gt; 首选项 -&gt; 网络连接 -&gt; 编辑 -&gt; 勾选自动连接<br>自动获取ip的ip地址会改变<br>指定固定IP<br>修改/etc/sysconfig/network-scripts/ifcfg-eth0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ONBOOT = yes   -- 启用</span><br><span class="line">BOOTPROTO = static  -- 指定以静态方式获取IP</span><br><span class="line">IPADDR = xxx.xxx.xxx.xxx  -- 指定IP</span><br><span class="line">GATEWAY = xxx.xxx.xxx.xxx  -- 网关</span><br><span class="line">DNS1 = xxx.xxx.xxx.xxx     -- DNS和网管保持一致即可</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>IPADDR、GATEWAY、DNS1的前面三段必须保持一致<br>重启网络：service network restart或重启机器：reboot</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>独立连接模式</strong>：Linux独立一个网络IP</p>
+</li>
+<li><p>测试：ping <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</li>
+</ul>
+<h1 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h1><p>关机重启前应该将内存的数据同步到磁盘上</p>
+<ul>
+<li>shutdown<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now；立即关机</span><br><span class="line">shutdown -h 1：一分钟后关机</span><br><span class="line">shutdown -r now：立即重启</span><br></pre></td></tr></table></figure></li>
+<li>halt：立即关机</li>
+<li>rebot：重启系统</li>
+<li>sync：将内存的数据同步到磁盘上</li>
+<li>logout：退出远程，图形界面运行无效</li>
+</ul>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>Linux采用基层是的树状目录结构，在Linux世界里，万物皆是文件，包括鼠标、键盘等</p>
+<blockquote>
+<p>root：根目录，只有一个，系统管理员的主目录<br>/bin：二进制指令文件目录<br>/boot：存放启动Linux的核心文件，包括连接文件和镜像文件<br>/dev：设备管理目录，将硬件以文件形式存放<br>/etc：系统管理需要的配置文件和子目录<br>/home：普通用户的目录，Linux里每一个用户都有自己的一个目录<br>/lib：系统开机所需最基本的动态链接共享库，类似于Window里面的DDL文件<br>/proc：是一个虚拟目录，是系统内存的映射，存放系统信息<br>/opt：安装软件管理目录<br>/sbin：高权限用户（系统管理员）使用的系统管理指令<br>/srv：service的缩写，存放服务启动之后需要提取的数据<br>/sys：存放2.6内核新出的文件系统ysfs<br>/tmp：存放临时文件<br>/usr：用户应用程序和文件的存放路径<br>/var：日志文件，存放不停变化的文件</p>
+</blockquote>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><h3 id="分区方式"><a href="#分区方式" class="headerlink" title="分区方式"></a>分区方式</h3><p><strong>mbr分区</strong></p>
+<blockquote>
+<p>最多支持四个主分区<br>系统只能安装在主分区<br>扩展分区腰斩一个主分区<br>MBR最大支持2TB，拥有最好的兼容性</p>
+</blockquote>
+<p><strong>gtp分区</strong></p>
+<blockquote>
+<p>支持无限个主分区（受系统限制，Windows 最多支持128个分区）<br>最大支持18EB的大容量<br>Windows7 64位之后支持 gtp</p>
+</blockquote>
+<h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><blockquote>
+<p>挂载：mount<br>卸载：umont</p>
+</blockquote>
+<h2 id="硬盘"><a href="#硬盘" class="headerlink" title="硬盘"></a>硬盘</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><blockquote>
+<p>IDE硬盘：并口，用hdxn进行标识，hd表示IDE硬盘，x代表盘号（a：基本盘、b：基本从属盘、c：辅助主盘、d：辅助从属盘），n表示分区数：1-4表示主分区或扩展分区，5以上是逻辑分区<br>SCSI硬盘：串口，用sdxn进行标识，sd表示SCSI硬盘，x代表盘号（a：基本盘、b：基本从属盘、c：辅助主盘、d：辅助从属盘），n表示分区数：1-4表示主分区或扩展分区，5以上是逻辑分区</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看硬盘分区挂载情况：lsblk -f</span><br><span class="line">返回分区情况、分区类型、UUID（40位字符串的唯一标识）、挂载目录</span><br><span class="line"></span><br><span class="line">查看分区大小：lsblk</span><br></pre></td></tr></table></figure>
+
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><ol>
+<li>新增硬盘</li>
+<li>重启服务器</li>
+<li>创建分区<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">fdisk /dev/sdb Enter</span><br><span class="line">输入n           Enter</span><br><span class="line">输入p           Enter</span><br><span class="line">连续两次默认选择  Enter</span><br><span class="line">输入w           Enter</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>命令</strong></p>
+<blockquote>
+<p>m：显示命令列表<br>p：显示磁盘分区<br>n：新增分区<br>d：删除分区<br>w：写入并保存退出</p>
+</blockquote>
+<ol start="4">
+<li><p>格式化：mkfs -t ext4    /dev/sdb1（ext4为文件类型，/dev/sdb1为分区地址和分区名称）</p>
+</li>
+<li><p>挂载：mount /dev/sdb1 /home/newdisk（mount 设备名称  挂载目录，将/dev/sdb1挂载到/home/newdisk下）</p>
+<blockquote>
+<p>卸载：umont 设备名称/挂载目录，例：mount /dev/sdb1      mount /home/newdisk，取消挂载/dev/sdb1</p>
+</blockquote>
+</li>
+<li><p>设置自动挂载（永久挂载）：vim /etc/fstab 输入挂载信息，保存退出，执行mount -a，即刻生效</p>
+</li>
+</ol>
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><p>Linux系统里面，万物皆是文件，包括鼠标、键盘等外部设备都用文件形式进行保存管理，每一个 Linux 用户最多可以开启1024个进程，每个进程最多可以打开2048个文件</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>所有者：文件的创建者<br>所在组：文件的所在组，一般是创建者的所在组<br>其他组：除去所在组的其他全部组</p>
+</blockquote>
+<h2 id="管理-1"><a href="#管理-1" class="headerlink" title="管理"></a>管理</h2><blockquote>
+<p>新建文件：touch file_name<br>删除文件：rm file_name<br>修改所有者：chown user_name file_name；将file_name的所有者改为user_name</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">同时修改所有者和所在组：chown user_name:group_name file_name，将file_name的所有者改为user_name、所在组改为group_name</span><br><span class="line">级联修改：chown -R user_name dictionary_name，将dictionary_name目录下的所有文件的所有者改为user_name</span><br><span class="line">修改所有组：chgrp group_name file_name，将file_name的所在组改为group_name</span><br><span class="line">级联修改：chgrp -R group_name dictionary_name，将dictionary_name目录下的所有文件的所在组改为group_name</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看文件信息：ls -ahl；以列表形式将所有文件以方便用户查看的形式返回，会显示文件类型、文件权限、所有者、所在组、最新更新时间、文件大小的信息</p>
+</blockquote>
+<p><img src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" alt="File_Info"></p>
+<h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>Linux是一个多用户多任务的操作系统，任何一个用户必须使用合法的账号才能登入系统，每一个用户账号至少属于一个用户组，存储在/home目录下</p>
+<ul>
+<li><p><strong>用户组</strong>：类似于角色，对有共性的多个用户进行统一的管理</p>
+<blockquote>
+<p>添加：groupadd groupname<br>删除：groupdel groupname</p>
+</blockquote>
+</li>
+<li><p><strong>用户</strong>：登入系统进行操作的人员</p>
+<blockquote>
+<p><strong>添加</strong>：useradd [-g gorup_name]  &gt; user_name，不指定所属组时，会自动创建与用户名同名的用户组，也可以指定目录：useradd -d 路径 user_name<br><strong>删除</strong>：userdel user_name，会保留用户组，如果需要删除用户组，使用：userdel -r user_name，一般保留用户组<br><strong>修改用户所在组</strong>：usermod -g group_name user_name，将user_name的所在组改为group_name<br><strong>修改用户登陆的初始目录</strong>：useradd -d directory_name user_name<br><strong>查询</strong>：id user_name，返回uid（用户ID号），gid（所在用户组的ID号）和用户组名<br><strong>切换登录用户</strong>：su - user_name，撤销切换指令：exit，高权限用户切换到地权限用户不需要输入密码<br><strong>设定密码</strong>：passwd user_name，回车输入密码<br><strong>查看当前用户</strong>：whoami/who am i<br><strong>修改用户组</strong>：usermod -g gorup_name user_name</p>
+</blockquote>
+</li>
+<li><p><strong>配置文件</strong></p>
+<blockquote>
+<p><strong>组配置文件</strong>：/etc/group，数据格式：user_name:password:uid:gid:注释行描述:主目录：登录shell<br><strong>用户配置文件</strong>：/etc/passwd，数据格式：groupname:password:gid:userList(会隐藏起来，不可见)<br><strong>口令文件</strong>：/etc/shadow，加密文件，存放密码信息，删除用户时不会删除相关记录</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><h2 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h2><p><strong>作用于文件</strong></p>
+<blockquote>
+<p>r：可读，可查看<br>w：可以修改文件，如想要删除文件，需要拥有对文件所在目录的w权限<br>x：可以被执行</p>
+</blockquote>
+<p><strong>作用于目录</strong></p>
+<blockquote>
+<p>r：可读，可查看<br>w：可在目录内新建、删除、重命名文件或目录<br>x：可进入该目录</p>
+</blockquote>
+<h2 id="管理-2"><a href="#管理-2" class="headerlink" title="管理"></a>管理</h2><blockquote>
+<p>修改权限：chmod（u：所有者、g：所有组、o：其他组、a：所有人）<br>+、-、=进行权限变更</p>
+<blockquote>
+<p>chmod u=rwx,g=rw,o=r file_name，设置file_name所有者的权限为读、写、执行，所在组的权限为读、写，其他人的权限为读<br>chmod o+x file_name，给file_name的所在组增加执行权限<br>通过数字进行权限变更，权限可用数字表示：r=4、w=2、x=1<br>chmod 764 file_name，设置file_name所有者的权限为读、写、执行，所在组的权限为读、写，其他人的权限为读</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7=4+2+1</span><br><span class="line">6=4+2</span><br><span class="line">5=4+1</span><br><span class="line">4=4</span><br><span class="line">3=2+1</span><br><span class="line">2=2</span><br><span class="line">1=1</span><br><span class="line">0：无权限</span><br></pre></td></tr></table></figure>
+
+<h1 id="Linux安装软件的方式"><a href="#Linux安装软件的方式" class="headerlink" title="Linux安装软件的方式"></a>Linux安装软件的方式</h1><ul>
+<li><strong>rpm</strong>（RedHat Package Manager），用于互联网下载包的打包和安装工具，类似于Windows的setup.exe程序</li>
+</ul>
+<p><strong>查看</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看全部：rpm -qa</span><br><span class="line">查看指定条件过滤：rpm -qa | grep RPM_packake_name</span><br><span class="line">查看软件包是否安装：rpm -q RPM_packake_name</span><br><span class="line">查看软件包信息：rpm -qi RPM_packake_name</span><br><span class="line">查询安装软件包的文件及存放目录：rpm -ql RPM_packake_name</span><br><span class="line">查询指定文件所属软件包：rpm -qf RPM_file_name</span><br></pre></td></tr></table></figure>
+<img src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" alt="RPM_Info" style="zoom:200%;" />
+
+<p><strong>管理</strong></p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm [选项] RPM_packake_name</span><br><span class="line"></span><br><span class="line">-i：install，安装</span><br><span class="line">-v：verbose，提示</span><br><span class="line">-h：hash，显示进度条</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>U盘安装：先挂载CentOS的iso文件，在/media/CentOS/下找到到需要安装的软件rpm包，拷贝到/opt/目录下，在/opt/目录下，执行rpm -ivh RPM_packake_name，安装完成</p>
+</blockquote>
+<p>删除</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e RPM_packake_name</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>删除时如果报错：removing these packages would break dependencies …表示会破坏这个包的相关依赖，可采用rpm -e –nodeps RPM_packake_name进行强制删除，一般不采用，会导致依赖于该软件包的程序无法使用</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>yum</strong>，是Shell前端软件包管理器，基于rpm包管理器，能顾从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，一次性安装所有以来的软件包，使用yum时需要保证网络通畅，默认安装最新版本</li>
+</ul>
+<p><strong>查看</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看全部：yum list installed</span><br><span class="line">查看指定条件过滤：yum list installed | grep name</span><br></pre></td></tr></table></figure>
+
+<p><strong>管理</strong></p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install 软件名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>deb</strong></li>
+</ul>
+<p><strong>查看</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l(查看全部)</span><br><span class="line">dpkg-l|grep name(查看特定)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>apt</strong>：Advanced Packaging Tool，是一个安装包管理管理工具，常用于Ubuntu中，用于软件包的安装、删除和管理，在/etc/apt/source.list中制定了官方的软件仓库地址（通常在美国）；当执行install时，安装相应的包，下载并更新，写入source.list文件；当执行update时，程序分析source.list文件是否有对应的Packages/Sources/lelease列表文件，如果有就下载，存入/var/lib/apt/lists/目录中</li>
+</ul>
+<p><strong>修改镜像源</strong></p>
+<blockquote>
+<ol>
+<li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source"></li>
+<li>更新源：sudo apt-get update</li>
+</ol>
+</blockquote>
+<p><strong>管理</strong></p>
+<blockquote>
+<p>更新源：apt-get update<br>搜索：apt-cache search package_name<br>获取包信息：apt-cache show package_name，包括说明、大小、版本等<br>查看包依赖：apt-cache rdepends package_name<br>安装：apt-get install package_name<br>修复安装：apt-get -f install package_name<br>重装：apt-get install package_name –reinstall<br>升级更新：apt-get upgrade package_name<br>删除：apt-get remove package_name<br>安装编译环境：apt-get build_dep package_name<br>下载源码：apt-get source package_name<br>删除包和配置文件：apt-get remove package_name –purge<br>升级系统：apt-get dist_upgrade package_name<br>若提示权限不够，可在指令前面加上sudo或者切换到root目录下运行</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例：安装sshd服务</span><br><span class="line">安装：sudo apt-get install openssh-server，默认安装服务器端和客户端</span><br><span class="line">启动服务：service sshd start</span><br><span class="line">本机测试：netstat -anp | more</span><br><span class="line">Windows测试：telnet ip port</span><br><span class="line">Linux测试：ssh user_name@ip，退出用exit 或 logout</span><br></pre></td></tr></table></figure>
+
+<h1 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h1><p><strong>vi/vim（vi的增强版）</strong></p>
+<blockquote>
+<ul>
+<li>正常模式：一般模式，使用vi/vim打开即可进入的默认模式，使用上下左右移动光标，使用删除字符和删除整行（dd）、复制、粘贴进行修改文件，不可进行输入</li>
+<li>插入模式：编辑模式，在一般模式下按 i、insert 进入编辑模式，可进行正常输入修改</li>
+<li>命令行模式：在一般模式下，输入“：或者/”进入命令行模式，输入命令，完成读取、存盘、替换、离开、显示行号等操作</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>模式切换</strong>：vi/vim打开进入一般模式：一般模式下，按 i 或 insert 进入编辑模式，按 Esc 退回一般模式；一般模式下，输入“：或者/”进入命令行模式，按 Esc 退回一般模式；在命令行模式输入 :wq (保存修改退出)、:q (未修改退出)、:q! (不保存修改退出) vi/vim 文本编辑</li>
+<li><strong>快捷键</strong><blockquote>
+<p>前往首行：gg，前往尾行：G，正常模式下<br>快速前往某行：先设置行号，再输入希望定位到的行号，再按 shift + g，正常模式下<br>复制当前行：yy（复制当前后面5行：5yy），正常模式下操作<br>粘贴：p，正常模式下操作<br>删除当前行：dd（复制当前后面5行：5dd），正常模式下操作<br>撤销：u，正常模式下操作<br>查找：/查找内容，命令行模式下，按n查找下一个<br>设置/取消行号：:set nu/nonu，命令行模式下</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="连通Windows和Linux"><a href="#连通Windows和Linux" class="headerlink" title="连通Windows和Linux"></a>连通Windows和Linux</h2><p>安装vmtool</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/12/System/Linux/Linux-%E5%9F%BA%E7%A1%80/" data-id="ckvsxxkfn0085f0un3841fowd" data-title="Linux-基础" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/13/System/Linux/Shell-%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Shell-常见操作指令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/12/System/Linux/Linux-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux-常见问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

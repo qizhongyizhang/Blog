@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录Nginx的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx-安装使用">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210628/2855.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录Nginx的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png">
+<meta property="article:published_time" content="2021-06-28T13:01:17.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:55:44.668Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210628/2855.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nginx-安装使用 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210628/2855.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nginx-安装使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-28 21:01:17" itemprop="dateCreated datePublished" datetime="2021-06-28T21:01:17+08:00">2021-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-08 10:55:44" itemprop="dateModified" datetime="2021-11-08T10:55:44+08:00">2021-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">安装使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210628/2855.html" class="post-meta-item leancloud_visitors" data-flag-title="Nginx-安装使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210628/2855.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210628/2855.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录Nginx的使用</p>
+<span id="more"></span>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>Nginx</strong>：是一个web服务器和反向代理服务器，用于 HTTP 、 HTTPS 、 SMTP 、 POP3 和 IMAP 协议<br><strong>反向代理</strong>：用户将请求发送到代理服务器，代理服务器将请求转发给内部服务器处理，处理完毕后将结果返回给用户，整个过程中客户不和处理服务器建立连接</p>
+<blockquote>
+<p><strong>负载均衡LB</strong>：预防服务器出现高并发(多人同时访问同一个接口)，将用户的访问请求尽量均匀的分配给服务器集群<br><strong>高可用HA</strong>：一般设置主节点与备用节点(互为主备)，当主节点宕机后，备用节点可以及时替换主节点，进行后面的任务</p>
+</blockquote>
+<p><strong>正向代理</strong>：代理人明确知道用户的目标是谁，代理人帮忙寻找目标，VPN代理</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="高并发场景的负载均衡"><a href="#高并发场景的负载均衡" class="headerlink" title="高并发场景的负载均衡"></a>高并发场景的负载均衡</h3><p>高并发指的是在同一时间点有很多请求访问同一 API 接口或者 Url 地址，会给服务器和硬件环境带来很大压力，通过负载均衡(将请求和数据分摊到多个操作单元进行执行)进行处理</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载安装包<br>解压安装包<br>安装依赖：yum install gcc pcre-devel zlib-devel openssi-devel -y, nginx需要进行源码编译安装，需要具备C语言编译环境<br>配置安装目录： ./configure –prefix=catalogue(安装目录)<br>编译安装：make &amp;&amp; make install<br>开启服务：进入安装目录下， ./sbin/nginx<br>Ngiinx 的启动都依赖于配置文件：安装目录下的conf目录下的 nginx.conf 文件</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><strong>upstream</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">upstream name&#123;</span><br><span class="line">	[least_conn&#x2F;ip_hash;]   &#x2F;&#x2F; 最少连接数&#x2F;IPHash</span><br><span class="line">	server ip:port [weight &#x3D; n];  &#x2F;&#x2F; 设置权重</span><br><span class="line">	server ip:port;</span><br><span class="line">	server ip:port;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.&#x2F;nginx -s reload  &#x2F;&#x2F; 重新加载配置文件，更新配置文件后，需要重新加载才能生效</span><br></pre></td></tr></table></figure>
+
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
+<li><strong>软件负载均衡</strong>(常见软件有LVS、Nginx、HAProxy)：软件负载均衡可以分为四层负载均衡和七层负载均衡：四层负载均衡利用在网络层中IP地址端口进行请求的转发，起到转发分配作用；七层负载均衡根据访问用户的HTTP请求头、URL信息将请求转发到特定的主机。LVS为四层负载均衡，Nginx、HAProxy可四可七。Nginx是万级的，通常用来做七层负载；LVS是十万级的，可以组合成：LVS+n个Nginx。</li>
+<li><strong>硬件负载均衡</strong>(常见硬件有F5、A10)：用一个硬件（类似于交换机）和一个基础网络设备，来实现负载均衡。</li>
+<li><strong>DNS负载均衡</strong>：DNS解析同一个域名可以返回不同的ip，用来实现地理级别的负载均衡</li>
+</ul>
+<blockquote>
+<p>DNS负载均衡是地理级别的，硬件负载均衡对应的是集群级别的，软件负载均衡对应的是机器级别的<br><img src="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png" alt="Load_Balance"><br>对比：</p>
+<blockquote>
+<ul>
+<li><strong>软件负载均衡</strong>：优点：便宜而且简单灵活，仅安装软件即可，适用于一般小型企业，或者并发量不高的企业，扩展性较好；缺点：和硬件负载均衡比性能一般，不适用于流量很大的企业没防火墙或者防DDos攻击等安全性功能</li>
+<li><strong>硬件负载均衡</strong>：优点：1.功能强大，支持全局负载均衡提供全面的复杂均衡算法；2.性能强悍，支持百万以上的并发；3.提供安全功能，例如防火墙，防DDos攻击等；缺点：价格昂贵，扩展能力差</li>
+<li><strong>DNS负载均衡</strong>：优点：1.简单，由DNS服务器处理，无需额外操作；2.就近访问可以减少响应时间，提升访问速度；缺点：1.DNS有缓存而且缓存时间较长，当机房迁移等需要修改DNS配置的时候，用户可能还会访问之前的IP，导致访问失败；2.扩展能力差，由运营商管理控制，不能自己定制或者扩展；3.比较笨，不能区分服务器之间的差异，也不能反映服务器的当前运行状态</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="负载策略"><a href="#负载策略" class="headerlink" title="负载策略"></a>负载策略</h3><p><strong>请求轮询</strong>：将请求转发给配置的服务器，默认<br><strong>增加权重</strong>：增加服务器权重，权重越大，分发到的请求数也越多，设置权重：weight=n ，默认为1<br><strong>最少连接数</strong>：将请求分发给连接请求数最少的服务器<br><strong>IPHash</strong>：确保来自同一客户端的请求始终定向到同一台服务器</p>
+<h1 id="知识查阅"><a href="#知识查阅" class="headerlink" title="知识查阅"></a>知识查阅</h1><h2 id="知识网站"><a href="#知识网站" class="headerlink" title="知识网站"></a>知识网站</h2><p><a target="_blank" rel="noopener" href="https://nginx.org/"><font face = "微软雅黑" color = 1E90FF size = 5> Nginx官网 </font></a><br><a target="_blank" rel="noopener" href="https://tengine.taobao.o/"><font face = "微软雅黑" color = 1E90FF size = 5> Tengine官网 </font></a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210617/10134.html" rel="prev" title="IDEA-常见问题">
+      <i class="fa fa-chevron-left"></i> IDEA-常见问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210707/3746.html" rel="next" title="Python-安装使用">
+      Python-安装使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E5%9C%BA%E6%99%AF%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">高并发场景的负载均衡</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E7%AD%96%E7%95%A5"><span class="nav-number">2.2.1.</span> <span class="nav-text">负载策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%9F%A5%E9%98%85"><span class="nav-number">3.</span> <span class="nav-text">知识查阅</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%BD%91%E7%AB%99"><span class="nav-number">3.1.</span> <span class="nav-text">知识网站</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

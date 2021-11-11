@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍数据存储与操作相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据存储与操作-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210821/13176.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍数据存储与操作相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-21T05:57:06.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.340Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta property="article:tag" content="数据治理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210821/13176.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据存储与操作-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210821/13176.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据存储与操作-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-21 13:57:06" itemprop="dateCreated datePublished" datetime="2021-08-21T13:57:06+08:00">2021-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210821/13176.html" class="post-meta-item leancloud_visitors" data-flag-title="数据存储与操作-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210821/13176.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210821/13176.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍数据存储与操作相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="数据存储和操作"><a href="#数据存储和操作" class="headerlink" title="数据存储和操作"></a>数据存储和操作</h1><p><strong>数据存储与设计</strong>包括对存储数据的设计、实施和支持，包括标准工具、数据库性能和业务连续性标准等，最大化数据资源价值，贯穿整个数据生命周期，包括数据库操作支持和数据库技术支持两个活动</p>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>在整个数据生命周期中管理数据的可用性<br>确保数据资产的完整性<br>管理数据交易事务的性能</p>
+</blockquote>
+<h2 id="操作原则"><a href="#操作原则" class="headerlink" title="操作原则"></a>操作原则</h2><blockquote>
+<p>识别自动化机会并采取行动：自动化实施数据库开发过程、开发工具和流程，缩短每个开发周期<br>构建是考虑重构：开发抽象的可重用的数据对象，避免应用程序与数据库模式的紧耦合（对象-关系阻抗不匹配）<br>理解并使用最佳实践：将数据库标准和最佳实践作为需求进行推广实施<br>支持数据库标准需求：形成服务水平协议（SLA），确保数据完整性和数据安全性<br>为项目中的DBA角色设置期望值：DBA在项目定义阶段参与工作</p>
+</blockquote>
+<h2 id="DBA"><a href="#DBA" class="headerlink" title="DBA"></a>DBA</h2><p>DBA(DataBase Administrator，数据库管理员)，与网络、系统管理员协调，建立系统的项目集成机制，包括标准化、整合、虚拟化、数据自动备份与恢复，以及数据安全</p>
+<ul>
+<li><strong>生产DBA</strong>：主要负责数据操作管理</li>
+</ul>
+<blockquote>
+<p>通过性能调优、监控、错误报告等活动，确保数据库性能及可靠性<br>建立备份与恢复机制，确保在任一情况下数据都能恢复<br>建立集群和容错机制，确保数据连续可用<br>执行其他数据库维护活动，如建立数据归档机制</p>
+</blockquote>
+<ul>
+<li><strong>应用程序DBA</strong>：负责所有环境（开发、测试、QA）中的多套数据库，为应用程序开发人员提供更好的支持服务</li>
+<li><strong>过程开发DBA</strong><ul>
+<li>过程DBA：负责审查和管理数据库过程对象，开发和支持关系数据库控制和执行的过程逻辑：存储过程、触发器和用户自定义函数（UDFs）</li>
+<li>开发DBA：创建、管理特殊用途的数据库，如数据沙盒、数据探索区等</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库架构类型"><a href="#数据库架构类型" class="headerlink" title="数据库架构类型"></a>数据库架构类型</h2><ul>
+<li><strong>集中式数据库</strong>：将所有数据存放在一个地方的一个系统中，所有用户连接到这套系统进行访问</li>
+<li><strong>分布式数据库</strong>：物理上数据存放在计算机网络的各个节点上，在逻辑上属于一个统一的数据库系统的数据集合<ul>
+<li><strong>联邦数据库</strong>：将多个自治的数据库系统映射成一个单一的联邦数据库，数据联邦提供的数据不需要对数据源进行额外复制或持久化，组成联邦的数据库分散在不同地理位置，通过计算机网络关联在一起，分为松耦合联邦和紧耦合联邦，松耦合联邦通过多个组件数据库构造，用户通过多数据库语言访问其他组件数据库系统；紧耦合联邦有组件数据库组成，用独立的进程构造，发布一个集成的联邦模式</li>
+<li><strong>区块链数据库</strong>：属于一种联邦数据库，用于安全管理金融交易，通过合同管理或健康信息交换，区块链有两种结构类型L单条记录和块，每个交易包含一条记录，每个区块包含一组带时间戳的交易，数据库由多个区块形成的链状结构组成，区块存储的交易信息通过哈希算法生成，新区块在链条末端</li>
+</ul>
+</li>
+<li><strong>可视化/云计算平台</strong>：云计算提供计算、软件、数据访问和存储服务，云计算是虚拟化、SOA（面向服务架构）和效用计算广泛使用的自然演进形态，具体实施方法有：虚拟机镜像，数据库即服务（Daas）和云上托管数据库等</li>
+</ul>
+<h3 id="数据库组织模型"><a href="#数据库组织模型" class="headerlink" title="数据库组织模型"></a>数据库组织模型</h3><ul>
+<li><p><strong>层次型数据库</strong>：最古老的数据库类型，数据被组织成具有强制父子关系的树形结构，父与子是一对多关系</p>
+</li>
+<li><p><strong>关系型数据库</strong>：是建立在关系模型(二维表)上的数据库系统，要求数据记录具有相同的关系结构，基于几何理论和关系代数</p>
+<ul>
+<li><strong>多维数据库</strong>：将数据存储在一种数据结构中，允许同时对多个数据元素过滤器进行搜索，常见于数据仓库和商务智能中，访问数据使用的是一个变体多维表达式（MDX，Multidimensional eXpression）</li>
+<li><strong>时态数据库</strong>：支持处理涉及时间数据的关系型数据库，面向有效时间和事务时间</li>
+</ul>
+</li>
+<li><p><strong>非关系型数据库</strong>：将数据存储为简单的字符串或完整的文件</p>
+<ul>
+<li><strong>列式数据库</strong>：某列数据仅有唯一值，压缩冗余数据，常用于商务智能</li>
+</ul>
+<blockquote>
+<p>使用条件</p>
+<blockquote>
+<p>一次性向所有行更新某一列<br>需要对多行进行聚合运算，适用于少量列的情况<br>当需要同时获取一行中的许多列，且行的体量相对较小，单次磁盘访问就能将整行数据检索时，面向行的存储组织更高效<br>写入一条新纪录、需要同时要提供所有的行数据，面向行的组织效率更高，整行的数据可以用单次磁盘写入<br>面向行的存储布局适合OLTP，面向列的存储布局适合OLAP</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>空间数据库</strong>：存储和查询表示几何空间中定义的对象数据</li>
+</ul>
+<blockquote>
+<p>空间评估：计算线条长度、多边形面积、几何图形之间的距离<br>空间功能：修改现有特征以创建新特征<br>空间预测：允许对几何图形之间的空间关系进行真假查询<br>几何构造：通过描述定义形状的顶点来创建新几何图形<br>观测功能：查询并返回某个特征的特定信息</p>
+</blockquote>
+<ul>
+<li><strong>对象 / 多谋体数据库</strong>：包括一个分层存储管理系统，用于管理磁介质和光存储介质</li>
+<li><strong>平面文件数据库</strong> ：将数据集编码为单个纯文本文件或二进制文件</li>
+<li><strong>键值对数据库</strong>：通过键值对存储数据</li>
+</ul>
+<blockquote>
+<p>文档数据库：由结构和数据组成的文件集合，对每个文档分配一个键<br>图数据库：关注组成图的节点信息</p>
+</blockquote>
+<ul>
+<li><strong>三元组存储数据库</strong>：由主、谓、宾组成数据实体</li>
+</ul>
+<blockquote>
+<p>原生三元组存储：从零开始实现并利用资源描述框架（RDF，Resource Description Framework）数据模型来高效存储访问RDF数据的三元存储<br>RDBMS支持的三元数据存储：在现有的RDBMS之上添加RDF描述层构建的三元存储<br>NoSQL三元存储</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="数据处理类型"><a href="#数据处理类型" class="headerlink" title="数据处理类型"></a>数据处理类型</h2><ul>
+<li><strong>ACID</strong>：强调一致性，酸</li>
+</ul>
+<blockquote>
+<p>原子性—A（atomicity）：事务是一个不可分割的工作单位，要么不做，要么全做<br>一致性—C（consistency）：事务执行结果正确，事务前后数据的状态必须保持一致<br>隔离性—I （isolation）：多个用户并发访问数据库时，一个用户的事务不能被其它用户的事物所干扰，多个并发事务之间的数据要相互隔离<br>持久性—D（durability）：事务完成后，结果直到下一次修改前，永久保存</p>
+</blockquote>
+<ul>
+<li><strong>BASE</strong>：强调可用性，碱</li>
+</ul>
+<blockquote>
+<p>基本可用—BA（Basically Available）：即使节点故障，仍能保证一定级别的数据可用性<br>软状态    —S  （Soft State）：数据处于流动状态，不保证最新数据<br>最终一致—E  （Eventual Consistency）：数据在节点、数据库最终状态一直，不保证在每个事务中时刻一致</p>
+</blockquote>
+<ul>
+<li><strong>CAP定理</strong>：分布式系统越大，满足ACID的要求点越少</li>
+</ul>
+<blockquote>
+<p>一致性—C（Consistency）：系统总是按照设计和预期方式运行<br>可用性—A（Availability）：请求发生时系统时刻保持可用状态，并对请求做出反应<br>分区容错—P（partition Tolerance）：偶尔发生数据丢失或部分系统故障时，系统依然能提供服务</p>
+</blockquote>
+<h2 id="数据存储介质"><a href="#数据存储介质" class="headerlink" title="数据存储介质"></a>数据存储介质</h2><ul>
+<li><strong>磁盘和存储区域网络</strong><br>磁盘存储是一种稳定的永久存储数据库方法<br>存储区域网络（SAN，Storage Area Networks），磁盘阵列组成存储区域网络</li>
+<li><strong>内存</strong>：系统启动时，内存数据库（IMDB，In-Memory Database）从永久存储中将数据加载到内存中，所有数据处理都在内存中完成</li>
+<li><strong>列压缩方案</strong>：列式数据库（Columnar-based Database）用于处理大量重复的数据集存储</li>
+<li><strong>闪存</strong>：Flash Memory</li>
+</ul>
+<h2 id="数据库环境"><a href="#数据库环境" class="headerlink" title="数据库环境"></a>数据库环境</h2><ul>
+<li><strong>生产环境</strong>：处理生产业务流程发生的技术环境，业务数据的产生地</li>
+<li><strong>非生产环境</strong>：系统变化部署到生产环境之前的开发测试环境，检测潜在问题，及时解决<ul>
+<li><strong>开发环境</strong>：是生产环境的精简版，开发人员在开发环境下编写代码、测试系统变更</li>
+<li><strong>测试环境</strong>：执行质量保证和用户验收测试<ol>
+<li>质量保证测试（QA）：依据需求进行功能测试</li>
+<li>集成测试：将独立开发或更新的多个模块作为整体进行测试</li>
+<li>用户性能测试（UAT）：从用户视角进行系统功能测试</li>
+<li>性能测试：进行高复杂度或大容量测试，压力测试</li>
+</ol>
+</li>
+<li><strong>数据沙盒或实验环境</strong>：数据沙盒允许以只读方式访问和管理生产数据的环境，进行概念验</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库管理过程"><a href="#数据库管理过程" class="headerlink" title="数据库管理过程"></a>数据库管理过程</h2><ol>
+<li>数据归档：是将数据从立即访问的存储介质迁移到查询性能低的存储介质，归档过程必须和分区策略保持一致</li>
+</ol>
+<blockquote>
+<p>传建一个辅助存储区域，优先建在辅助数据库服务器上<br>从当前数据库表分区区分出可归档的单元<br>将不经常使用的数据复制到单独的数据库<br>创建磁盘或磁带备份<br>创建数据库任务，定期清理不再使用的数据</p>
+</blockquote>
+<p>需要定期进行归档恢复测试，在系统变更时也需要也需要进行恢复测试</p>
+<blockquote>
+<p>确定是否需要保留历史归档或保留多少，清除不需要的历史归档<br>系统变更前，先将归档数据恢复到原系统，系统变更后，再重新归档<br>对低价值低频的访问归档，根据需要从旧系统的数据格式抽取数据</p>
+</blockquote>
+<ol start="2">
+<li>变动数据捕获：（CDC，Change Data Capture），监测数据变动，并确保变更信息被适当记录</li>
+<li>数据清除：清除无价值的数据</li>
+<li>数据保留：数据保持可用的时间</li>
+<li>数据分片</li>
+</ol>
+<h2 id="数据库衡量"><a href="#数据库衡量" class="headerlink" title="数据库衡量"></a>数据库衡量</h2><blockquote>
+<p>数据架构和复杂性<br>容量和速度限制，包括数据流传送速率<br>应用类别，如事务处理、商务智能、个人资料等<br>特殊功能，如时间计算支持<br>硬件平台及操作系统支持<br>软件支持工具的可用性<br>性能评测，包括实时统计信息<br>可扩展性<br>软件、内存和存储需求<br>韧性，包括错误处理和错误报告<br>组织对技术风险的偏好<br>提供训练有素的专业技术人员<br>拥有成本，如软件许可费、维护费和计算资源成本等<br>供应商声誉<br>供应商支持策略和版本计划<br>其他客户案例</p>
+</blockquote>
+<h2 id="管理数据库操作"><a href="#管理数据库操作" class="headerlink" title="管理数据库操作"></a>管理数据库操作</h2><ul>
+<li><p><strong>理解需求</strong></p>
+<ul>
+<li><strong>定义存储需求</strong>：为DBMS建立存储系统，为NoSQL建立文件存储系统，识别永久性存放和临时性存放数据，   做好增量数据规划和数据存储周期规划</li>
+<li><strong>识别使用模式</strong></li>
+</ul>
+<blockquote>
+<p>基于事务型<br>基于大数据集的读型或写型<br>基于时间型（月末压力大，周末压力小）<br>基于位置型（人口集中地区更多交易）<br>基于优先级型（某些部门或批处理具有更大权限的优先级）</p>
+</blockquote>
+<ul>
+<li><strong>定义访问需求</strong>：授权访问不同数据文件</li>
+</ul>
+</li>
+<li><p><strong>规划业务连续性</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>物理数据库服务器失效<br>磁盘存储设备失效<br>数据库失效，包括主要数据库、临时存储数据库和事务日志等<br>数据库索引页或数据页损坏<br>数据库和日志段的文件系统失效<br>数据库或事务日志的备份文件失效<br><strong>数据库韧性</strong>：用来评估系统对错误条件容忍度的指标，韧性越高，错误容忍度级别越高</p>
+<ul>
+<li><strong>备份数据</strong>：实现高可用，保证业务连续性，包括数据库备份和数据库事务日志备份等</li>
+</ul>
+<blockquote>
+<p><strong>增量备份</strong>和<strong>全量备份</strong></p>
+</blockquote>
+<ul>
+<li><strong>恢复数据</strong></li>
+</ul>
+<blockquote>
+<p>立即恢复：通过预判自动切换到备用系统<br>关键恢复：尽快恢复以尽量减少关键业务延迟会业务中断<br>非关键恢复：等非关键业务恢复后恢复的非关键义务</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>创建数据库实例</strong></li>
+</ul>
+<blockquote>
+<p>安装和更新DBMS软件<br>维护多种环境的安装，包括多版本的DBMS<br>安装和管理相关的数据技术</p>
+<ul>
+<li><strong>物理存储环境管理</strong>：遵循传统的软件配置管理过程（SCM）或信息技术基础设施库的方法，记录对数据库配置、结构、约束、权限、阈值的修改</li>
+</ul>
+<blockquote>
+<p>配置识别：DBA与多方协作，定制各个方面的属性配置，形成配置文档和基线，后续配置修改需要提交配置变更控制过程<br>配置变更控制：用于更改配置项属性并重新对其进行基线化的流程和审批阶段<br>配置状态报告：及时记录和报告任意点上与每个配置项相关的配置基线<br>配置审计：在交付或变更时进行审计，物理配置审计确保配置项按照其详细设计文档的要求进行安装；功能配置审计确保配置项的功能属性得以实现</p>
+</blockquote>
+<ul>
+<li><strong>管理数据访问控制</strong></li>
+</ul>
+<blockquote>
+<p>受控环境：包括网络角色和权限管理、全天候监控和网络健康管理、防火墙管理、补丁管理和微软基准安全分析器集成管理等<br>物理安全：基于简单网络管理协议（SNMP）的监控、数据审计日志记录、灾难管理和数据库备份计划对数据资产的物理安全性进行管理<br>监控：进行连续的软硬件监控<br>控制：通过控制访问、数据库审计、入侵检测和漏洞评估工具维护数据安全</p>
+</blockquote>
+<ul>
+<li><strong>创建存储容器</strong>：为每个级别的存储对象创建合适的存储容器，便于进行组织、加载、查询等</li>
+<li><strong>应用物理数据模型</strong>：以物理数据模型创建和管理完整的数据存储环境，以便提供DaaS服务</li>
+<li><strong>加载数据</strong>：将多种形式的数据加载入建立的空的数据库中</li>
+<li><strong>管理数据复制</strong></li>
+</ul>
+<blockquote>
+<p><strong>主动复制</strong>：不存在主副本，每个副本主动创建和存储来自其他副本的相同数据；<strong>被动复制</strong>：在主副本上创建和存储数据，将更改的状态传送到其他副本<br><strong>镜像复制</strong>：作为两阶段提交过程的一个部分，主库的更新会立即同步给辅助数据库； <strong>日志复制</strong>：辅助数据库定时接收主库传来的事务日志副本<br><strong>水平数据扩展</strong>：增加更多的数据副本；<strong>垂直数据扩展</strong>：数据存储更远的位置</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>管理数据库性能</strong></li>
+</ul>
+<blockquote>
+<p>设置和优化操作系统及应用程序参数<br>管理数据库连接<br>优化操作系统、网络和事务处理中间件<br>提供合适的存储设备<br>提供容量增长预测<br>提供操作工作负载和基准，以支持SLA管理、收费计算、服务器容量及规划的生命周期轮换</p>
+<ul>
+<li><strong>设置数据库性能水平</strong>：通过SLA来管理系统性能、数据可用性、恢复预期以及团队对问题的响应期望</li>
+<li><strong>管理数据库可用性</strong></li>
+</ul>
+<blockquote>
+<p><strong>相关因素</strong></p>
+<blockquote>
+<p>可管理性：创新和维护环境的能力<br>可恢复性：中断后重新建立服务的能力，修复不可预见时间或组件故障导致错误的能力<br>可靠性：在规定时间内提供制定水平服务的能力<br>可维护性：识别存在问题的能力，诊断原因，修复问题</p>
+</blockquote>
+<p><strong>影响因素</strong></p>
+<blockquote>
+<p>计划性停机：出于维护或升级的考虑<br>非计划停机：服务器硬件、磁盘硬件、操作系统、数据库软件或数据中心站点故障等<br>应用问题：安全和授权问题、验证性能问题或恢复失败等<br>数据问题：数据损坏、数据库对象丢失、数据丢失或数据肤质问题等<br>人为错误</p>
+</blockquote>
+<p><strong>维护工具</strong></p>
+<blockquote>
+<p>运行数据库备份工具<br>运行数据库重组工具<br>运行数据完整性检查工具<br>利用表空间局类和分区<br>垮裤进行数据复制保证高可用性</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>管理数据库运行</strong>：监视数据库运行、数据变更日志的使用和复制环境的同步情况等</li>
+<li><strong>维护数据库性能服务水平</strong></li>
+</ul>
+<blockquote>
+<p>事务性能与批处理性能：监控时时发生或批处理发生的数据交易的工作性能，解决其中的错误问题<br>问题修复：内存分配和争用、锁与阻塞、不准确的数据库统计信息、不良代码、低效复杂的表链接、不当索引、应用程序争用活动、服务器过载和数据库短时间变化等</p>
+</blockquote>
+<ul>
+<li><strong>维护备用环境</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>管理测试数据集</strong></li>
+<li><strong>管理数据迁移</strong>：在保证数据不变的前提下，在不同存储类型、格式或计算机系统之间传送数据</li>
+</ul>
+<h2 id="数据审计"><a href="#数据审计" class="headerlink" title="数据审计"></a>数据审计</h2><blockquote>
+<p>指定和审核审计标准<br>进行初步的数据筛选和审查<br>开发数据监控方法<br>应用统计信息、地理统计信息、生物统计信息优化数据分析<br>支持采样及分析<br>审核数据<br>提供数据发现功能的支持</p>
+</blockquote>
+<h2 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h2><ul>
+<li><strong>存储度量</strong></li>
+</ul>
+<blockquote>
+<p>数据库类型数量<br>汇总交易统计<br>容量指标<br>已使用存储的数量<br>存储容器的数量<br>数据对象中已提交和未提交块或页的数量<br>数据队列<br>存储服务使用情况<br>对存储服务提出的数据请求数量<br>对使用服务的应用程序性能的改进</p>
+</blockquote>
+<ul>
+<li><strong>性能度量</strong></li>
+</ul>
+<blockquote>
+<p>事务频率和数量<br>查询性能<br>API服务性能</p>
+</blockquote>
+<ul>
+<li><strong>操作度量</strong></li>
+</ul>
+<blockquote>
+<p>有关数据检索时间的汇总统计<br>备份的大小<br>数据质量评估<br>可用性</p>
+</blockquote>
+<ul>
+<li><strong>服务度量</strong></li>
+</ul>
+<blockquote>
+<p>按类型的问题提交、解决和升级的数量<br>问题解决事件</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag"># 数据治理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210820/40152.html" rel="prev" title="数据建模与设计-基础">
+      <i class="fa fa-chevron-left"></i> 数据建模与设计-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210822/28179.html" rel="next" title="数据安全管理-基础">
+      数据安全管理-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">数据存储和操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%8E%9F%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">操作原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBA"><span class="nav-number">1.3.</span> <span class="nav-text">DBA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">数据库架构类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84%E7%BB%87%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">数据库组织模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">数据处理类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8"><span class="nav-number">1.6.</span> <span class="nav-text">数据存储介质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8E%AF%E5%A2%83"><span class="nav-number">1.7.</span> <span class="nav-text">数据库环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number">1.8.</span> <span class="nav-text">数据库管理过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A1%E9%87%8F"><span class="nav-number">1.9.</span> <span class="nav-text">数据库衡量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">1.10.</span> <span class="nav-text">管理数据库操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%A1%E8%AE%A1"><span class="nav-number">1.11.</span> <span class="nav-text">数据审计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">1.12.</span> <span class="nav-text">衡量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

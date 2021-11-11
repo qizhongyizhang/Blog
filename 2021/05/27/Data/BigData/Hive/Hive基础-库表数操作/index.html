@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hive基础-库表数操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录Hive的基础知识-库表数操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive基础-库表数操作">
+<meta property="og:url" content="http://example.com/2021/05/27/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E5%BA%93%E8%A1%A8%E6%95%B0%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录Hive的基础知识-库表数操作">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-27T00:33:02.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.308Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hive">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Data/BigData/Hive/Hive基础-库表数操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/27/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E5%BA%93%E8%A1%A8%E6%95%B0%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="dt-published" datetime="2021-05-27T00:33:02.000Z" itemprop="datePublished">2021-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hive基础-库表数操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录Hive的基础知识-库表数操作</p>
+<span id="more"></span>
+
+<h1 id="HQL指令"><a href="#HQL指令" class="headerlink" title="HQL指令"></a>HQL指令</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create database [if exists] db_name(</span><br><span class="line">col_name1 type</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">[location catalogue]</span><br><span class="line">[with dbproperties (&#x27;owner&#x27;=&#x27;owner_name&#x27;,&#x27;date&#x27;=&#x27;创建时间‘&#x27;)]; </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>location：指明数据库在HDFS的存放位置，可通过hive-site.xml文件进行配置<br>with dbproperties()：使用键值对指明数据库的相关描述信息<br>describe database extended db_name：查看指定数据库的描述性信息<br>alter database db_name set dbproperties(‘key’=’value’)：修改键值对信息<br>desc database extended db_name：查看更多详情<br>drop database database [cascade]：删除数据库，若数据库里面有表，需要加入cascade参数<br>使用数据库：use db_name;</p>
+</blockquote>
+<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create [external] table [if not exists] tb_name(</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">[comment &#x27;xxx&#x27;]</span><br><span class="line">[partitioned by (col_name type [comment &#x27;xxx&#x27;])]</span><br><span class="line">[clustered by (col_name type [comment &#x27;xxx&#x27;])]</span><br><span class="line">[sorted by (col_name [asc|desc] ) into N buckets buckets]</span><br><span class="line">[row format delimited fields terminated by &#x27; &#x27;]</span><br><span class="line">[storted as ...]</span><br><span class="line">[location &#x27;catalogue&#x27;];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>if not exists：在不存在的情况下创建表<br>external：指明创建外部表：外部表仅存储指向实际数据的路径，删除时仅删除元数据；内部表会移动数据到数据仓库指定的路径进行存储，删除时会删除元数据和数据文件<br>comment：表或字段的描述性信息，默认不能使用中文<br>partitioned by()：分区表的分区字段，每一个分区单独存在一个目录下<br>clustered by()：对于每一个表分文件，Hive可以进一步组织成桶，进行更细粒度的范围划分<br>sorted by() into N buckets buckets：指明排序字段和排序方式<br>row format ：指明表数据文件的分隔符<br>storted as：指明数据表文件的数据存储类型</p>
+<blockquote>
+<p>SEQUENCEFILE：数据需要压缩，二进制文件<br>TEXTFILE：纯文本，默认<br>RCFILE<br>location：指明数据表存放位置</p>
+</blockquote>
+</blockquote>
+<p><strong>内部表</strong><br>创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name (</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">row format delimited fields terminated by &#x27;\t&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>快速建内部表</p>
+<blockquote>
+<p>create table tb_name1 as select * from tb_name2：tb_name1 和 tb_name2 的表结构和数据都一致<br>create table tb_name1 like tb_name2：tb_name1 和 tb_name2 的表结构一致，但是tb_name1没有数据</p>
+</blockquote>
+<p>查询表信息：desc [formatted] tb_name; 加入 formatted 参数会更详细<br>删除表：drop table tb_name;</p>
+<p><strong>外部表</strong><br>创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create external table tb_name (</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">row format delimited fields terminated by &#x27;\t&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>加载数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// HDFS命令</span><br><span class="line">要求文件字段个数与对应的数据表结构一致，文件的内容分隔符与对应的数据表设置的分隔符一致</span><br><span class="line">hdfs dfs -mkdir [-p] catalogue_name;  // 创建目录，-p表示级联创建文件夹</span><br><span class="line">hdfs dfs -put file_name catalogue;  // 上传数据</span><br><span class="line">dfs -du -h catalogue/file_name;  // 查看表数据大小</span><br><span class="line"></span><br><span class="line">// 本地加载</span><br><span class="line">load data [local] inpath &#x27;catalogue&#x27;[overwrite] into table tb_name;</span><br><span class="line">local：指明从本地加载数据(复制操作)，省略表示从HDFS上加载(剪切操作)</span><br><span class="line">inpath：本地文件的存放位置</span><br><span class="line">overwrite：覆盖加载数据</span><br><span class="line"></span><br><span class="line">// 建立数据文件与表的映射关系</span><br><span class="line">msck repair table tb_name;</span><br></pre></td></tr></table></figure>
+
+<p>每天将收集到的网站日志文件定期流入HDFS文本文件，在外部表（公共拥有的原始日志文件）的基础上进行大量的统计分析，各个部门用到的中间表、结果表使用内部表存储，数据通过SELECT 和 INSERT 进入内部表</p>
+<p><strong>分区表</strong><br>将一个大的数据文件按照月、天进行分区，即进行切分成小文件，存放在不同的文件夹中，分区就相当于是把表中的数据按照不同的条件分成了不同的文件夹<br>创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create [external] table tb_name (</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">partitioned by(col_name1 type[,col_name2 type,col_name3 type...])</span><br><span class="line">row format delimited fields terminated by &#x27;\t&#x27;</span><br><span class="line">// 可以创建多个分区字段，即创建多级目录</span><br><span class="line">// 分区字段并不是实际数据，仅表示分区</span><br></pre></td></tr></table></figure>
+
+<p>加载数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [local] inpath &#x27;catalogue&#x27;[overwrite] into table tb_name partition(col_name1=&#x27;value&#x27;[,col_name2=&#x27;value&#x27;,col_name3=&#x27;value&#x27;]);</span><br></pre></td></tr></table></figure>
+
+<p>查询数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_name where col_name=&#x27;value1&#x27; [union all select * from tb_name where col_name=&#x27;value2&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>查询分区：show partitions tb_name;<br>添加分区：alter table tb_name add partition(col_name=’value1’);<br>删除分区：alter table tb_name drop partition(col_name=’value1’);<br>查询分区：select col_name_list from tb_name where col_name_p = ‘value1’;</p>
+<p><strong>分桶表</strong>：将数据文件按照指定的字段划分到多个文件当中，分桶就是MapReduce中的分区</p>
+<ol>
+<li>开启分桶配置</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set hive.enforce.bucketing=true;  // 开启Hive的分桶功能，默认为false</span><br><span class="line">set mapreduce.job.reduces=3;  // 设置Reduce的个数</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建分桶表</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create [external] table tb_name_clu(</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">clustered by(col_name_clu) into N buckets</span><br><span class="line">row format delimited fields deminated by &#x27;\t&#x27;;</span><br><span class="line">col_name是表的实际字段</span><br><span class="line">N对应Reduce的个数</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>加载数据<br>先创建同结构的普通表，向普通表加入数据，通过over write向分桶表加入数据</p>
+<ul>
+<li>创建同结构的普通表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create [external] table tb_name_com(</span><br><span class="line">col_name1 type [comment &#x27;xxx&#x27;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">row format delimited fields deminated by &#x27;\t&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向普通表加入数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load [local] data inpath &#x27;catalogue&#x27; into table tb_name_com;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过over write向分桶表加入数据</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert overwrite table tb_name_clu </span><br><span class="line">select * from tb_name_com cluster by(col_name_clu)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看表信息：desc tb_name;</span><br><span class="line">重命名：alter table tb_name_old rename to tb_name_new;</span><br><span class="line">增加列：alter table tb_name add columns (col_name type[,col_name type]);</span><br><span class="line">修改列名：alter table tb_name change col_name_old col_name_new data_type [Comment &#x27;&#x27;];</span><br><span class="line">删除表：drop table tb_name;</span><br><span class="line">快速建表：create tbale tb_name_new like tb_name_old;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h4><h4 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h4><h3 id="数据存储格式"><a href="#数据存储格式" class="headerlink" title="数据存储格式"></a>数据存储格式</h3><p>行式存储：相邻的是一条记录的不同字段，行查询效率高，列查询效率低，数据压缩效率低<br>列式存储：相邻的是不同记录的同一字段，行查询效率低，列查询效率高，数据压缩效率高<br>**TEXTFILE(行式存储)**：默认的存储格式，数据不进行压缩，空间开销大，可结合 Gzip、Bzip2 压缩算法使用<br>**SEQUENCEFILE(行式存储)**：<br>**ORC(列式存储)**：每个 ORC 数据文件由多个 stripe 组成，每个 stripe 250M</p>
+<blockquote>
+<p>indexData：某些列的索引数据<br>rowData：真正的数据内容<br>StripFooter：stripe 的元数据信息<br>加载数据时使用 insert into table 语句<br>stored as orc tblproperties(“orc.compress”=”none”); 指定数据存储方式为 ORC ， ORC 的压缩方式为 NONE(不进行压缩)</p>
+</blockquote>
+<p>**PARQUET(列式存储)**：parquet 文件以二进制方式存储，文件中包含真正数据和元数据，可自解析， parquet 文件内部是由多个行组组成，每一个行组(row group)由 mapreduce 任务进行处理，加载数据时使用 insert into table 语句</p>
+<h3 id="压缩方式"><a href="#压缩方式" class="headerlink" title="压缩方式"></a>压缩方式</h3><p>查看 Hive 支持的数据压缩方式：在 Hive 的安装目录执行 bin/hadoop checknative<br><strong>Map阶段</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set hive.exec.compress.intermediate=true;  // 开启 hive 中间传输数据压缩功能</span><br><span class="line">set mapreduce.map.output.compress=true;  // 开启 mapreduce 中 map 输出压缩功能，默认为false</span><br><span class="line">set mapreduce.map.output.compress.codec=org.apapche.hadoop.io.compress.SnappyCode;   // 设置 mapreduce 中 map 输出压缩方式</span><br></pre></td></tr></table></figure>
+
+<p><strong>Reduce阶段</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set hive.exec.compress.output=true;  // 开启 hive 最终传输数据压缩功能</span><br><span class="line">set mapreduce.output.fileoutputformat.compress=true;  // 开启 mapreduce 最终传输数据压缩功能</span><br><span class="line">set mapreduce.output.fileoutputformat.compress.codec=org.apapche.hadoop.io.compress.SnappyCodec;   // 设置 mapreduce 最终数据输出压缩方式</span><br><span class="line">set mapreduce.output.fileoutputformat.compress.type=block;   // 设置 mapreduce 最终数据输出压缩为块压缩，默认为 record (记录压缩)</span><br></pre></td></tr></table></figure>
+
+<p>建议选择 ORC、PARQUET 的数据存储格式、 snappy 的数据压缩方式</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h3 id="数据I-O"><a href="#数据I-O" class="headerlink" title="数据I/O"></a>数据I/O</h3><p><strong>导出</strong><br>insert overwrite local dictionary ‘catalogue’ select_expr</p>
+<p>每一次 insert into 命令都会进行一次 MapReduce 任务，生成一个文件，应尽量减少单独插入语句，使</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/27/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E5%BA%93%E8%A1%A8%E6%95%B0%E6%93%8D%E4%BD%9C/" data-id="ckvsxxk2v001cf0un9sfwfubx" data-title="Hive基础-库表数操作" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/28/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hive基础-函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/26/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E6%9F%A5%E8%AF%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hive基础-查询</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

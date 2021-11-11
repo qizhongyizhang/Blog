@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍文件和内容管理相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据文件和内容管理-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210824/26382.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍文件和内容管理相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-24T13:24:24.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.347Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta property="article:tag" content="数据治理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210824/26382.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据文件和内容管理-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210824/26382.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据文件和内容管理-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-24 21:24:24" itemprop="dateCreated datePublished" datetime="2021-08-24T21:24:24+08:00">2021-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210824/26382.html" class="post-meta-item leancloud_visitors" data-flag-title="数据文件和内容管理-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210824/26382.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210824/26382.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍文件和内容管理相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="文件和内容管理"><a href="#文件和内容管理" class="headerlink" title="文件和内容管理"></a>文件和内容管理</h1><p><strong>文件内容管理</strong>：针对存储在关系型数据库之外的数据和信息的采集、存储、访问和使用过程的管理，重点保证文件和非结构化、半结构化数据的信息完整性</p>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>确保能够高速有效的采集使用非结构化数据与信息<br>确保结构化和非结构化数据之间的整合能力<br>遵守法律业务并达到客户预期</p>
+</blockquote>
+<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
+<p>问责制度：指派适当的高级管理人员，采用制度和流程来指导员工，并确保计划的可审计性<br>完整原则：建立信息治理和规划，使组织创建或管理的档案和信息具有合理性以及适当的真实性和可靠性保证<br>保护原则：建立信息治理和规划，确保对个人信息或其他需要保护的信息提供合理的保护<br>遵从原则：建立信息治理和规划，遵从适用的法律法规和其他有约束力的机构及组织的制度要求<br>可用原则：组织应确保已及时、高效和准确检索信息的原则维护信息<br>保留原则：基于运营、法律、监管和财政以及其他所有相关约束的要求确保组织保留适当的时间<br>处置原则：根据制度、适用的法律法规以及其他有约束力的机构要求，提供安全和适当的信息处置<br>透明原则：组织应以工作人员和利益相关方可以理解的方式记录其制度、流程和活动，包括信息治理规划</p>
+</blockquote>
+<h2 id="内容分发"><a href="#内容分发" class="headerlink" title="内容分发"></a>内容分发</h2><ul>
+<li><strong>推式分布</strong>：用户按照预先确定的时间表选择传送给他们的内容类型，发布方创建内容并在多处发布，如简易信息聚合</li>
+<li><strong>拉式分发</strong>：用户通过互联网获取内容，如在线零售店</li>
+<li><strong>交互分发</strong>：交互式内容分布方法，如第三方电子销售点</li>
+</ul>
+<h3 id="受控词表"><a href="#受控词表" class="headerlink" title="受控词表"></a>受控词表</h3><p><strong>受控词表</strong>：被明确允许用于通过浏览和搜索对内容进行索引、分类、标引、排序和检索术语的定义列表，如都柏林元素集</p>
+<ul>
+<li><strong>词汇表管理</strong>：与时俱进的维护词汇表，满足采用一致并便于检索的方式描述内容对象</li>
+</ul>
+<blockquote>
+<p>确定支持的信息概念<br>确定词汇表受众、支持流程和角色<br>评估词汇表的必要性，支持应用、内容管理或分析<br>确定首选术语的制定机构<br>确定现有词汇表的创建方式、负责人、信息分类现状和安全隐私问题现状等<br>确定现有词汇表的业务支持度</p>
+</blockquote>
+<ul>
+<li><strong>词汇表视图或微控制词汇表</strong>：词汇表视图是受控词表的子集，涵盖了受控词表领域内有限范围的主题；微控制词汇表包含一般词汇表中不包含的高度专业化术语的词汇表</li>
+<li><strong>术语和选择列表</strong>：术语列表不描述术语之间的关系，仅列举出术语；选择列表通常隐藏在应用程序中，选择列表和控制词汇转换为可用于主页搜索的选择列表</li>
+<li><strong>术语管理</strong>：建立术语之间的关系</li>
+</ul>
+<blockquote>
+<p>等价术语关系：同时使用多个不交叉的术语，常用的属于映射功能<br>层次化关系：描述一般到特定或整体到局部的关系<br>关联关系：受控词汇表中非层次化关联的术语</p>
+</blockquote>
+<ul>
+<li><strong>同义词环和规范表</strong>：同义词环是指一组大致相同的术语，允许用户搜索访问同义词环中的其他内容；规范表是指描述性的受控词汇表，旨在促进特定领域或范围内的信息检索</li>
+<li><strong>分类法</strong>：指任何分类或受控词汇表的总称</li>
+</ul>
+<blockquote>
+<p>扁平分类法：受控类别集之间没有关系，类别平等<br>层次分类法：一种节点通过规则关联的树状结构，至少有两个结构，且是双向的<br>多重层级结构：具有多个节点关系规则的树状结构，可以有多个父节点<br>面分类法：每个节点与中心节点相关联，每个面都是中心对象的一个属性<br>网状分类法：既可用于层级结构，可以用于刻面结构，两个节点依赖关联建立连接，如搜索引擎</p>
+</blockquote>
+<ul>
+<li><strong>分类方案和打标签</strong>：分类方案是代表受控词表的代码，如杜威十进制分类法</li>
+<li><strong>主题词表</strong>：又称叙词表，是一种用于内容检索的受控词表，结合了同义词环和分类方案的特征，提供相关的每个术语及其相关术语的关系信息，相关标准有 ISO 25964、ANSI / NISO Z39.19等</li>
+<li><strong>本体</strong>：代表一套概念和在某个领域内概念之间的关联，提供语义网络的基本知识代表，用于语义网络与应用程序之间的信息交换</li>
+</ul>
+<blockquote>
+<p>无法区分实例关系和子类关系<br>将事件建模为关系<br>术语缺乏清晰度和独特性<br>将角色建模为类<br>无法重复使用<br>混淆建模语言的语义和概念</p>
+</blockquote>
+<h2 id="文件和档案管理"><a href="#文件和档案管理" class="headerlink" title="文件和档案管理"></a>文件和档案管理</h2><p><strong>文件</strong>：包含任务说明，对执行任务的方式和时间要求，以及任务执行和决策的日志等电子或纸质对象<br><strong>档案</strong>：用于证明所作决策和采取行动是符合程序的，可作为组织业务活动和法规遵从的证据</p>
+<h3 id="文件档案生命周期"><a href="#文件档案生命周期" class="headerlink" title="文件档案生命周期"></a>文件档案生命周期</h3><blockquote>
+<p>编目：识别已有的新建的文件或档案<br>制度：创建、批准和实施文件档案的制度<br>分类：对文件档案进行分类<br>存储：结合实际业务需要，对文档和档案进行电子或纸质、长期或短期存储<br>检索和流转：在合规的前提下，允许文件档案进行访问和流通<br>保存和处置：在合规的前提下，允许文件档案进行归档和销毁</p>
+</blockquote>
+<h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><blockquote>
+<p>内容准确、完整和真实<br>背景充足，包括创建者、创建时间、与其他档案关系的描述性信息等<br>档案在事件、行为和决定发生后及时创建<br>建立档案后，在法定保存期限内不允许轻易改变<br>档案内容的外观和排版结构需要清晰易读</p>
+</blockquote>
+<h3 id="成熟度评估"><a href="#成熟度评估" class="headerlink" title="成熟度评估"></a>成熟度评估</h3><ul>
+<li>1级：低于标准：信息治理和档案保管问题没有得到解决，或只是最低限度的解决</li>
+<li>2级：意识发展：认识到信息治理和档案保管可能对组织的影响</li>
+<li>3级：基本保证：满足法律法规和行业规范的最低要求</li>
+<li>4级：积极发展：拥有以持续改进为重点的主动信息治理计划</li>
+<li>5级：完成变革：信息治理融入到组织的基础架构和业务流程中</li>
+</ul>
+<h2 id="管理实践"><a href="#管理实践" class="headerlink" title="管理实践"></a>管理实践</h2><h3 id="创建内容处理制度"><a href="#创建内容处理制度" class="headerlink" title="创建内容处理制度"></a>创建内容处理制度</h3><blockquote>
+<p>审计的范围和合理性<br>重要档案的鉴定和保护<br>保留档案的目的和保管期限表<br>如何响应信息保留命令（特殊保护令），针对已过保留期的诉讼信息要求<br>本地和异地存储档案的要求<br>硬盘驱动器和共享网络驱动器的使用和维护<br>对电子邮件管理，从内容管理的角度进行处理<br>合理的档案销毁方法，如预先批准供应商和销毁证据的收据<br>社交媒体制度<br>设备访问制度<br>处理敏感数据<br>应对诉讼</p>
+<blockquote>
+<p>给每个部门（法律、档案管理、IT）建立制度和过程清单<br>为各主题起草制度，如诉讼保留、文件保管、归档和备份<br>评估IT工具的能力，如电子取证索引、搜索和收集、数据隔离和保护工具以及非结构化 ESI源<br>识别和分析相关的法律问题<br>指定沟通和培训计划<br>确定提前准备的材料，根据法律案例进行裁剪<br>在需要外部服务的情况下分析供应商服务<br>制定如何处理通知的流程并保持指引手册的最新状态</p>
+</blockquote>
+</blockquote>
+<h3 id="定义内容信息架构"><a href="#定义内容信息架构" class="headerlink" title="定义内容信息架构"></a>定义内容信息架构</h3><blockquote>
+<p>受控词表<br>分类法和本体<br>元数据映射<br>搜索功能规格<br>用例<br>用户流</p>
+</blockquote>
+<h3 id="实施生命周期管理"><a href="#实施生命周期管理" class="headerlink" title="实施生命周期管理"></a>实施生命周期管理</h3><blockquote>
+<p>获取档案和内容<br>管理版本的控制</p>
+<blockquote>
+<p>正式控制：需要正式的变更启动、对影响的全面评估、变更管理机构的决策以及利益相关方一份全面执行和验证的状态报告<br>修订控制：需要在变更时通知利益相关方并升级版本<br>托管控制：最不正式，仅需要安全存储黑桃检索方法</p>
+</blockquote>
+<p>备份和恢复<br>管理保管和处置<br>审计文件和档案</p>
+<blockquote>
+<p>定义组织驱动因素<br>确定检查、测量的内容和要使用的工具<br>收集数据<br>报告结果<br>制定下一步计划和时间表</p>
+</blockquote>
+</blockquote>
+<h3 id="分布和分发布内容"><a href="#分布和分发布内容" class="headerlink" title="分布和分发布内容"></a>分布和分发布内容</h3><blockquote>
+<p>开放访问、搜索和检索<br>通过可接受的渠道分发</p>
+</blockquote>
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><ul>
+<li>**可扩展标示语言(XML)**：是一种表示结构化和非结构化数据和信息的语言，将数据结构转换为用于数据交换的文件结构，通过简单的嵌套和引用提供数据元素之间的关系</li>
+</ul>
+<blockquote>
+<p>能够将结构化数据整合到具有非结构化数据的关系型数据库中，非结构化数据可以存储在关系型数据管理系统中的 BLOB（二进制大对象）或 XML文件中<br>可以将结构化数据与文件、报表、电子邮件、图像、图形、音频和视频文件中的非结构化数据集成在一起<br>可以用于建立公司门户网站（B2B、B2C），为用户提供一个可以连接到各种内容的接入点<br>可以识别标记非结构化内容，以便进行理解和处理</p>
+</blockquote>
+<ul>
+<li><strong>JSON</strong>：Java Script Object Notation，基于 JavaScript 的轻量数据交换格式，一种开放的、轻量级的数据交换标准格式，基于C语言的习惯方式，有键值对和数组两种存储结构</li>
+<li><strong>资源描述框架(RDF)<strong>：是描述各种网络资源信息的通用框架，用于在 Web 上进行数据交换的标准模型，RDF 以主语（资源）—谓语（属性名称）—宾语（属性值）表达式或三元组描述资源，主谓宾都由统一资源标示符(URI)描述，谓语不允许为空；</strong>网络本体语言</strong>（W3C Web Ontology Language）是 RDF 的词汇表拓展，是一种语义标记语言，用于在网络上发布共享 OWL文件（本体）</li>
+<li><strong>Schema.org</strong>：用于页面标记的共享词汇表或模式，便于主流搜索引擎理解</li>
+</ul>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><ul>
+<li><strong>档案管理</strong></li>
+</ul>
+<blockquote>
+<p>每个用户被认为是公司档案的文件和电子邮件比率<br>公司档案的控制率<br>所有存储的档案应用适当的保管规则的比率</p>
+</blockquote>
+<ul>
+<li><strong>电子取证</strong></li>
+<li><strong>企业内容管理</strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag"># 数据治理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210823/11121.html" rel="prev" title="数据集成和互操作-基础">
+      <i class="fa fa-chevron-left"></i> 数据集成和互操作-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210825/54322.html" rel="next" title="主数据管理-基础">
+      主数据管理-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">文件和内容管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">内容分发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E6%8E%A7%E8%AF%8D%E8%A1%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">受控词表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E6%A1%A3%E6%A1%88%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">文件和档案管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A1%A3%E6%A1%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.4.1.</span> <span class="nav-text">文件档案生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E6%B1%82"><span class="nav-number">1.4.2.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E7%86%9F%E5%BA%A6%E8%AF%84%E4%BC%B0"><span class="nav-number">1.4.3.</span> <span class="nav-text">成熟度评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.5.</span> <span class="nav-text">管理实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%86%85%E5%AE%B9%E5%A4%84%E7%90%86%E5%88%B6%E5%BA%A6"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建内容处理制度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%86%85%E5%AE%B9%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84"><span class="nav-number">1.5.2.</span> <span class="nav-text">定义内容信息架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86"><span class="nav-number">1.5.3.</span> <span class="nav-text">实施生命周期管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%92%8C%E5%88%86%E5%8F%91%E5%B8%83%E5%86%85%E5%AE%B9"><span class="nav-number">1.5.4.</span> <span class="nav-text">分布和分发布内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">1.7.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

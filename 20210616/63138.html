@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录Java实用工具-IDEA安装使用的相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA-安装使用">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210616/63138.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录Java实用工具-IDEA安装使用的相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Program_Catalogue.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Auto_Catalogue.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Vmoptions.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Choose_Project_Type.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Create_Project_Type.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Define_Project_Name.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Finish.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Module_Create.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Choose_Project_Type.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Moudle_Define.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Use_Setting.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Use_Setting_Content.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Annotation_Module_Class.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Annotation_Module_Function.png">
+<meta property="article:published_time" content="2021-06-16T00:37:44.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:53:40.208Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="IDEA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Program_Catalogue.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210616/63138.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>IDEA-安装使用 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210616/63138.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IDEA-安装使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-16 08:37:44" itemprop="dateCreated datePublished" datetime="2021-06-16T08:37:44+08:00">2021-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-08 10:53:40" itemprop="dateModified" datetime="2021-11-08T10:53:40+08:00">2021-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">安装使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210616/63138.html" class="post-meta-item leancloud_visitors" data-flag-title="IDEA-安装使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210616/63138.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210616/63138.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录Java实用工具-IDEA安装使用的相关知识</p>
+<span id="more"></span>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>IDEA全称Intellij IDEA是<a target="_blank" rel="noopener" href="https://www.jetbrains.com/">JetBrains公司</a>的产品，是Java的集成开发环境，支持只能代码助手、代码自动提示、重构、J2EE支持、Ant、JUnit、CVS整合、代码审查和超前的GUI设计，支持Java、Scala、Groovy等语言，支持主流的技术和框架<br><strong>优势</strong></p>
+<ol>
+<li>强大的代码整合功能（Git、Maven、Spring）</li>
+<li>提示功能的快速、便捷、范围广(数据库表名、列名)</li>
+<li>好用的快捷键和代码版本</li>
+<li>精准搜索</li>
+<li>实时保存</li>
+</ol>
+<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><ol>
+<li><p><strong>卸载</strong>：安装前保证环境干净（卸载干净），初次安装无问题<br>通过控制面板进行卸载，不保留缓存和设置，卸载结束之后重启电脑</p>
+</li>
+<li><p><strong>下载</strong>：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/download/other.html">下载官网</a> ，选择合适的版本</p>
+</li>
+<li><p><strong>安装</strong>：<br>双击下载的exe文件，进入安装；点击下一步，选择安装路径，点击下一步；选择电脑对应的位数，选择.java，点击下一步；选择默认，点击Install，开始安装；安装结束，启动IDEA，跳过自行默认选择<br>安装目录介绍<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Program_Catalogue.png" alt="IDEA_Program_Catalogue"></p>
+</li>
+</ol>
+<p>  启动目录介绍<br>  <img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Auto_Catalogue.png" alt="IDEA_Start_Auto_Catalogue"></p>
+<ol start="4">
+<li><strong>配置环境</strong><ul>
+<li>虚拟机选项<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Vmoptions.png" alt="IDEA_Vmoptions"></li>
+</ul>
+</li>
+<li><strong>启动</strong><br>运行IDEA安装目录的bin目录下的idea64.exe文件（32位的系统则运行idea32.exe，也可以在桌面创建快捷方式启动）</li>
+</ol>
+<p><strong>创建项目</strong>：点击Create New Project<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start.png" alt="IDEA_Start"></p>
+<p>下一步：选择创建的项目类型和所需版本的JDK</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Choose_Project_Type.png" alt="IDEA_Start_Choose_Project_Type"></p>
+<p>下一步：选择创建项目的方式：按照模板创建(勾选，点击Next)和自定已创建(不勾选，直接点击Next)</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Create_Project_Type.png" alt="IDEA_Start_Create_Project_Type"></p>
+<p>下一步：定义项目的名称和存放位置</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Define_Project_Name.png" alt="IDEA_Start_Define_Project_Name"></p>
+<p>Finish</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Finish.png" alt="IDEA_Start_Finish"></p>
+<p>.idea和project_name.ini文件是IDEA特定的文件</p>
+<h1 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h1><h2 id="Module介绍"><a href="#Module介绍" class="headerlink" title="Module介绍"></a>Module介绍</h2><p>为适应分布式部署的需要，一个Project可以有多个Module组成，如：core Module、Web Module、plugin Module、solr Module等，彼此相互依赖<br><strong>新建</strong>：右键点击项目名，选择New -&gt; Module<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Module_Create.png" alt="IDEA_Module_Create"></p>
+<p>下一步：选择创建的Module类型和所需版本的JDK</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Start_Choose_Project_Type.png" alt="IDEA_Start_Choose_Project_Type"></p>
+<p>下一步：定义Module名称和存放目录</p>
+<p><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Moudle_Define.png" alt="IDEA_Moudle_Define"></p>
+<p>Finish：会在设置的位置出现对应的目录结构，进行编写<br><strong>删除</strong>：右键点击模块名module_name，选择Open Module Settings，选中要删除的module_name，点击上方的减号，再右键点击模块名module_name，选择Delete</p>
+<h2 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h2><p>进入设置界面有三种方法：<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Use_Setting.png" alt="IDEA_Use_Setting"></p>
+<p>设置页面介绍<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Use_Setting_Content.png" alt="IDEA_Use_Setting_Content"></p>
+<h3 id="Appearance-amp-Behavior"><a href="#Appearance-amp-Behavior" class="headerlink" title="Appearance &amp; Behavior"></a>Appearance &amp; Behavior</h3><p><strong>Theme</strong><br>下载：<a target="_blank" rel="noopener" href="http://www.riaway.com/">http://www.riaway.com</a><br>file -&gt; import Settings或者Settings -&gt; color scheme的scheme进行导入<br>找到下载目录，导入后重启</p>
+<p><strong>取消更新</strong><br>依次点击 Appearance &amp; Behavior -&gt; System Settings -&gt; Update，取消勾选Automatically check update for</p>
+<h3 id="Keymap"><a href="#Keymap" class="headerlink" title="Keymap"></a>Keymap</h3><p>IDEA和Eclipse有不同，可以进行搜索</p>
+<h3 id="Version-Control-版本控制"><a href="#Version-Control-版本控制" class="headerlink" title="Version Control(版本控制)"></a>Version Control(版本控制)</h3><p>以 Git 为例</p>
+<ol>
+<li>安装 Git 客户端</li>
+<li>依次点击 Settings -&gt; Version Control -&gt; Git</li>
+<li>在右侧的Path to Git executable ：里面配置 Git的安装目录</li>
+<li>依次点击 Settings -&gt; Version Control -&gt; GitHub，Auth Type 选择Password ，在右侧输入账号和密码，测试连接</li>
+<li>依次点击 VCS -&gt; Checkout from Version Control -&gt; GitHub</li>
+</ol>
+<h3 id="Editor"><a href="#Editor" class="headerlink" title="Editor"></a>Editor</h3><p><strong>General</strong><br>Mouse</p>
+<ul>
+<li>Change font size with Ctrl + Mouse Wheel：通过鼠标滚轮改变字体大小<br>Auto Import </li>
+<li>Insert imports on paste 选择all，勾选Add unambiguous imports on the fly和Optimize imports on the fly (for current project)：自动导入相关jar包<br>Appearance</li>
+<li>show line numbers ：显示行号</li>
+<li>show method separators：两个方法之间加入横线进行区分<br>Code Completion</li>
+<li>Case sensitive completions 选择None：忽略大小写，进行提示<br>Editor tabs</li>
+<li>show tabs in single row取消勾选：多行显示类文件<br>Postfix Completion：模板不可修改<br>Other</li>
+<li>Show quick documentation on mouse move，设置时间，单位毫秒：鼠标放在类名上，会显示相关信息<br><strong>Font</strong><br>Font(字体) ：Consolas；Size(字体大小)： 16；Line spacing(行间距)：1.0<br><strong>Color Scheme</strong><br>Language Defaults -&gt; Comments -&gt; Block(多行)/Doc(文档)/Line(单行) Comment -&gt; Foreground：设置注释颜色<br>Color Scheme Font：设置编辑区字体<br>Console Font，勾选Use console font instead of the default：设置控制台字体<br><strong>Code Style</strong><br>Java -&gt; Imports -&gt; Class count to use  import with ‘*‘ ：设置import *的个数<br><strong>File and Code Templates</strong><br>Include -&gt; File Header ：添加文档注释<br><strong>File Encoding</strong><br>Global(系统)/Project(当前项目) Encoding：设置文件的编码信息<br><strong>Live Template</strong>：可以定制<br>psvm ：public static void main(String [] args){}<br>sout   ：System.out.println(“”);  soutp、soutm、soutv：最近的变量值、xxx.sout<br>fori     ：for(int i =0; ; i++)   iter、itar<br>list.for:list.fori、list.forr<br>ifn       :inn<br>prsf    ：private static final<br>psf      ：public static final;    psfi、psfs</li>
+</ul>
+<h3 id="Build、Execution、Deployment"><a href="#Build、Execution、Deployment" class="headerlink" title="Build、Execution、Deployment"></a>Build、Execution、Deployment</h3><p><strong>Build Tools</strong><br>配置Maven</p>
+<blockquote>
+<p>Maven是项目自动化构建工具，也可以进行依赖管理<br>Maven home dirtionary ：选择Maven本地安装目录<br>User Setting File ：settings.xml<br>Local repository：本地仓库</p>
+<p>勾选 import Maven projects automatically<br>Automatically download 勾选 Source 和 Doucmentation：可以选择下载源码和官方文档<br>VM options ：-Xmx768m</p>
+</blockquote>
+<p><strong>Compiler</strong><br>Build project automatically：自动编译当前项目，建议勾选<br>Compiler independent modules in parallel：并行对多个模块进行编译，建议勾选</p>
+<p><strong>Debugger</strong><br>Transport 勾选 Shared memory ，可以节省内存空间</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><strong>注释模板</strong></p>
+<ul>
+<li><strong>类注释模板设置</strong>：IDEA –&gt; Settings… –&gt; Editor –&gt; File and Code Templates –&gt; Includes –&gt;File Header，在里面输入注释模板<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Annotation_Module_Class.png" alt="IDEA_Annotation_Module_Class"></li>
+<li><strong>方法注释模板设置</strong>：IDEA –&gt; Settings… –&gt; Editor –&gt; Live Templates  –&gt; 点击+号  –&gt;Template Group…(添加模板组，随便取名)； 添加了模板组后再次点击+号，这次选择Live Template(添加注释模板）； Abbreviation: 该处填入* （此处一定要填写*,IDEA生成注释的默认方式是：/*+模板名+快捷键）<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/IDEA/IDEA_Annotation_Module_Function.png" alt="IDEA_Annotation_Module_Function"></li>
+</ul>
+<p><strong>省电模式</strong><br>File -&gt; Power Save Mode：关闭代码检查和代码提示的功能</p>
+<p><strong>显示模式</strong><br>右键点击类名 -&gt; Split Vertically/Horizontally：横/竖分屏显示</p>
+<p><strong>生成JavaDoc</strong><br>依次点击 Tools -&gt; Generate JavaDoc， 可以选择生成的范围和存储目录，保存格式设置为中文：zh_CN  ，Other command line arguments：-encoding UTF-8 -charset UTF-8</p>
+<p><strong>清除缓存</strong><br>依次点击 File -&gt; Invalidate Caches / Restart</p>
+<h2 id="配置Tomcat"><a href="#配置Tomcat" class="headerlink" title="配置Tomcat"></a>配置Tomcat</h2><p>运行JavaEE动态Web需要配置Tomcat项目</p>
+<ol>
+<li>依次点击 Run -&gt; Configuration</li>
+<li>点击弹窗左上方的 + 号，选择 Tomcat -&gt; Local</li>
+<li>进入配置页面，点击Server页面，给 Tomcat 命名，点击 Configure 指明Tomcat的安装路径</li>
+<li>点击Deployment，进入部署页面，依次点击右侧 + 号 -&gt; Artifact ，选择需要部署的项目，在 Application context 指明部署应用的名称，点击Apply<br>结束时，先断开与服务器的连接，在执行关闭</li>
+</ol>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><ol>
+<li>依次点击右侧的 Database -&gt; +号 -&gt; Data Source，选择数据库类型，进入连接配置页面</li>
+<li>配置连接IP、端口、数据库、用户和密码，配置完成后可以点击 Test Connection，进行连接</li>
+</ol>
+<h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><p>step over：进入下一步，如果当前行断点是一个方法，则不进入当前方法体内<br>step into：进入下一步，如果当前行断点是一个方法，则进入当前方法体内<br>force step into：进入下一步，如果当前行断点是一个方法，则进入当前方法体内<br>step out：跳出<br>resume program：恢复程序运行，但如果该断点下面代码还有断点则停在下一个断点上<br>stop：停止<br>mute breakpoints：使所有断点失效<br>view breakpoints：查看所有断点<br>条件断点<br>查看值：Ctrl + U</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/IDEA/" rel="tag"># IDEA</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210615/17146.html" rel="prev" title="Eclipse-安装使用">
+      <i class="fa fa-chevron-left"></i> Eclipse-安装使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210617/10134.html" rel="next" title="IDEA-常见问题">
+      IDEA-常见问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">配置使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Module%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.</span> <span class="nav-text">Module介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">常用配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Appearance-amp-Behavior"><span class="nav-number">3.2.1.</span> <span class="nav-text">Appearance &amp; Behavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keymap"><span class="nav-number">3.2.2.</span> <span class="nav-text">Keymap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Version-Control-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">Version Control(版本控制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Editor"><span class="nav-number">3.2.4.</span> <span class="nav-text">Editor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build%E3%80%81Execution%E3%80%81Deployment"><span class="nav-number">3.2.5.</span> <span class="nav-text">Build、Execution、Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.2.6.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AETomcat"><span class="nav-number">3.3.</span> <span class="nav-text">配置Tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.4.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="nav-number">3.5.</span> <span class="nav-text">断点调试</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

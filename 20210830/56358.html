@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录大数据与数据科学相关内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据和数据科学-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210830/56358.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录大数据与数据科学相关内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-30T13:47:33.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.330Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="数据科学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210830/56358.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据和数据科学-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210830/56358.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据和数据科学-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-30 21:47:33" itemprop="dateCreated datePublished" datetime="2021-08-30T21:47:33+08:00">2021-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210830/56358.html" class="post-meta-item leancloud_visitors" data-flag-title="大数据和数据科学-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210830/56358.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210830/56358.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录大数据与数据科学相关内容</p>
+<span id="more"></span>
+
+<h1 id="大数据与数据科学"><a href="#大数据与数据科学" class="headerlink" title="大数据与数据科学"></a>大数据与数据科学</h1><h2 id="大数据战略"><a href="#大数据战略" class="headerlink" title="大数据战略"></a>大数据战略</h2><ol>
+<li><strong>定义大数据战略和业务需求</strong>：大数据战略需要与整体业务战略和业务需求保持一致</li>
+</ol>
+<blockquote>
+<p>组织需要解决和分析的问题<br>确定获取使用的数据源<br>提供数据的及时性和范围：实时提供或定时快照<br>对其他数据结构的影响以及与其他数据结构的相关性：可能需要对其他数据结构进行结构或内容改造，使其适合与大数据集成整合<br>对现有建模数据的影响：包括扩展对客户、产品和营销方法的知识</p>
+</blockquote>
+<ol start="2">
+<li><strong>选择数据源</strong>：数据源的选择由组织试图解决的问题驱动</li>
+</ol>
+<blockquote>
+<p>数据源信息</p>
+<blockquote>
+<p>数据源头系统<br>数据格式<br>数据元素表示含义<br>连接其他数据的方式<br>数据的更新频率</p>
+</blockquote>
+<p>数据源管理内容</p>
+<blockquote>
+<p>基础数据：在销售分析中考虑基础数据组件，如 POS（销售终端）<br>粒度：理想以最细粒度的形式获取数据，可用于各种目的聚合<br>一致性：选择超越可视化和认知限制、合适且一致的数据<br>可靠性：选择长时间稳定可靠的数据源<br>检查分析新数据源：添加新数据集之前，需要对变更情况进行测试</p>
+</blockquote>
+</blockquote>
+<ol start="3">
+<li><strong>获得和接收数据源</strong>：获取需要用到的数据源，采用加载或购买，获取数据源、关键元数据等相关内容</li>
+<li><strong>制定数据假设方法</strong>：构建统计模型，指定数据科学解决方案，展出数据元素和数据及内部二者的关系</li>
+<li><strong>继承和调整数据进行分析</strong>：准备数据中的内容、查找各种来源的数据间链接，以及调整常用数据以供使用</li>
+<li><strong>使用模型探索数据</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li>填充预测模型：使用历史信息预先填充配置预测模型，涉及模型中的客户、市场、产品或模型触发因素之外的其他因素</li>
+<li>训练模型：通过数据模型进行基于数据重复运行模型以验证假设训练，根据结果进行更改</li>
+<li>评估模型：针对训练集进行模型构建、评估和验证，完善业务需求</li>
+<li>创建数据可视化：模型的数据可视化必须满足与模型目的相关的特定需求，每个可视化能够回答一个问题或提供一个见解</li>
+</ul>
+</blockquote>
+<ol start="7">
+<li><strong>部署和监控</strong>：将满足业务需求的模型部署到生产中，进行持续监控</li>
+</ol>
+<blockquote>
+<ul>
+<li>揭示洞察和发现：与行动项目相关联进行洞察、发现新关系，获取利益</li>
+<li>使用附加数据源迭代：依据展示发现和数据洞察，触发新一轮的数据科学研究，迭代更新</li>
+</ul>
+</blockquote>
+<h2 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h2><h3 id="数据可视化的技术进步"><a href="#数据可视化的技术进步" class="headerlink" title="数据可视化的技术进步"></a>数据可视化的技术进步</h3><blockquote>
+<p>大规模并行处理（MPP）：数据在多个处理服务器 / 计算节点进行逻辑分区，每个服务器用各自的内存处理本地数据，处理服务器之间的通信由管理节点控制<br>数据库内的高级分析：使用类似MPP的原则<br>非结构化数据分析（Hadoop、MapReduce）</p>
+<blockquote>
+<p>MapReduce 有三个步骤：映射（Map）：识别和获取需要分析的数据；洗牌（Shuffle）：依据所需的分析模式组合数据；归并（Reduce）：删除重复或执行聚合，以便将结果数据及大小减少到需要的规模</p>
+</blockquote>
+<p>分析结果与操作系统的集成<br>跨多媒体和数据的可视化<br>链接结构化和非结构化信息的语义<br>使用物联网的新数据源<br>高级可视化能力<br>数据扩展能力<br>技术和工具集的协作</p>
+</blockquote>
+<h3 id="数据可视化工具"><a href="#数据可视化工具" class="headerlink" title="数据可视化工具"></a>数据可视化工具</h3><p><strong>数据可视化工具</strong>：传统工具具有数据和图形组件，高级可视化和发现工具使用内存架构，使用户能够与数据交互，展示难以识别的大数据集模式，Apache Mahout</p>
+<ul>
+<li><strong>优势</strong></li>
+</ul>
+<blockquote>
+<p>复杂的分析和可视化类型，如格子图、火花线、热图、直方图、瀑布图和子弹图等<br>内置可视化最佳实践<br>交互性，实现视觉发现</p>
+</blockquote>
+<h3 id="可视化标准"><a href="#可视化标准" class="headerlink" title="可视化标准"></a>可视化标准</h3><blockquote>
+<p>分析范例、用户团体、主题域的工具标准<br>新数据的请求<br>数据集流程标准<br>采用中立、专业的陈述过程，避免产生有偏见的结果，确保所有要素都以公平一致的方式完成，如</p>
+<blockquote>
+<p>数据包含和排除<br>模型中的假设<br>结果统计的有效性<br>结果解释的有效性<br>采用适当的方法</p>
+</blockquote>
+</blockquote>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><ol>
+<li>技术使用指标：使用技术分析手段查找数据热点（最常访问的数据），以便管理数据分发和保持性能</li>
+<li>加载和扫描指标：定义了数据提取率以及与用户社区的交互</li>
+<li>学习和故事场景：衡量有形式成果，证明投入成本的合理性，包括效益的量化、成本预防或避免，以及启动和实现效益之间的时间长度</li>
+</ol>
+<blockquote>
+<p>已开发模型的数量和准确性<br>已识别的机会中实现的收入<br>避免以识别的威胁所降低的成本</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag"># 数据科学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210829/39064.html" rel="prev" title="数据管控战略-基础">
+      <i class="fa fa-chevron-left"></i> 数据管控战略-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210831/57880.html" rel="next" title="数据中台-基础">
+      数据中台-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">大数据与数据科学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%88%98%E7%95%A5"><span class="nav-number">1.1.</span> <span class="nav-text">大数据战略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9A%84%E6%8A%80%E6%9C%AF%E8%BF%9B%E6%AD%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据可视化的技术进步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据可视化工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%87%E5%87%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">可视化标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">1.3.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

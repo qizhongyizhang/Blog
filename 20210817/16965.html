@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍数据管理相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据管理-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210817/16965.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍数据管理相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E6%88%98%E7%95%A5%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E9%98%BF%E5%A7%86%E6%96%AF%E7%89%B9%E4%B8%B9%E4%BF%A1%E6%81%AF%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_DAMA%E8%BD%A6%E8%BD%AE%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E6%B3%95%E7%9A%84GDPR%E5%8E%9F%E5%88%99.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E5%9F%BA%E4%BA%8EPIPEDA%E7%9A%84%E6%B3%95%E5%AE%9A%E4%B9%89%E5%8A%A1.png">
+<meta property="article:published_time" content="2021-08-17T05:35:29.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:32:43.648Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E6%88%98%E7%95%A5%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210817/16965.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据管理-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210817/16965.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据管理-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-17 13:35:29" itemprop="dateCreated datePublished" datetime="2021-08-17T13:35:29+08:00">2021-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-08 10:32:43" itemprop="dateModified" datetime="2021-11-08T10:32:43+08:00">2021-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210817/16965.html" class="post-meta-item leancloud_visitors" data-flag-title="数据管理-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210817/16965.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210817/16965.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍数据管理相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h1><p><strong>数据管理</strong>：是数据资源获取、控制和价值提升等活动的集合，具体指为保护和提高数据和信息资产价值，在其整个生命周期中制定计划、制度和实践活动，并执行和监督，包括数据治理、数据架构、数据模型与设计、数据存储与操作、数据安全管理、数据集成与互操作、文件和内容管理、参考数据和主数据管理、数据仓库和商务智能、元数据管理、数据质量管理11个管理职能<br><strong>数据战略</strong>：包括使用数据信息以获得竞争优势和支持企业目标的业务计划，来自于对业务战略固有数据需求的深度理解<br><strong>数据管控</strong>：是企业开展数据治理的重要基础性保障，为数据治理提供人才团队、制度规范、文化氛围等</p>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>满足企业及利益相关方（包括客户、员工和业务合作伙伴等）的信息需求<br>获取、存储、保护数据，确保数据资产的完整性<br>确保数据和信息的质量<br>确保利益相关方的数据隐私和保密性<br>防止数据和信息未经授权或被不当的访问、操作及使用<br>确保数据能有效地服务与企业增值的目标<br>短期目标：满足基本的管理决策与业务协同；中期目标：创新与转型；长期目标：定义企业在数字化竞争生态中的角色和地位</p>
+</blockquote>
+<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
+<p>认识到数据是具有独特属性的资产<br>用经济术语表示数据价值：认识到数据资产的经济价值，进行量化分析<br>数据管理需要领导层全力推动，进行规划<br>数据管理需要企业级视角，进行跨职能工作，多角度思考，业务部门全面配合<br>进行元数据管理、严格的数据质量管理、合理的全生命周期管理，加强规范管理<br>数据管理需要纳入数据相关风险<br>数据管理驱动信息技术决策，数据战略与业务战略一致</p>
+</blockquote>
+<h2 id="数据管理战略内容"><a href="#数据管理战略内容" class="headerlink" title="数据管理战略内容"></a>数据管理战略内容</h2><blockquote>
+<p>令人信服的数据管理愿景，数据管理的使命和长期目标<br>符合 SMART原则（具体、可衡量、可操作、现实、时间限制）的短期数据管理计划目标<br>指导原则、价值观和管理观点，对数据管理角色和组织的描述，以及其对职责和决策权的总结<br>数据管理程序组件和初始化任务，具体明确范围的优先工作计划，包含项目和行动任务的实施路线图草案<br>数据管理的商业案例总结，数据管理成功的建议措施</p>
+</blockquote>
+<h2 id="管理职能"><a href="#管理职能" class="headerlink" title="管理职能"></a>管理职能</h2><ul>
+<li><p><strong>数据治理</strong>：对数据资产管理行使权力和控制的集合，包括规划、监督，执行等</p>
+<ul>
+<li><strong>减少风险</strong></li>
+</ul>
+<blockquote>
+<p><strong>一般性风险管理</strong>：洞察数据对财务、商誉造成的影响，包括法律和监管问题<br><strong>数据安全</strong>：通过控制活动保护数据资产的可获得性、可用性可审计和数据安全<br><strong>隐私</strong>：通过制度对私密信息进行合规性监控</p>
+</blockquote>
+<ul>
+<li><strong>改进流程</strong></li>
+</ul>
+<blockquote>
+<p><strong>法规遵从性</strong>：有效持续地响应监管要求<br><strong>数据质量提升</strong>：通过真实可信的数据提升业务绩效<br><strong>元数据管理</strong>：建立业务术语表，定义定位组织中的数据<br><strong>项目开发效率</strong>：在系统生命周期（SDLC） 中改进，解决整个组织中的数据管理问题<br><strong>供应商管理</strong>：控制数据处理的合同，包括云存储、外部数据采购、数据产品销售和外包数据运维等</p>
+</blockquote>
+</li>
+<li><p><strong>数据架构</strong>：用于定义数据需求，整合和控制数据资产，与业务战略匹配的一整套构建规范，包括企业级数据模型、工具标准、系统命名规范、数据资源分布等内容的管理</p>
+<blockquote>
+<p>利用新兴技术从战略上帮助组织快速改变产品、服务和数据<br>将业务需求转换为数据和应用需求，确保为业务流程提供数据<br>管理复杂的数据和信息，实现企业内共享<br>确保业务和 IT技术 保持一致<br>为企业改革、转型和提高适应性支撑</p>
+</blockquote>
+</li>
+<li><p><strong>数据建模与设计</strong>：是发现、分析和确定数据需求的过程，通过数据模型精确表示传达数据需求，包括数据模型管理程序<br><strong>数据建模</strong>：是发现、分析和确定数据需求的过程，通过数据模型精确地表示和传递数据需求<br><strong>数据模式</strong>：关系模式、多维模式、面向对象模式、事实模式、时间序列模式和 NoSQL模式<br><strong>模型分层</strong>：概念模型 —&gt; 逻辑模型（E-R图） —&gt; 物理模型（类图）</p>
+<blockquote>
+<p>提供有关数据的通用词汇表<br>获取、记录组织内数据和系统的详细信息<br>在项目中作为主要的交流沟通工具<br>提供应用定制、整合、替换的起点</p>
+</blockquote>
+</li>
+<li><p><strong>数据存储与操作</strong>：包括对存储数据的设计、实施和支持，包括标准工具、数据库性能和业务连续性标准等，最大化数据资源价值，贯穿整个数据生命周期</p>
+<blockquote>
+<p>在整个数据生命周期中管理数据的可用性<br>确保数据资产的完整性<br>管理数据交易事务的性能</p>
+</blockquote>
+</li>
+<li><p><strong>数据安全管理</strong>：采用各种技术和管理措施，保证数据的机密性、完整性和可用性，确保数据不被破坏，且能被适当访问，包括数据访问安全标准、监控和审计程序和存储安全标准等，包括安全策略和过程的规划</p>
+<ul>
+<li><strong>降低风险</strong><ul>
+<li>支持适当访问并组织对企业数据资产的不当访问</li>
+<li>支持对隐私、保护和保密制度、法规的遵从</li>
+<li>确保满足利益相关方的隐私保密要求</li>
+</ul>
+</li>
+<li><strong>业务增长</strong></li>
+<li><strong>安全性作为资产</strong></li>
+</ul>
+</li>
+<li><p><strong>数据集成与互操作</strong>：描述了数据在不同数据存储、应用程序和组织三者内部之间进行移动和整合的相关过程，数据集成是将数据整合成，核心是ETL操作</p>
+<blockquote>
+<p>及时以数据消费者所需的格式提供数据<br>将数据物理地或虚拟地合并到数据中心<br>通过开发共享模型和接口来降低管理解决方案的成本和复杂度<br>识别有意义的事件，自动触发警报并采取行动<br>支持商务智能、数据分析、主数据管理以及运营效率的提升</p>
+</blockquote>
+</li>
+<li><p><strong>文件和内容管理</strong>：针对存储在关系型数据库之外的数据和信息的采集、存储、访问和使用过程的管理，重点保持文件和非结构化、半结构化数据的信息完整性</p>
+<blockquote>
+<p>确保能够高速有效的采集使用非结构化数据与信息<br>确保结构化和非结构化数据之间的整合能力<br>遵守法律业务并达到客户预期</p>
+</blockquote>
+</li>
+<li><p><strong>参考数据和主数据管理</strong>：满足主数据、参考数据相对稳定，变化缓慢，可唯一识别的业务需求，提供数据共享基础<br><strong>主数据</strong>：是有关业务实体的数据，如雇员、客户、产品等，以通用和抽象概念形式为业务交易和分析提供语境数据，包括业务交易涉及的内部和外部的详细信息（定义和标识符），以满足跨部门业务协同需要、反映核心业务实体状态属性的基础信息<br><strong>参考数据</strong>：描述组织中的其他数据，或将组织数据与外部信息联系起来，如代码表和描述表</p>
+<blockquote>
+<p>确保组织在各个流程中都拥有完整、一致、最新且权威的参考数据和主数据<br>促使组织在各业务单元和应用系统之间共享参考数据和主数据<br>通过标准的、通用的数据模型和整合模式，降低数据使用和数据整合的成本及复杂性</p>
+</blockquote>
+</li>
+<li><p><strong>数据仓库和商务智能</strong>：通过数据仓库技术实现商务智能，支持商业决策<br><strong>数据仓库</strong>：Data Warehouse，简写为 DW 或 DWH，是一个面向主题的、集成的、稳定的、随时间变化的数据集合，是面向分析的集成化数据环境，通过形成分析报告和各类报表提供企业决策支持<br><strong>商务智能</strong>：包括理解组织诉求和寻找机会的数据分析活动，及其相关的技术集合。促成了数据挖掘、报表分析、数据可视化等</p>
+<blockquote>
+<p>方便地存取数据，及时、一致地展示信息<br>支持商务智能活动<br>赋能商业分析和高效决策<br>能够适应实时变化，基于数据洞察寻找创新方法</p>
+</blockquote>
+</li>
+<li><p><strong>元数据管理</strong>：通过元数据资料库（MetaData Repository）进行统一的存储与管理，赋能企业数据资产<br><strong>元数据</strong>：描述数据的数据，对数据资源进行描述、解释 、定位等，便于检索和管理，包括技术和业务流程、数据规则和约束，还包括逻辑数据结构和物理数据结构等。用来描述数据本身（如数据库、数据元素、数据模型），数据表示的概念（如业务流程、应用系统软件代码、技术基础设施），数据与概念之间的联系（关系）</p>
+<blockquote>
+<p>收集记录元数据内容，确保元数据完整性<br>建立元数据标准，提供标准路径访问元数据和元数据标准语义<br>整合管理不同来源的元数据进行统一管理<br>确保元数据的数据质量、数据一致性、数据及时性和数据安全<br>创建准确的血缘分析、关联度分析和影响分析，增加对数据流向的认识<br>满足数据监规范，合理使用数据<br>提供全面的数据背景、历史和来源，降低培训成本和人员流动影响<br>提供上下文语境和执行数据质量检查，提高数据可信度<br>明确数据语义，提高数据使用者和IT人员的沟通效率<br>明确数据流程，识别冗余、过时和不正确的数据<br>扩展元数据用途，增加战略信息（如主数据）的价值</p>
+</blockquote>
+</li>
+<li><p><strong>数据质量管理</strong>：包括规划和实施质量管理技术，测量、评估和提高企业内数据的适用性，提高数据对业务和管理的满意度，是一项持续的任务</p>
+<blockquote>
+<p>提高组织数据价值和数据利用的机会<br>降低低质量数据导致的风险和成本<br>提高组织效率和生产力<br>保护和提升组织的声誉<br>定义数据质量控制的标准和规范</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>时代背景</strong>：第四次工业革命，以 CPS（Cyber-Physical Systems，信息物理系统）作为实施核心技术<br><strong>技术特征</strong></p>
+<blockquote>
+<p>智能感知：信息来源、采集方式和管理方式保证了数据的质量和全面性<br>数据信息转化：对数据进行特征提取、筛选、分类和优先级排序<br>网络融合：将机理、环境和群体有机结合，构建能指导实体空间的网络环境，包括景区同步、关键建模、变化记忆、分析预测等<br>自我认知：结合机理模型和数据驱动模型，保证数据解读符合客观规律，并在机理上反映对象状态变化<br>自由配置：根据活动目标进行优化，进而体现决策实现价值</p>
+</blockquote>
+<h2 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h2><ul>
+<li><strong>战略一致性模型（SAM）</strong>：模型的中心是数据与信息之间的关系，业务战略、IT战略、组织与流程、信息系统，如下图所示：<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E6%88%98%E7%95%A5%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B.png" alt="DM_战略一致性模型"></li>
+<li><strong>阿姆斯特丹信息模型（AIM）</strong>：从战略角度看待业务域IT的一致性，分为9个单元，如下图所示：<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E9%98%BF%E5%A7%86%E6%96%AF%E7%89%B9%E4%B8%B9%E4%BF%A1%E6%81%AF%E6%A8%A1%E5%9E%8B.png" alt="DM_阿姆斯特丹信息模型"></li>
+<li><strong>DAMA-DBBOK模型</strong></li>
+</ul>
+<blockquote>
+<p>DAMA车轮图，将数据治理作为数据管理的核心，如下图所示：<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/DM_DAMA%E8%BD%A6%E8%BD%AE%E6%A8%A1%E5%9E%8B.png" alt="DM_DAMA车轮模型"><br>环境因素六边形图，显示了人、过程和技术之间的关系，如下图所示：<br>知识领域语境关系图，描述了人员、流程和技术等知识领域的相关细节，基于产品管理的 <strong>SIPOC图</strong>的概念，包括如下内容：</p>
+<blockquote>
+<p>定义：知识领域的简要定义<br>目标：知识领域内指导活动执行的目的、基本原则<br>活动：实现知识领域目标所需的行动和任务，分为计划、控制、开发和运营</p>
+<blockquote>
+<p>计划活动 Plan：为实现数据管理目标指定战略战术工作<br>控制活动 Control：持续确保数据质量<br>开发活动 Develop：围绕数据生命周期开展分析、设计、构建、测试、准备和部署工作<br>运营活动 Operate：支持系统和流程的使用、维护和增强</p>
+</blockquote>
+<p>输入：知识领域启动活动需要的有形实物<br>交付成果：知识领域内的产出<br>角色和职责<br>相关参与方：供给者，消费者，参与者<br>工具<br>方法<br>质量指标</p>
+</blockquote>
+</blockquote>
+<h2 id="管理实施"><a href="#管理实施" class="headerlink" title="管理实施"></a>管理实施</h2><ul>
+<li><p><strong>统筹规划</strong>：<strong>建立数据管理组织和制度</strong>，明确各级角色和职责，形成规范的管理标准和管理人才；确定管理目标，<strong>盘点数据资产</strong>，熟悉数据来源、采集手段和硬件设备；<strong>制定数据标准规范</strong>，包括元数据模型标准、主数据标准、核心业务指标数据标准、业务数据模型标准等，规划数据仓库、元数据库、主数据库建设</p>
+</li>
+<li><p><strong>管理实施</strong>：搭建大数据管理平台、完成数据汇聚工作，建设或采购必要的数据资管理平台或第三方工具；梳理数据质量规则，建立高质量数据评估标准；建立安全管理体系，执行数据安全管理职能；明确企业核心业务实体数据（主数据），进行规范化管理<br><strong>组织方式</strong></p>
+<blockquote>
+<p>自上而下的顶层设计模式：标准规范先行</p>
+<blockquote>
+<p>调研数据资产分布现状<br>评估数据资产管理水平<br>建设数据资产管理体系</p>
+</blockquote>
+<p>自下而上的各个击破模式：问题导向，建设先行，快速见效</p>
+</blockquote>
+<p><strong>建设策略</strong></p>
+<blockquote>
+<p>生产系统入手</p>
+<blockquote>
+<p>大型生产系统开发建设模式：从大型生产系统开发入手，借助项目建设契机，建立该应用和业务领域数据的企业级标准和质量管控<br>企业数据建设模式：企业数据建设模式是从企业数据模型出发，在建模的同时建立标准，规范生产环节的数据录入，保证数据质量<br>主数据模式：主数据建设模式是从主数据的质量和业务协同入手，推动生产环节在客户、无聊、组织机构、产品、统一编码</p>
+</blockquote>
+<p>数据系统入手</p>
+<blockquote>
+<p>统一数据平台模式：统一数据平台模式是从数仓、大数据平台等统一数据整合平台入手，统一接入各业务各公司的数据，统一语义和标准，提升数据质量<br>数据集市模式：数据集市模式从某个特懂的分析主题入手，在各业务单独建立数据仓库，能满足各自数据分析需求的基础下，统一每个业务数仓的语义和标准规范，实现物理分离、逻辑统一</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>稽核检查</strong>：数据管理是一项常态化的工作，包括数据标准执行情况检查的常态化，全流程数据质量稽核的常态化和灵活配置数据存储策略的常态化，对数据按照价值进行分类分级，形成数据资产目录，制定相应的存储策略</p>
+</li>
+<li><p><strong>资产运营</strong>：以实现业务价值为导向，用户为中心，为企业内外部不同层面用户提供数据价值，是数据管理实现价值的最终阶段</p>
+</li>
+</ul>
+<h1 id="数据资产"><a href="#数据资产" class="headerlink" title="数据资产"></a>数据资产</h1><p><strong>数据资产</strong>：由企业拥有或控制的（包括以合法途径获取的企业外部数据资源），未来能够带来经济利益的，以物理或电子方式记录的数据资源等，如文档资料、电子数据等<br><strong>数据资产管理</strong>：对数据资产进行管理，规划、控制数据及信息资产的业务活动，包括开发、执行和监督有关数据的计划、政策、项目等，确保数据资产保值、升值，贯穿数据整个生命周期</p>
+<h2 id="数据资产特性"><a href="#数据资产特性" class="headerlink" title="数据资产特性"></a>数据资产特性</h2><p><strong>无消耗性</strong>：数据资产不会因为使用频率的增加而磨损、消耗，与传统无形资产类似<br><strong>增值性</strong>：企业通过稳定发展，数据规模和数据维度会在原有的基础上不断积累，整体价值进一步提升<br><strong>依附性</strong>：数据资产往往依附于相应的软件、硬件发挥作用和效应，不能独立发挥作用<br><strong>价值易变性</strong>：数据资产时刻受到数据容量、数据时效程度、应用场景等因素的影响，其价值更易发生变化<br><strong>战略性</strong>：一切数据业务化，一切业务数据化，具有战略性</p>
+<h2 id="数据资产估值"><a href="#数据资产估值" class="headerlink" title="数据资产估值"></a>数据资产估值</h2><h3 id="估值内容"><a href="#估值内容" class="headerlink" title="估值内容"></a>估值内容</h3><ol>
+<li><strong>运营成本</strong>：包括采集、存储、计算和运维的费用</li>
+<li><strong>替换成本</strong>：在灾难性数据破坏事件或数据中断时，数据替换货恢复的成本</li>
+<li><strong>风险成本</strong>：潜在罚款、补救成本和诉讼费用的估价<ul>
+<li>缺少必须数据</li>
+<li>保存不应留存数据</li>
+<li>存储数据不正确</li>
+</ul>
+</li>
+<li><strong>使用价值</strong>：企业日常运行带来的价值，主要通过数据资产分类、使用频次、使用对象、使用效果和共享流通进行计量</li>
+<li><strong>市场价值</strong>：通过交易、售卖、兼并或收购时作为企业资产的价值，通过稀缺性、时效性进行衡量</li>
+<li><strong>洞察价值</strong>：从数据中发现、洞察商机获得的收入价值</li>
+</ol>
+<h3 id="估值方法"><a href="#估值方法" class="headerlink" title="估值方法"></a>估值方法</h3><ul>
+<li><strong>非财务方法</strong></li>
+</ul>
+<blockquote>
+<p>数据的内在价值模型：不考虑业务价值，仅从技术层面进行特征加权统计<br>数据的商业价值模型：结合业务流程进行特征加权统计<br>数据的绩效价值模型：衡量随时间推移对API绩效指标的影响</p>
+</blockquote>
+<ul>
+<li><strong>财务方法</strong></li>
+</ul>
+<blockquote>
+<p>数据的成本价值模型：衡量获取或替换丢失数据的价值成本<br>数据的经济价值模型：衡量信息资产对企业收入的贡献<br>数据的市场价值模型：衡量企业出售、出租和交换企业数据所产生的收入</p>
+</blockquote>
+<h3 id="价值评估理论"><a href="#价值评估理论" class="headerlink" title="价值评估理论"></a>价值评估理论</h3><ul>
+<li><strong>层次分析法</strong></li>
+</ul>
+<blockquote>
+<p>分析各因素关系，建立地接层次结构<br>同一层级进行重要性判断，构建判断矩阵<br>由判断矩阵计算比较元素的相对权重<br>计算合成权重</p>
+</blockquote>
+<ul>
+<li><strong>专家打分法（德尔菲法）</strong></li>
+</ul>
+<blockquote>
+<p>按照课题组成专家小组<br>收集专家关于相关问题的书面回答<br>分析专家的回答，提出自己的预测<br>将专家判断意见汇总，进行对比，再将所有专家意见返还，专家根据他人意见进行修改<br>回收专家意见，再次汇总分发，直至所有专家不再更改<br>对专家意见进行综合处理</p>
+</blockquote>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><ul>
+<li><strong>数据内在价值——数据质量</strong></li>
+</ul>
+<blockquote>
+<p>完整性：缺失字段或缺失记录（整个数据缺失记录）<br>正确性：数据内容与客观实体特征是否一致<br>一致性：同一实体同一属性值在不同的数据集中是否一致<br>重复性：是否存在重复数据</p>
+</blockquote>
+<ul>
+<li><strong>数据外在价值</strong></li>
+</ul>
+<blockquote>
+<p>稀缺性：数据供给方数量的多寡及数据的供给丰富程度<br>时效性：数据时间特性对应用的满足程度<br>多维性：描述数据集的多寡程度<br>场景经济性：在具体场景中数据集的经济价值</p>
+</blockquote>
+<h2 id="数据资产目录"><a href="#数据资产目录" class="headerlink" title="数据资产目录"></a>数据资产目录</h2><p><strong>包含内容</strong>：业务术语表、数据元素定义、数据血缘、数据质量标准、数据安全标准等</p>
+<h3 id="编制方法"><a href="#编制方法" class="headerlink" title="编制方法"></a>编制方法</h3><p><strong>系统视角</strong>：以系统目前的核心系统为主，将系统功能模块分类，按照系统数据主题、实体定义信息、实体分类信息、数据相关方信息、技术信息构建数据资产目录<br><strong>主题域视角</strong>：按照战略发展、业务运营、管理支持构建系统统一的数据域主题或以及主题，按照实体定义信息、实体分类信息、数据相关方信息、技术信息构建数据资产目录</p>
+<h3 id="能力评估"><a href="#能力评估" class="headerlink" title="能力评估"></a>能力评估</h3><ul>
+<li><strong>能力内容</strong></li>
+</ul>
+<blockquote>
+<p>发现能力：所有可用数据资产进行清洗全面概述的能力<br>理解能力：新增、修改数据资产目录和自我丰富的能力<br>信任能力：支持用户评估数据的可靠性和质量<br>协作能力：支持用户进行任务共享并鼓励用户创建和修订描述<br>治理能力：支持满足企业标准的能力</p>
+</blockquote>
+<ul>
+<li><strong>能力级别</strong></li>
+</ul>
+<blockquote>
+<p>初始级：没有努力集中编制数据资产目录，无法集中获得大部分有价值信息<br>主动管理：存在数据资产列表和文档，可使用搜索功能，更新缓慢<br>基于工具：数据资产目录由专业团队管理，能助力自动捕获元数据，使用更轻松<br>优化级：数据资产目录做了样本数据条目和统计信息，包含自动捕获的血缘信息，使数据资产目录可信度更高<br>自动化级：可向用户推荐数据资产可自动生成数据质量和数据资产价值评估结果</p>
+</blockquote>
+<h1 id="数据处理伦理"><a href="#数据处理伦理" class="headerlink" title="数据处理伦理"></a>数据处理伦理</h1><p><strong>伦理</strong>：是建立在是非观念上的行为准则，在没有人注意到的情况下做正确的事<br><strong>数据处理伦理</strong>：以符合伦理准则的方式获取、存储、管理、使用和销毁数据</p>
+<h2 id="核心问题"><a href="#核心问题" class="headerlink" title="核心问题"></a>核心问题</h2><blockquote>
+<p>对人的影响：数据代表个人特征，可用于各类决策，需要保证质量与可靠性<br>滥用的可能：需要伦理准则防止数据滥用<br>数据经济价值：需要规定数据所有权，规定使用者、使用方式和受益者等</p>
+</blockquote>
+<h2 id="伦理准则"><a href="#伦理准则" class="headerlink" title="伦理准则"></a>伦理准则</h2><blockquote>
+<p>尊重数据所有者：尊重个人尊严和自主权，尊重隐私权，提供数据保护<br>数据行善：不利用数据伤害他人，将利益最大化、伤害最小化<br>待人公平公正：平衡数据问题带来的利益分配不均<br>尊重法律和公众利益：确定数据负责人承担相关责任<br>在线言论自由：在法律允许范围内自由的表达自己的观点，不煽动、挑衅、侮辱他人等<br>允许遗忘：允许从网上删除侵害个人声誉的个人信息</p>
+</blockquote>
+<p><strong>数据隐私法的GDPR原则</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E6%B3%95%E7%9A%84GDPR%E5%8E%9F%E5%88%99.png" alt="DM_数据隐私法的GDPR原则"><br><strong>基于PIPEDA的法定义务</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/DM_%E5%9F%BA%E4%BA%8EPIPEDA%E7%9A%84%E6%B3%95%E5%AE%9A%E4%B9%89%E5%8A%A1.png" alt="DM_基于PIPEDA的法定义务"></p>
+<h2 id="违背伦理实例"><a href="#违背伦理实例" class="headerlink" title="违背伦理实例"></a>违背伦理实例</h2><ol>
+<li><strong>时机选择</strong>：通过遗漏或根据时间将某些数据点包含在报告或活动中而撒谎</li>
+<li><strong>可视化误导</strong>：利用图表图形误导性呈现数据</li>
+<li><strong>定义不清晰或无效比较</strong>：统计维度不清晰或统计维度不相同的指标进行统计</li>
+<li><strong>偏见</strong>：包括预设结论、片面抽样、背景文化等</li>
+<li><strong>转换和集成数据</strong>：包括不了解数据来源和血缘关系、数据质量较差、元数据不可靠、缺少数据修订的历史文档等</li>
+<li><strong>数据混淆和修订</strong>：用于信息脱敏或信息不公开处理，可能出现在以下情况，包括数据聚合、数据标记（标记敏感数据，控制发布到合适业务系统）、数据脱敏等</li>
+</ol>
+<h2 id="建立伦理文化"><a href="#建立伦理文化" class="headerlink" title="建立伦理文化"></a>建立伦理文化</h2><ol>
+<li>评审现有的数据处理方法</li>
+<li>识别原则、实践和风险因素：原则应与风险、实践保持一致，通过控制支持实践</li>
+<li>指定合乎伦理的数据处理策略和路线图<ul>
+<li>价值观申明：描述组织的信仰</li>
+<li>数据处理原则：描述组织如何处理数据带来的挑战</li>
+<li>合规架构：合规架构包括驱动阻止业务的因素</li>
+<li>风险评估：定义组织内部特殊问题出现的可能和影响</li>
+<li>培训交流：不间断的培训包括对伦理准则的审核</li>
+<li>路线规划：由管理层批准的活动时间表</li>
+<li>审计和检测方法</li>
+</ul>
+</li>
+<li>采用对社会负责的伦理风险模型，保障个人信息隐私</li>
+</ol>
+<h1 id="数据管理成熟度评估"><a href="#数据管理成熟度评估" class="headerlink" title="数据管理成熟度评估"></a>数据管理成熟度评估</h1><p><strong>成熟度评估</strong>：明确组织发展现状，对比其他组织或行业基准所处阶段，设置衡量组织目标</p>
+<h2 id="业务目标-1"><a href="#业务目标-1" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>监管：对数据管理提出最低成熟度水平要求<br>数据治理：基于数据治理成熟度评估业务规划和合规性目的<br>组织准备：评估当前状态，改进实践过程<br>组织变更：处理组织变更带来的数据管理挑战<br>新技术：评估采用新技术进行管理和使用数据的可能性<br>数据管理问题：评估当前数据管理需要解决的数据质量问题，实施变更</p>
+</blockquote>
+<h2 id="评估内容"><a href="#评估内容" class="headerlink" title="评估内容"></a>评估内容</h2><blockquote>
+<p>数据管控：包括数据管理战略、数据管理组织、数据管理制度、数据管理绩效等<br>数据架构：包括数据标准管理、数据模型、主数据管理、元数据管理、数据分布、数据集成与共享等<br>数据质量：包括数据质量需求、数据质量检查、数据质量评估、数据质量提升等<br>数据生命周期：包括数据需求、数据设计和开发、数据运维、数据销毁等<br>数据安全：包括数据安全策略、数据安全保护、数据安全审计等<br>数据价值挖掘：包括数据分析、数据融合、数据应用、数据资产价值管理等<br>数据资产运营：包括数据服务、数据共享与开放、数据资产变现等<br>支撑平台：包括数据治理工具集、数据管理平台等</p>
+</blockquote>
+<h2 id="评估分级"><a href="#评估分级" class="headerlink" title="评估分级"></a>评估分级</h2><blockquote>
+<p>0级：无能力级，不存在<br>1级：初始级或临时级，<strong>初始阶段</strong>：数据尚未发挥价值，使用有限的工具进行通用数据管理，成功取决于个人能力<br>2级：可重复级，<strong>基本管理</strong>：数据支持业务基本工作，制定最初的流程规则，有一致的工具和角色定义支持流程执行<br>3级：已定义级，<strong>主动管理</strong>：数据基本能满足业务管理要求，已建立标准并使用<br>4级：已管理级，<strong>量化管理</strong>：数据完全满足业务需求，能力可以被量化和控制<br>5级：优化级，<strong>持续优化</strong>：数据成为企业核心竞争力，可量化能力提升的目标</p>
+</blockquote>
+<h2 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h2><ul>
+<li><strong>数据管理能力成熟度评估模型DCMM</strong>：数据管理有8个能力域：数据战略、数据治理、数据架构、数据标准、数据质量、数据安全、数据应用和数据生存周期，全国信息技术标准化信息委员会大数据标准工作组（工信部、国家标准化管理委员会指导），可直接使用</li>
+<li><strong>CMMI数据管理成熟度模型</strong>：CMMI（能力成熟度模型研究所）-DMM，评估标准包括数据管理战略、数据治理、数据质量、平台与架构、数据操作和支持流程等</li>
+<li><strong>EDM数据管理能力评估模型</strong>：EDM（企业数据管理委员会，Enterprise Data Management Council）-DCAM（数据管理能力评估模型，Data management Capability Assessment Model），描述了与可持续数据管理项目开发相关的能力，重点关注利益相关方的参与程度、流程的形式以及展示能力的组件</li>
+<li><strong>IBM数据治理委员会成熟度模型</strong>：定义一组可观察期望的行为，评估和设计数据治理项目</li>
+</ul>
+<blockquote>
+<p>结果：数据风险管理和合规、价值创造<br>使能因素：组织结构和认知、政策、管理<br>核心内容：数据质量管理、信息生命周期管理、信息安全和隐私<br>支持内容：数据架构、分类和元数据、审计信息、日志记录和报告</p>
+</blockquote>
+<ul>
+<li><strong>斯坦福数据治理成熟度模型</strong>：关注数据治理，区分基础部分（意识、形式化、元数据）和项目部分（数据管理、数据质量、主数据），说明人员、政策和能力的驱动因素阐明了每个成熟度级别的特征，提供了定性和定量的测量标准</li>
+<li><strong>Gartner企业信息管理成熟度模型</strong>：评估了愿景、战略、度量、治理、角色和责任、生命周期和基础架构的标准</li>
+</ul>
+<p><strong>数据管理成熟度理论标准</strong></p>
+<blockquote>
+<p><strong>ISO/IEC 38505标准</strong>：基于原则驱动的数据治理方法论，通过评估现在和将来数据利用情况，指导数据准备及实施，并监督数据治理实施的符合性，2015年，国际标准化组织IT服务管理和IT治理分技术委员会<br><strong>GB/T 34960 数据治理规范</strong>：包括顶层设计、数据治理环境、数据治理域和数据治理过程，顶层设计包括战略规划、组织架构和架构规划，是数据治理实施的基础；数据治理环境包括分析业务、市场和利益相关方需求，适应内外部环境变化，营造企业内数据治理文化，是数据治理实施的保障；数据治理域包括数据管理体系和数据价值体系，是数据治理实施的对象；数据治理过程包括统筹规划、构建运行、监控评价、改进优化等，是数据治理实施的方法</p>
+</blockquote>
+<h2 id="选择标准"><a href="#选择标准" class="headerlink" title="选择标准"></a>选择标准</h2><blockquote>
+<p>易用性：以非技术性属于描述实践活动，传达活动的功能本质<br>全面性：涉及广泛的数据管理活动，包括业务和技术部门<br>可扩展性和灵活性：支持行业特定或附加的规程，根据组织需要使用组件<br>演进途径：内置定义每个功能逻辑的前进方式<br>行业特定论：遵循跨垂直领域的数据管理最佳实践<br>抽象或详细程度：实践和评估标准详细表达，确保指导相关执行工作<br>非规定性：描述需要执行的内容<br>按主题组织：将数据管理活动放置在适当的情境中，是每个活动能够单独评估，又可识别依赖关系<br>可重复：可以得到一致解释，支持可重复结果<br>中立支持：由中立的供应商广泛提供，确保最佳实践的广泛代表性<br>技术中立：模型重点集中于实践<br>培训支持：支持全面培训，能够掌握框架并优化使用方法</p>
+</blockquote>
+<h2 id="评估结果"><a href="#评估结果" class="headerlink" title="评估结果"></a>评估结果</h2><ol>
+<li>评估结果报告</li>
+</ol>
+<blockquote>
+<p>评估的业务驱动因素<br>评估的总体结果<br>按主题分类有差距的评级<br>弥补差距的建议方法<br>所观察到的组织优势<br>进展的风险<br>投资和成果选项<br>衡量进展的治理和指标<br>资源分析与未来潜在效用<br>可在组织内使用或重复使用的组件</p>
+</blockquote>
+<ol start="2">
+<li>管理层简报：向管理层汇报评估调查结果</li>
+<li>改进建议</li>
+</ol>
+<blockquote>
+<p>对特定数据管理功能进行改进的系列活动<br>实施改进活动的时间表<br>实施改进后，DMMA评级的预期改善情况<br>监督活动，包括时间线上逐渐成熟的监督</p>
+</blockquote>
+<ol start="4">
+<li>实施改建措施</li>
+<li>重新评估</li>
+</ol>
+<blockquote>
+<p>通过第一次评估建立基线评级<br>重新定义评估参数，包括组织范围<br>根据跟踪需要，重复 DMM评估<br>跟踪对于初始基线的趋势<br>根据评估结果指定改进建议</p>
+</blockquote>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><blockquote>
+<p>DMMA评级：提供组织能力级别的快照<br>资源利用率<br>风险敞口：对风险情景做出反应的能力<br>支出管理：描述组织中分配数据管理成本，确定成本对可持续性和价值的影响</p>
+<blockquote>
+<p>数据管理可持续性<br>实现主动性的目标和目的<br>沟通的有效性<br>教育培训的有效性<br>变更采用的速度<br>数据管理价值<br>对业务目标的贡献<br>降低风险<br>提高运营效率</p>
+</blockquote>
+<p>DMMA的输入：包括技术、覆盖范围、可用性、系统数量、数据量、涉及团队<br>变革速度：企业提高自身实力的速度</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210711/18374.html" rel="prev" title="PyCharm-安装使用">
+      <i class="fa fa-chevron-left"></i> PyCharm-安装使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210818/13539.html" rel="next" title="数据治理-基础">
+      数据治理-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E6%88%98%E7%95%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">数据管理战略内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%81%8C%E8%83%BD"><span class="nav-number">1.4.</span> <span class="nav-text">管理职能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">模型架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="nav-number">1.6.</span> <span class="nav-text">管理实施</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">数据资产</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7%E7%89%B9%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">数据资产特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7%E4%BC%B0%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">数据资产估值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%B0%E5%80%BC%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.1.</span> <span class="nav-text">估值内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%B0%E5%80%BC%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">估值方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%B7%E5%80%BC%E8%AF%84%E4%BC%B0%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.3.</span> <span class="nav-text">价值评估理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="nav-number">2.2.4.</span> <span class="nav-text">评估指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7%E7%9B%AE%E5%BD%95"><span class="nav-number">2.3.</span> <span class="nav-text">数据资产目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">编制方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E5%8A%9B%E8%AF%84%E4%BC%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">能力评估</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%BC%A6%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">数据处理伦理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">核心问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A6%E7%90%86%E5%87%86%E5%88%99"><span class="nav-number">3.2.</span> <span class="nav-text">伦理准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9D%E8%83%8C%E4%BC%A6%E7%90%86%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">违背伦理实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BC%A6%E7%90%86%E6%96%87%E5%8C%96"><span class="nav-number">3.4.</span> <span class="nav-text">建立伦理文化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E6%88%90%E7%86%9F%E5%BA%A6%E8%AF%84%E4%BC%B0"><span class="nav-number">4.</span> <span class="nav-text">数据管理成熟度评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87-1"><span class="nav-number">4.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">评估内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E5%88%86%E7%BA%A7"><span class="nav-number">4.3.</span> <span class="nav-text">评估分级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">评估模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A0%87%E5%87%86"><span class="nav-number">4.5.</span> <span class="nav-text">选择标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E7%BB%93%E6%9E%9C"><span class="nav-number">4.6.</span> <span class="nav-text">评估结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">4.7.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

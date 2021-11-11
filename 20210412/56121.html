@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录Linux操作系统的常见操作指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-常见指令">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210412/56121.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录Linux操作系统的常见操作指令">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/Init_Process.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/Service_wrok.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png">
+<meta property="article:published_time" content="2021-04-12T05:05:15.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:38:47.826Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/System/Linux/Init_Process.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210412/56121.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux-常见指令 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210412/56121.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux-常见指令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-12 13:05:15" itemprop="dateCreated datePublished" datetime="2021-04-12T13:05:15+08:00">2021-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-08 10:38:47" itemprop="dateModified" datetime="2021-11-08T10:38:47+08:00">2021-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">常见操作指令</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210412/56121.html" class="post-meta-item leancloud_visitors" data-flag-title="Linux-常见指令" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210412/56121.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210412/56121.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录Linux操作系统的常见操作指令</p>
+<span id="more"></span>
+
+<h1 id="指定运行级别"><a href="#指定运行级别" class="headerlink" title="指定运行级别"></a>指定运行级别</h1><p>Init 运行级别</p>
+<blockquote>
+<ul>
+<li>0：关机</li>
+<li>1：单用户（找回丢失密码）</li>
+<li>2：多用户无网络服务</li>
+<li>3：多用户有网络服务，常用</li>
+<li>4：保留的运行级别</li>
+<li>5：图形界面</li>
+<li>6：重启<br>* 配置文件：/etc/inittab的 id:5:initdefault</li>
+<li>init 0/1/2/3/5/6<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Init_Process.png" alt="Init_Process"></li>
+</ul>
+</blockquote>
+<h1 id="帮助指令"><a href="#帮助指令" class="headerlink" title="帮助指令"></a>帮助指令</h1><ul>
+<li>man 指令，获得帮助信息（the on-line reference manuals）</li>
+</ul>
+<blockquote>
+<p>例：man ls</p>
+</blockquote>
+<ul>
+<li>help 指令，获得shell内置命令的帮助信息</li>
+</ul>
+<blockquote>
+<p>例：help cd</p>
+</blockquote>
+<h1 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h1><ul>
+<li><strong>pwd</strong>：显示当前目录的绝对路径</li>
+</ul>
+<blockquote>
+<p>例：pwd</p>
+</blockquote>
+<ul>
+<li><strong>ls</strong> [选项]  [目录或文件]：显示指定目录下的文件和目录（list directory contents），默认为当前目录</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-a：显示当前目录下的所有文件和目录，包括隐藏内容<br>-l：以列表形式显示信息<br>-h：按照用户可理解的形式显示<br>-al：以列表形式显示当前目录下包括隐藏内容的所有文件和目录</p>
+<blockquote>
+<p>例：ls -al</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>cd</strong> [选项]：切换目录（change dictionary）</li>
+</ul>
+<blockquote>
+<p>例：cd ../ ：返回上一级目录<br>例：cd ./ ：切换至当前目录<br>例：cd ~/ ：返回当前用户的home目录/主目录，也可以使用：cd<br>例：cd 路径 ：前往指定目录，可用绝对路径和相对路径</p>
+</blockquote>
+<ul>
+<li><strong>mkdir</strong> [选项] 目录名：创建目录（make directories）</li>
+</ul>
+<blockquote>
+<p>选项：-p，创建多级目录，默认一次只能创建一级目录</p>
+<blockquote>
+<p>例：mkdir -p /home/animal/dog ：在home目录下创建animal，再在animal下创建dog，若之前有animal目录则不需要-p选项</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>rmdir</strong> [选项] 目录名：删除空目录（remove empty directories）</li>
+</ul>
+<blockquote>
+<p>若要删除非空目录，应使用：rm -r 目录名</p>
+</blockquote>
+<ul>
+<li><strong>touch</strong> 文件名：创建空文件，可一次创建多个文件</li>
+</ul>
+<blockquote>
+<p>例：touch hello.txt helloword.txt</p>
+</blockquote>
+<ul>
+<li><strong>cp</strong> [选项] source(数据源) dest(目标位置)：复制文件到指定目录（copy）</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-r 递归复制整个文件夹<br>\cp 强制覆盖</p>
+<blockquote>
+<p>例：cp -r test1/ test2/：将test1整个复制到test2里面</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>rm</strong> [选项] 目录名或文件名：删除文件或目录（remove），默认有删除提示</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-r：递归删除整个文件夹<br>-f：强制删除不提示<br>-rf：强制递归删除整个文件夹不提示（慎用！！！）</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>mv</strong> 移动或重命名文件或目录（move）</li>
+</ul>
+<blockquote>
+<p>重命名</p>
+<blockquote>
+<p>文件：mv old_file_name new_file_name<br>文件夹：mv old_dictionary_name new_dictionary_name</p>
+</blockquote>
+<p>移动</p>
+<blockquote>
+<p>文件：mv file_name dictionary_name<br>文件夹：mv dictionary_name dictionary_name</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>cat</strong> [选项] 目录名：以只读的方式打开文件</li>
+</ul>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<p>-n：显示行号</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>more</strong> [选项(-dflpcsu)]  [-num]  [+linenum | +/pattern] 文件名：以全屏的方式按页显示文件内容，加载完全部内容，再进行显示，按空格键进行翻页</li>
+</ul>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<ul>
+<li>-d：提示使用者，在画面下方显示 [Press space to continue, ‘q’ to quit.] ，如果使用者按错键，则会显示 [Press ‘h’ for instructions.] 而不是 ‘哔’ 声</li>
+<li>-l：取消遇见特殊字符，默认是将^L(表单提要)视为特殊字符，在包含表单提要的任何行之后暂停，使用-l会避免上述情况</li>
+<li>-f：计算行数时，以实际上的行数，而非自动换行过后的行数(有些单行字数太长的会被扩展为两行或两行以上)</li>
+<li>-p：不以卷动的方式显示每一页，而是先清除萤幕后再显示内容</li>
+<li>-c：跟 -p 相似，不同的是先显示内容再清除其他旧资料</li>
+<li>-s：当遇到有连续两行以上的空白行，就代换为一行的空白行</li>
+<li>-u：不显示下引号 (根据环境变数 TERM 指定的 terminal 而有所不同)</li>
+<li>-num：设置一次显示的行数</li>
+<li>+linenum：开始显示的行号</li>
+<li>+/pattern：在每个文档显示前搜寻该字串(pattern)，然后从该字串之后开始显示</li>
+</ul>
+</blockquote>
+<p>快捷键</p>
+<blockquote>
+<ul>
+<li>空格键：向下翻页</li>
+<li>Enter：下翻一行</li>
+<li>q：退出more指令</li>
+<li>Ctrl + F：向下滚动一屏</li>
+<li>Ctrl + B：向上滚动一屏</li>
+<li>=：显示当前行号</li>
+<li>:f：输出文件名和当前行号</li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>|</strong> 管道命令，将管道前面的内容，交给管道后面的指令进行显示</li>
+</ul>
+<blockquote>
+<p>例：cat -n hello.txt | more，以cat命令打开hello.txt，将内容以分页带有行号显示</p>
+</blockquote>
+<ul>
+<li><strong>less</strong> [选项] 文件名：功能同more，支持各种显示终端，根据显示需要动态加载内容，对显示大型文件有较高的效率</li>
+</ul>
+<blockquote>
+<p>快捷键</p>
+<blockquote>
+<ul>
+<li>空格键/PageDown：向下翻页</li>
+<li>PageUp：向上翻页</li>
+<li>Enter：下翻一行<br>/字符串：向下查找字符串内容：n-向下查找；N-向上查找<br>?字符串：向上查找字符串内容：n-向上查找；N-向下查找</li>
+<li>q：退出less指令</li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>&gt;</strong> / &gt;&gt;：输出重定向（将原来文件的内容覆盖）或追加到文件末尾</li>
+</ul>
+<blockquote>
+<p>ls -l &gt;   a.txt：将ls -l显示的内容覆盖写入到a.txt里面，如文件不存在，则创建文件<br>ls -l &gt;&gt; a.txt：将ls -l显示的内容追加写入到a.txt里面<br><strong>echo</strong> [选项]  [输出内容]：输出内容到控制台</p>
+</blockquote>
+<ul>
+<li><strong>head</strong> [-n] 文件名：显示文件开头部分内容，默认显示10行，n为正整数</li>
+<li><strong>tail</strong> [选项] 文件名：显示文件结尾部分内容，默认显示10行</li>
+</ul>
+<blockquote>
+<p>-n：设置显示的文件内容行数，n为正整数<br>-f：实时监控文件的更新情况</p>
+</blockquote>
+<ul>
+<li><strong>ln</strong> -s [原文件或目录]  [连接名]：软连接，符号链接，类似于Windows的快捷方式，存放连接其他文件的路径</li>
+<li><strong>history</strong> [n]：查看已经执行过的指令，也可以执行历史指令，n为正整数，显示最近执行的n条指令，使用 !n，可以执行历史编号为n的指令</li>
+</ul>
+<h1 id="时间日期"><a href="#时间日期" class="headerlink" title="时间日期"></a>时间日期</h1><ul>
+<li><strong>date</strong> [选项]  [+ 显示格式]：显示当前时间，注意date与+之间有一个空格</li>
+</ul>
+<blockquote>
+<p>显示格式：</p>
+<blockquote>
+<p>%Y：显示当前年份<br>%m：显示当前月份<br>%w：显示当前星期<br>%d：显示当前日期<br>%Y%%d%H%M%S：显示当前年月日时分秒，可以在中间加入分隔符，date ‘+%Y年%m月%d日 %H:%M:%S’，需要用引号包裹<br>选项<br>-s：设定当前系统时间：date -s ‘yyyy-mm-dd HH:MM:ss’</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>cal</strong> [时间]：默认显示当前月的日历，时间为年份，加上时间显示指定年份一整年的日历</li>
+</ul>
+<h1 id="搜索查找"><a href="#搜索查找" class="headerlink" title="搜索查找"></a>搜索查找</h1><ul>
+<li><strong>find</strong> [范围]  [选项]：从指定目录下递归遍历各个子目录，将满足条件的内容显示在终端</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-name ：按照文件名进行查找，例：find / -name *.txt<br>-user：按照文件拥有者进行查找<br>-size [+/-]Size：按照文件大小进行查找，+表示大于，-表示小于，不写表示等于Size，Size表示文件大小，100k、20M</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>locate</strong> 文件名称：根据locate数据库快速定位文件路径，locate存储系统中所有文件名称及路径，需要及时更新，第一次执行前，需要使用updatedb指令创建locate数据库</li>
+<li><strong>grep</strong> [选项] 查找内容 源文件：过滤查找，管道符 | ，表示将前一个命令的处理结果输出传递给后面的指令处理</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-n：显示行号<br>-i：忽略大小写</p>
+</blockquote>
+</blockquote>
+<h1 id="压缩解压"><a href="#压缩解压" class="headerlink" title="压缩解压"></a>压缩解压</h1><ul>
+<li><strong>gzip/gunzip</strong> 文件名：gzip压缩文件，不保留源文件，gunzip解压文件，压缩文件为gz后缀</li>
+<li><strong>zip/unzip</strong> [选项] 文件名：压缩文件为zip后缀</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-r：递归压缩，压缩文件目录，例：zip -r 文件名  目录/<br>-d 目录：指定解压目录，例：unzip -d /目录  文件名</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>tar</strong> [选项]  文件名：打包指令，压缩文件为tar.gz后缀</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-c：压缩<br>-f：<br>-v：<br>-x：解压<br>-z：</p>
+</blockquote>
+</blockquote>
+<h1 id="定时机制"><a href="#定时机制" class="headerlink" title="定时机制"></a>定时机制</h1><p><strong>crontab</strong> [选项]</p>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<p>-e：开始任务<br>-r：删除所有任务<br>-l：显示当前的cron任务<br>service crond start ：重启任务调度</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">例：每分钟将etc的目录内容写入到tmp的to.txt文件中</span><br><span class="line">1. cron -e</span><br><span class="line">2. 输入：\*&#x2F;1 * * * * ls -l &#x2F;etc&#x2F; &gt;&gt; &#x2F;tmp&#x2F;to.txt</span><br><span class="line">3. 保存退出后生效</span><br></pre></td></tr></table></figure>
+
+<p><strong>corn表达式</strong></p>
+<blockquote>
+<p>第一个*：一小时中的第几分钟，取0-59<br>第二个*：一天的第几小时，取0-23<br>第三个*：一月中的第几天，取1-31<br>第四个*：一年中的低级月，取1-12<br>第五个*：一周中的星期几，取0-7（0、7代表星期天）<br>可用*代表任何时间，用,指定多个不连续的时间，例：1,3,6，表示仅1，3，6执行，用-表示范围，例：1-6，表示1至6都执行，用/n表示多久执行一次，例：*/1 * * * *，每分钟执行一次</p>
+</blockquote>
+<h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><ul>
+<li><strong>df</strong> [选项] ：查询系统整体磁盘使用情况</li>
+</ul>
+<blockquote>
+<p>-l：以列表形式显示信息<br>-h：按照用户可理解的形式显示</p>
+</blockquote>
+<ul>
+<li><strong>du</strong> [选项]：查询指定目录的磁盘占用情况</li>
+</ul>
+<blockquote>
+<p>-s：指定目录占用大小汇总<br>-h：带计量单位<br>-a：含文件<br>-c：列出明细的同时，增加汇总值<br>–max-depth = 1：子目录的深度<br>例：du -ach –max-depth = 1 /opt，统计/opt目录的磁盘占用情况，深度为1</p>
+</blockquote>
+<ul>
+<li><strong>常用</strong></li>
+</ul>
+<blockquote>
+<p>ls -l /home | grep “^-“ | wc -l，统计home文件夹下文件的个数，“^-”表示以-开头，wc表示统计<br>ls -lR /home | grep “^-“ | wc -l，统计home文件夹及子文件下文件的个数<br>tree /home，以树状图显示home文件夹</p>
+</blockquote>
+<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><ul>
+<li>每个执行的程序（代码）都成为一个进程，每一个进程都分配一个ID号</li>
+<li>每一个进程都会对应一个父进程，父进程可以复制多个子进程，Linux最大的进程是init</li>
+<li>每一个进程都能以前台和后台两种方式存在，前台进程就是用户在米钱屏幕上可以进行操作，后台进程则实际在操作，但屏幕上无法显示，一般采用后台方式执行</li>
+<li>一般系统的服务都是以后台进程的方式存在，会常驻在系统中，知道关机结束</li>
+</ul>
+<h2 id="进程管理-进程"><a href="#进程管理-进程" class="headerlink" title="进程管理-进程"></a>进程管理-进程</h2><ul>
+<li><strong>ps</strong> [选项]：查看当前系统中正在执行的进程和其执行情况</li>
+</ul>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<p>-a：当前终端的所有进程信息<br>-e：显示所有进程<br>-f：全格式显示<br>-u：以用户的格式显示进程信息<br>-x：显示后台进程<br>进程信息<br>USER：用户名<br>PID：进程识别号<br>%CPU：此进程占用CPU的百分比情况<br>%MEM：此进程占用内存的百分比情况<br>VSZ：此进程的虚拟内存占用情况<br>RSS：此进程的物理内存占用情况<br>TTY：终端机号<br>STAT：此进程的运行状态：S-休眠，s-表示此进程是会话的先导进程，R-运行，D-短期等待，Z-僵死进程，T-被跟踪或被停止的进程，N-表示此进程比普通进程的优先级更低<br>START：此进程的启动时间<br>TIME：此进程占用CPU的总时间<br>COMMAND：进程执行时的命令和参数</p>
+<blockquote>
+<p>查看父进程：ps -ef | more，显示的PPID为父进程进程号<br>查看指定进程的父进程：ps -ef | sshd，查看sshd的父进程</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>pstree</strong> [选项]：查看进程树</li>
+</ul>
+<blockquote>
+<p>-p：显示进程的PID<br>-u：显示进程的所属用户</p>
+</blockquote>
+<ul>
+<li><strong>kill</strong> [选项] 进程号</li>
+</ul>
+<blockquote>
+<p>选项：-9 强制进程立即终止</p>
+</blockquote>
+<ul>
+<li><strong>killall</strong> 进程名，支持通配符</li>
+</ul>
+<blockquote>
+<p>终止：当进程需要停止或消耗了大量的系统资源时执行</p>
+</blockquote>
+<ul>
+<li><strong>常见进程</strong></li>
+</ul>
+<blockquote>
+<p>sshd：远程登陆<br>bash：终端命令行窗口</p>
+</blockquote>
+<h2 id="进程管理-服务"><a href="#进程管理-服务" class="headerlink" title="进程管理-服务"></a>进程管理-服务</h2><h3 id="基本介绍-1"><a href="#基本介绍-1" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>服务（Service）的本质是后台运行的进程，通常会监听某一个端口，等待其他程序的请求，又叫守护进程，每一个服务都会在0-6的Linux运行级别下通过chkconfig设置是否自启动<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_wrok.png" alt="Service_wrok"></p>
+<p><strong>service</strong> 服务名 start|stop|restart|reload|status</p>
+<blockquote>
+<p>CentOS 7.0以后使用systemctl，不再使用service</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">重启防火墙：service iptables restart</span><br><span class="line">查看防火墙状态：service iptablesstatus</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<blockquote>
+<p>关闭或启用防火墙后立即生效，可用telnet ip 端口进行测试<br>设置仅当次有效，系统重启后回到原有设置，可用chkconfig设置永久生效<br>查看服务<br>setup，进入系统服务，加入_*_号的服务均会自启动，可以直接修改<br>查看/etc/init.d目录下的内容<br>常见服务<br>防火墙：iptables</p>
+</blockquote>
+</blockquote>
+<p><strong>chkconfig</strong>；给每个服务指定各个运行级别是否自启动</p>
+<blockquote>
+<p>查看所有服务：chkconfig –list<br>查看指定服务：</p>
+<blockquote>
+<p>chkconfig –list | grep 服务名<br>chkconfig 服务名 –list<br>修改指定服务指定运行级别的自启动状态：chkconfig –level 5 服务名 off/on，在所有运行级别下设置，直接省略–level<br>监控</p>
+</blockquote>
+</blockquote>
+<p><strong>top</strong> [选项]：显示正在执行的进程，top会在运行一段时间可以更新正在运行的进程</p>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<p>-d n：指定n秒后自动更新，默认三秒<br>-i：不显示任何闲置或僵死进程<br>-p：通过指定进程ID进监控进程状态<br>交互说明<br>P：以CPU使用规律排序，默认选项<br>M：以内存使用率排序<br>N：以PID排序<br>q：退出top指令<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" alt="Service_Info"></p>
+</blockquote>
+<p>使用</p>
+<blockquote>
+<p>监控指定用户：先输入top，回车，在输入u，最后输入用户名<br>中止指定服务：先输入top，回车，在输入k，最后输入进程号</p>
+</blockquote>
+</blockquote>
+<p><strong>netstat</strong> [选项]：查看网络服务情况</p>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-an：按照一定顺序排列输出<br>-p：显示那个进程在调用</p>
+</blockquote>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>ntsysv：查看系统自启动服务</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210411/64896.html" rel="prev" title="Windows-常见问题">
+      <i class="fa fa-chevron-left"></i> Windows-常见问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210412/14543.html" rel="next" title="Linux-常见问题">
+      Linux-常见问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">指定运行级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">帮助指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">文件目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="nav-number">4.</span> <span class="nav-text">时间日期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="nav-number">5.</span> <span class="nav-text">搜索查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="nav-number">6.</span> <span class="nav-text">压缩解压</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">7.</span> <span class="nav-text">定时机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">磁盘管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">9.1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">进程管理-进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="nav-number">9.3.</span> <span class="nav-text">进程管理-服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="nav-number">9.3.1.</span> <span class="nav-text">基本介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">10.</span> <span class="nav-text">其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

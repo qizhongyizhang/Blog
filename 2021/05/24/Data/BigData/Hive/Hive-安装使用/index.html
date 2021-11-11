@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hive-安装使用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录Hive的安装知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive-安装使用">
+<meta property="og:url" content="http://example.com/2021/05/24/Data/BigData/Hive/Hive-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录Hive的安装知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png">
+<meta property="article:published_time" content="2021-05-24T00:27:05.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:05:58.845Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hive">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Data/BigData/Hive/Hive-安装使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/24/Data/BigData/Hive/Hive-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2021-05-24T00:27:05.000Z" itemprop="datePublished">2021-05-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hive-安装使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录Hive的安装知识</p>
+<span id="more"></span>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Hive 是基于 Hadoop 的数据仓库工具，将结构化的数据文件映射为一张数据库表，并提供类SQL（HQL，底层使用 MapReduce 实现）的功能，进行数据操作<br>本质是将 SQL 转化为 MapReduce 任务进行运算，底层由HDFS提供数据存储，可以认为 Hive 是一个将 SQL 转化为 MapReduce 任务的工具，通过Hive元数据(默认存储在derby 中，可以用其他的结构化数据进行存储)记录表与文件的对应关系、表字段与文件字段的对应关系</p>
+<h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><p><img src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png" alt="HQL_Run_Step"><br><strong>用户接口</strong>：包括 CLI、JDBC/ODBC 和 WebGUI。CLI 是（Command Line Interface）是 shell 命令行，JDBC/ODBC 是 Hive 的 Java 实现，与传统数据库的 JDBC 相似，WebGUI 是通过浏览器进行访问 Hive<br><strong>元数据存储</strong>：通常 Hive 将元数据存储在关系型数据库 MySQL/Derby（默认）中，包括表名称、表字段和分区及其属性，表的属性（是否为外部表)和表所在目录等<br><strong>解析器</strong>：完成 HQL 语句的词法分析、语法分析、编译、优化和生成查询计划，查询计划存储到 HDFS 中，通过 MApReduce 调用执行</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>采用类 SQL 的语法操作数据，开发效率快<br>避免写 MapReduce 任务，降低开发人员的学习成本<br>较强的扩展功能<br>Hive与传统数据库都是用来做数据存储和数据分析，他们之间有一些区别如下：<br><img src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png" alt="Hive_RDBMS"></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装前一般安装关系型数据库存储 Hive 元数据</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://archive.apache.org/dist/hive"><font face = "微软雅黑" color = 1E90FF size = 5> 下载地址 </font></a>：选择合适的版本进行下载</li>
+<li>上传安装包(rz -E)，解压：tar -zxvf 安装包名</li>
+<li>修改配置文件：安装目录下的 conf 目录下的 hive-env.sh，默认仅有 hive-env.sh.template 模板文件，一般复制 hive-env.sh.template 文件改名为 hive-env.sh 修改 HADOOP_HOME=hadoop 的安装目录，HIVE_CONF_DIR=hive 的配置文件目录（即 hive-env.sh 文件所在的目录）</li>
+<li>修改 hive-site.xml 文件</li>
+<li>在安装目录下的lib目录放置所安装关系型数据库得驱动包</li>
+<li>配置环境变量：vim /etc/profile，增加 HIVE_HOME=hive 的安装目录，PATH 加上 HIVE_HOME/bin：PATH=:$HIVE_HOME/bin:$PATH</li>
+</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>在 hive 得安装目录下执行：bin/hive，进入Hive终端（推荐）；也可以使用 bin/hive -e “HQL语句”，在命令行执行；也可以使用脚本进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin./hive [-hiveconf x=y] * [&lt;-i file_name&gt;] * [&lt;-f file_name&gt; | &lt;-e query-string&gt;] [-S]</span><br><span class="line">-hiveconf：设置 Hive 运行时的配置参数</span><br><span class="line">-i：从指定文件初始化 HQL</span><br><span class="line">-e：在命令行执行执行的 HQL</span><br><span class="line">-f：执行 HQL 脚本</span><br><span class="line">-v：输出执行的 HQL 语句到控制台</span><br><span class="line">-p：指定 Hive 服务器的端口</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h2><p><strong>配置文件</strong><br>用户自定义配置文件：$HIVE_CONF_DIR/hive-site.xml<br>默认配置文件：$HIVE_CONF_DIR/hive-default.xml<br>配置了用户自定义的配置文件，就会覆盖默认的配置文件，Hive 也会读入 Hadoop 的配置， Hive 的配置也会覆盖 Hadoop 的配置<br><strong>命令行参数</strong>：在启动 Hive 时，可以在命令行添加 -hiveconf param=value 的方式来设定参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例： bin/hive -hiveconf hive.root.logger=INFO.console</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数申明</strong>：在 HQL 中使用 SET 关键字进行设置，作用域是 Session 级(一次会话)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例： set mapred.reduce.tasks=100;</span><br></pre></td></tr></table></figure>
+
+<p>优先级：参数申明 -&gt; 命令行参数 -&gt; 配置文件参数</p>
+<h2 id="常用参数配置"><a href="#常用参数配置" class="headerlink" title="常用参数配置"></a>常用参数配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#在命令行中显示当前数据库名</span><br><span class="line">set hive.cli.print.current.db=true;</span><br><span class="line"></span><br><span class="line"># 查询出来的结果前显示字段名字</span><br><span class="line">set hive.cli.print.header=true;</span><br><span class="line">set hive.resultset.use.unique.column.names=false;</span><br></pre></td></tr></table></figure>
+
+<h2 id="知识查阅"><a href="#知识查阅" class="headerlink" title="知识查阅"></a>知识查阅</h2><p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF"><font face = "微软雅黑" color = 1E90FF size = 5> 官方文档 </font></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/24/Data/BigData/Hive/Hive-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" data-id="ckvsxxk2t0019f0undg3o1f5n" data-title="Hive-安装使用" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/26/Data/BigData/Hive/Hive%E5%9F%BA%E7%A1%80-%E6%9F%A5%E8%AF%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hive基础-查询
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/23/Data/BigData/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">大数据-基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录Shell编程的相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell-常见操作指令">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210413/16490.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录Shell编程的相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/System/Linux/System_Function_01.png">
+<meta property="article:published_time" content="2021-04-13T05:28:04.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:39:22.778Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210413/16490.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Shell-常见操作指令 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210413/16490.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shell-常见操作指令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-13 13:28:04" itemprop="dateCreated datePublished" datetime="2021-04-13T13:28:04+08:00">2021-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-08 10:39:22" itemprop="dateModified" datetime="2021-11-08T10:39:22+08:00">2021-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">常见操作指令</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210413/16490.html" class="post-meta-item leancloud_visitors" data-flag-title="Shell-常见操作指令" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210413/16490.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210413/16490.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录Shell编程的相关知识</p>
+<span id="more"></span>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Shell是一个命令行解释器，为用户提供一个项Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来启动、挂起、停止和编写程序<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png" alt="Shell_Principle"></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>Shell脚本以#!/bin/bash开始，告诉系统使用bash进行解析</li>
+<li>脚本需要可执行权限</li>
+<li>Shell脚本的文件后缀一般是.sh，可以为其他后缀</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><ul>
+<li>拥有可执行权限：可使用绝对路径和相对路径进行运行</li>
+</ul>
+<blockquote>
+<p>./file_name<br>/root/…/file_name</p>
+</blockquote>
+<ul>
+<li>没有可执行权限：可使用sh解释器强制运行，不推荐</li>
+</ul>
+<blockquote>
+<p>sh ./file_name<br>sh /root/…/file_name</p>
+</blockquote>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>Linux Shell中的变量分为系统变量和用户自定义变量<br><strong>系统变量</strong>：系统已经定义好的变量，可以直接使用</p>
+<blockquote>
+<p>查看所有系统变量：set</p>
+</blockquote>
+<p><strong>用户自定义变量</strong>：用户定义变量，仅对当前脚本有效<br><strong>定义</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">普通变量：variable_name&#x3D;value，等号两端不要有空格</span><br><span class="line">静态变量：readonly variable_name&#x3D;value，静态变量不能注销 unset</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>定义规则</p>
+<ul>
+<li>变量可由字母、数字、下划线组成，不能以数字开头</li>
+<li>定义变量时等号两端不要有空格</li>
+<li>变量名一般为大写</li>
+</ul>
+</blockquote>
+<p><strong>赋值</strong>：将命令的返回值赋值给变量</p>
+<blockquote>
+<ol>
+<li>variable_name=`ls -al`，反引号括起命令，运行ls -al，并将结果复制给A</li>
+<li>variable_name=$(ls -al)，$()美元符号和小括号括起命令，运行ls -al，并将结果复制给A，推荐</li>
+</ol>
+</blockquote>
+<p><strong>引用</strong>：$variable_name，在变量前加$表示引用变量<br><strong>注销</strong>：unset variable_name<br><strong>设置环境变量并引用</strong></p>
+<blockquote>
+<ol>
+<li>export variable_name=value，将shell变量输出给环境变量</li>
+<li>source 配置文件，让修改后的配置文件立即生效</li>
+<li>echo $variable_name，查询环境变量的值<br>输出环境变量，需要刷新，才能引用</li>
+</ol>
+</blockquote>
+<p><strong>设置位置参数</strong>：获取到命令行的参数信息（传参）</p>
+<blockquote>
+<p>$n：n为整数，$0表示命令本身，$1-$9表示第一到就个参数，十个以上用大括号包含，例${10}<br>$*：代表命令行中的所有参数，看成一个整体<br>$@：代表命令行中的所有参数，每个参数单独对待<br>$#：代表命令中的参数个数</p>
+</blockquote>
+<p><strong>预定义变量</strong>：shell设计者事先定义好的变量，可以直接在shell就脚本中使用</p>
+<blockquote>
+<p>$$：获取当前进程号（PID）<br>$!：后台运行最后一个进程的进程号（PID）<br>$?：返回最后一次执行命令的状态，0为正常，其他为不正常</p>
+</blockquote>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ol>
+<li>$((运算表达式))或$[运算表达式]（推荐）</li>
+<li>expr m +，-，*，/，% n：加、减、乘、除、取余，可嵌套使用，也可计算中间值</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RESULT&#x3D;$(((2 * 3) + 4))</span><br><span class="line">RESULT&#x3D;$[(2 * 3) + 4]    # 推荐</span><br><span class="line"></span><br><span class="line"># 嵌套使用</span><br><span class="line">RESULT&#x3D;expr expr 2 \* 3  + 4</span><br><span class="line"></span><br><span class="line"># 计算中间值</span><br><span class="line">TEMP&#x3D;&#96;expr 2 \* 5&#96;</span><br><span class="line">RESULT1&#x3D;&#96;expr $TEMP + 4&#96;</span><br><span class="line">注：使用expr时，需要用反引号包裹，运算符两边需要加上空格</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h3 id="条件判断—CONDITION"><a href="#条件判断—CONDITION" class="headerlink" title="条件判断—CONDITION"></a>条件判断—CONDITION</h3><p>[ 条件 ]，条件两端有空格，非空为true，可使用$?判断（0为true，&gt;1为false）<br><strong>两个整数比较</strong></p>
+<blockquote>
+<p>=：字符串比较<br>-lt：小于<br>-le：小于等于<br>-eq：等于<br>-gt：大于<br>-ge：大于等于<br>-ne：不等于</p>
+</blockquote>
+<p><strong>按照文件权限进行判断</strong></p>
+<blockquote>
+<p>-r：拥有可读权限<br>-w：拥有可写权限<br>-x：拥有可执行权限</p>
+</blockquote>
+<p><strong>按照文件类型进行比较</strong></p>
+<blockquote>
+<p>-f：文件存在且是一个常规文件<br>-e：文件存在<br>-d：文件存在并且是一个目录</p>
+</blockquote>
+<h3 id="if分支"><a href="#if分支" class="headerlink" title="if分支"></a>if分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">	程序段</span><br><span class="line">[elif conditon</span><br><span class="line">then</span><br><span class="line">	程序段]</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h3 id="case分支"><a href="#case分支" class="headerlink" title="case分支"></a>case分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">case variable_name in</span><br><span class="line">&quot;value1&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">&quot;value2&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for variable_name value1 value2 value3...</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for ((初始值;循环控制条件;变量变化))</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while [condition]</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br><span class="line">注：while于中括号之间要有空格</span><br></pre></td></tr></table></figure>
+
+<h2 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h2><ul>
+<li><strong>read读取控制台输入</strong>：read 选项 参数</li>
+</ul>
+<blockquote>
+<p>-p：指定读取值的提示符<br>-t：指定读取的访问时间（秒）<br>参数为读取数据的变量名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read -t 5 -p &quot;请输入一个整数：&quot; NUM</span><br><span class="line">echo &quot;输入的值是：$NUM&quot;</span><br><span class="line">5秒内在控制台输入一个整数，用NUM存储，并打印到控制台窗口</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><p><strong>读取命令行输入</strong>：获取到的内容为设置位置参数：$n、$*、$@、$#</p>
+</li>
+<li><p><strong>echo输出</strong>：输出关键字为echo，输出的内容由双引号包裹，用$引用变量</p>
+</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li><strong>系统函数</strong>：shell编程里自带的函数</li>
+</ul>
+<ol>
+<li>basename：返回完整路径最后/的部分，常用来获取文件名<br>basename [string]  [suffix]，若指定suffix后缀，则返回string里的文件名，不保留文件类型；若省略，则返回string里的文件名和文件类型</li>
+<li>dirname：返回完整路径最后/的前面部分，常用来获取文件目录<br>dirname [string]<br><img src="https://alexedwardz.gitee.io/images/System/Linux/System_Function_01.png" alt="System_Function_01"></li>
+</ol>
+<ul>
+<li><strong>用户自定义函数</strong>：由用户根据实际业务需求定制的函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[function] function_name()&#123;</span><br><span class="line">	程序段</span><br><span class="line">	[返回值]</span><br><span class="line">&#125;</span><br><span class="line">注：不需要配置形参，调用时直接使用函数名，后面接上实际参数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">function Sum()&#123;</span><br><span class="line">        SUM&#x3D;$[$A+$B]</span><br><span class="line">        echo &quot;$A与$B的和是：$SUM&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read -p &quot;请输入X：&quot; A</span><br><span class="line">read -p &quot;请输入Y：&quot; B</span><br><span class="line"></span><br><span class="line">Sum $A $B</span><br><span class="line">注：命令行输入两个数，计算这两个数的和</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><strong>注释</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">单行注释：#内容</span><br><span class="line"></span><br><span class="line">多行注释</span><br><span class="line">:&lt;&lt;!</span><br><span class="line">内容</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Shell/" rel="tag"># Shell</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210412/56685.html" rel="prev" title="Linux-基础">
+      <i class="fa fa-chevron-left"></i> Linux-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210510/47364.html" rel="next" title="数据库-基础">
+      数据库-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E2%80%94CONDITION"><span class="nav-number">2.4.1.</span> <span class="nav-text">条件判断—CONDITION</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E5%88%86%E6%94%AF"><span class="nav-number">2.4.2.</span> <span class="nav-text">if分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case%E5%88%86%E6%94%AF"><span class="nav-number">2.4.3.</span> <span class="nav-text">case分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.4.4.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.4.5.</span> <span class="nav-text">while循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O%E6%93%8D%E4%BD%9C"><span class="nav-number">2.5.</span> <span class="nav-text">I&#x2F;O操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">2.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.7.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

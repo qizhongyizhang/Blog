@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>大数据-基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录大数据的相关概念和基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据-基础">
+<meta property="og:url" content="http://example.com/2021/05/23/Data/BigData/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录大数据的相关概念和基础知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/BigData/Hadoop_ecosystem.png">
+<meta property="article:published_time" content="2021-05-23T00:22:55.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:07:17.265Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Data/BigData/Hadoop_ecosystem.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Data/BigData/大数据-基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/23/Data/BigData/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2021-05-23T00:22:55.000Z" itemprop="datePublished">2021-05-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      大数据-基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录大数据的相关概念和基础知识</p>
+<span id="more"></span>
+
+<h1 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h1><ul>
+<li><strong>数据科学</strong>：将数据挖掘、统计分析和机器学习与数据集成整合，结合数据建模能力，构建数据模型、探索数据内容模式</li>
+</ul>
+<blockquote>
+<p>条件</p>
+<blockquote>
+<p>丰富的数据源：具有能够展示隐藏在组织或客户行为中不可见模式<br>信息组织和分析：领会数据内容，结合数据集针对有意义模式进行假设和测试的技术<br>信息交付：针对数据运行模型和数学算法，进行可视化展示及其它方式输出，加强对行为的深入洞察</p>
+</blockquote>
+<p>过程</p>
+<blockquote>
+<p>定义大数据战略和业务需求：定义可衡量的、能够产生实际收益的需求<br>选择数据源：在当前数据资产库中识别短板并找到数据源以弥补短板<br>采集和提取数据资料：收集数据并加载使用它们<br>设定数据假设和方法：通过对数据进行剖析、可视化和挖掘来探索数据源，如定义模型算法的输入、种类或者模型假设和分析方法<br>集成和调整数据进行分析：模型的可行性取决于源数据的质量<br>使用数据模型探索数据：对集成的数据应用统计分析和机器学习算法进行验证、训练，并随着时间的推移演化模型<br>部署和监控：将产生有用信息的模型部署到生产环境中，持续监控它们的价值和有效性</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>大数据</strong>：5V特性</li>
+</ul>
+<blockquote>
+<p>Volume ：数据量大，包括采集、存储和计算的量都非常大<br>Velocity： 数据增长速度快、处理速度快，时效性要求高<br>Variety： 数据种类（视频、音频、文本等）、来源多样化<br>Value ： 数据价值密度低<br>Veracity：数据真实性，数据质量</p>
+</blockquote>
+<ul>
+<li><strong>数据湖</strong>：一种可以提取、存储、评估和分析不同类型和结构海量数据的环境，可供多种场景使用，可以作为 Hadoop 或其他数据存储系统、集群服务、数据转换、数据集成等数据处理工具的一种复合配置来实施</li>
+</ul>
+<blockquote>
+<p>数据科学家可以挖掘和分析数据的环境<br>原始数据的集中存储区域，只需要进行少量的转换操作<br>数据仓库明细历史数据的内用存储区域<br>信息记录的在线归档<br>可通过自动化的模型识别提取流数据的环境</p>
+</blockquote>
+<ul>
+<li><strong>基于服务的架构</strong>：Services-Based Architecture ，SBA，一种立即提供（如果不是完全准确或完整）数据的方法，使用相同的数据原来更新完整、准确的历史数据集</li>
+</ul>
+<blockquote>
+<p>批处理层：数据湖为批处理层提供服务，包括近期和历史数据<br>加速层：只包括实时数据<br>服务层：提供链接批处理和加速层数据的接口</p>
+</blockquote>
+<ul>
+<li><strong>机器学习</strong>：探索学习算法的构建和研究，是监督学习和无监督学习的结合</li>
+</ul>
+<blockquote>
+<p><strong>无监督学习</strong>：数据挖掘，输入并不知道输出的数据，有关联、群集和维度降低三种类型，使用 Apriori、K-means、PCA算法等，无标签，进行聚类</p>
+<blockquote>
+<p>分类<br>聚类<br>回归分析<br>关联规则<br>特征分析<br>偏差分析<br>变化分析<br>Web 页文本挖掘</p>
+<blockquote>
+<p>剖析：尝试描述个人、群体或人群的典型行为，建立异常检测应用程序的行为规范，剖析结果是许多无监督学习组件的输入<br>数据缩减：在包含大数据集大部分重要信息的前提下，将大数据集转换为小数据集<br>关联：基于无监督学习找到交易数据之间的关联<br>聚类：基于数据元素共享特征，将他们合为不同的族<br>自组织映射：是聚类分析的神经网络算法，也被称为拓扑有序网络，旨在减少评估空间的维度</p>
+</blockquote>
+</blockquote>
+<p><strong>监督学习</strong>：基于复杂的数学理论，从给定的训练数据集中学习函数，当出现新数据时，根据函数预测结果，要求包括输入和输出。方式分为回归和分类，算法有线性回归、Lonistic回归、CART、朴素贝叶斯、KNN等，有标签，进行分类，涉及统计学、组合学和运筹学等<br><strong>强化学习</strong>：基于目标实现，让机器不断测试，在环境中获得高分<br>数据集分为训练集、测试集和校验集：训练集用于拟合训练，测试集用于评估最终模型的泛化误差，校验集用于预测选择的误差，利用 K折（K-fold）验证避免过度拟合（将少量噪声数据具有的特性当做大部分数据的共性）</p>
+</blockquote>
+<ul>
+<li><strong>语义分析</strong>：从大量非结构化或半结构化数据中检索并获得简洁的自动化方法，使用自然语言处理（NLP）分析短语或句子、语义察觉情绪，并揭示情绪的变化，以预测可能的情景</li>
+</ul>
+<h1 id="Hadoop生态圈"><a href="#Hadoop生态圈" class="headerlink" title="Hadoop生态圈"></a>Hadoop生态圈</h1><ol>
+<li>Hadoop 是 Apacche 基金组织下的分布式系统基础框架，主要针对离线和大规模数据</li>
+<li>核心组件有 HDFS、MapReduce、YARN、Hadoop 基础功能库<br><img src="https://alexedwardz.gitee.io/images/Data/BigData/Hadoop_ecosystem.png" alt="Hadoop_ecosystem"></li>
+</ol>
+<h2 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h2><p>块级别的分布式文件存储系统，HDFS 为了防止数据丢失，会自动对数据块进行备份，默认备份3份，一个数据块 128M</p>
+<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>MapReduce 是采用分而治之的思想设计的分布式计算框架，对一个复杂任务切分成若干个子任务（Map阶段），子任务会并行的在服务器上运行，最后汇总所有子任务的结果（Reduce阶段）</p>
+<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><p>进行资源调度</p>
+<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>基于 Hadoop 的开源数据仓库工具，用于处理海量结构化数据，将HDFS中结构化的数据文件映射成数据表<br>Hive 通过 HiveSQL 进行解析和转换，最终变成 mapreduce 任务，完成数据分析与处理<br>HiveSQL 遵循SQL标准</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/23/Data/BigData/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E5%9F%BA%E7%A1%80/" data-id="ckvsxxk0d000vf0un7sbn5bud" data-title="大数据-基础" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/24/Data/BigData/Hive/Hive-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hive-安装使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/22/Data/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据仓库-基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

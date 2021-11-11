@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录数据中台相关内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据中台-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210831/57880.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录数据中台相关内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-31T12:27:48.000Z">
+<meta property="article:modified_time" content="2021-09-10T06:25:43.084Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210831/57880.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据中台-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210831/57880.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据中台-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-31 20:27:48" itemprop="dateCreated datePublished" datetime="2021-08-31T20:27:48+08:00">2021-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-10 14:25:43" itemprop="dateModified" datetime="2021-09-10T14:25:43+08:00">2021-09-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210831/57880.html" class="post-meta-item leancloud_visitors" data-flag-title="数据中台-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210831/57880.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210831/57880.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录数据中台相关内容</p>
+<span id="more"></span>
+
+<h1 id="数据中台"><a href="#数据中台" class="headerlink" title="数据中台"></a>数据中台</h1><p>**数据中台 **：通过对企业内、外部多源异构数据进行采集、治理、建模、分析、应用，对内优化管理、赋能业务，对外开展数据合作，释放数据价值，是 数据 + 技术(向下连接后台、向上连接前端的先进的与时俱进的技术) + 产品(经过抽象和设计形成的通用化、标准化、可扩展的服务) + 组织的组合，包括所有数据资源、数据研发管理、数据资产管理的统一的数据资源池</p>
+<h2 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h2><p><strong>数据采集</strong>：又称为数据获取，利用一种装置从系统外部不同数据源经过收集、整理、清洗、转换后，加载到系统内部新数据源中</p>
+<ul>
+<li><strong>通用数据采集</strong>：包括结构化数据和非结构化数据</li>
+</ul>
+<blockquote>
+<p>实现结构化数据从数据源头到目录数据平台的分布式 ETL 操作<br>结构化数据支持 HANA、SAP BW、HDFS、Hive、Kafka、Flume、Hbase等文件类数据源<br>非结构化数据支持 HDFS、Hive、Kafka、Flume、Hbase等文件类数据源<br>支持分布式 ETL 任务，任务处理能力可横向扩展<br>支持过滤、数学运算和字符运算等数据转换等</p>
+</blockquote>
+<ul>
+<li><strong>流式数据采集</strong>：实现对流数据的抽取、转换和加载功能，支持对应用日志、系统日志及数据库日志文件的增量采集</li>
+</ul>
+<blockquote>
+<p>提供高并发、高吞吐、低延迟、可容错、可持久化的实时消息系统，如 Kafka、RabbitMQ 等<br>支持可扩展的分布式流数据 ETL 操作<br>支持失败任务断点恢复<br>支持分级并发任务调度<br>提供任务管理、任务监控的 Web 管理界面<br>具备完善的用户及权限管理功能</p>
+</blockquote>
+<h3 id="技术路线"><a href="#技术路线" class="headerlink" title="技术路线"></a>技术路线</h3><ul>
+<li><strong>ETL</strong>：将数据从源系统通过 ETL 按照一定的周期（每天、每小时等）传输到目标系统，根据业务场景进行数据治理，如质量监测、格式转换和数据规范化、数据替换，保证数据完整性等</li>
+<li><strong>实时数据采集</strong>：通过实时数据采集工具，如 Flume、Kafka，进行流数据采集处理，如数据源的操作日志、网络监控的流量管理、金融应用的股票记账和 Web服务器的用户访问数据等</li>
+<li><strong>互联网数据采集</strong>：通过 Scribe 等网络爬虫在合法范围内按照一定规则，自动抓取互联网信息的程序或脚本，支持图片、音频、视频等文件</li>
+</ul>
+<blockquote>
+<p>Scribe： Facebook 开发的数据(日志)收集系统，又称为网页蜘蛛、网络机器人、网络爬虫</p>
+</blockquote>
+<ul>
+<li><strong>数据采集接口</strong>：通过与软件技术服务商合作，使用特定系统接口采集企业内部数据</li>
+</ul>
+<blockquote>
+<p>数据库视图：从指定数据库视图中提取数据<br>数据表：从指定数据表中提取数据<br>自定义SQL：用自定义SQL 从指定数据库提取数据<br>Web Service：从 Web Service 提供的方法中提取数据<br>文件：从 XML、Excel、Access、DBF文件中提取数据</p>
+</blockquote>
+<p><a href="https://alexedwardz.gitee.io/20210901/25760.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据技术 </font></a></p>
+<p><a href="https://alexedwardz.gitee.io/20210902/27125.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据模型 </font></a></p>
+<p><a href="https://alexedwardz.gitee.io/20210902/56600.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据管理 </font></a></p>
+<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><ul>
+<li><strong>分布式数据存储</strong></li>
+</ul>
+<blockquote>
+<p>具备可扩展的分布式数据存储功能<br>支持结构化、半结构化、非结构化数据的可扩展分布式存储<br>支持1:4的数据压缩比<br>支持高可用和故障自动切换部署<br>具备数据安全策略，避免数据丢失<br>支持 SQL 语法（ANSI SQL 2003）</p>
+</blockquote>
+<ul>
+<li><strong>NoSQL 数据存储</strong></li>
+</ul>
+<blockquote>
+<p>可扩展的分布式 Key-Value 数据库功能<br>支持对象存储<br>支持图数据库<br>支持高可用和故障自动切换部署<br>具备数据安全策略，避免数据丢失<br>具备 Web 图形化管理界面</p>
+</blockquote>
+<h2 id="数据计算"><a href="#数据计算" class="headerlink" title="数据计算"></a>数据计算</h2><h3 id="分布式查询"><a href="#分布式查询" class="headerlink" title="分布式查询"></a>分布式查询</h3><blockquote>
+<p>支持联机分析处理 ROLAP<br>支持 SQL 语法，支持 UDF<br>具备良好的水平扩展性<br>支持高可用和故障自动切换部署<br>具备完善的用户及权限管理功能<br>具备 Web 图形化管理界面</p>
+</blockquote>
+<h3 id="分布式计算"><a href="#分布式计算" class="headerlink" title="分布式计算"></a>分布式计算</h3><blockquote>
+<p>支持结构化、非结构化的分布式批处理功能<br>支持大规模水平扩展<br>支持高可用和故障自动切换部署<br>支持任务失败恢复能力<br>具有高效的分布式内存计算引擎，如 Spark、Flink 等<br>支持 Java、Pyhton等</p>
+</blockquote>
+<h3 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h3><blockquote>
+<p>提供数据库建模工具、可自动生成物理实体<br>提供基于 Web 的集成开发环境，支持数据库开发、数据处理、数据集成等<br>支持数据中台模型开发，可定义维度、度量、ODS、Cube 的大数据模型<br>支持特征工程创建<br>支持主流统计分析算法及模型<br>提供基于 Web 的图形化模型设计、训练、评估</p>
+</blockquote>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><blockquote>
+<p>支持对多维模型的钻取(Drill-down)操作<br>支持对多维模型的上卷(Roll-up)操作<br>支持对多维模型的切片(Slice)操作<br>支持对多维模型的切块(Dice)操作<br>支持对多维模型的旋转(Pivot)操作<br>支持用户多维度展示分析</p>
+</blockquote>
+<h2 id="数据服务"><a href="#数据服务" class="headerlink" title="数据服务"></a>数据服务</h2><p><strong>数据服务</strong>：是指数据在存储、应用程序和组织之间的移动及整合相关的过程。制定合适的数据服务标准，针对不用的场景合理采用相应的数据服务技术，为企业新的管理模式和业务模式提供灵活可靠的数据支持</p>
+<h3 id="数据服务技术"><a href="#数据服务技术" class="headerlink" title="数据服务技术"></a>数据服务技术</h3><ul>
+<li><strong>文件共享</strong>：从一个系统中导出数据文件，再导入另一个系统，需要双方规定好数据格式，数据传递不及时，需要人工干预，数据可能出现异常</li>
+<li><strong>数据库中间表</strong>：双方约定公用数据库，一方写入数据库，另一方读数据，跨系统可通过跨数据库实现</li>
+<li><strong>点对点接口技术</strong>：Web Service ，部署 Web Service ，其他 Web Service 应用程序调用它部署的服务，典型协议有 SOAP（Simple Object Access Protocol，简单对象访问协议）、REST（Representational State Transfer，表述性状态转移)</li>
+<li><strong>消息队列技术</strong>：将数据打包成消息，放入消息队列，等对需求方获取，消息队列是消息传输过程中保存消息的容器，当消息接收者不可用会保留信息，消息一定被送达且只送达一次，消息只能放在接收方的消息队列中，双方接口协议一致</li>
+<li><strong>服务总线交换技术</strong>：基于消息队列产生，服务总线通过列已转换、路由分发控制接口泛滥，保证接口重用</li>
+<li><strong>ETL技术</strong>：基于SQL数据库复制批量数据的技术，将数据从业务系统数据库转移到企业数据仓库</li>
+</ul>
+<h3 id="数据服务方式"><a href="#数据服务方式" class="headerlink" title="数据服务方式"></a>数据服务方式</h3><ul>
+<li><strong>数据集</strong>：以表格形式出现的数据集合，数据库批量导出部分数据明细进行提供</li>
+<li><strong>API 网关</strong>：提供 API网关的生成、登记发布、调用申请、审核等功能</li>
+</ul>
+<blockquote>
+<p><strong>优点</strong></p>
+<blockquote>
+<p>简单易用：基于云平台，用户可以直接在管理控制平台中对 API网关服务进行图形化配置，无需搭建 API网关部署需要的设备<br>易于维护：提供对 API网关的可视化监控，以及资源管理、租户隔离、权限控制等一系列运维能力<br>高可靠性： API网关是分布式集群部署，及时应对网关节点故障，实现高可靠性<br>高性能：可承载大规模、大流量的 API调用访问<br>安全：通过多种认证方式，确保 API的访问安全性，通过严格流量控制，避免用户服务过载，通过全面的监控告警，保证用户的可用性</p>
+</blockquote>
+<p><strong>便利</strong><br>规范化接口：内部多套业务系统对外提供统一 、规范化的 API<br>下沉管理：通过 API权限鉴别实现下沉到平台层进行管理，简化服务代码，减少冗余<br>开放合作：通过 API网关将企业内部服务能力以标准API 的形式开放给合作伙伴，共享服务、能力和数据，达成深度合作</p>
+</blockquote>
+<ul>
+<li><strong>数据报表</strong>：按照规定的业务逻辑，通过简单的统计处理，以数据集合或图形展示</li>
+<li><strong>数据报告</strong>：对数据进行深度加工，并基于数据分析，加上文字或图表解释，将数据反映的问题展现出来</li>
+<li><strong>数据标签</strong>：对一组数据的基本特性或共同特性进行提炼</li>
+<li><strong>数据订阅</strong>：通过统一、开放的数据订阅通道，使用户高效获取订阅对象的实时增量数据</li>
+<li><strong>数据组件</strong>：具备特定数据处理逻辑的工具，可以根据需要直接处理数据或作为数据应用的调用对象</li>
+<li><strong>数据应用</strong>：数据服务的高级形式，通过功能、程序处理后，进行复杂的数据处理和多样的数据展示</li>
+</ul>
+<h3 id="数据服务工具"><a href="#数据服务工具" class="headerlink" title="数据服务工具"></a>数据服务工具</h3><ul>
+<li><strong>功能</strong></li>
+</ul>
+<blockquote>
+<p>支持不同地域的服务器端连接<br>支持 IaaS架构，提供多种高可用性，能够在服务器节点之间进行请求转移<br>具备事件触发、定时任务、数据触发（敏感数据变化时主动触发）等数据服务请求<br>具备完善的日志管理机制，对服务进行全过程监控合和日志管理<br>支持实时数据交换</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210830/56358.html" rel="prev" title="大数据和数据科学-基础">
+      <i class="fa fa-chevron-left"></i> 大数据和数据科学-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210901/25760.html" rel="next" title="大数据实践-01阿里-数据技术">
+      大数据实践-01阿里-数据技术 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">数据中台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="nav-number">1.1.</span> <span class="nav-text">数据采集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="nav-number">1.1.1.</span> <span class="nav-text">技术路线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">1.2.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="nav-number">1.3.</span> <span class="nav-text">数据计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">分布式查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="nav-number">1.3.2.</span> <span class="nav-text">分布式计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.3.3.</span> <span class="nav-text">数据建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="nav-number">1.3.4.</span> <span class="nav-text">数据分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">数据服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">数据服务技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">数据服务方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="nav-number">1.4.3.</span> <span class="nav-text">数据服务工具</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

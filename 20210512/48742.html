@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要对MySQL的安装、卸载和简单配置进行介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL-安装使用">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210512/48742.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要对MySQL的安装、卸载和简单配置进行介绍">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-12T13:58:00.000Z">
+<meta property="article:modified_time" content="2021-09-13T01:30:51.520Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210512/48742.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL-安装使用 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210512/48742.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL-安装使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-12 21:58:00" itemprop="dateCreated datePublished" datetime="2021-05-12T21:58:00+08:00">2021-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-13 09:30:51" itemprop="dateModified" datetime="2021-09-13T09:30:51+08:00">2021-09-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">安装使用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210512/48742.html" class="post-meta-item leancloud_visitors" data-flag-title="MySQL-安装使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210512/48742.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210512/48742.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要对MySQL的安装、卸载和简单配置进行介绍</p>
+<span id="more"></span>
+
+<h1 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h1><p>MySQL是由瑞典的MySQL AB公司开发的，目前是Oracle(甲骨文)公司的一个关系型数据库产品(2008年MySQL AB被Sun公司收购、2009年Sun公司又被Oracle收购)<br>MySQL是世界上流行的基于C/S(客户端/服务器端:服务器端：存储和管理数据库的;客户端：发出操作请求的程序)框架的开源的数据库系统<br>MySQL采用的是C/S架构，需要安装mysqld服务器，mysql客户端，data/数据存储，此外还要配置MySQL服务器占用的资源，使用的连接数，字符集，root用户密码等)</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><blockquote>
+<ul>
+<li>成本低——MySQL代码是开放源的，一般可以免费使用或修改</li>
+<li>性能高——MySQL代码执行效率非常快</li>
+<li>可信赖——许多厉害的公司、站点在使用和维护MySQL</li>
+<li>操作易——MySQL很容易安装和使用</li>
+</ul>
+</blockquote>
+<h1 id="安装卸载"><a href="#安装卸载" class="headerlink" title="安装卸载"></a>安装卸载</h1><h2 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h2><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/"><font face = "微软雅黑" color = 1E90FF size = 5> 下载官网 </font></a><br><strong>完全干净</strong>：安装之前确保MySQL相关文件完全清除（第一次安装无此问题），解压下载好的文件至想要安装的目录下(尽量无中文)，检查服务、文件夹和注册表等是否删除完成，环境变量（可以保留）</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>初始化data文件：在bin目录下运行：mysqld –initialize-insecure –user=mysql</li>
+<li>安装MySQL：mysqld -install； 安装完毕，运行配置向导（详细配置：开发环境，服务器环境，独立服务器：占用最多的资源；多功能：支持事务和非事务，支持事务，不支持事务；innodb表空间地址；OLAP，OLTP，手动设置连接数量；网络端口，严格模式；设定字符集；Windows服务名：不允许同名，环境变量；用户登录；运行配置）</li>
+<li>启动服务：net start MySQL</li>
+<li>登录MySQL：mysql -u root -p<br>因为之前没设置密码，所以直接回车即可</li>
+<li>设置root用户密码：ALTER USER ‘root’@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘password’;</li>
+<li>刷新权限：flush privileges;</li>
+<li>退出(exit/quit;)重新登陆即可</li>
+<li>配置环境变量：<ul>
+<li>MYSQL_HOME：安装根目录（bin的上一级目录）</li>
+</ul>
+</li>
+<li>测试<ol>
+<li>查看变量：show variable like ‘character_set%’;（%对应任意个数的字符，_  对应一个字符）</li>
+<li>查看版本：select version();</li>
+</ol>
+</li>
+</ol>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ol>
+<li>安装之前先查看是否安装mysql：rpm -qa | grep mysql，若有则进入2，若没有则进入3</li>
+<li>卸载mysql，rpm -e mysql-libs，如提示会破坏依赖，则强制删除：rpm -e –nodeps mysql-libs</li>
+<li>安装</li>
+</ol>
+<blockquote>
+<ul>
+<li>安装编译代码包gcc：yum -y install make gcc-c++ cmake bison-devel ncurses-devel</li>
+<li>下载安装包</li>
+<li>解压安装包：tar -zxvf YUM_package_name</li>
+<li>进入解压目录：cd YUM_package_name</li>
+<li>编译：</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql</span><br><span class="line">-DMYSQL_DATADIR&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data -DSYSCONFDIR&#x3D;&#x2F;etc</span><br><span class="line">-DWITH_MYISAM_STORAGE_ENGINE&#x3D;1 -DWITH_INNOBASE_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DWITH_MEMORY_STORAGE_ENGINE&#x3D;1 -DWITH_READLINE&#x3D;1</span><br><span class="line">-DMYSQL_UNIX_ADDR&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock -DMYSQL_TCP_PORT&#x3D;3306</span><br><span class="line">-DENABLED_LOCAL_INFILE&#x3D;1 -DWITH_PARTITION_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DEXTRA_CHARSETS&#x3D;all -DDEFAULT_CHARSET&#x3D;utf8</span><br><span class="line">-DDEFAULT_COLLATION&#x3D;utf8_general_ci</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>安装：make &amp;&amp; make install，时间较长，大概30分钟</li>
+</ul>
+</blockquote>
+<ol start="4">
+<li>配置：</li>
+</ol>
+<blockquote>
+<ul>
+<li>添加用户和用户组</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看用户列表：cat &#x2F;etc&#x2F;passwd</span><br><span class="line">查看用户列表：cat &#x2F;etc&#x2F;group</span><br><span class="line">创建组：groupadd mysql</span><br><span class="line">创建用户：useradd -g mysql mysql</span><br><span class="line">修改&#x2F;usr&#x2F;local&#x2F;mysql权限：chown -R mysql:mysql &#x2F;usr&#x2F;local&#x2F;mysql</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>初始化配置</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;mysql   进入安装目录</span><br><span class="line">scripts&#x2F;mysql_install_db --basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql --datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data --user&#x3D;mysql，配置数据库和数据表存储位置</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>启动，在/usr/local/mysql/下运行</li>
+</ol>
+<blockquote>
+<p>注：启动mysql服务时，会按照/etc/my.cnf——“$basedir/my.cnf”搜索mysql的配置文件，新版MySQL的默认位置是：/usr/local/mysql/my.cnf。为防止干扰可将/etc/的文件名修改：mv /etc/my.cnf /etc/my.cnf.bak</p>
+<ul>
+<li>复制mysql服务到init.d目录下：cp support-files/mysql.server /etc/init.d/mysql</li>
+<li>设置mysql服务开机自启动：chkconfig mysql on</li>
+<li>启动mysql：service mysql start</li>
+</ul>
+</blockquote>
+<ol start="6">
+<li>登录：./mysql -u root -p，回车即可进入，默认密码为空</li>
+<li>初次使用：<ul>
+<li>修改root用户密码：set PASSWORD = PASSWORD(‘pwd’);</li>
+</ul>
+</li>
+<li>退出：exit;</li>
+<li>重新登陆：./mysql -u root -p，此时需要登陆密码，密码为之前设置的pwd</li>
+</ol>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><ul>
+<li>暂停服务:管理员运行cmd：net stop MySQL，再进行删除</li>
+<li>控制面板下卸载MySQL，删除ProgramData下的MySQL数据文件</li>
+<li>删除注册表：win + r下输入regedit，进入注册表，进行删除</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\eventlog\Application\MySQL</span><br><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\services\eventlog\Application\MySQL（可能没有） HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application</span><br></pre></td></tr></table></figure>
+
+<h1 id="连接启动"><a href="#连接启动" class="headerlink" title="连接启动"></a>连接启动</h1><ul>
+<li>连接前要先开启服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">开启服务：net start MySQL; (net start service_name);</span><br><span class="line">关闭服务：net stop MySQL;</span><br><span class="line">重启服务：net restart MySQL;</span><br><span class="line"></span><br><span class="line">cmd下操作：配置环境变量，可以在任意路径下运行；没配置环境变量，需要在安装路径下的bin目录下运行，下文全是，服务名默认是 MySQL</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>登录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql [-h host_ip -P port] -u user_name -p [passwaord]</span><br><span class="line"></span><br><span class="line">主机：运行 MySQL 服务器的主机名地址，如果连接到本地MySQL服务器，为localhost 或 127.0.0.1</span><br><span class="line">端口：默认端口 3306，用默认可省略；修改端口后，需要指定</span><br><span class="line">用户名：一个合法的用户名</span><br><span class="line">密码：用户的登陆密码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出数据库列表：show databases;  -- 包含MySQL内部使用的数据库，如mysql、information_schema</span><br><span class="line">切换数据库：use database_name;</span><br><span class="line">输出数据表列表：show tables;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>断开连接：exit; /quit; /q;</li>
+</ul>
+<h2 id="简单查看"><a href="#简单查看" class="headerlink" title="简单查看"></a>简单查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查看所有的数据库：show databases [like ‘xxx’];</span><br><span class="line">查看创建数据库的DDL：show create database db_name;</span><br><span class="line">查看当前数据库的所有表：show tables [like ‘xxx’];</span><br><span class="line">查看创建数据表的DDL：show create table tb_name;</span><br><span class="line">查看指定数据库的所有表：show tables from db_name;</span><br><span class="line">查看指定数据表的属性列：show columns from tb_name;</span><br><span class="line">查看广泛的服务器状态信息：show status;</span><br><span class="line">查看授予用户（所有用户或特定用户）的安全权限：show grants；</span><br><span class="line">查看服务器错误或警告消息：show errors &#x2F; warnings;</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on dbname.tbname to &#39;username&#39;@&#39;loginip&#39; identified by &#39;password&#39; with grant option;</span><br><span class="line"></span><br><span class="line">all privileges：表示所有权限（insert、delete、update、select、create、drop、alter等）</span><br><span class="line">dbname：表示数据库名，\* 表示所有数据库</span><br><span class="line">tbname：表示数据表名，\* 表示所有数据表</span><br><span class="line">username：表示用户名</span><br><span class="line">loginip：表示允许远程IP地址，% 表示所有IP地址</span><br><span class="line">password：表示登录密码，为空表示不需要密码登录</span><br><span class="line">with grant option：表示允许级联授权</span><br><span class="line"></span><br><span class="line">设置好了之后需要刷新权限：flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h1 id="知识查阅"><a href="#知识查阅" class="headerlink" title="知识查阅"></a>知识查阅</h1><h2 id="网站资讯"><a href="#网站资讯" class="headerlink" title="网站资讯"></a>网站资讯</h2><blockquote>
+<ul>
+<li>官方网站：<a target="_blank" rel="noopener" href="https://dev.mysql.com/"><font face = "微软雅黑" color = 1E90FF size = 5> 英文 </font></a>、<a target="_blank" rel="noopener" href="https://www.mysql.com/cn/"><font face = "微软雅黑" color = 1E90FF size = 5> 中文 </font></a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/"><font face = "微软雅黑" color = 1E90FF size = 5> 官方文档 </font></a></li>
+<li><a target="_blank" rel="noopener" href="http://mysqlserverteam.com/"><font face = "微软雅黑" color = 1E90FF size = 5> 开发团队 </font></a></li>
+<li><a target="_blank" rel="noopener" href="https://community.oracle.com/"><font face = "微软雅黑" color = 1E90FF size = 5> Oracle社区</font></a></li>
+</ul>
+</blockquote>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/mysql/"><font face = "微软雅黑" color = 1E90FF size = 5> w3cschool</font></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/mysql/mysql-tutorial.html"><font face = "微软雅黑" color = 1E90FF size = 5> 菜鸟</font></a></li>
+</ul>
+</blockquote>
+<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><blockquote>
+<ul>
+<li>《MySQL必知必会》：比较经典，入门，<a target="_blank" rel="noopener" href="http://forta.com/books/0672327120/"><font face = "微软雅黑" color = 1E90FF size = 5> 配套网站 </font></a></li>
+<li>《高性能MySQL》：进阶</li>
+<li>《高可用MySQL》：进阶</li>
+<li>《MySQL技术内幕（第5版）》:进阶</li>
+<li>《MySQL技术内幕：InnoDB存储引擎》：进阶</li>
+</ul>
+</blockquote>
+<h1 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h1><h2 id="语法校验规则（sql-mode）"><a href="#语法校验规则（sql-mode）" class="headerlink" title="语法校验规则（sql_mode）"></a>语法校验规则（sql_mode）</h2><p><strong>查看sql_mode</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局：select @@global.sql_mode;</span><br><span class="line">当前进程：select @@SESSION.sql_mode;</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置sql_mode</strong>：set @@sql_mode = sql_mode选项列表<br>仅对当前进程有效，想要永久有效，需要修改MySQL的配置文件（Wnidows：my.ini/my_dufault.ini；Linux：my.cnf）</p>
+<blockquote>
+<p>sql_mode选项：</p>
+<blockquote>
+<ul>
+<li><strong>ANSI_QUOTES</strong>：启用ANSI_QUOTES后，双引号将被解释为识别符，不能再用来引用字符串</li>
+<li><strong>ERROR_FOR_DIVISION_BY_ZERO</strong>：启用ERROR_FOR_DIVISION_BY_ZERO后，在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告；如果未给出该模式，那么数据被零除时返回NULL</li>
+<li><strong>NO_AUTO_CREATE_USER</strong>：启用NO_AUTO_CREATE_USER后，禁止GRANT创建密码为空的用户</li>
+<li><strong>NO_AUTO_VALUE_ON_ZERO</strong>：默认设置下，插入0或NULL代表生成下一个自增长值，启用NO_AUTO_VALUE_ON_ZERO后，可以在自增长列插入0值</li>
+<li><strong>NO_ENGINE_SUBSTITUTION</strong>：启用NO_ENGINE_SUBSTITUTION后，如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</li>
+<li><strong>NO_ZERO_DATE</strong>：启用NO_ZERO_DATE后，在严格模式下，不接受’0000-00-00’做为合法日期，可以使用IGNORE选项插入；在非严格模式下，可以接受’0000-00-00’做为合法日期，但会生成警告</li>
+<li><strong>NO_ZERO_IN_DATE</strong>：启用NO_ZERO_IN_DATE后，在严格模式下，不接受月或日部分为0的日期，可以使用IGNORE选项插入；在非严格模式下，可以接受月或日部分为0的日期，但会生成警告</li>
+<li><strong>ONLY_FULL_GROUP_BY</strong>：启用ONLY_FULL_GROUP_BY后，出现在select语句、HAVING条件和ORDER BY语句中的列，必须是GROUP BY的列或者依赖于GROUP BY列的函数列</li>
+<li><strong>PIPES_AS_CONCAT</strong>：启用PIPES_AS_CONCAT后，将”||”视为字符串的连接操作符而非或运算符，与字符串的拼接函数Concat相功能类似</li>
+<li><strong>STRICT_TRANS_TABLES</strong>：启用STRICT_TRANS_TABLES后，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制</li>
+</ul>
+</blockquote>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210511/11792.html" rel="prev" title="数据库-注意事项">
+      <i class="fa fa-chevron-left"></i> 数据库-注意事项
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210513/41093.html" rel="next" title="MySQL基础-数据类型">
+      MySQL基础-数据类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">发展历史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8D%B8%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">安装卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%83%85"><span class="nav-number">2.1.</span> <span class="nav-text">前情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.2.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.2.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">卸载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%90%AF%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">连接启动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9F%A5%E7%9C%8B"><span class="nav-number">3.1.</span> <span class="nav-text">简单查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.2.</span> <span class="nav-text">远程连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%9F%A5%E9%98%85"><span class="nav-number">4.</span> <span class="nav-text">知识查阅</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E8%B5%84%E8%AE%AF"><span class="nav-number">4.1.</span> <span class="nav-text">网站资讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%99%E7%A8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A6%E7%B1%8D"><span class="nav-number">4.3.</span> <span class="nav-text">书籍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">基础配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99%EF%BC%88sql-mode%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">语法校验规则（sql_mode）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

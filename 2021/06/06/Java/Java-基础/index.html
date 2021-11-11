@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java-基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录Java基础语法的相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-基础">
+<meta property="og:url" content="http://example.com/2021/06/06/Java/Java-%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录Java基础语法的相关知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Arithmetic_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Relation_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Logic_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Operator_Precedence.png">
+<meta property="article:published_time" content="2021-06-06T00:08:29.000Z">
+<meta property="article:modified_time" content="2021-11-04T09:23:40.780Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java/Java-基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/06/06/Java/Java-%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2021-06-06T00:08:29.000Z" itemprop="datePublished">2021-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java-基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录Java基础语法的相关知识</p>
+<span id="more"></span>
+
+<h1 id="保留关键字"><a href="#保留关键字" class="headerlink" title="保留关键字"></a>保留关键字</h1><p>被Java语言赋予了特殊含义，用作专门用途的字符串(单词)，所有字母都小写</p>
+<ul>
+<li><p><strong>访问控制/权限控制</strong>：</p>
+<ul>
+<li>private：私有</li>
+<li>protected：受保护的</li>
+<li>public：公开</li>
+</ul>
+</li>
+<li><p><strong>类、方法和变量修饰符</strong>：</p>
+<ul>
+<li>abstract</li>
+<li>class</li>
+<li>extends</li>
+<li>final</li>
+<li>implements</li>
+<li>interface</li>
+<li>native</li>
+<li>new</li>
+<li>static</li>
+<li>strictfp</li>
+<li>synchronized</li>
+<li>transient</li>
+<li>volatile</li>
+</ul>
+</li>
+<li><p><strong>程序控制</strong>：</p>
+<ul>
+<li>if</li>
+<li>else</li>
+<li>do</li>
+<li>while</li>
+<li>for</li>
+<li>switch</li>
+<li>case</li>
+<li>default</li>
+<li>break：主要用在循环语句或者 switch 语句中，用来 跳出最里层的循环，并且继续执行该循环下面的语句</li>
+<li>continue：用于任何循环控制结构中，用于让程序立刻跳转到下一次循环的迭代：在 for 循环中，continue 语句使程序立即跳转到更新语句；在 while 或者 do…while 循环中，程序立即跳转到布尔表达式的判断语句</li>
+<li>return</li>
+<li>instanceof：判断其左边对象是否为其右边类的实例，返回boolean类型的数据</li>
+</ul>
+</li>
+<li><p><strong>错误处理</strong>：</p>
+<ul>
+<li>try</li>
+<li>catch</li>
+<li>throw</li>
+<li>throws</li>
+<li>finally</li>
+</ul>
+</li>
+<li><p><strong>包相关</strong>：</p>
+<ul>
+<li>import：导入相关包（包括Java预定义的包和用户自定义的包）</li>
+<li>package</li>
+</ul>
+</li>
+<li><p><strong>基本类型/原始类型</strong>：</p>
+<ul>
+<li>boolean</li>
+<li>byte</li>
+<li>char</li>
+<li>double</li>
+<li>float</li>
+<li>int</li>
+<li>long</li>
+<li>short</li>
+<li>null</li>
+<li>true</li>
+<li>false</li>
+</ul>
+</li>
+<li><p><strong>变量引用</strong>：</p>
+<ul>
+<li>super</li>
+<li>this</li>
+<li>void</li>
+</ul>
+</li>
+<li><p><strong>保留字</strong>：现在未使用，以后的版本可能会作为关键字使用，命名时应尽量避免</p>
+<ul>
+<li>goto</li>
+<li>const</li>
+<li>byValue</li>
+<li>cast</li>
+<li>future</li>
+<li>generic</li>
+<li>inner</li>
+<li>operator</li>
+<li>outer</li>
+<li>rest</li>
+<li>var</li>
+</ul>
+</li>
+</ul>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
+<li><p><strong>数值型</strong></p>
+<ul>
+<li><strong>整数</strong>：存放整数<ul>
+<li>byte[1]：字节</li>
+<li>short[2]：短整型</li>
+<li>int[4]：整数型(默认)</li>
+<li>long[8]：长整型，申明时需要加上“i”或者“L”</li>
+</ul>
+</li>
+<li><strong>浮点数</strong>：存放小数，由符号位、指数位和尾数位构成，尾数位可能丢失，存在精度问题，有十进制计数法和科学计数法两种表现形式<ul>
+<li>float[4]：单精度浮点数，申明时需要加上“f”或“F”</li>
+<li>double[8]：双精度浮点数(默认)<br>不要使用运算结果为小数进行相等判断，通常采用两数之差的绝对值小于某个精度范围就认为相等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>字符串类型</strong>：char[2]，存放单个字符，可用ASCLL码/Unicode码输出字符，输出的字符用单引号包裹，双引号包裹的是字符串，char字符都有Unicode码对应的整数，可以参与运算</p>
+</li>
+<li><p><strong>布尔类型</strong> ：boolean[1]，存放ture，false，常用于逻辑运算，进行流程控制，<strong>不能用0或非0的整数代替true或false</strong></p>
+</li>
+<li><p><strong>数据类型转换</strong>：小容量数据类型可以自动转换为大容量类型<br><img src="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png" alt="Java_Type_Change"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>自动类型转换</strong>：存在多种类型的数据混合运算时，先自动转换为容量最大的数据类型</p>
+<blockquote>
+<p>byte、short和char不能自动进行类型转换，byte、short和char进行运算(包括单类型运算和多类型运算)时先自动转换为int进行计算<br>boolean不参与数据类型转换<br>当把整数赋值给byte时，先判断整数是否在byte范围内，在进行类型判断进行赋值，如果是变量进行赋值，则先进行类型判断</p>
+</blockquote>
+<p><strong>强制类型转换</strong>：用强制类型转换符()包裹要转换成的数据类型，后面接上要转换的数据，可能引起数据精度丢失和数据溢出的问题</p>
+<blockquote>
+<p>强制类型转换符只针对最近的操作数有效，可以使用()提高运算优先级<br>char可以保存int值，不能保存int的变量，需要进行强制类型转换符</p>
+</blockquote>
+<p><strong>String类型转换</strong>：仅能转换整数字符串为基本数据，不能转换字符字符串为基本数据</p>
+<blockquote>
+<p>基本类型转换为String数据类型：只需要在基本数据类型后面加上’ + “” ‘即可<br>String类型转换为基本数据类型：需要用到基本数据类型包装类的parseXxx方法，String转换为char类型是使用charAt()方法取字符串的第一个字符给char</p>
+</blockquote>
+</blockquote>
+<h2 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h2><ul>
+<li><strong>类</strong>class</li>
+<li><strong>接口</strong>interface</li>
+<li><strong>数组</strong></li>
+</ul>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>对数值数据的变量进行运算<br><img src="https://alexedwardz.gitee.io/images/Java/Arithmetic_Operator.png" alt="Arithmetic_Operator"><br>**+**：拼接，当左右两边数据类型均为数值型时，进行加法运算；若一边为字符串类型，进行拼接运算，运算顺序为从左到右<br>**/**：除，当除号两边均为int时，结果会舍弃小数部分，仅保留整数部分<br>**%**：取模，本质是：a % b = a - a / b * b<br>**++**：独立使用时，前++与后++完全一致，作为表达式使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int i = 1;</span><br><span class="line">i++;            // 等价于：i = i + 1;</span><br><span class="line">++i;            // 等价于：i = i + 1;</span><br><span class="line"></span><br><span class="line">int j = ++i;    // 等价于：i = i + 1; j = i;</span><br><span class="line">int j = i++;    // 等价于：j = i; i = i + 1;</span><br><span class="line">i = i++;        // 得i = 1 ：(1)temp = i; (2)i = i + 1; (3)i = temp</span><br><span class="line">i = ++i;        // 得i = 2 ：(1)i = i + 1; (2)temp = i; (3)i = temp</span><br><span class="line">注：--同理</span><br></pre></td></tr></table></figure>
+
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符的结果都是boolean类型，常用在 if 分支结构或 for / while 循环结构中，有关系运算符组成的表达式成为关系表达式<br><img src="https://alexedwardz.gitee.io/images/Java/Relation_Operator.png" alt="Relation_Operator"></p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>用于连接多个条件(关系表达式)，最终结果也是一个boolean值<br><img src="https://alexedwardz.gitee.io/images/Java/Logic_Operator.png" alt="Logic_Operator"></p>
+<ul>
+<li>**逻辑与 &amp;**（and）：当运算符两边的表达式的结果都为true时，整个运算结果才为true，只要有一边为false，则结果为false<ul>
+<li>&amp;：无论第一个判断条件是否成立，逻辑运算符前后两个条件都会进行判断</li>
+</ul>
+</li>
+<li>**短路与 &amp;&amp;**（and）：当运算符两边的表达式的结果都为true时，整个运算结果才为true，只要有一方为false，则结果为false<ul>
+<li>&amp;&amp;：第一个条件不成立，后面的条件均不进行判断，返回false，推荐使用，效率更高</li>
+</ul>
+</li>
+<li>**逻辑或 |**（or）：当运算符有一边为true时，整个运算结果为true<ul>
+<li>|：无论第一个判断条件是否成立，逻辑运算符前后两个条件都会进行判断</li>
+</ul>
+</li>
+<li>**短路或 ||**（or）：当运算符有一边为true时，整个运算结果为true<ul>
+<li>||：第一个条件成立，后面的条件均不进行判断，返回true，推荐使用，效率更高</li>
+</ul>
+</li>
+<li>**逻辑非 !**（not）：取本来值的相反值</li>
+<li><strong>逻辑异或 ^</strong>：符号两边不同时结果为true，否则为false</li>
+</ul>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p>将数据赋值给变量，左边只能是变量，右边可以是常量、变量、表达式，进行复核赋值运算时会进行类型转换<br><strong>基本赋值运算符</strong>：=，例：int a = 10;<br><strong>复合赋值运算符</strong>：+=、-=、*=、/=、%=，例：a += b; 等价于 a = a + b;其他同理</p>
+<h2 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h2><p>条件表达式 ？ 表达式1 : 表达式2；若条件表达式为true，则运行表达式1；若条件表达式为false，则运行表达式2。通常可以转换为if ··· else ··· 语句<br>当条件表达式为true时，不会执行表达式2；当条件表达式为false时，不会执行表达式1</p>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p><img src="https://alexedwardz.gitee.io/images/Java/Operator_Precedence.png" alt="Operator_Precedence"></p>
+<ol>
+<li>(), {}等</li>
+<li>单目运算符</li>
+<li>算术运算符</li>
+<li>位移运算符</li>
+<li>比较运算符</li>
+<li>逻辑运算符</li>
+<li>三元运算符</li>
+<li>赋值运算符</li>
+</ol>
+<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><ul>
+<li><strong>for</strong>(初始化循环变量;  判断条件;  循环变量增幅){循环体}</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>增强for循环：for(声明循环变量; 数组名称){语句}，主要用于数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] str=&#123;&#x27;xx&#x27;,&#x27;xxx&#x27;&#125;</span><br><span class="line">for(String s:str)&#123;</span><br><span class="line">	System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：增强for的目标不能是null（使用前先做非空判断），声明局部变量的类型必须和数组元素的类型匹配</p>
+</blockquote>
+<ul>
+<li><strong>while</strong>(条件){语句}</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while(条件)&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>do</strong> {语句}while(条件);</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">do&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;while(条件)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>比较：与while相比，do…while 循环至少会执行一次；for的循环次数提前已知</p>
+</blockquote>
+<h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><ul>
+<li><strong>if</strong>(条件){语句}[else if(条件){语句}else{语句}]</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if()&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else if(条件)&#123;</span><br><span class="line">	System.out.print(&quot;j&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">	System.out.print(&quot;k&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>switch</strong>(变量) {case value:{语句;break;}[default:{语句}]}</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">switch(变量)&#123;</span><br><span class="line">	case value1:&#123;</span><br><span class="line">		System.out.print(&quot;i&quot;);</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line">	case value2:&#123;</span><br><span class="line">		System.out.print(&quot;j&quot;);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">	default:&#123;</span><br><span class="line">		System.out.print(&quot;k&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>switch的类型可以是int，short，byte和char，不能处理long，String类型；匹配之前不会执行，若匹配无break，则后续会继续执行</p>
+</blockquote>
+<p>比较：switch使用了Binary Tree算法，运行效率优于if（除非是if-else的第一个条件就为true），if的使用更加灵活，条件更为多样；编译器编译switch时，不管有多少case，都直接跳转，不需逐个比较查询，与if不同；分支较多时，优先考虑switch</p>
+<h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><h2 id="Input-输入-："><a href="#Input-输入-：" class="headerlink" title="Input(输入)："></a>Input(输入)：</h2><blockquote>
+<p>Scanner</p>
+<blockquote>
+<ul>
+<li>导包：import java.util.Scanner</li>
+<li>输入：Scanner sc = new Scanner(System.in);</li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="Output-输出-："><a href="#Output-输出-：" class="headerlink" title="Output(输出)："></a>Output(输出)：</h2><p>Java的输出方法是在java.long包里的System类中的方法，有print、println、printf三种</p>
+<blockquote>
+<ul>
+<li>System.out.print()；是一般的标准输出，输出的信息不会换行</li>
+<li>System.out.println()；与print功能相似，输出的信息后会换行</li>
+<li>System.out.printf()；继承了C语言的printf的一些特性，可以进行格式化输出</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th>说明</th>
+<th align="left">适用范围</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%d</td>
+<td>以十进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%f</td>
+<td>以十进制浮点数格式输出</td>
+<td align="left">float、double、Float、Double、BigDecimal</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%e或%E</td>
+<td>以科学记号浮点数格式输出</td>
+<td align="left">float、double、Float、Double、BigDecimal</td>
+<td align="left">%e表示以小写字母e表示，%E表示以大写字母E表示</td>
+</tr>
+<tr>
+<td align="center">%o</td>
+<td>以八进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%x或%X</td>
+<td>以十六进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">%x表示以小写字母x表示，%X表示以大写字母X表示</td>
+</tr>
+<tr>
+<td align="center">%c或%C</td>
+<td>以字符符号输出</td>
+<td align="left">byte、short、char、Byte、Short、Integer、Charcater</td>
+<td align="left">%c表示以小写字母表示，%X表示以大写字母表示</td>
+</tr>
+<tr>
+<td align="center">%b或%B</td>
+<td>输出boolean值</td>
+<td align="left">boolean、非null值为true、null值为false</td>
+<td align="left">%b表示输出结果会是true或false，%B表示输出结果会是TRUE或FALSE</td>
+</tr>
+<tr>
+<td align="center">%h或%H</td>
+<td>用Integer.toHexString (arg.hashCode())来得到输出结果</td>
+<td align="left">-</td>
+<td align="left">如果arg是null，则输出null，也常用于想得到十六进制格式输出</td>
+</tr>
+<tr>
+<td align="center">%n</td>
+<td>输出平台特定的换行符号</td>
+<td align="left">-</td>
+<td align="left">Windows下会置换为”\r\n”；Linux下会置换为’\n’；Mac OS下回置换为’\r’</td>
+</tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<h1 id="简单函数"><a href="#简单函数" class="headerlink" title="简单函数"></a>简单函数</h1><ul>
+<li><strong>进制转换函数</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>10进制的x转2进制: Integer.toBinaryString(x);  返回一个二进制int型数据</li>
+<li>10进制的x转8进制: Integer.toOctalString(x);    返回一个八进制int型数据</li>
+<li>10进制的x转16进制:Integer.toHexString(x);     返回一个16进制int型数据</li>
+<li>10进制的x转n进制: Integer.toString(x,n);          返回一个n进制int型数据</li>
+<li>n进制的x转10进制: Integer.valueOf(x,n);          返回一个十进制int型数据<br>valueOf()：用于返回给定参数的原生Number对象值的静态方法，参数可以是原生数据类型, String等。该方法接收两个参数一个是需要转换字符串[，一个是转换基数(可选)]<br>Number.valueOf(“444”/444[,16]);     // 返回字符”444”/数值444对应的十六进制Number(Integer/Float/Double/String)型数据</li>
+</ul>
+<blockquote>
+<p>n进制的x转m进制</p>
+<blockquote>
+<p>n进制的x转m进制(n-&gt;10-&gt;m):</p>
+<blockquote>
+<p>2进制的10001110转8进制:Integer.toOctalString(Integer.valueOf(10001110, 2));</p>
+</blockquote>
+<p>BigInteger：change(String number/“x”, int from/n, int to/m);</p>
+<blockquote>
+<p>2进制的10001110转8进制:change(“10001110”, 2, 8);</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>字符串相关函数</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>字符串截取：substring(start, stop); (包头不包尾)</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>方法重载</strong></li>
+</ul>
+<blockquote>
+<p>方法名相同，可以改变参数类型、参数个数、参数顺序，仅改变参数名不构成方法重载，方法重载使用同一个方法名实现功能相同、主体不同的方法</p>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><ul>
+<li>\t：制表位</li>
+<li>\n：换行</li>
+<li>\：输出\</li>
+<li>&quot;：输出”，常用在在字符串里面输出“</li>
+<li>\r：回车，光标会移动到最前面，重新开始输出</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/06/06/Java/Java-%E5%9F%BA%E7%A1%80/" data-id="ckvsxxkdz006qf0un0u2b4x5y" data-title="Java-基础" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/06/07/Java/JVM-%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JVM-基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/06/05/Java/Java-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java-安装使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

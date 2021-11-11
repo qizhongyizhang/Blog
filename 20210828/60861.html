@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍数据质量管理相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据质量管理-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210828/60861.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍数据质量管理相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-28T13:39:52.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.356Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta property="article:tag" content="数据治理">
+<meta property="article:tag" content="数据质量">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210828/60861.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据质量管理-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210828/60861.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据质量管理-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-28 21:39:52" itemprop="dateCreated datePublished" datetime="2021-08-28T21:39:52+08:00">2021-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210828/60861.html" class="post-meta-item leancloud_visitors" data-flag-title="数据质量管理-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210828/60861.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210828/60861.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍数据质量管理相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="数据质量管理"><a href="#数据质量管理" class="headerlink" title="数据质量管理"></a>数据质量管理</h1><p><strong>数据质量管理</strong>：包括规划和实施质量管理技术，测量、评估和提高企业内数据的适用性，提高数据对业务和管理的满意度，是一项持续地任务</p>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>提高组织数据价值和数据利用的机会<br>降低低质量数据导致的风险和成本<br>提高组织效率和生产力<br>保护和提升组织的声誉<br>定义数据质量控制的标准和规范</p>
+</blockquote>
+<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
+<p>重要认知：结合对企业和用户的重视程度和数据不正确的风险水平确定数据重要性，确定数据改进顺序<br>周期管理：数据质量管理覆盖从产生采集到处置的全数据生命周期，包括系统内部和系统之间的数据流转<br>预防为主：数据质量反感的重点应放在预防数据错误和降低数据可用性的情形<br>根因修正：优化数据流程和系统设计，从根本上解决数据质量问题<br>治理促进：数据治理活动和数据质量管理活动二者相互促进<br>标准驱动：用可测量的标准和期望定义可量化的数据质量需求<br>客观一致测量：数据质量水平需要得到客观一致的测量<br>嵌入业务流程：在各个业务流程中实时数据标准<br>系统强制执行：系统必须强制执行数据质量要求<br>关联服务水平：数据质量报告和问题应纳入服务水平协议（SLA）</p>
+</blockquote>
+<h1 id="数据质量"><a href="#数据质量" class="headerlink" title="数据质量"></a>数据质量</h1><h2 id="数据质量维度"><a href="#数据质量维度" class="headerlink" title="数据质量维度"></a>数据质量维度</h2><p><strong>Strong-Wang 框架</strong></p>
+<blockquote>
+<ul>
+<li><strong>内在数据质量</strong></li>
+</ul>
+<blockquote>
+<p>准确性<br>客观性<br>可信度<br>信誉度</p>
+</blockquote>
+<ul>
+<li><strong>场景数据质量</strong></li>
+</ul>
+<blockquote>
+<p>增值性<br>关联性<br>及时性<br>完整性<br>适量性</p>
+</blockquote>
+<ul>
+<li><strong>表达数据质量</strong></li>
+</ul>
+<blockquote>
+<p>可解释性<br>易理解性<br>表达一致性<br>简洁性</p>
+</blockquote>
+<ul>
+<li><strong>访问数据质量</strong></li>
+</ul>
+<blockquote>
+<p>可访问性<br>访问安全性</p>
+</blockquote>
+</blockquote>
+<p><strong>Larry English</strong>：《<em>Improving Data Warehouse and Bussiness Information Quality</em>》——《改善数据仓库和业务信息质量》</p>
+<blockquote>
+<ul>
+<li><strong>固有质量特性</strong></li>
+</ul>
+<blockquote>
+<p>定义一致性<br>值域完备性<br>有效性或业务规则一致性<br>数据源准确性<br>反映实时准确性<br>精确性<br>非冗余性<br>冗余或分布数据的等效性<br>冗余或分布数据的并发性</p>
+</blockquote>
+<ul>
+<li><strong>实用质量特性</strong></li>
+</ul>
+<blockquote>
+<p>可访问性<br>及时性<br>语境清晰性<br>可用性<br>多源数据的可整合性<br>适当性或事实完整性</p>
+</blockquote>
+</blockquote>
+<p><strong>DAMA UK</strong></p>
+<blockquote>
+<p>完备性：存储数据量与潜在数据量的百分比<br>唯一性：在满足对象识别基础上不应多次记录实体实例<br>及时性：数据从要求的时间点起代表现实的程度<br>有效性：数据符合其定义的语法（格式、类型、范围等）<br>准确性：数据正确的描述现实世界对象或事件的程度<br>一致性：比较事务多种表述与定义的差异</p>
+</blockquote>
+<h3 id="管理内容"><a href="#管理内容" class="headerlink" title="管理内容"></a>管理内容</h3><blockquote>
+<p>数据内容及背景分析<br>数据结构及路径分析<br>数据成分及业务规则合规分析<br>数据间的关系及相关资源分配<br>识别数据转换机制<br>建立数据有效性及准确性规则<br>检验数据间的依赖性</p>
+</blockquote>
+<h3 id="常用评估内容"><a href="#常用评估内容" class="headerlink" title="常用评估内容"></a>常用评估内容</h3><blockquote>
+<p>完整性：数据不存在缺失记录或缺失字段<br>规范性：对数据标准、数据模型、业务规则、元数据和参考数据进行完整性、质量及归档的度量<br>一致性：保证数据内容在信息含义上一致<br>准确性：考察数据内容的正确性<br>唯一性：在满足业务需求下不允许重复同时也解决了数据不一致的潜在可能<br>关联性：关联数据的缺失或未建立索引<br>及时性：数据的最近更新时间<br>可用性：数据是否真实可用</p>
+</blockquote>
+<h2 id="数据质量低下的原因"><a href="#数据质量低下的原因" class="headerlink" title="数据质量低下的原因"></a>数据质量低下的原因</h2><p><strong>缺乏领导力</strong></p>
+<blockquote>
+<p>领导员工缺乏意识<br>缺乏治理<br>缺乏领导力和管理能力<br>难以证明改进的合理性<br>测量价值的工具不合适或不起作用</p>
+</blockquote>
+<p><strong>数据输入过程中的问题</strong></p>
+<blockquote>
+<p>数据输入接口问题<br>列表条目放置<br>字段重载<br>培训问题，人员操作水平不一<br>业务流程变更<br>业务流程执行混乱</p>
+</blockquote>
+<p><strong>数据处理功能的问题</strong></p>
+<blockquote>
+<p>有关数据源的错误假设：问题有多种原因导致：错误或变更、系统文档不完整或过时、知识转移不够充分<br>过时的业务规则<br>变更的数据结构</p>
+</blockquote>
+<p><strong>系统设计的问题</strong></p>
+<blockquote>
+<p>未能执行参照完整性</p>
+<blockquote>
+<p>产生破坏唯一性约束的重复数据<br>既可以包含、又可以排除在某些报表中的孤儿数据，导致同样的计算生成多个值<br>由于参照完整性要求以还原或更改，无法升级<br>由于丢失的数据被分配为默认值二导致数据准确性降低</p>
+</blockquote>
+<p>未执行唯一性约束<br>编码不准确和分歧<br>缺少有效的审核纠错机制<br>数据模型不准确，各系统数据交换标准不一<br>字段重载<br>时间数据不匹配<br>主数据管理薄弱，应用程序缺乏全面校验流程<br>数据复制</p>
+<blockquote>
+<p>单源-多个本地实例<br>多源-单一本地实例</p>
+</blockquote>
+</blockquote>
+<p><strong>解决问题导致的问题</strong></p>
+<h3 id="常见脏数据"><a href="#常见脏数据" class="headerlink" title="常见脏数据"></a>常见脏数据</h3><blockquote>
+<p>缺失值：确定缺失值范围，根据字段的重要性和缺失率指定不同的清洗策略(重要缺多——重新取数，重要缺少——算法填充或业务逻辑填充等，不重要缺多——考虑删除或统一置数，为零、平均数、中位数、众数等，不重要缺少——统一置数)<br>逻辑异常值(离群点)：去重、不合理的值(修正、删除、缺失值处理)、矛盾内容(业务判断、删除、重构)<br>格式内容不一致：统一时间、日期、数值单位、语言、半全角等，数据出现不规范内容，如首尾空格、异常标点等，数据错列等<br>内容未知的值<br>无效值</p>
+</blockquote>
+<h2 id="数据质量管理方法"><a href="#数据质量管理方法" class="headerlink" title="数据质量管理方法"></a>数据质量管理方法</h2><ol>
+<li><strong>数据清理</strong>：通过数据转换使数据符合数据标准和域规则</li>
+</ol>
+<blockquote>
+<p>实施控制以防止数据输入错误<br>纠正源系统中的数据<br>改进数据录入的业务流程</p>
+</blockquote>
+<ol start="2">
+<li><strong>数据增强</strong>：给数据集添加属性以提高其质量和可用性的过程</li>
+</ol>
+<blockquote>
+<p>时间戳<br>审计数据：记录血缘<br>参考词汇表<br>语境信息：添加位置、环境或访问方法等上下文语境信息<br>地理信息<br>人口统计信息<br>心理信息：按特定行为、习惯或偏好对目标人群进行细分的数据<br>评估信息：针对资产评估、库存和销售数据等使用数据增强</p>
+</blockquote>
+<ol start="3">
+<li><strong>数据解析和格式化</strong>：使用预先确定的规则来解释其内容或值的分析过程</li>
+<li><strong>数据转换与标准化</strong>：通过触发数据规则将数据转换为目标体系结构可读取的格式</li>
+<li><strong>关联与统一服务</strong>：结合实际业务规则关联多个业务系统，确定权威数据，形成统一视图</li>
+</ol>
+<h3 id="改进过程"><a href="#改进过程" class="headerlink" title="改进过程"></a>改进过程</h3><p><strong>戴明环</strong>：PDCA （计划-执行-检查-行动）</p>
+<ul>
+<li>计划阶段（Plan）：数据质量团队评估已知问题的范围、影响和优先级，并评估解决这些问题的备选方案</li>
+<li>执行阶段（Do）：数据质量团队解决引起问题的根本原因，并作出对持续监控数据的计划</li>
+<li>检查阶段（Check）：积极监控按要求测量的数据质量</li>
+<li>处理阶段（Act）：处理解决新出现的数据质量问题</li>
+</ul>
+<h2 id="数据质量管理过程"><a href="#数据质量管理过程" class="headerlink" title="数据质量管理过程"></a>数据质量管理过程</h2><h3 id="定义高质量数据"><a href="#定义高质量数据" class="headerlink" title="定义高质量数据"></a>定义高质量数据</h3><blockquote>
+<p>了解业务战略和目标<br>与利益相关方面谈，以识别痛点、风险和业务驱动因素<br>通过资料收集和其他剖析形式直接评估数据<br>记录业务流程中的数据依赖关系<br>记录业务流程中的技术架构和系统支持</p>
+</blockquote>
+<h3 id="定义数据质量战略"><a href="#定义数据质量战略" class="headerlink" title="定义数据质量战略"></a>定义数据质量战略</h3><blockquote>
+<p>了解并优先考虑业务需求<br>确定满足业务需求的关键数据<br>根据业务需求定义业务规则和数据质量标准<br>根据预期评估数据<br>分享调查结果，并从利益相关方获得反馈<br>优先处理和管理问题<br>确定并优先考虑改进机会<br>测量、监控和报告数据质量<br>管理通过数据质量流程生成的元数据<br>将数据质量控制集成到业务和技术流程中</p>
+</blockquote>
+<h3 id="识别关键数据和业务规则"><a href="#识别关键数据和业务规则" class="headerlink" title="识别关键数据和业务规则"></a>识别关键数据和业务规则</h3><ul>
+<li><strong>关键数据</strong></li>
+</ul>
+<blockquote>
+<p>监管报告<br>财务报告<br>商业政策<br>持续经营<br>商业战略，尤其是差异化竞争战略</p>
+</blockquote>
+<ul>
+<li><strong>业务规则类型</strong></li>
+</ul>
+<blockquote>
+<p>定义一致性：确认对数据定义的理解相同，并在整个组织过程中得到实现和正确的使用<br>记录完整性：定义数值缺失的情况是否可接受的规则<br>格式符合性：按指定模式分配给数据元素的值，如设置电话号码格式的标准<br>值域匹配性：指定数据元素的赋值需包含在某数据值域的枚举值中<br>范围一致性：数据元素赋值必须在定义的数字、词典或时间范围内<br>映射一致性：表示分配给数据元素的值，必须映射到其他等效对应值域中选择的值<br>一致性规则：指根据某些属性的实际值，在两个或多个属性之间关系的条件判定<br>准确性验证：将数据值与记录系统或其他来源中的对应值进行比较，以验证是否匹配<br>及时性验证：表明与数据可访问性和可用性预期相关特征的规则</p>
+</blockquote>
+<h3 id="执行初始数据质量评估"><a href="#执行初始数据质量评估" class="headerlink" title="执行初始数据质量评估"></a>执行初始数据质量评估</h3><ol>
+<li>定义评估目标，推动工作进展</li>
+<li>确定需要评估的数据，重点放在某个特定的数据集或特定数据质量问题上</li>
+<li>识别数据的用途和使用者</li>
+<li>利用评估的数据识别已知风险，包括数据问题对组织过程的潜在影响</li>
+<li>根据已知和建议的规则检查数据</li>
+<li>记录不一致的级别和问题类型</li>
+<li>根据初步发现进行深入分析，以便</li>
+</ol>
+<blockquote>
+<p>量化结果<br>根据业务影响优化问题<br>提出关于数据问题根本原因假设</p>
+</blockquote>
+<ol start="8">
+<li>与数据管理专员、领域专家和数据消费者会面，确认问题优先级</li>
+<li>实用调查结果作为规划的基础</li>
+</ol>
+<blockquote>
+<p>找到问题的根本原因解决问题<br>控制改进处理流程，防止问题重复发生<br>持续控制和汇报</p>
+</blockquote>
+<h3 id="识别改进方向并确认优先排序"><a href="#识别改进方向并确认优先排序" class="headerlink" title="识别改进方向并确认优先排序"></a>识别改进方向并确认优先排序</h3><blockquote>
+<p>通过对交大数据及进行全面的数据分析，了解现有问题<br>与利益相关方沟通数据影响问题，并跟踪分析其业务影响<br>结合数据分析人员和利益相关方的讨论排定最终优先顺序</p>
+</blockquote>
+<h3 id="定义数据质量改进目标"><a href="#定义数据质量改进目标" class="headerlink" title="定义数据质量改进目标"></a>定义数据质量改进目标</h3><blockquote>
+<p>受影响数据的关键性（重要性排序）<br>受影响的数据量<br>数据的龄期<br>受问题影响的业务流程数量和类型<br>受问题影响的消费者、客户、供应商或员工数量<br>与问题相关的风险<br>纠正根本原因的成本<br>潜在的工作成本</p>
+</blockquote>
+<h3 id="开发和部署数据质量操作"><a href="#开发和部署数据质量操作" class="headerlink" title="开发和部署数据质量操作"></a>开发和部署数据质量操作</h3><ol>
+<li><strong>管理数据质量规则</strong></li>
+</ol>
+<blockquote>
+<p>记录一致性：建立记录规则的标准和模板<br>根据数据质量维度定义：质量维度有助于了解正在测算的内容<br>与业务影响挂钩：数据质量标准和规则应该与组织业务成功直接关联，不应采取与业务流程无关的度量<br>数据分析支持：数据质量分析人员应该根据数据测试规则，而不应猜测规则，规则显示数据存在的问题<br>由领域专家确认：规则的目的是描述数据形态，由主题专家确认或解释数据分析结果，产生知识<br>所有数据消费者都可以访问：所有数据消费者都应该能够访问记录的规则，以方便更好地了解数据</p>
+</blockquote>
+<ol start="2">
+<li><strong>测量和监控数据质量</strong></li>
+</ol>
+<blockquote>
+<p>向数据消费者通报质量水平<br>管理业务或技术流程，改变引入的变更风险</p>
+</blockquote>
+<ol start="3">
+<li><strong>制定管理数据问题的操作过程</strong></li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>诊断问题</strong>：身缠数据质量事件的症状，跟踪相关数据的血缘，确定问题及其来源，并查明问题根本原因</li>
+</ul>
+<blockquote>
+<p>在适当的信息处理流程下查看数据问题，并隔离出现缺陷过程的位置<br>评估环境变化导致错误的可能性<br>评估其他过程导致数据质量问题的可能性<br>评估外部数据影像数据质量问题的可能性</p>
+</blockquote>
+<ul>
+<li><strong>制定补救方案</strong></li>
+</ul>
+<blockquote>
+<p>纠正非技术性根本原因，如缺乏培训、缺乏领导支持、责任所有权不明等<br>修改系统以消除技术类根本原因<br>制定控制措施以防止问题发生<br>引入额外的检查和检测<br>直接修正有缺陷的数据<br>基于变更的成本和影响对比更正后的数据价值分析，不采取任何操作</p>
+</blockquote>
+<ul>
+<li><strong>解决问题</strong></li>
+</ul>
+<blockquote>
+<p>评估替代方案的相对成本和优点<br>推荐计划中的一个备选方案<br>提供开发和实施该解决方案的计划<br>实施该解决方案</p>
+</blockquote>
+<ul>
+<li><strong>跟踪解决方案</strong></li>
+</ul>
+<blockquote>
+<p>标准化数据质量问题和活动：定义相关概念的标准词汇表，用于简化分类和报告，简化衡量问题和活动的数量、确定系统和参与者之间的模式和相互依赖关系以及报告数据质量活动的总体影响<br>提供数据问题的分配过程：操作过程指导分析人员将数据质量事件分配给个人进行诊断，并提供解决方案<br>管理问题升级过程：根据问题的影响、持续时间或紧急程度制定明确的升级机制，明确规定数据质量服务级别协议中的升级顺序<br>管理数据质量解决方案工作流：数据质量服务水平协议规定了监控、控制和解决的目标，定义了操作工作流的集合</p>
+</blockquote>
+</blockquote>
+<ol start="4">
+<li>**制定数据质量服务水平协议(SLA)**：规定了组织对每个系统中数据质量问题进行响应和补救的期望</li>
+</ol>
+<blockquote>
+<p>协议涵盖的数据元素<br>与数据缺陷相关的业务影响<br>与每个数据元素相关的数据质量指标<br>从每个已确定指标的数据元素出发，识别数据价值链上每个应用程序系统中的质量期望<br>测量这些期望的方法<br>每次测量的可接受性阈值，如超出阈值，应及时通知数据管理专员<br>预期解决或补救问题的时间和截止日期<br>升级策略，以及可能的奖励和惩罚</p>
+</blockquote>
+<ol start="5">
+<li><strong>编写数据质量报告</strong></li>
+</ol>
+<blockquote>
+<p>数据质量评分卡<br>数据质量趋势<br>服务水平协议指标<br>数据质量问题管理<br>数据质量团队与治理政策的一致性<br>IT 和业务团队对数据质量政策的一致性<br>改善项目带来的积极影响</p>
+</blockquote>
+<h3 id="数据治理下的数据质量工作"><a href="#数据治理下的数据质量工作" class="headerlink" title="数据治理下的数据质量工作"></a>数据治理下的数据质量工作</h3><blockquote>
+<p>设定优先级<br>确定和协调有权参加各种数据质量相关决定和相关活动的人<br>制定和维护数据质量标准<br>报告企业范围内数据质量的相关测量<br>提供有助于员工参与的指导<br>建立知识共享的沟通机制<br>制定和应用数据质量和合规政策<br>监控和报告绩效<br>共享数据质量报告检查结果，以提高认识、确定改进机会，并就改进达成共识<br>解决变化和冲突，提供方向性指导</p>
+</blockquote>
+<h2 id="数据质量问题预防"><a href="#数据质量问题预防" class="headerlink" title="数据质量问题预防"></a>数据质量问题预防</h2><ol>
+<li>建立数据输入控制</li>
+<li>培训数据生产者</li>
+</ol>
+<blockquote>
+<p>导致数据问题的常见原因<br>组织数据生态系统中的关系<br>糟糕数据造成的后果<br>持续改进的必要性<br>要推动数据语言化，阐述数据对组织战略与成功、监管报告和客户满意度的影响</p>
+</blockquote>
+<ol start="3">
+<li>定义和执行规则</li>
+<li>要求数据供应商提供高质量数据</li>
+<li>实施数据治理和管理制度</li>
+<li>指定正式的变更控制</li>
+</ol>
+<h2 id="数据质量问题纠正"><a href="#数据质量问题纠正" class="headerlink" title="数据质量问题纠正"></a>数据质量问题纠正</h2><ul>
+<li><strong>自动纠正</strong>：基于规则的标准化、规范化和更正，修改后的值在没有人工干预的情况下自动获取、生成和提交，需要具有定义良好的标准、普遍接受的规则和已知的错误模式等</li>
+<li><strong>人工检查纠正</strong>：使用自动工具矫正和纠正数据，人工检查后将纠正持久化存储</li>
+<li><strong>人工修正</strong>：通过人工按照数据质量规则处理变更</li>
+</ul>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><ul>
+<li>投资回报：关于改进工作的成本和改进数据质量好处的声明</li>
+<li>质量水平：一个数据集内或多个数据集间的错误或不满足甚至违反需求情况的数量和比率</li>
+<li>数据质量趋势：随时间推移，针对阈值和目标的质量改进，或个阶段的质量事件</li>
+<li>数据问题管理指标</li>
+</ul>
+<blockquote>
+<p>按数据质量指标对问题分类与计数<br>各业务职能部门及其问题状态<br>按优先级和严重程度对问题排序<br>解决问题的时间</p>
+</blockquote>
+<ul>
+<li>服务水平一致性：包括负责人员在内的组织单位对数据质量评估项目干预过程的一致性</li>
+<li>数据质量计划示意图：现状和扩展路线图</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag"># 数据治理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag"># 数据质量</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210827/19375.html" rel="prev" title="元数据管理-基础">
+      <i class="fa fa-chevron-left"></i> 元数据管理-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210829/39064.html" rel="next" title="数据管控战略-基础">
+      数据管控战略-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据质量管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">原则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">数据质量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="nav-number">2.1.</span> <span class="nav-text">数据质量维度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.1.</span> <span class="nav-text">管理内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">常用评估内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.2.</span> <span class="nav-text">数据质量低下的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">常见脏数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">数据质量管理方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">改进过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">数据质量管理过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.1.</span> <span class="nav-text">定义高质量数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="nav-number">2.4.2.</span> <span class="nav-text">定义数据质量战略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="nav-number">2.4.3.</span> <span class="nav-text">识别关键数据和业务规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="nav-number">2.4.4.</span> <span class="nav-text">执行初始数据质量评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="nav-number">2.4.5.</span> <span class="nav-text">识别改进方向并确认优先排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="nav-number">2.4.6.</span> <span class="nav-text">定义数据质量改进目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">2.4.7.</span> <span class="nav-text">开发和部署数据质量操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.4.8.</span> <span class="nav-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="nav-number">2.5.</span> <span class="nav-text">数据质量问题预防</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="nav-number">2.6.</span> <span class="nav-text">数据质量问题纠正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">2.7.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

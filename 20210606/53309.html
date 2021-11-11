@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要记录Java基础语法的相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210606/53309.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要记录Java基础语法的相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Arithmetic_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Relation_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Logic_Operator.png">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Java/Operator_Precedence.png">
+<meta property="article:published_time" content="2021-06-06T00:08:29.000Z">
+<meta property="article:modified_time" content="2021-11-04T09:23:40.780Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210606/53309.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210606/53309.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-06 08:08:29" itemprop="dateCreated datePublished" datetime="2021-06-06T08:08:29+08:00">2021-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-04 17:23:40" itemprop="dateModified" datetime="2021-11-04T17:23:40+08:00">2021-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210606/53309.html" class="post-meta-item leancloud_visitors" data-flag-title="Java-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210606/53309.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210606/53309.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要记录Java基础语法的相关知识</p>
+<span id="more"></span>
+
+<h1 id="保留关键字"><a href="#保留关键字" class="headerlink" title="保留关键字"></a>保留关键字</h1><p>被Java语言赋予了特殊含义，用作专门用途的字符串(单词)，所有字母都小写</p>
+<ul>
+<li><p><strong>访问控制/权限控制</strong>：</p>
+<ul>
+<li>private：私有</li>
+<li>protected：受保护的</li>
+<li>public：公开</li>
+</ul>
+</li>
+<li><p><strong>类、方法和变量修饰符</strong>：</p>
+<ul>
+<li>abstract</li>
+<li>class</li>
+<li>extends</li>
+<li>final</li>
+<li>implements</li>
+<li>interface</li>
+<li>native</li>
+<li>new</li>
+<li>static</li>
+<li>strictfp</li>
+<li>synchronized</li>
+<li>transient</li>
+<li>volatile</li>
+</ul>
+</li>
+<li><p><strong>程序控制</strong>：</p>
+<ul>
+<li>if</li>
+<li>else</li>
+<li>do</li>
+<li>while</li>
+<li>for</li>
+<li>switch</li>
+<li>case</li>
+<li>default</li>
+<li>break：主要用在循环语句或者 switch 语句中，用来 跳出最里层的循环，并且继续执行该循环下面的语句</li>
+<li>continue：用于任何循环控制结构中，用于让程序立刻跳转到下一次循环的迭代：在 for 循环中，continue 语句使程序立即跳转到更新语句；在 while 或者 do…while 循环中，程序立即跳转到布尔表达式的判断语句</li>
+<li>return</li>
+<li>instanceof：判断其左边对象是否为其右边类的实例，返回boolean类型的数据</li>
+</ul>
+</li>
+<li><p><strong>错误处理</strong>：</p>
+<ul>
+<li>try</li>
+<li>catch</li>
+<li>throw</li>
+<li>throws</li>
+<li>finally</li>
+</ul>
+</li>
+<li><p><strong>包相关</strong>：</p>
+<ul>
+<li>import：导入相关包（包括Java预定义的包和用户自定义的包）</li>
+<li>package</li>
+</ul>
+</li>
+<li><p><strong>基本类型/原始类型</strong>：</p>
+<ul>
+<li>boolean</li>
+<li>byte</li>
+<li>char</li>
+<li>double</li>
+<li>float</li>
+<li>int</li>
+<li>long</li>
+<li>short</li>
+<li>null</li>
+<li>true</li>
+<li>false</li>
+</ul>
+</li>
+<li><p><strong>变量引用</strong>：</p>
+<ul>
+<li>super</li>
+<li>this</li>
+<li>void</li>
+</ul>
+</li>
+<li><p><strong>保留字</strong>：现在未使用，以后的版本可能会作为关键字使用，命名时应尽量避免</p>
+<ul>
+<li>goto</li>
+<li>const</li>
+<li>byValue</li>
+<li>cast</li>
+<li>future</li>
+<li>generic</li>
+<li>inner</li>
+<li>operator</li>
+<li>outer</li>
+<li>rest</li>
+<li>var</li>
+</ul>
+</li>
+</ul>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
+<li><p><strong>数值型</strong></p>
+<ul>
+<li><strong>整数</strong>：存放整数<ul>
+<li>byte[1]：字节</li>
+<li>short[2]：短整型</li>
+<li>int[4]：整数型(默认)</li>
+<li>long[8]：长整型，申明时需要加上“i”或者“L”</li>
+</ul>
+</li>
+<li><strong>浮点数</strong>：存放小数，由符号位、指数位和尾数位构成，尾数位可能丢失，存在精度问题，有十进制计数法和科学计数法两种表现形式<ul>
+<li>float[4]：单精度浮点数，申明时需要加上“f”或“F”</li>
+<li>double[8]：双精度浮点数(默认)<br>不要使用运算结果为小数进行相等判断，通常采用两数之差的绝对值小于某个精度范围就认为相等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>字符串类型</strong>：char[2]，存放单个字符，可用ASCLL码/Unicode码输出字符，输出的字符用单引号包裹，双引号包裹的是字符串，char字符都有Unicode码对应的整数，可以参与运算</p>
+</li>
+<li><p><strong>布尔类型</strong> ：boolean[1]，存放ture，false，常用于逻辑运算，进行流程控制，<strong>不能用0或非0的整数代替true或false</strong></p>
+</li>
+<li><p><strong>数据类型转换</strong>：小容量数据类型可以自动转换为大容量类型<br><img src="https://alexedwardz.gitee.io/images/Java/Java_Type_Change.png" alt="Java_Type_Change"></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>自动类型转换</strong>：存在多种类型的数据混合运算时，先自动转换为容量最大的数据类型</p>
+<blockquote>
+<p>byte、short和char不能自动进行类型转换，byte、short和char进行运算(包括单类型运算和多类型运算)时先自动转换为int进行计算<br>boolean不参与数据类型转换<br>当把整数赋值给byte时，先判断整数是否在byte范围内，在进行类型判断进行赋值，如果是变量进行赋值，则先进行类型判断</p>
+</blockquote>
+<p><strong>强制类型转换</strong>：用强制类型转换符()包裹要转换成的数据类型，后面接上要转换的数据，可能引起数据精度丢失和数据溢出的问题</p>
+<blockquote>
+<p>强制类型转换符只针对最近的操作数有效，可以使用()提高运算优先级<br>char可以保存int值，不能保存int的变量，需要进行强制类型转换符</p>
+</blockquote>
+<p><strong>String类型转换</strong>：仅能转换整数字符串为基本数据，不能转换字符字符串为基本数据</p>
+<blockquote>
+<p>基本类型转换为String数据类型：只需要在基本数据类型后面加上’ + “” ‘即可<br>String类型转换为基本数据类型：需要用到基本数据类型包装类的parseXxx方法，String转换为char类型是使用charAt()方法取字符串的第一个字符给char</p>
+</blockquote>
+</blockquote>
+<h2 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h2><ul>
+<li><strong>类</strong>class</li>
+<li><strong>接口</strong>interface</li>
+<li><strong>数组</strong></li>
+</ul>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>对数值数据的变量进行运算<br><img src="https://alexedwardz.gitee.io/images/Java/Arithmetic_Operator.png" alt="Arithmetic_Operator"><br>**+**：拼接，当左右两边数据类型均为数值型时，进行加法运算；若一边为字符串类型，进行拼接运算，运算顺序为从左到右<br>**/**：除，当除号两边均为int时，结果会舍弃小数部分，仅保留整数部分<br>**%**：取模，本质是：a % b = a - a / b * b<br>**++**：独立使用时，前++与后++完全一致，作为表达式使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int i &#x3D; 1;</span><br><span class="line">i++;            &#x2F;&#x2F; 等价于：i &#x3D; i + 1;</span><br><span class="line">++i;            &#x2F;&#x2F; 等价于：i &#x3D; i + 1;</span><br><span class="line"></span><br><span class="line">int j &#x3D; ++i;    &#x2F;&#x2F; 等价于：i &#x3D; i + 1; j &#x3D; i;</span><br><span class="line">int j &#x3D; i++;    &#x2F;&#x2F; 等价于：j &#x3D; i; i &#x3D; i + 1;</span><br><span class="line">i &#x3D; i++;        &#x2F;&#x2F; 得i &#x3D; 1 ：(1)temp &#x3D; i; (2)i &#x3D; i + 1; (3)i &#x3D; temp</span><br><span class="line">i &#x3D; ++i;        &#x2F;&#x2F; 得i &#x3D; 2 ：(1)i &#x3D; i + 1; (2)temp &#x3D; i; (3)i &#x3D; temp</span><br><span class="line">注：--同理</span><br></pre></td></tr></table></figure>
+
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符的结果都是boolean类型，常用在 if 分支结构或 for / while 循环结构中，有关系运算符组成的表达式成为关系表达式<br><img src="https://alexedwardz.gitee.io/images/Java/Relation_Operator.png" alt="Relation_Operator"></p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>用于连接多个条件(关系表达式)，最终结果也是一个boolean值<br><img src="https://alexedwardz.gitee.io/images/Java/Logic_Operator.png" alt="Logic_Operator"></p>
+<ul>
+<li>**逻辑与 &amp;**（and）：当运算符两边的表达式的结果都为true时，整个运算结果才为true，只要有一边为false，则结果为false<ul>
+<li>&amp;：无论第一个判断条件是否成立，逻辑运算符前后两个条件都会进行判断</li>
+</ul>
+</li>
+<li>**短路与 &amp;&amp;**（and）：当运算符两边的表达式的结果都为true时，整个运算结果才为true，只要有一方为false，则结果为false<ul>
+<li>&amp;&amp;：第一个条件不成立，后面的条件均不进行判断，返回false，推荐使用，效率更高</li>
+</ul>
+</li>
+<li>**逻辑或 |**（or）：当运算符有一边为true时，整个运算结果为true<ul>
+<li>|：无论第一个判断条件是否成立，逻辑运算符前后两个条件都会进行判断</li>
+</ul>
+</li>
+<li>**短路或 ||**（or）：当运算符有一边为true时，整个运算结果为true<ul>
+<li>||：第一个条件成立，后面的条件均不进行判断，返回true，推荐使用，效率更高</li>
+</ul>
+</li>
+<li>**逻辑非 !**（not）：取本来值的相反值</li>
+<li><strong>逻辑异或 ^</strong>：符号两边不同时结果为true，否则为false</li>
+</ul>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p>将数据赋值给变量，左边只能是变量，右边可以是常量、变量、表达式，进行复核赋值运算时会进行类型转换<br><strong>基本赋值运算符</strong>：=，例：int a = 10;<br><strong>复合赋值运算符</strong>：+=、-=、*=、/=、%=，例：a += b; 等价于 a = a + b;其他同理</p>
+<h2 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h2><p>条件表达式 ？ 表达式1 : 表达式2；若条件表达式为true，则运行表达式1；若条件表达式为false，则运行表达式2。通常可以转换为if ··· else ··· 语句<br>当条件表达式为true时，不会执行表达式2；当条件表达式为false时，不会执行表达式1</p>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p><img src="https://alexedwardz.gitee.io/images/Java/Operator_Precedence.png" alt="Operator_Precedence"></p>
+<ol>
+<li>(), {}等</li>
+<li>单目运算符</li>
+<li>算术运算符</li>
+<li>位移运算符</li>
+<li>比较运算符</li>
+<li>逻辑运算符</li>
+<li>三元运算符</li>
+<li>赋值运算符</li>
+</ol>
+<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><ul>
+<li><strong>for</strong>(初始化循环变量;  判断条件;  循环变量增幅){循环体}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>增强for循环：for(声明循环变量; 数组名称){语句}，主要用于数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] str&#x3D;&#123;&#39;xx&#39;,&#39;xxx&#39;&#125;</span><br><span class="line">for(String s:str)&#123;</span><br><span class="line">	System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：增强for的目标不能是null（使用前先做非空判断），声明局部变量的类型必须和数组元素的类型匹配</p>
+</blockquote>
+<ul>
+<li><strong>while</strong>(条件){语句}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while(条件)&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>do</strong> {语句}while(条件);</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">do&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;while(条件)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>比较：与while相比，do…while 循环至少会执行一次；for的循环次数提前已知</p>
+</blockquote>
+<h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><ul>
+<li><strong>if</strong>(条件){语句}[else if(条件){语句}else{语句}]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if()&#123;</span><br><span class="line">	System.out.print(&quot;i&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else if(条件)&#123;</span><br><span class="line">	System.out.print(&quot;j&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">	System.out.print(&quot;k&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>switch</strong>(变量) {case value:{语句;break;}[default:{语句}]}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">switch(变量)&#123;</span><br><span class="line">	case value1:&#123;</span><br><span class="line">		System.out.print(&quot;i&quot;);</span><br><span class="line">		continue;</span><br><span class="line">	&#125;</span><br><span class="line">	case value2:&#123;</span><br><span class="line">		System.out.print(&quot;j&quot;);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">	default:&#123;</span><br><span class="line">		System.out.print(&quot;k&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>switch的类型可以是int，short，byte和char，不能处理long，String类型；匹配之前不会执行，若匹配无break，则后续会继续执行</p>
+</blockquote>
+<p>比较：switch使用了Binary Tree算法，运行效率优于if（除非是if-else的第一个条件就为true），if的使用更加灵活，条件更为多样；编译器编译switch时，不管有多少case，都直接跳转，不需逐个比较查询，与if不同；分支较多时，优先考虑switch</p>
+<h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><h2 id="Input-输入-："><a href="#Input-输入-：" class="headerlink" title="Input(输入)："></a>Input(输入)：</h2><blockquote>
+<p>Scanner</p>
+<blockquote>
+<ul>
+<li>导包：import java.util.Scanner</li>
+<li>输入：Scanner sc = new Scanner(System.in);</li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="Output-输出-："><a href="#Output-输出-：" class="headerlink" title="Output(输出)："></a>Output(输出)：</h2><p>Java的输出方法是在java.long包里的System类中的方法，有print、println、printf三种</p>
+<blockquote>
+<ul>
+<li>System.out.print()；是一般的标准输出，输出的信息不会换行</li>
+<li>System.out.println()；与print功能相似，输出的信息后会换行</li>
+<li>System.out.printf()；继承了C语言的printf的一些特性，可以进行格式化输出</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th>说明</th>
+<th align="left">适用范围</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%d</td>
+<td>以十进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%f</td>
+<td>以十进制浮点数格式输出</td>
+<td align="left">float、double、Float、Double、BigDecimal</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%e或%E</td>
+<td>以科学记号浮点数格式输出</td>
+<td align="left">float、double、Float、Double、BigDecimal</td>
+<td align="left">%e表示以小写字母e表示，%E表示以大写字母E表示</td>
+</tr>
+<tr>
+<td align="center">%o</td>
+<td>以八进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">%x或%X</td>
+<td>以十六进制整数格式输出</td>
+<td align="left">byte、short、int、long、Byte、Short、Integer、Long、BigInteger</td>
+<td align="left">%x表示以小写字母x表示，%X表示以大写字母X表示</td>
+</tr>
+<tr>
+<td align="center">%c或%C</td>
+<td>以字符符号输出</td>
+<td align="left">byte、short、char、Byte、Short、Integer、Charcater</td>
+<td align="left">%c表示以小写字母表示，%X表示以大写字母表示</td>
+</tr>
+<tr>
+<td align="center">%b或%B</td>
+<td>输出boolean值</td>
+<td align="left">boolean、非null值为true、null值为false</td>
+<td align="left">%b表示输出结果会是true或false，%B表示输出结果会是TRUE或FALSE</td>
+</tr>
+<tr>
+<td align="center">%h或%H</td>
+<td>用Integer.toHexString (arg.hashCode())来得到输出结果</td>
+<td align="left">-</td>
+<td align="left">如果arg是null，则输出null，也常用于想得到十六进制格式输出</td>
+</tr>
+<tr>
+<td align="center">%n</td>
+<td>输出平台特定的换行符号</td>
+<td align="left">-</td>
+<td align="left">Windows下会置换为”\r\n”；Linux下会置换为’\n’；Mac OS下回置换为’\r’</td>
+</tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<h1 id="简单函数"><a href="#简单函数" class="headerlink" title="简单函数"></a>简单函数</h1><ul>
+<li><strong>进制转换函数</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>10进制的x转2进制: Integer.toBinaryString(x);  返回一个二进制int型数据</li>
+<li>10进制的x转8进制: Integer.toOctalString(x);    返回一个八进制int型数据</li>
+<li>10进制的x转16进制:Integer.toHexString(x);     返回一个16进制int型数据</li>
+<li>10进制的x转n进制: Integer.toString(x,n);          返回一个n进制int型数据</li>
+<li>n进制的x转10进制: Integer.valueOf(x,n);          返回一个十进制int型数据<br>valueOf()：用于返回给定参数的原生Number对象值的静态方法，参数可以是原生数据类型, String等。该方法接收两个参数一个是需要转换字符串[，一个是转换基数(可选)]<br>Number.valueOf(“444”/444[,16]);     // 返回字符”444”/数值444对应的十六进制Number(Integer/Float/Double/String)型数据</li>
+</ul>
+<blockquote>
+<p>n进制的x转m进制</p>
+<blockquote>
+<p>n进制的x转m进制(n-&gt;10-&gt;m):</p>
+<blockquote>
+<p>2进制的10001110转8进制:Integer.toOctalString(Integer.valueOf(10001110, 2));</p>
+</blockquote>
+<p>BigInteger：change(String number/“x”, int from/n, int to/m);</p>
+<blockquote>
+<p>2进制的10001110转8进制:change(“10001110”, 2, 8);</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>字符串相关函数</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>字符串截取：substring(start, stop); (包头不包尾)</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>方法重载</strong></li>
+</ul>
+<blockquote>
+<p>方法名相同，可以改变参数类型、参数个数、参数顺序，仅改变参数名不构成方法重载，方法重载使用同一个方法名实现功能相同、主体不同的方法</p>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><ul>
+<li>\t：制表位</li>
+<li>\n：换行</li>
+<li>\：输出\</li>
+<li>&quot;：输出”，常用在在字符串里面输出“</li>
+<li>\r：回车，光标会移动到最前面，重新开始输出</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210605/30938.html" rel="prev" title="Java-安装使用">
+      <i class="fa fa-chevron-left"></i> Java-安装使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210607/51874.html" rel="next" title="JVM-基础">
+      JVM-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.</span> <span class="nav-text">保留关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">引用数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.5.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">3.6.</span> <span class="nav-text">运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.1.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.2.</span> <span class="nav-text">分支语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O"><span class="nav-number">5.</span> <span class="nav-text">I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Input-%E8%BE%93%E5%85%A5-%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">Input(输入)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output-%E8%BE%93%E5%87%BA-%EF%BC%9A"><span class="nav-number">5.2.</span> <span class="nav-text">Output(输出)：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">简单函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">7.1.</span> <span class="nav-text">转义字符</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

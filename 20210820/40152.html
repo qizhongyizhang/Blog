@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍数据建模与设计相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据建模与设计-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210820/40152.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍数据建模与设计相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-20T05:50:31.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.345Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta property="article:tag" content="数据治理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210820/40152.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据建模与设计-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210820/40152.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据建模与设计-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-20 13:50:31" itemprop="dateCreated datePublished" datetime="2021-08-20T13:50:31+08:00">2021-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210820/40152.html" class="post-meta-item leancloud_visitors" data-flag-title="数据建模与设计-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210820/40152.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210820/40152.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍数据建模与设计相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="数据建模和设计"><a href="#数据建模和设计" class="headerlink" title="数据建模和设计"></a>数据建模和设计</h1><p><strong>数据建模</strong>：是发现、分析和确定数据需求的过程，通过数据模型精确地表示和传递数据需求<br><strong>模型分层</strong>：概念模型 —&gt; 逻辑模型(E-R图) —&gt; 物理模型(类图)，模型包括数据结构、数据操作和数据约束三部分</p>
+<blockquote>
+<p>概念模型：面向用户、面向客观世界的模型，用来描述现实世界的概念化结构，与具体的数据库管理系统无关<br>逻辑模型：以概念模型为基础，根据业务线、业务事项、业务流程、业务场景的需要，设计面向业务实现的数据模型，指导在不同数据库管理系统中的实现，包括网状数据模型和层析数据模型<br>物理模型：面向计算机物理表示的模型，描述数据在存储介质上的组织结构，基于逻辑模型成果，保证业务需求实现</p>
+</blockquote>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
+<p>提供有关数据的通用词汇表<br>获取、记录组织内数据和系统的详细信息<br>在项目中作为主要的交流沟通工具<br>提供应用定制、整合、替换的起点</p>
+</blockquote>
+<h2 id="模型管理内容"><a href="#模型管理内容" class="headerlink" title="模型管理内容"></a>模型管理内容</h2><blockquote>
+<p>数据架构管控：基于业务模型，使用标准化用语等数据要素设计企业数据模型，实现数据模型的标准化审核和统一管理，便于数据整合、提高数据质量<br>标准管控：建立数据标准体系和管理标准代码，如业务用语、域、编码等<br>模型管理：基于企业级逻辑模型和数据标准形成系统级逻辑模型，包括应用系统开发模型和数据仓库模型<br>元数据管控：基于应用系统开发模型提取数据库结构模型、参考数据标准进行完善</p>
+</blockquote>
+<h2 id="建模数据"><a href="#建模数据" class="headerlink" title="建模数据"></a>建模数据</h2><blockquote>
+<p>类别信息：对事物进行分类和分配事务类型的数据，如按市场类别分类的客户、按颜色分类的产品等<br>资源信息：实时操作流程所需的基本数据，如产品、客户等<br>业务事件信息：在操作过程中创建的数据，如客户订单<br>详细交易信息：通过销售系统产生的详细交易信息</p>
+</blockquote>
+<h2 id="建模方法"><a href="#建模方法" class="headerlink" title="建模方法"></a>建模方法</h2><p><strong>基于关系建模</strong>（关系模式，Relational）：采用信息工程法的三叉线表示基数（与其他实体参与建立关系的数量），连线表示业务规则<br><strong>基于维度建模</strong>（多维模式，Dimensional）：专注于特定业务流程的业务问题，连线表示导航路径</p>
+<ul>
+<li>事实表：行对应特定的数值型度量值，占据近90%的存储空间</li>
+<li>维度表：表示业务的重要对象，主要包含文字描述，是事实表的入口点或链接，违反高范式，维表中最主要的两种标识键是代理键和自然键，ORC变化（覆盖，新行，新列）</li>
+<li>雪花模型：将星型模型中的平面、单表、维度结构规范为组件层次结构和网络结构</li>
+<li>粒度：是指事实表中单行数据的含义或描述，是每行都有的最详细信息</li>
+<li>一致性维度：在不同维度模型可以共享，具有一致的属于和值的维度</li>
+<li>一致性事实：跨多个数据集市的标准化术语</li>
+</ul>
+<p><strong>面向对象建模</strong>（面向对象模式，Object-Oriented）：规定类和类之间的关系模型<br><strong>基于事实建模</strong>（事实模式，Fact-Based）</p>
+<ul>
+<li>对象角色建模</li>
+<li>完全面向通讯建模</li>
+</ul>
+<p><strong>基于时间建模</strong>（时间序列模式，Time-Based）<br><strong>非关系型建模</strong>（NoSQL模式，NoSQL）</p>
+<ul>
+<li>文档数据库</li>
+<li>键值数据库</li>
+<li>列数据库</li>
+<li>图数据库</li>
+</ul>
+<h1 id="数据建模实践"><a href="#数据建模实践" class="headerlink" title="数据建模实践"></a>数据建模实践</h1><h2 id="数据模型管理工具"><a href="#数据模型管理工具" class="headerlink" title="数据模型管理工具"></a>数据模型管理工具</h2><p><strong>数据模型管理工具</strong>：负责企业数据模型的管理、对比、分析、展示提供技术支撑，解决数据模型管理分散、无统一的数据模型视图，数据模型无有效管控过程，数据模型标准设计无法有效落地</p>
+<ul>
+<li><strong>基础功能</strong></li>
+</ul>
+<blockquote>
+<p>数据模型设计：支持正向建模和逆向建模，对数据模型进行标准化设计，保证数据模型和企业架构保持一致<br>模型差异稽核：解决数据模型设计和数据库表实现不一致问题，针对数据库包结构、关系等差别形成差异报告，辅助数据模型管理人员监控数据模型质量问题，提升数据模型设计和实施的质量<br>数据模型变更管理：支持数据模型从设计、提交、评审、发布、实施到消亡的的在线、全过程、流程化管理，实现对各系统数据模型的版本化管理，自动生成版本号、版本变更信息，辅助管理不同版本的数据模型</p>
+</blockquote>
+<ul>
+<li><strong>业务功能</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li>模型抽取和版本管理：收集主流数据库业务系统数据结构，实现数据标准的统计分析，快速分析信息系统数据标准落地情况</li>
+<li>模型差异报告：自动检测基线模型和业务系统的不一致并预警</li>
+<li>模型质量报告：在测试阶段进行模型评审</li>
+</ol>
+<blockquote>
+<p>标准的落标引用：自动检查标准的引用和落地，并生成报告<br>自定义数据标准：支持自定义数据标准和词典，完善标准库<br>元数据充足率：自动生成不满足元模型内容的报告</p>
+</blockquote>
+<ol start="4">
+<li>模型上线流程：模型上线需要提供设计文档、测试报告、使用手册等</li>
+</ol>
+<blockquote>
+<p>模型生产库基线与封板：根据评审时建立的模型分支，建立模型的生产库基线，进行封板操作<br>模型基线报告：提供模型标准数据字典、标准落标报告、模型质量报告等</p>
+</blockquote>
+<ol start="5">
+<li>新增变更流程：根据变更流程进行标准的修改</li>
+</ol>
+</blockquote>
+<h2 id="建立数据模型"><a href="#建立数据模型" class="headerlink" title="建立数据模型"></a>建立数据模型</h2><p><strong>正向工程</strong></p>
+<blockquote>
+<ul>
+<li>概念数据模型建模</li>
+</ul>
+<blockquote>
+<p>选择模型类型：关系模式、多维模式面向对象模式、面向对象模式、事实模式、时间序列模式、NoSQL模式<br>选择表示方法：基于模型类型和组织标准和人员习惯确定<br>完成初始概念模型：获取用户观点<br>收集组织最高级概念：包括时间、客户、产品和交易等<br>收集概念的相关活动：包括活动和关系，关系可以是双向的<br>合并专业术语：建立统一的术语标准<br>获取签署</p>
+</blockquote>
+<ul>
+<li>逻辑数据模型家建模</li>
+</ul>
+<blockquote>
+<p>分析信息需求<br>分析现有文档<br>添加关联实体：该实体仅用于描述多对多关系<br>添加属性：添加属性到概念实体<br>指定域：保证模型属性中的格式与数值集一致<br>指定键</p>
+</blockquote>
+<ul>
+<li>物理数据建模</li>
+</ul>
+<blockquote>
+<p>解决逻辑抽象：物理将逻辑抽象实体在数据库设计中成为独立对象</p>
+<blockquote>
+<p>子类型吸收：子类型实体属性作为可空列，包括在表示超类型实体的表中<br>超类型分区：超类型实体的属性包含在每个子类型实体创建的单独表中</p>
+</blockquote>
+<p>添加属性细节：向物理模型添加每个表和列、文档和字段的技术名称<br>添加参考数据对象：</p>
+<blockquote>
+<p>创建匹配的单独码表<br>创建主共享代码表<br>将规则或有效代码嵌入到相应对象的定义中</p>
+</blockquote>
+<p>指定代理建：给业务分配与业务无关的不可见的唯一键值，可选步骤<br>逆规范化：在合适情况下，通过逆规范化或增加按冗余提高性能</p>
+<blockquote>
+<p>提前组合来自多个其他表的数据，避免运行时连接<br>创建更小的、预先过滤的数据副本，以减少运行时计算或大型表扫描<br>预先计算和存储昂贵的数据计算结果，避免运行时系统资源竞争</p>
+</blockquote>
+<p>建立索引<br>建立分区</p>
+<blockquote>
+<p>垂直分区：为减少查询返回的结果集，根据列的不同为某表创建子集<br>水平分区：为减少查询返回的结果集，使用某列的值作为区分创建子集表</p>
+</blockquote>
+<p>创建视图</p>
+</blockquote>
+</blockquote>
+<h2 id="交付成果"><a href="#交付成果" class="headerlink" title="交付成果"></a>交付成果</h2><blockquote>
+<p>图表：精确描述数据需求<br>定义：定义实体、属性和关系<br>遗留问题<br>血缘关系：包括数据流向和数据操作等</p>
+</blockquote>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><blockquote>
+<p>模型反应业务需求程度<br>模型完整性程度<br>模型与模式匹配度<br>模型结构<br>模型通用性<br>模型遵循命名标准程度<br>模型可读性<br>模型定义<br>模型与企业数据架构的一致性<br>模型与元数据匹配程度</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag"># 数据治理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210819/19413.html" rel="prev" title="数据架构-基础">
+      <i class="fa fa-chevron-left"></i> 数据架构-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210821/13176.html" rel="next" title="数据存储与操作-基础">
+      数据存储与操作-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%92%8C%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">数据建模和设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">模型管理内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E6%A8%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">建模数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">建模方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%AE%9E%E8%B7%B5"><span class="nav-number">2.</span> <span class="nav-text">数据建模实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">数据模型管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">建立数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E4%BB%98%E6%88%90%E6%9E%9C"><span class="nav-number">2.3.</span> <span class="nav-text">交付成果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">2.4.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

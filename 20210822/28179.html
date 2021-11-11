@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alexedwardz.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文主要介绍数据安全管理相关的基础内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据安全管理-基础">
+<meta property="og:url" content="https://alexedwardz.gitee.io/20210822/28179.html">
+<meta property="og:site_name" content="戚中一">
+<meta property="og:description" content="写在前面：本文主要介绍数据安全管理相关的基础内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-22T13:16:24.000Z">
+<meta property="article:modified_time" content="2021-09-03T01:55:15.343Z">
+<meta property="article:author" content="戚中一">
+<meta property="article:tag" content="数据管理">
+<meta property="article:tag" content="数据治理">
+<meta property="article:tag" content="数据安全">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://alexedwardz.gitee.io/20210822/28179.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据安全管理-基础 | 戚中一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">戚中一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">都云作者痴，谁解戚中一</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://alexedwardz.gitee.io/20210822/28179.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="戚中一">
+      <meta itemprop="description" content="戚中一的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="戚中一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据安全管理-基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-22 21:16:24" itemprop="dateCreated datePublished" datetime="2021-08-22T21:16:24+08:00">2021-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-03 09:55:15" itemprop="dateModified" datetime="2021-09-03T09:55:15+08:00">2021-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/20210822/28179.html" class="post-meta-item leancloud_visitors" data-flag-title="数据安全管理-基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20210822/28179.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20210822/28179.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写在前面：本文主要介绍数据安全管理相关的基础内容</p>
+<span id="more"></span>
+
+<h1 id="数据安全管理"><a href="#数据安全管理" class="headerlink" title="数据安全管理"></a>数据安全管理</h1><p><strong>数据安全管理</strong>：采用各种技术和管理措施，保证数据的机密性、完整性和可用性，确保数据不被破坏，且能被适当访问，包括数据访问安全标准、监控和审计程序和存储安全标准等，包括安全策略和过程的规划</p>
+<h2 id="管理动力来源"><a href="#管理动力来源" class="headerlink" title="管理动力来源"></a>管理动力来源</h2><blockquote>
+<p>利益相关方：识别利益相关方隐私和保密需求<br>政府法规：保护利益相关方的利益<br>特定业务关注点：对专有数据进行特殊保护<br>合法访问需求：不同角色的人员合理的访问、使用和管理数据<br>合同义务：在合同或安全保密协议里对数据的要求</p>
+</blockquote>
+<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><ul>
+<li><strong>降低风险</strong><ul>
+<li>支持适当访问并组织对企业数据资产的不当访问</li>
+<li>支持对隐私、保护和保密制度、法规的遵从</li>
+<li>确保满足利益相关方的隐私保密要求</li>
+</ul>
+</li>
+<li><strong>业务增长</strong></li>
+<li><strong>安全性作为资产</strong></li>
+</ul>
+<h2 id="管理原则"><a href="#管理原则" class="headerlink" title="管理原则"></a>管理原则</h2><blockquote>
+<p>协同合作：由IT安全管理员、数据管理专员、内外部审计团队及法律部门协调合作<br>企业统筹：确保安全策略与企业发展战略规划一致<br>主动管理：相关人员主动、动态维护数据安全管理<br>明确责任：明确界定角色和责任<br>元数据驱动<br>减少接触以降低风险：最大限度的减少非生产环境中减少敏感、机密数据的泄漏</p>
+</blockquote>
+<h2 id="安全风险"><a href="#安全风险" class="headerlink" title="安全风险"></a>安全风险</h2><p><strong>安全风险</strong>：既指损失的可能性，也指构成潜在损失的事务或条件</p>
+<h3 id="计算风险"><a href="#计算风险" class="headerlink" title="计算风险"></a>计算风险</h3><blockquote>
+<p>威胁发生的概率及可能的频率<br>可能造成的损害类型和规模，包括声誉损害<br>损害对收入或业务运营的影响<br>发生损害后的修复成本<br>预防威胁的成本，包括漏洞修复手段<br>攻击者可能的目标或意图</p>
+</blockquote>
+<h3 id="风险漏洞"><a href="#风险漏洞" class="headerlink" title="风险漏洞"></a>风险漏洞</h3><blockquote>
+<p>系统漏洞：主机、软件、安全配置问题、弱口令<br>Web漏洞：注入攻击、跨站脚本、文件包含、钓鱼攻击、信息泄露、恶意编码、表单绕过<br>数据库漏洞：数据库配置、数据库用户弱口令、弱点检测与弱点分析、补丁检测、存储过程监测等<br>基线漏洞：涵盖操作系统、数据库、中间件、防火墙、路由器、交换机等<br>滥用特权、合法职权或未经授权的特权升级等<br>服务账户或共享账户滥用<br>平台入侵攻击<br>注入漏洞<br>默认密码<br>数据备份泛滥</p>
+</blockquote>
+<h3 id="风险数据分类"><a href="#风险数据分类" class="headerlink" title="风险数据分类"></a>风险数据分类</h3><blockquote>
+<p>关键风险数据：关键风险数据具有直接的财务价值，如个人信息<br>高风险数据：高风险数据为公司提供竞争优势，具有潜在的财务价值<br>中风险数据：几乎没有实际价值的组织非公开信息</p>
+</blockquote>
+<h2 id="安全管理过程"><a href="#安全管理过程" class="headerlink" title="安全管理过程"></a>安全管理过程</h2><ul>
+<li><p><strong>4A</strong>：通过数据识别和分类达标、访问控制、角色组、用户和密码保证4A，保证数据安全</p>
+<ul>
+<li>访问（Access）：允许具有授权的用户及时正常地访问系统</li>
+<li>审计（Audit）：审查安全操作和用户活动，确保符合法规和公司制度标准</li>
+</ul>
+<blockquote>
+<p>账号审计：账号创建、销毁制度，实现“一人一账号”<br>授权审计：账号授权管理制度，实现账号权限分类、账号最小化权限控制、确定授权责任人<br>认证审计：禁止绕过安全管理平台直接跳转访问资源的违规行为<br>访问控制审计：基于地址、端口等进行访问控制<br>重要操作审计：全面记录安全运维人员的运维操作记录<br>敏感信息审计：全面分析业务敏感数据，对前 / 后台查询、删除、导出等操作进行安全管控</p>
+</blockquote>
+<ul>
+<li>验证（Authentication）：在用户登录时，验证用户访问权限</li>
+<li>授权（Authorization）：授予用户访问与其角色匹配的特定数据视图</li>
+<li>权限（Entitlement）：是由单个访问授权决策向用户公开所有数据元素的总和</li>
+</ul>
+</li>
+<li><p><strong>监控</strong>：检测意外事件（包括潜在的安全违规）的监视控制</p>
+</li>
+</ul>
+<h3 id="安全管理策略"><a href="#安全管理策略" class="headerlink" title="安全管理策略"></a>安全管理策略</h3><ul>
+<li><strong>加密</strong>：将纯文本转换为复杂代码，以隐藏特权信息、验证传送完整性或信息发送者身份</li>
+</ul>
+<blockquote>
+<p>哈希加密：将任意长度的数据转换为固定长度数据表示，常见算法有MD5，SHA等<br>对称加密：一组秘钥，进行加密解密工作，数据发送方、数据接收方都持有，速度快，常见算法有DES、AES、IDEA等<br>非对称加密：两组秘钥，公钥和私钥，公钥进行加密，数据发送方、数据接收方持有；私钥进行解密，仅数据接收方持有，速度慢，常见算法有RSA加密算法、Diffie-Hellman密钥交换协议等</p>
+</blockquote>
+<ul>
+<li><strong>混淆或脱敏</strong><br><strong>混淆</strong>：将数据变模糊或不明确<br><strong>脱敏</strong>：删除、打乱或以其他方式更改数据外观</li>
+</ul>
+<blockquote>
+<p><strong>分类</strong></p>
+<blockquote>
+<p>静态脱敏（SDM）：直接通过屏蔽、变形、替换、随机格式保留加密和强加密等多种加密算法对数据进行掩码扰乱(数据存储发生改变)</p>
+<blockquote>
+<p>落地脱敏：当数据源（生产环境）和目标（非生产环境）相同时，可采用落地脱敏，从数据源读取未脱敏数据，进行脱敏操作后直接覆盖原始数据<br>不落地脱敏：当在数据源和目标环境之间移动需要脱敏获混淆处理时，会采用不落地脱敏</p>
+</blockquote>
+<p>动态脱敏（DDM）：精确解析SQL语句匹配脱敏条件，可根据IP、主机、用户、时间等改写SQL语句，返回脱敏后的数据(数据存储未改变)</p>
+</blockquote>
+<p><strong>方式</strong></p>
+<blockquote>
+<p><strong>替换</strong>：将字符或整数值替换为查找或标准模式中的字符或整数值<br><strong>混排</strong>：在一个记录中交换相同数据类型的数据或交换不同记录统一属性的值<br><strong>时空变异</strong>：将日期时间前后移动若干天，要求无法识别且小到能够保留趋势<br><strong>数值变异</strong>：应用随机因素（正负百分比等）改变数值，要求重要到不可识别且小到足以保持趋势<br><strong>取消或删除</strong>：删除不应出现在测试系统的数据<br><strong>随机选择</strong>：将部分或全部数据元素替换为随机字符或一系列单个字符<br><strong>加密技术</strong>：通过密码代码将可识别、有意义的字符流转换为不可识别的字符流，如利用  * 号屏蔽无效化，掩码屏蔽等<br><strong>表达式脱敏</strong>：通过一个表达式更改所有数据的值，如偏移、取整、集算器数据脱敏 SPL 脚本等<br><strong>键值脱敏</strong>：指定的脱敏算法或进程的结果必须是唯一且可重复的，用于数据库键值字段或类似字段脱敏</p>
+</blockquote>
+</blockquote>
+<h3 id="全周期管理"><a href="#全周期管理" class="headerlink" title="全周期管理"></a>全周期管理</h3><p><strong>数据采集阶段</strong>：明确数据采集规范，制定数据采集策略，完善数据采集风险评估，确保数据采集的合规合法性<br><strong>数据传输阶段</strong>：使用合适的数据加密算法对数据进行加密传输<br><strong>数据存储阶段</strong>：制定存储介质标准和存储系统的安全防护标准<br><strong>数据处理阶段</strong>：明确需要数据脱敏的业务场景和统一的数据脱敏算法<br><strong>数据共享阶段</strong>：建立数据交换和共享的审核流程和监管平台<br><strong>数据销毁阶段</strong>：保证整个销毁过程管理和技术保障措施</p>
+<blockquote>
+<p>覆写法<br>消磁法<br>损坏法：捣碎、焚毁等</p>
+</blockquote>
+<h2 id="数据安全内容"><a href="#数据安全内容" class="headerlink" title="数据安全内容"></a>数据安全内容</h2><ul>
+<li><strong>设施安全</strong>：抵御恶意行为人员的第一道防线仅允许授权员工访问</li>
+<li><strong>设备安全</strong>：防止U盘、笔记本丢失被盗带来的损失<ul>
+<li>使用移动设备连接的访问策略，如笔记本、CD、USB驱动器等</li>
+<li>在便携式设备上存储数据</li>
+<li>符合记录管理策略的设备数据擦除和处置</li>
+<li>反恶意软件和加密软件安装</li>
+<li>安全漏洞意识</li>
+</ul>
+</li>
+<li><strong>凭据安全</strong><ul>
+<li>身份管理系统</li>
+<li>电子邮件系统的用户ID标准</li>
+<li>密码标准</li>
+<li>多因素识别</li>
+<li>电子通信安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="制约因素"><a href="#制约因素" class="headerlink" title="制约因素"></a>制约因素</h3><ul>
+<li><strong>保密等级</strong></li>
+</ul>
+<blockquote>
+<p>对普通受众公开<br>仅内部使用<br>机密：无恰当的保密协议或类似内容，不得在组织以外共享<br>受限机密：要求个人通过许可才能访问<br>绝密：必须签署法律协议才能访问数据</p>
+</blockquote>
+<ul>
+<li><strong>监管要求</strong></li>
+</ul>
+<blockquote>
+<p>法规要求：个人身份信息、财务敏感信息、医疗敏感数据或个人健康信息、教育记录等<br>行业要求：支付卡行业数据安全标准（PCI-DSS）、竞争优势或商业秘密、合同限制等</p>
+</blockquote>
+<h2 id="恶意软件"><a href="#恶意软件" class="headerlink" title="恶意软件"></a>恶意软件</h2><p><strong>恶意软件</strong>：是指为破坏、更改或不当访问计算机或网络而创建的软件</p>
+<blockquote>
+<p>广告软件：监控计算机的使用<br>间谍软件：未经同意嵌入计算机以跟踪在线活动的任何程序<br>特洛伊木马：通过伪装或嵌入合法软件进入计算机系统的恶意程序<br>病毒：将自身附加到可执行文件或易受攻击的应用程序上，产生让人讨厌到具有破坏性的后果<br>蠕虫：自己在可以网络中进行复制和传播的程序</p>
+</blockquote>
+<h2 id="数据安全架构"><a href="#数据安全架构" class="headerlink" title="数据安全架构"></a>数据安全架构</h2><blockquote>
+<p>用于管理数据安全的工具<br>数据加密标准和机制<br>外部供应商和承包商的数据访问指南<br>通过互联网的数据传输协议<br>文档要求<br>远程访问标准<br>安全漏洞事件报告规程</p>
+</blockquote>
+<h3 id="安全实施控制"><a href="#安全实施控制" class="headerlink" title="安全实施控制"></a>安全实施控制</h3><ul>
+<li><p><strong>分配密级</strong>：根据组织分类方案，确定合适的数据密级</p>
+</li>
+<li><p><strong>分配监管类别</strong>：创建采用能确保满足法规遵从要求的分类方案</p>
+</li>
+<li><p><strong>管理维护数据安全</strong></p>
+<ul>
+<li>控制数据可用性 / 以数据为中心的安全性</li>
+<li>监控用户身份验证和访问行为：缺乏自动化监控的风险如下</li>
+</ul>
+<blockquote>
+<p>监管风险：薄弱的数据库审计机制与政府监管要求相违背<br>监测和恢复风险<br>管理和审计职责风险<br>依赖与不适当的本地审计工具的风险</p>
+</blockquote>
+</li>
+<li><p><strong>管理安全制度遵从性</strong></p>
+<ul>
+<li>管理法规遵从性</li>
+</ul>
+<blockquote>
+<p>衡量授权细则和程序合规性<br>确保所有数据需求可衡量、可审计<br>使用标准工具和流程保护存储和运行中的受监管数据<br>发现潜在不合规问题以及存在违反法规遵从性时，使用上报程序和通知机制</p>
+</blockquote>
+<ul>
+<li>审计数据安全合规活动</li>
+</ul>
+<blockquote>
+<p>评估制度和细则，确保明确定义合规并满足法规要求<br>分析实施程序和用户授权实践，确保符合监管目标、制度、细则和预期结果<br>评估授权标准和规范是否充分符合技术要求<br>发现潜在不合规问题以及存在违反法规遵从性时，使用上报程序和通知机制<br>审查外包和外部供应商合同、数据共享协议以及合规义务，确保业务合作伙伴履行义务及组织履行其保护受监管数据的法律义务<br>评估组织内安全时间成熟度<br>推进合规制度变革和运营合规改进</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><ul>
+<li><strong>安全实施指标</strong></li>
+</ul>
+<blockquote>
+<p>安装最先安全补丁程序的企业计算机百分比<br>安装并运行最新反恶意软件的计算机百分比<br>成功通过背景调查员工的百分比<br>在年度安全实践实验中优秀的员工百分比<br>成功通过天灾恢复测试的业务流程百分比<br>已成功解决审计发现的问题百分比</p>
+</blockquote>
+<ul>
+<li><strong>安全意识指标</strong></li>
+</ul>
+<blockquote>
+<p>风险评估结果<br>风险事件和配置文件<br>正式的反馈调查和访谈<br>事故复盘、经验教训和受害者访谈<br>补丁有效性审计</p>
+</blockquote>
+<ul>
+<li><strong>数据保护指标</strong></li>
+</ul>
+<blockquote>
+<p>特定数据类型和信息系统的关键性排名<br>数据丢失、损坏相关的事故、黑客攻击、盗窃或灾难的年损失预期<br>与特定数据丢失的风险相关的某些类别的受监管信息以及补救优先级排序<br>数据与特定义务流程的风险映射<br>数据资源及其传输媒介遭受攻击的可能性<br>对可能意外或有意泄漏敏感信息的业务流程的特定部分进行娄总评估</p>
+</blockquote>
+<ul>
+<li><strong>安全事件指标</strong></li>
+</ul>
+<blockquote>
+<p>检测到并组织了入侵尝试数量<br>通过防止入侵节省的安全成本投资回报</p>
+</blockquote>
+<ul>
+<li><strong>机密数据扩散</strong>：衡量数据副本数量，以减少扩散</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="戚中一 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="戚中一 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag"># 数据管理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag"># 数据治理</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag"># 数据安全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20210821/13176.html" rel="prev" title="数据存储与操作-基础">
+      <i class="fa fa-chevron-left"></i> 数据存储与操作-基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/20210823/11121.html" rel="next" title="数据集成和互操作-基础">
+      数据集成和互操作-基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据安全管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%8A%A8%E5%8A%9B%E6%9D%A5%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">管理动力来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.2.</span> <span class="nav-text">业务目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%8E%9F%E5%88%99"><span class="nav-number">1.3.</span> <span class="nav-text">管理原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9"><span class="nav-number">1.4.</span> <span class="nav-text">安全风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%A3%8E%E9%99%A9"><span class="nav-number">1.4.1.</span> <span class="nav-text">计算风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.4.2.</span> <span class="nav-text">风险漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.3.</span> <span class="nav-text">风险数据分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">安全管理过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">1.5.1.</span> <span class="nav-text">安全管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86"><span class="nav-number">1.5.2.</span> <span class="nav-text">全周期管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%86%85%E5%AE%B9"><span class="nav-number">1.6.</span> <span class="nav-text">数据安全内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B6%E7%BA%A6%E5%9B%A0%E7%B4%A0"><span class="nav-number">1.6.1.</span> <span class="nav-text">制约因素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.7.</span> <span class="nav-text">恶意软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">1.8.</span> <span class="nav-text">数据安全架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD%E6%8E%A7%E5%88%B6"><span class="nav-number">1.8.1.</span> <span class="nav-text">安全实施控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="nav-number">1.9.</span> <span class="nav-text">度量指标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">戚中一</p>
+  <div class="site-description" itemprop="description">戚中一的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚中一</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '48HE5bs38SPTd5fJ4lLfkyOe-gzGzoHsz',
+      appKey     : 'JhMArj4DQE8uA6G1bM7cnHlV',
+      placeholder: "唠两句...",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

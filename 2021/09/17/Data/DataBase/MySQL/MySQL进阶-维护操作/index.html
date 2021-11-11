@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL进阶-维护操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="写在前面：本文主要记录MySQL进阶-数据维护操作的相关知识，包括存储过程、游标和触发器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL进阶-维护操作">
+<meta property="og:url" content="http://example.com/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面：本文主要记录MySQL进阶-数据维护操作的相关知识，包括存储过程、游标和触发器">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/privileges.jpg">
+<meta property="article:published_time" content="2021-09-17T12:34:52.000Z">
+<meta property="article:modified_time" content="2021-11-08T02:18:07.119Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/privileges.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Data/DataBase/MySQL/MySQL进阶-维护操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="dt-published" datetime="2021-09-17T12:34:52.000Z" itemprop="datePublished">2021-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MySQL进阶-维护操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>写在前面：本文主要记录MySQL进阶-数据维护操作的相关知识，包括存储过程、游标和触发器</p>
+<span id="more"></span>
+
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><p><strong>存储过程-procedure</strong>：为以后的使用而保存为以后的使用而保存，类似于批文件<br><strong>目的</strong>：简单、安全、高性能</p>
+<blockquote>
+<p>把处理封装在容易使用的单元中，简化复杂的操作<br>避免反复建立一系列处理步骤，保证数据的完整性和一致性<br>处理过程对使用者透明，简化对变动的管理；表名、列名或业务逻辑变化，只需要更改存储过程的代码<br>提高性能；使用存储过程比使用单独的SQL语句要快<br>编写功能更强更灵活的代码</p>
+</blockquote>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li><strong>创建存储过程</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$    -- delimiter $$：将语句分隔符修改为$$，delimiter用于修改语句分隔符</span><br><span class="line">create procedure pro_name([pramer_name data_type, out pramer_name data_type])[(Comment)]</span><br><span class="line">begin</span><br><span class="line">SQL_List</span><br><span class="line">end $$</span><br><span class="line">delimiter ;   -- 重新定义，恢复成默认以英文分号 ; 结束</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>删除存储过程</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">drop procedure [IF EXISTS] pro_name;</span><br><span class="line"></span><br><span class="line">只给出存储过程名，后面没有小括号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>调用存储过程</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call procedure pro_name([pramer_value_list]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>检查存储过程</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create procedure pro_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="输出参数"><a href="#输出参数" class="headerlink" title="输出参数"></a>输出参数</h3><ol>
+<li><strong>创建</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">create procedure productpricing(</span><br><span class="line">	out pl decimal(8,2),    -- out 申明输出变量，接收价格最低值；默认为in，输入参数</span><br><span class="line">	out pm decimal(8,2),    -- out 申明输出变量，接收价格最高值</span><br><span class="line">	out pa decimal(8,2)     -- out 申明输出变量，接收价格平均值</span><br><span class="line">)</span><br><span class="line">begin</span><br><span class="line">	select min(prod_price) into pl from products;    -- 使用 into 关键字将数据保存到相应的变量</span><br><span class="line">	select max(prod_price) into pm from products;</span><br><span class="line">	select avg(prod_price) into pa from products;</span><br><span class="line">end $$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>调用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call procedure pro_name(@price_low,@price_max,@price_avg);</span><br><span class="line"></span><br><span class="line">所有MySQL变量都必须以@开始</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>使用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @price_low, @price_max, @price_avg;</span><br><span class="line"></span><br><span class="line">在调用时，并不显示任何数据；完成调用后，申明的输出变量可在其他处理中使用</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入输出参数"><a href="#输入输出参数" class="headerlink" title="输入输出参数"></a>输入输出参数</h3><ol>
+<li><strong>创建</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">create procedure ordertotal(</span><br><span class="line">	in onumber int,    -- in 申明输入变量，接收订单编号；in 可省略</span><br><span class="line">	out ototal decimal(8,2)     -- 申明输出变量，接收订单金额</span><br><span class="line">)</span><br><span class="line">begin</span><br><span class="line">	select sum(item_price * quantity) from orderitems where order_num = onumber into ototal;</span><br><span class="line">end $$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>调用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call procedure ordertotal(2005, @total);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>使用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @total;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复杂案例"><a href="#复杂案例" class="headerlink" title="复杂案例"></a>复杂案例</h3><ol>
+<li><strong>创建</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">create procedure ordertotal(</span><br><span class="line">	in onumber int,    -- 申明输入变量，接收订单编号</span><br><span class="line">	in taxable boolean,    -- 申明输入变量，接收是否收税</span><br><span class="line">	out ototal decimal(8,2)     -- 申明输出变量，接收订单金额</span><br><span class="line">)(Comment &#x27;add tax&#x27;)</span><br><span class="line">begin</span><br><span class="line">	declare total decimal(8,2);       -- 申明局部变量，存储订单金额</span><br><span class="line">	declare taxrate int default 6;    -- 申明局部变量，存储税率；默认为6%</span><br><span class="line">	</span><br><span class="line">	select sum(item_price * quantity) from orderitems where order_num = onumber into total;</span><br><span class="line">	</span><br><span class="line">	if taxable then</span><br><span class="line">		select total + (total/100 * taxrate) into total</span><br><span class="line">	end if;</span><br><span class="line">	</span><br><span class="line">	select total into ototal;</span><br><span class="line">end $$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>调用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call procedure ordertotal(2005, 0, @total);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>使用</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select @total;</span><br></pre></td></tr></table></figure>
+
+<h1 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h1><p><strong>游标-cursor</strong>：一个存储在 MySQL 服务器上的数据库查询，是 SQL 语句检索出来的结果集；存储游标后，应用程序可以根据需要滚动或浏览其中的数据；MySQL游标只能用于存储过程（和函数）</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>过程</strong></p>
+<ol>
+<li>使用游标前，必须声明（定义）</li>
+<li>声明后，打开游标以供使用；这个过程用前面定义的 SELECT 语句把数据实际检索出来</li>
+<li>对于填有数据的游标，根据需要取出（检索）各行</li>
+<li>在结束游标使用时，必须关闭游标</li>
+</ol>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create procrdure processorders()</span><br><span class="line">begin</span><br><span class="line">	declare ordernumbers cursor	for	select order_num from orders;</span><br><span class="line">end;</span><br><span class="line">创建了名为 processorders 的存储过程和名为 ordernumbers 的游标，游标可以检索所有订单的 SELECT 语句；存储过程处理完成后，游标消失（局限于存储过程）</span><br></pre></td></tr></table></figure>
+
+<h3 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">open ordernumbers;    -- 开启游标；在处理OPEN语句时执行查询，存储检索出的数据以供浏览和滚动</span><br><span class="line">close ordernumbers;   -- 关闭游标；CLOSE释放游标使用的所有内部内存和资源，应该及时关闭游标；不明确申明关闭游标，MySQL将会在到达END语句时自动关闭</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>检索单行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create procrdure processorders()</span><br><span class="line">begin</span><br><span class="line">	declare o int;</span><br><span class="line">	declare ordernumbers cursor	for	select order_num from orders;</span><br><span class="line">	</span><br><span class="line">	open ordernumbers;</span><br><span class="line">	fetch ordernumbers into o;  -- 游标被打开后，FETCH 用来检索指定列 order_num 当前行的数据，并将数据加载到一个名为 o 的局部声明的变量中，对检索出的数据不做任何处理；自动从第一行开始检索</span><br><span class="line">	close ordernumbers;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p><strong>循环检索</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create procrdure processorders()</span><br><span class="line">begin</span><br><span class="line">	declare done boolean default 0;</span><br><span class="line">	declare o int;</span><br><span class="line">	declare ordernumbers cursor for select order_num from orders;</span><br><span class="line">	declare continue handler for SQLSTATE &#x27;02000&#x27; set done = 1;   -- 指出当SQLSTATE &#x27;02000&#x27;出现时，SET done=1；SQLSTATE &#x27;02000&#x27; 出现在REPEAT 没有更多的行供循环而不能继续时</span><br><span class="line">	</span><br><span class="line">	open ordernumbers;</span><br><span class="line">	repeat</span><br><span class="line">		fetch ordernumbers into o;</span><br><span class="line">	until done end repeat;    -- 直到临时变量 done 为真时结束 repeat</span><br><span class="line">	close ordernumbers;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p><strong>上例修改</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">create procrdure processorders()</span><br><span class="line">begin</span><br><span class="line">	declare done boolean default 0;</span><br><span class="line">	declare o int;</span><br><span class="line">	declare t decimal(8,2);</span><br><span class="line">	declare ordernumbers cursor for select order_num from orders;</span><br><span class="line">	declare continue handler for SQLSTATE &#x27;02000&#x27; set done = 1;</span><br><span class="line">	</span><br><span class="line">	create table if not exists ordertotals(</span><br><span class="line">	order_num int, total decimal(8,2));</span><br><span class="line">	</span><br><span class="line">	open ordernumbers;</span><br><span class="line">	repeat</span><br><span class="line">		fetch ordernumbers into o;</span><br><span class="line">		call ordertotal(o, 1, t);  -- 调用存储过程，计算带税合计</span><br><span class="line">		insert into ordertotals(order_num, total) values(o, t);</span><br><span class="line">	until done end repeat;</span><br><span class="line">	close ordernumbers;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p><strong>触发器</strong>：是与表有关的命名数据库对象，当表上特定事件发生时触发执行特定 SQL；触发器在每个表中不能重名，同一数据库中的两个表可具有相同名字的触发器，尽量在数据库范围内使用唯一的触发器名；一个事件只支持创建一个触发器，每个表最多支持6个触发器，可能出现锁表的现象；只有表才支持触发器，视图不支持</p>
+<blockquote>
+<p>唯一的触发器名<br>触发器关联的表<br>触发器应该响应的活动（DELETE、INSERT或UPDATE）<br>触发器何时执行（处理之前或之后）</p>
+</blockquote>
+<h2 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><p><strong>创建触发器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER trigger_name trigger_time(before/after) trigger_event(INSERT/delete/update) ON tb_name FOR EACH ROW 执行性SQL_List;</span><br><span class="line"></span><br><span class="line">trigger_event：指明激活触发器的语句的类型，包括 INSERT、UPDATE、DELETE，即插入、修改、删除数据时激活触发器，执行预定义的代码</span><br><span class="line">trigger_time：指明激活触发器的动作时间，包括 BEFORE 和 AFTER，如在删除前执行操作或删除后执行操作</span><br><span class="line">FOR EACH ROW：针对每一行更新都触发</span><br><span class="line"></span><br><span class="line">CREATE TRIGGER audit_log after insert on employees_test FOR EACH ROW insert into audit values(new.id, new.name);</span><br><span class="line">创建触发器audit_log：当 employees_test 表插入数据后，将新ID和新名称添加到 into 表里</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>删除触发器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER trigger_name;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>查看触发器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create trigger_name;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>特殊执行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO on duplicate key update 语法触发：</span><br><span class="line"></span><br><span class="line">如果没有重复记录，触发：before INSERT, after INSERT</span><br><span class="line">如果有重复记录并更新，触发：before INSERT, before update, after update</span><br><span class="line">如果有重复记录无更新，触发：before INSERT,befor update</span><br><span class="line"></span><br><span class="line">Replace语法</span><br><span class="line">如果有记录，触发：before INSERT, before delete, after delete, after INSERT</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="INSERT触发器"><a href="#INSERT触发器" class="headerlink" title="INSERT触发器"></a>INSERT触发器</h3><p><strong>INSERT触发器</strong>：INSERT 触发器在 INSERT 语句执行之前或之后执行</p>
+<blockquote>
+<p>在 INSERT 触发器代码内，可引用一个名为 NEW 的虚拟表，访问被插入的行；INSERT 没有 old 记录<br>在 BEFORE INSERT 触发器中，NEW 中的值也可以被更新（允许更改被插入的值）<br>对于 AUTO_INCREMENT 列，NEW 在 INSERT 执行之前包含0，执行后包含新的自动生成值</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER neworder after insert on orders FOR EACH ROW select new.order_num;</span><br><span class="line">创建 neworder 触发器： order 表插入一行之后，返回新纪录自动生成的 order_num；</span><br></pre></td></tr></table></figure>
+
+<h3 id="DELETE触发器"><a href="#DELETE触发器" class="headerlink" title="DELETE触发器"></a>DELETE触发器</h3><p><strong>DELETE触发器</strong>：DELETE 触发器在 DELETE 语句执行之前或之后执行</p>
+<blockquote>
+<p>在 BEFORE UPDATE 触发器中，NEW 中的值可以被更新，即允许更改将要用于UPDATE语句中的值<br>OLD 中的值全都是只读的，不能更新；delete 没有 new 记录</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER updateorder before update on orders FOR EACH ROW set new.vend_state = upper(new.vend_state);</span><br><span class="line">创建 neworder 触发器： order 表更新一行之前，将删除记录的 order_num, order_date, cust_id 插入到 archive_orders 表中；</span><br></pre></td></tr></table></figure>
+
+<h3 id="UPDATE触发器"><a href="#UPDATE触发器" class="headerlink" title="UPDATE触发器"></a>UPDATE触发器</h3><p><strong>UPDATE触发器</strong>：UPDATE 触发器在 UPDATE 语句执行之前或之后执行</p>
+<blockquote>
+<p>在 DELETE 触发器代码内，你可以引用一个名为 OLD 的虚拟表，访问被删除的行<br>OLD 中的值全都是只读的，不能更新；UPDATE 拥有 new 和 old 记录</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER deleteorder before delete on orders FOR EACH ROW </span><br><span class="line">begin</span><br><span class="line">	insert into archive_orders(order_num, order_date, cust_id) values(old.order_num, old.order_date, old.cust_id)</span><br><span class="line">end;</span><br><span class="line">创建 neworder 触发器：当 order 表更新一行之前，将更新记录的 order_num 全部变为大写后, 再更新到指定的记录中；</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
+<p>创建触发器可能需要特殊的安全访问权限，与对应的 INSERT、UPDATE 或 DELETE 语句 权限需求相同<br>应该用触发器来保证数据的一致性（大小写、格式等）；自动规范化进行，对客户机透明<br>可以创建审计跟踪，把更改记录到另一个表<br>触发器中不支持CALL语句，不能从触发器内调用存储过程</p>
+</blockquote>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p><strong>事务</strong>：是指逻辑上的一组操作，组成这组操作的各个单元，要不全成功要不全失败；维护数据库的完整性</p>
+<h2 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h2><p><strong>原子性</strong>—A（atomicity）：事务是一个不可分割的工作单位，要么不做，要么全做<br><strong>一致性</strong>—C（consistency）：事务执行结果正确，事务前后数据的状态必须保持一致<br><strong>隔离性</strong>—I （isolation）：多个用户并发访问数据库时，一个用户的事务不能被其它用户的事物所干扰，多个并发事务之间的数据要相互隔离<br><strong>持久性</strong>—D（durability）：事务完成后，结果直到下一次修改前，永久保存</p>
+<blockquote>
+<p>开启事务环境：begin/start transaction;<br>提交事务：commit; 将数据更新修改操作本地持久化，在物理层面执行更新修改；一般采取隐含提交，即提交（写或保存）操作是自动进行，开启事务后需要手动提交<br>回滚事务：rollback; 撤销数据的更新修改操作，可以回退整个事务，也可以回退到某个保留点；只能在一个事务处理内使用，不能回退CREATE或DROP操作<br>保留点：savepoint； 指事务处理中设置的临时占位符，可以进行回退；保留点在事务处理完成后自动释放</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">savepoint savepoint_name;  -- 申明保留点</span><br><span class="line">RELEASE SAVEPOINT;  -- 释放保留点</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set autocommit = 0/1;  -- 设置是否自动提交，1 为是，0 为否</span><br></pre></td></tr></table></figure>
+
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>RU：read uncommited；读未提交，产生脏读<br>RC：read committed；读已提交，产生不可重复读<br>RR：repeatable read；可重复读，产生脏读（MySQL 在 RR 级别，脏读不存在）<br>Serializable：不存在事务并发问题，为读写都加锁，效率不高</p>
+<p>MySQL 的 RC 和 RR 是通过 MVCC (多版本并发控制)机制实现：读不加锁，写加锁，读写不冲突</p>
+<h1 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h1><h2 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h2><ul>
+<li><strong>创建用户</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;user_name&#x27;[@&#x27;ip&#x27;] identified by &#x27;password&#x27;;</span><br><span class="line"></span><br><span class="line">ip：表示允许用户登录的主机ip，%表示所有机器，localhost表示只允许本机登录</span><br></pre></td></tr></table></figure></li>
+<li><strong>修改</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rename old_user_name to new_user_name;  -- 重命名</span><br><span class="line"></span><br><span class="line">set password for user_name = password(&#x27;xxx&#x27;);  -- 修改密码；在不指定用户名时，默认更新当前登录用户的口令</span><br></pre></td></tr></table></figure></li>
+<li><strong>删除用户</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user user_name;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><ul>
+<li><strong>赋予权限</strong>：包括要授予的权限、被授予访问权限的数据库或表和用户名<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">grant privileges on db_name/tb_name to user_name;</span><br><span class="line"></span><br><span class="line">grant select, insert on user_info to user_name;  -- 支持一次授予多个权限</span><br><span class="line"></span><br><span class="line">权限对象包括：服务器、数据库、数据表、数据列、存储过程、触发器、函数</span><br><span class="line">服务器：GRANT ALL</span><br><span class="line">数据库：ON database.*</span><br><span class="line">数据表：ON db_name.tb_name</span><br><span class="line">数据列：ON db_name.tb_name.col_name</span><br><span class="line">存储过程、触发器、函数的权限对应到具体的表或者字段</span><br></pre></td></tr></table></figure>
+<img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/privileges.jpg" alt="privileges"></li>
+</ul>
+<ul>
+<li><strong>查看权限</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for user_name;</span><br></pre></td></tr></table></figure></li>
+<li><strong>回收权限</strong>：撤销的访问权限必须存在，否则会出错<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">revoke privileges on db_name/tb_name from user_name;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="日常维护"><a href="#日常维护" class="headerlink" title="日常维护"></a>日常维护</h1><h2 id="分析数据表"><a href="#分析数据表" class="headerlink" title="分析数据表"></a>分析数据表</h2><p><strong>分析数据表</strong>：ANALYZE TABLE，用来检查表键是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE TABLE tb_name;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/" data-id="ckvsxxk9l0044f0un5ay26t1j" data-title="MySQL进阶-维护操作" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL进阶-事务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/15/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%B4%A2%E5%BC%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL进阶-索引</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8C%BA%E5%88%AB/">区别</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">安装使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E8%B7%B5/">实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">常见操作指令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">常见问题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9B%E9%98%B6/">进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E8%AF%86/">通识</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" rel="tag">主数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="tag">元数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" rel="tag">数据仓库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" rel="tag">数据治理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" rel="tag">数据科学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" rel="tag">数据管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" rel="tag">数据质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" rel="tag">计算机组成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hive/" style="font-size: 13.75px;">Hive</a> <a href="/tags/IDEA/" style="font-size: 11.25px;">IDEA</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSM/" style="font-size: 10px;">SSM</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Tools/" style="font-size: 15px;">Tools</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/%E4%B8%BB%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">主数据</a> <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">元数据</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 16.25px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" style="font-size: 11.25px;">数据仓库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" style="font-size: 16.25px;">数据治理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">数据科学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" style="font-size: 18.75px;">数据管理</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" style="font-size: 10px;">数据质量</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">计算机</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/" style="font-size: 10px;">计算机组成</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/10/Data/DataAnalysis/%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87%E6%8B%86%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/10/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E5%AE%89%E5%85%A8/">MySQL进阶-安全</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/18/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E4%BA%8B%E5%8A%A1/">MySQL进阶-事务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/Data/DataBase/MySQL/MySQL%E8%BF%9B%E9%98%B6-%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C/">MySQL进阶-维护操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
