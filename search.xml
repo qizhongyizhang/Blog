@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title></title>
-      <link href="20211110/0.html"/>
-      <url>20211110/0.html</url>
+      <title>数据分析报告-业务目标拆解</title>
+      <link href="20211110/51844.html"/>
+      <url>20211110/51844.html</url>
       
         <content type="html"><![CDATA[<p>写在前面：本文主要记录业务目标拆解的基础知识</p><span id="more"></span><h1 id="数据指标"><a href="#数据指标" class="headerlink" title="数据指标"></a>数据指标</h1><p><strong>作用</strong>：快速高效地定位问题</p><ol><li>表现现状（展现公司组织的运营现状）</li><li>反映问题（反映业务推进过程中存在的问题）</li><li>预测趋势（预测未来发展趋势）</li><li>评估目标（预期目标GAP）</li><li>决策调整（调整执行方案）</li></ol><p><strong>搭建过程</strong></p><ol><li>了解业务</li><li>了解架构</li><li>了解数据库</li></ol><h1 id="埋点"><a href="#埋点" class="headerlink" title="埋点"></a>埋点</h1><p><strong>分类</strong><br>前端埋点：<br>后端埋点</p><p>SDK埋点<br>无埋点<br>全埋点</p><p><strong>目标</strong><br>用户体验<br>功能校验<br>运营活动</p><p><strong>步骤</strong><br>了解产品形态：小程序、APP、H5<br>了解业务逻辑：用户操作路径、功能能模块、逻辑关系和数据流向<br>业务流程图<br>设计埋点方案：添加统计事件和统计参数<br>交付设计文档</p>]]></content>
       
       
+      <categories>
+          
+          <category> 基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据分析 </tag>
+            
+        </tags>
       
     </entry>
     
