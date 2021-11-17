@@ -1373,6 +1373,8 @@
             
             <tag> Redis </tag>
             
+            <tag> 数据库 </tag>
+            
         </tags>
       
     </entry>
@@ -1397,6 +1399,8 @@
         <tags>
             
             <tag> PostgreSQL </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
