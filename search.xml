@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Python基础-控制语句</title>
+      <link href="20211118/25209.html"/>
+      <url>20211118/25209.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><h2 id="引用语句"><a href="#引用语句" class="headerlink" title="引用语句"></a>引用语句</h2><ul><li>import &lt;库函数名&gt;</li><li>from &lt;库函数名&gt; import &lt;特定函数名&gt;</li></ul><h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><ul><li>for遍历循环：for &lt;循环变量&gt; in &lt;遍历结构&gt;: …</li><li>增强for循环：for … else … ，正常循环结束时执行else的语句内容</li><li>while无限循环：while &lt;条件&gt;: …</li><li>循环控制：</li></ul><blockquote><p>break：直接跳出循环语言，执行循环后的语句<br>continue：退出本次循环过程，继续下一次循环</p></blockquote><h2 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h2><ul><li>单分支：if &lt;条件&gt;: …</li><li>双分支：if &lt;条件&gt;: …else &lt;条件&gt;: …</li><li>多分支：if &lt;条件&gt;: …elif&lt;条件&gt;: … else &lt;条件&gt;: …</li></ul><h2 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h2><ul><li>多个变量同时赋值时，按照顺序赋值</li></ul><h2 id="异常控制语句"><a href="#异常控制语句" class="headerlink" title="异常控制语句"></a>异常控制语句</h2><ul><li>try: … except: … finally</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python基础-数据类型</title>
       <link href="20211118/65236.html"/>
       <url>20211118/65236.html</url>
