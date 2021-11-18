@@ -28,7 +28,7 @@
 <meta property="og:description" content="写在前面：本文主要记录Python的数据类型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-18T01:10:08.000Z">
-<meta property="article:modified_time" content="2021-11-18T05:37:52.711Z">
+<meta property="article:modified_time" content="2021-11-18T06:52:31.402Z">
 <meta property="article:author" content="戚中一">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-11-18 09:10:08 / 修改时间：13:37:52" itemprop="dateCreated datePublished" datetime="2021-11-18T09:10:08+08:00">2021-11-18</time>
+              <time title="创建时间：2021-11-18 09:10:08 / 修改时间：14:52:31" itemprop="dateCreated datePublished" datetime="2021-11-18T09:10:08+08:00">2021-11-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,21 +290,21 @@
 <p><strong>多行字符串</strong>：打印多行字符串时，可以通过 ‘’’ 或 “”” 括起来</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&#39;&#39;&#39;line1</span><br><span class="line">... line2</span><br><span class="line">... line3&#39;&#39;&#39;)</span><br><span class="line">在交互式命令行内输入多行内容时，提示符由&gt;&gt;&gt;变为...，提示可以接着上一行输入</span><br></pre></td></tr></table></figure>
 
-<h4 id="字符串处理函数"><a href="#字符串处理函数" class="headerlink" title="字符串处理函数"></a>字符串处理函数</h4><ul>
+<h4 id="字符串处理函数"><a href="#字符串处理函数" class="headerlink" title="字符串处理函数"></a>字符串处理函数</h4><p><strong>统计</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">len(str)：返回 str字符串 的字符数，len(str.encode(&#39;utf-8&#39;))：返回 str字符串 的字节数</span><br><span class="line">str.count(x)：返回 x子串 在 str字符串 中出现的次数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
 <li>读取（切片）：str[start_num: end_num]，不包括结束位置</li>
 <li>操作符：连接（a+b）、复制（a * n：将a复制n次）、判断存在（b in/(not in) a：判断b是否在a中存在）</li>
 <li>str.index(x)：返回第一次出现x的位置标号</li>
-<li>str.count(x)：返回x在序列中出现的次数</li>
-<li>len(str)：返回x字符串长度</li>
 <li>str(str)：将x转换为字符串格式</li>
-<li>chr(str)：返回Unicode编码对应的字符</li>
-<li>ord(str)：返回字符对应的Unicode编码</li>
-<li>hex(str)：返回x对应的十六进制数</li>
-<li>oct(str)：返回x对应的八进制数</li>
+</ul>
+<p><strong>字符编码</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ord(str)：返回 str字符 对应的十进制整数编码值</span><br><span class="line">chr(num)：返回十进制整数编码值对应的字符，可用&#39;\十进制整数编码&#39;直接输出对应字符</span><br><span class="line">str.encode()：指定编码方式，如：&#39;ABC&#39;.encode(&#39;ascii&#39;)，&#39;ABC&#39;.encode(&#39;utf-8&#39;)；显示 b&#39;ABC&#39; 编码字符，与字符串 &#39;ABC&#39; 不同</span><br><span class="line">b&#39;ABC&#39;.decode(&#39;utf-8&#39;)：指定解码，将 b&#39;ABC&#39; 编码字符按照 &#39;utf-8&#39; 编码方式解码成字符串，如果其中有无法解码的内容会报错，可以忽略： b&#39;\xe4\xb8\xad\xff&#39;.decode(&#39;utf-8&#39;, errors&#x3D;&#39;ignore&#39;)</span><br><span class="line">为了避免乱码问题，应当始终坚持使用 UTF-8编码方式对字符串进行编码解码</span><br><span class="line">hex(num)：返回十进制整数对应的十六进制数</span><br><span class="line">oct(num)：返回十进制整数对应的八进制数</span><br></pre></td></tr></table></figure>
+<ul>
 <li>str.lower()：返回str小写形式的副本</li>
 <li>str.upper()：返回str大写形式的副本</li>
 <li>str.split(sep=’’)：返回根据sep字符分割的字符串列表</li>
-<li>str.count()：返回子串出现次数</li>
 <li>str.replace(old,new)：返回old被new替代的新字符串</li>
 <li>str.center(width,fillchar)：字符串根据给定宽度居中显示，多余位置按fillchar填充</li>
 <li>str.strip(char)：去掉字符串两端的指定char字符</li>
