@@ -136,6 +136,9 @@
   
   
   
+    
+    <link rel="prefetch" href="//unpkg.com/valine/dist/Valine.min.js" as="script">
+  
   
   
   <link rel="stylesheet" href="/css/main.css">
@@ -160,7 +163,7 @@
           src="https://demo.theme-kaze.top/img/Kaze.png" 
           alt="blog logo">
       
-      <span class="navbar-logo-dsc">theme-kaze demo</span>
+      <span class="navbar-logo-dsc">戚中一的个人博客</span>
     </span>
   </div>
   <div class="navbar-menu">
@@ -202,14 +205,6 @@
         class="navbar-menu-item">
         
           关于
-        
-      </a>
-    
-      <a 
-        href="/links" 
-        class="navbar-menu-item">
-        
-          友链
         
       </a>
     
@@ -477,8 +472,8 @@
     height="88"
     alt="author avatar">
 
-<p class="author-name">theme-kaze</p>
-<p class="author-description">designed by theme-kaze</p>
+<p class="author-name">戚中一</p>
+<p class="author-description">戚中一的个人博客</p>
 <div class="author-message">
   <a 
     class="author-posts-count" 
@@ -1465,7 +1460,7 @@
         <a 
           href="/" 
           class="footer-link">
-          theme-kaze demo
+          戚中一的个人博客
         </a>
       </div>
     </div>
@@ -1499,6 +1494,19 @@
     
     
     
+    
+      <div class="footer-dsc">
+        
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          本站总访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
     
 </footer> 
     
@@ -1543,6 +1551,10 @@
      
      
     <script src="/js/main.js"></script> 
+    
+      <script> 
+        loadScript('/js/lib/busuanzi.min.js') 
+      </script>
      
     
       <script>
@@ -1563,6 +1575,10 @@
       </script>
      
     
+    
+      <script>
+        setTimeout(() => {localSearch("search.json")}, 0)
+      </script>
     
   </body>
 </html>
