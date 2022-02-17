@@ -49,7 +49,7 @@
         content="2021-05-18">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-09">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -327,7 +327,7 @@
 <li>存储出现问题</li>
 </ul>
 <h1 id="优化策略"><a href="#优化策略" class="headerlink" title="优化策略"></a>优化策略</h1><h2 id="SQL层面-SQL优化"><a href="#SQL层面-SQL优化" class="headerlink" title="SQL层面-SQL优化"></a>SQL层面-SQL优化</h2><p><strong>开启慢SQL记录</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slow_query_log &#x3D; on</span><br><span class="line">long_query_time &#x3D; 1</span><br><span class="line">slow_query_log_file &#x3D; &#x2F;path&#x2F;to&#x2F;log</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">slow_query_log &#x3D; on</span><br><span class="line">long_query_time &#x3D; 1</span><br><span class="line">slow_query_log_file &#x3D; &#x2F;path&#x2F;to&#x2F;log</span><br></pre>
 
 <p><strong>调优工具-生成执行计划</strong>：在查询语句之前加上 explain 关键字<br><strong>SQL细节</strong>：尽量避免全表扫描</p>
 <blockquote>
@@ -494,7 +494,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -541,7 +541,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -682,21 +682,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -709,6 +703,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -744,6 +744,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -756,11 +761,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -784,7 +784,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

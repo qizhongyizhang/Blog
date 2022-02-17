@@ -49,7 +49,7 @@
         content="2021-09-01">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -354,7 +354,7 @@
 <blockquote>
 <p>DataX 采用 Framework + Plugin 的开放式框架实现，Framework 处理缓冲、流程控制、并发、上下文加载，提供简单的接口与插件接入；插件需实现对数据处理系统的访问，编写方便；数据传输在单进程（单机模式）／多进程（分布式模式）下完成，传输过程全内存操作，不读写磁盘，也没有进程间通信，实现了在异构数据库或文件系统之间的高速数据交换</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Job：数据同步作业</span><br><span class="line">Splitter：作业切分模块，将大任务切分成并行的小任务</span><br><span class="line">Sub-Job：切分后的小任务，也称Task</span><br><span class="line">Reader：数据读入模块，运行切分后的小任务，将数据装载到 DataX</span><br><span class="line">Channel： Reader Writer 通过 Channel 交换数据</span><br><span class="line">Writer ：数据写出模块，负责将数据从 DataX 导入目标数据系统</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Job：数据同步作业</span><br><span class="line">Splitter：作业切分模块，将大任务切分成并行的小任务</span><br><span class="line">Sub-Job：切分后的小任务，也称Task</span><br><span class="line">Reader：数据读入模块，运行切分后的小任务，将数据装载到 DataX</span><br><span class="line">Channel： Reader Writer 通过 Channel 交换数据</span><br><span class="line">Writer ：数据写出模块，负责将数据从 DataX 导入目标数据系统</span><br></pre>
 
 <ul>
 <li><strong>实时数据同步</strong>：建立日志数据交换中心，通过服务器读取日志数据，或者解析数据库系统的 binlog 或归档日志，将增量数据以数据流的方式同步到日志交换中心，通知订阅数据仓库自动获取，通过 TimeTunnel（TT，实时数据传输平台）实现，是一种基于生产者、消费者和 Topic 消息标识的消息中间件，将消息数据持久化到 HBase 的高可用、分布式数据交互系统</li>
@@ -407,7 +407,7 @@
 <h1 id="数据计算"><a href="#数据计算" class="headerlink" title="数据计算"></a>数据计算</h1><p>阿里离线数据仓库的存储和计算都在阿里云大数据计算服务 MaxCompute 上完成</p>
 <h2 id="离线数据开发"><a href="#离线数据开发" class="headerlink" title="离线数据开发"></a>离线数据开发</h2><h3 id="离线计算平台-MaxCompute"><a href="#离线计算平台-MaxCompute" class="headerlink" title="离线计算平台 MaxCompute"></a>离线计算平台 MaxCompute</h3><p><strong>MaxCompute</strong>：采用抽象的作业处理框架 ，将不同场景的各种计算任务统一在同一个平台之上，共享安全、存储 、数据管理和资源调度，为来自不同用户需求的各种数据处理任务提供统一的编程接口和界面；提供数据上传／下载通道、SQL、MapReduce 、机器学习算法、图编程模型和流式计算模型多种计算分析服务，提供完善的安全解决方案</p>
 <ul>
-<li><strong>MaxCompute体系架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0101_MaxCompute%E6%9E%B6%E6%9E%84.png" alt="0101_MaxCompute架构"></li>
+<li><strong>MaxCompute体系架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0101_MaxCompute%E6%9E%B6%E6%9E%84.png" alt="0101_MaxCompute架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0101_MaxCompute%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p><strong>客户端</strong></p>
@@ -533,14 +533,14 @@
 </blockquote>
 <h2 id="任务调度系统"><a href="#任务调度系统" class="headerlink" title="任务调度系统"></a>任务调度系统</h2><p><strong>任务调度系统</strong>：整个调度系统共有两个核心模块：调度引擎（ Phoenix Engine ）和<br>执行引擎 Alisa ）；调度引擎的作用是根据任务节点属性及依赖关系进行实例化， 生成各类参数的实值，并生成调度树；执行引擎的作用是根据调度引擎生成的具体任务实例和配置信息，分配 CPU、内存、运行节点等资源 在任务对应的执行环境中运行节点代码</p>
 <ul>
-<li><strong>调度引擎</strong>：基于任务状态机模型、工作流状态机模型原理，以事件驱动的方式运行，为数据任务节点生成实例，并在调度树中生成具体执行的工作流；任务节点实例在工作流状态机、任务状态机和事件处理器之间转换，其中调度引擎只涉及任务状态机的未运行和 待运行两种状态，其他5种状态存在于执行引擎中<br><strong>调度引擎工作原理</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0102_Schedule_%E8%B0%83%E5%BA%A6%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="0102_Schedule_调度引擎工作原理"></li>
+<li><strong>调度引擎</strong>：基于任务状态机模型、工作流状态机模型原理，以事件驱动的方式运行，为数据任务节点生成实例，并在调度树中生成具体执行的工作流；任务节点实例在工作流状态机、任务状态机和事件处理器之间转换，其中调度引擎只涉及任务状态机的未运行和 待运行两种状态，其他5种状态存在于执行引擎中<br><strong>调度引擎工作原理</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0102_Schedule_%E8%B0%83%E5%BA%A6%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="0102_Schedule_调度引擎工作原理" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0102_Schedule_%E8%B0%83%E5%BA%A6%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p>Async Dispatcher ：异步处理任务调度<br>Sync Dispatcher ：同步处理任务调度<br>Task 事件处理器：任务事件处理器，与任务状态机交互<br>DAG 事件处理器：工作流事件处理器，与工作流状态机交互，一个DAG 事件处理器包含若干个 Task 件处理器</p>
 </blockquote>
-<p><strong>任务状态机模型</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0103_Schedule_%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" alt="0103_Schedule_任务状态机模型"><br><strong>工作流状态机模型</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0104_Schedule_%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" alt="0104_Schedule_工作流状态机模型"></p>
+<p><strong>任务状态机模型</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0103_Schedule_%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" alt="0103_Schedule_任务状态机模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0103_Schedule_%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"><br><strong>工作流状态机模型</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0104_Schedule_%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" alt="0104_Schedule_工作流状态机模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0104_Schedule_%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"></p>
 <ul>
-<li><strong>执行引擎</strong><br><strong>执行引擎逻辑架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0105_Schedule_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png" alt="0105_Schedule_执行引擎逻辑架构"></li>
+<li><strong>执行引擎</strong><br><strong>执行引擎逻辑架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0105_Schedule_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png" alt="0105_Schedule_执行引擎逻辑架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0105_Schedule_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p><strong>任务管理接口</strong>：供用户系统向 Alisa 中提交、查询和操作离线任务，并获得异步通知<br><strong>系统管理接口</strong>：供系统管理员进行后台管理，包括为集群增加新机器、划分资源组、查看集群资源和负载、追踪任务状态<br><strong>Driver</strong>：Alisa 的调度器，实现了任务管理接口和系统管理接口；负责任务的调度策略、集群容灾和伸缩、任务失效备援、负载均衡实现；采用可插拔替换的任务调度策略，满足不同的使用场景；使用 Resource manager 管理整个集群的负载；类似于 Hadoop 的 Job Tracker<br><strong>Task pool</strong>：Driver 将提交的各状态全部任务放入 Task pool 管理，包括等待资源、数据质量检测、运行中、运行成功和失败的所有任务；当用户获取到任务运行完成（成功或失败）的状态通知， Driver 将任务从 Task pool 中移除；Driver 和 Node 通过 Task pool 提供的事件机制进行可靠的通信；整个系统全部状态（除与运行无关的部分管理信息外）都保存在 Task pool 中，实现系统其他部分的高可用性和伸缩性；Task pool 采用 Zookeeper实现，本身也具备高可用能力<br><strong>Resource manager</strong>：专注于集群整体资源的管理<br><strong>Task container</strong>：为 Task 提供运行的容器，类似于 Web Server（Web Server 为 Action 提供运行的容器）；负责处理Task 的公共逻辑，如文件下载，任务级 Session 、流程级 Session的维护等；同时 Task container 负责收集机器的实际负载并上报给 Resource manager<br><strong>Session manager</strong>：对 Task session 进行管理<br><strong>Node</strong>：代表 Alisa 集群中的一个节点；负责提供任务运行所需的物理资源；Node 是逻辑概念，一台物理机器上可部署一个或者多个 Node（类似于 Hadoop 的 TaskTracker）</p>
@@ -556,21 +556,21 @@
 </ul>
 <h1 id="数据服务"><a href="#数据服务" class="headerlink" title="数据服务"></a>数据服务</h1><h2 id="数据服务架构"><a href="#数据服务架构" class="headerlink" title="数据服务架构"></a>数据服务架构</h2><p><strong>数据服务架构</strong>：阿里数据服务架构演进过程为 DWSOA、 OpenAPI、 SmartDQ 和OneService 的四个阶段</p>
 <ul>
-<li><strong>DWSOA架构</strong>：将业务方对数据的需求通过 SOA 服务的方式发布；由需求驱动，一个需求开发一个或者几个接口，编写接口文档，开放给业务方调用<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0106_DataService_DWSOA%E6%9E%B6%E6%9E%84.png" alt="0106_DataService_DWSOA架构"></li>
+<li><strong>DWSOA架构</strong>：将业务方对数据的需求通过 SOA 服务的方式发布；由需求驱动，一个需求开发一个或者几个接口，编写接口文档，开放给业务方调用<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0106_DataService_DWSOA%E6%9E%B6%E6%9E%84.png" alt="0106_DataService_DWSOA架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0106_DataService_DWSOA%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p>接口粒度比较粗，灵活性不高，扩展性差，复用率低<br>开发效率不高，无法快速响应业务</p>
 </blockquote>
 <ul>
-<li><strong>OpenAPI</strong>：将数据按照统计粒度进行聚合，同样维度的数据，形成一张逻辑表，采用同样的接口描述；有效地收敛接口数量<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0107_DataService_OpenAPI%E6%9E%B6%E6%9E%84.png" alt="0107_DataService_OpenAPI架构"></li>
-<li><strong>SmartDQ架构</strong>：在OpenAPI 的基础上抽象一层，用 DSL (Domain Specific Language ，领域专用语言）来描述取数需求；采用标准的 SQL 语法，做限制和特殊增强；封装标准 DataSource ，可以使用ORM (Object Relation Mapping ，对象关系映射）框架来解决对象关系映射问题，如Hibernate、 MyBatis；开放给业务方通过写 SQL 的方式对外提供服务；封装了跨异构数据源和分布式查询功能<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0108_DataService_SmartDQ%E6%9E%B6%E6%9E%84.png" alt="0108_DataService_SmartDQ架构"></li>
-<li><strong>OneService架构</strong>：提供OneService-SmartDQ、OneService-Lego、 OneService-iPush、 OneService-uTiming等多种服务类型来满足用户需求<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0109_DataService_OneService%E6%9E%B6%E6%9E%84.png" alt="0109_DataService_OneService架构"></li>
+<li><strong>OpenAPI</strong>：将数据按照统计粒度进行聚合，同样维度的数据，形成一张逻辑表，采用同样的接口描述；有效地收敛接口数量<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0107_DataService_OpenAPI%E6%9E%B6%E6%9E%84.png" alt="0107_DataService_OpenAPI架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0107_DataService_OpenAPI%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
+<li><strong>SmartDQ架构</strong>：在OpenAPI 的基础上抽象一层，用 DSL (Domain Specific Language ，领域专用语言）来描述取数需求；采用标准的 SQL 语法，做限制和特殊增强；封装标准 DataSource ，可以使用ORM (Object Relation Mapping ，对象关系映射）框架来解决对象关系映射问题，如Hibernate、 MyBatis；开放给业务方通过写 SQL 的方式对外提供服务；封装了跨异构数据源和分布式查询功能<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0108_DataService_SmartDQ%E6%9E%B6%E6%9E%84.png" alt="0108_DataService_SmartDQ架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0108_DataService_SmartDQ%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
+<li><strong>OneService架构</strong>：提供OneService-SmartDQ、OneService-Lego、 OneService-iPush、 OneService-uTiming等多种服务类型来满足用户需求<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0109_DataService_OneService%E6%9E%B6%E6%9E%84.png" alt="0109_DataService_OneService架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0109_DataService_OneService%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p>OneService-Lego：采用插件化方式开发服务， 一类需求开发一个插件，目前共生产5个插件；可以将插件做成微服务、用 Docker 做隔离避免插件之间相互影响<br>OneService-iPush：要提供 Web Socket 和 long polling 两种方式，主要用于商家端实时直播<br>OneService-uTiming：提供即时任务和定时任务两种模式，满足用户运行大数据量任务的需求</p>
 </blockquote>
 <h2 id="数据服务技术架构"><a href="#数据服务技术架构" class="headerlink" title="数据服务技术架构"></a>数据服务技术架构</h2><ul>
-<li><strong>SmartDQ应用架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0110_DataService_OneService-SmartDQ%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0110_DataService_OneService-SmartDQ应用架构"></li>
+<li><strong>SmartDQ应用架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0110_DataService_OneService-SmartDQ%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0110_DataService_OneService-SmartDQ应用架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0110_DataService_OneService-SmartDQ%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p>查询数据库：SmartDQ 底层支持多种数据源，可以通过实时公共层的计算作业直接将计算结果写入 HBase ；或通过同步作业将公共层的离线数据同步到对应的查询库<br>服务层</p>
@@ -582,16 +582,16 @@
 <p><strong>其他模块</strong>：专门用于性能及稳定性方面的优化</p>
 </blockquote>
 </blockquote>
-<p>  <strong>OneService-SmartDQ元数据模型架构</strong>：逻辑表到物理表的映射<br>  <img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0111_DataService_OneService-SmartDQ%E5%85%83%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84.png" alt="0111_DataService_OneService-SmartDQ元数据模型架构"></p>
+<p>  <strong>OneService-SmartDQ元数据模型架构</strong>：逻辑表到物理表的映射<br>  <img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0111_DataService_OneService-SmartDQ%E5%85%83%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84.png" alt="0111_DataService_OneService-SmartDQ元数据模型架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0111_DataService_OneService-SmartDQ%E5%85%83%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></p>
 <blockquote>
 <p>数据源：支持跨数据源查询，底层支持接人多种数据源，如MySQL、HBase、OpenSearch<br>物理表：是具体某个数据源中的一张表，每张物理表都需要指明主键列，明确统计粒度<br>逻辑表：可以理解为数据库中的视图、一张虚拟表；或由若干主键相同的物理表构成的大宽表<br>主题：逻辑表 般会挂载在某个主题下，以便进行管理与查找</p>
 </blockquote>
 <ul>
-<li><p><strong>iPush应用架构</strong>：面向 TT、MetaQ 等不同消息源，通过定制滤规则，向 Web 、无线等终端推送消息的中间件平台；核心服务器端基于高性能异步事件驱动模型的网络通信框架 Netty4 实现，结合使用 Guava 缓存实现本地注册信息存储， Filter 和 Server 之间的通信采用 Thrift 异步调用高效服务实现，消息基于 Disruptor 高性能的异步处理框架（最快的消息框架）的消息队列，在服务器运行中Zookeeper 实时监控服务器状态，通过 Diamond 作为统一的控制触发中心<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0112_DataService_OneService-iPush%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0112_DataService_OneService-iPush应用架构"></p>
+<li><p><strong>iPush应用架构</strong>：面向 TT、MetaQ 等不同消息源，通过定制滤规则，向 Web 、无线等终端推送消息的中间件平台；核心服务器端基于高性能异步事件驱动模型的网络通信框架 Netty4 实现，结合使用 Guava 缓存实现本地注册信息存储， Filter 和 Server 之间的通信采用 Thrift 异步调用高效服务实现，消息基于 Disruptor 高性能的异步处理框架（最快的消息框架）的消息队列，在服务器运行中Zookeeper 实时监控服务器状态，通过 Diamond 作为统一的控制触发中心<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0112_DataService_OneService-iPush%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0112_DataService_OneService-iPush应用架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0112_DataService_OneService-iPush%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></p>
 </li>
-<li><p><strong>Lego应用架构</strong>：面向中度和高度定制化数据查询需求、支持插件机制的服务容器；本身提供日志 、服务注册、 Diamond 配置监听、鉴权、数据源管理等一系列基础设施，数据服务由服务插件提供；采用轻量级的 Node.JS 技术核实现，适合处理高并发、低延迟的 IO 密集型场景 ，目前主要支撑用户识别发码、用户识别、用户画像、人群透视和人群圈选等在线服务；底层根据需求选用 Tair、HBase、ADS 存储数据<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0113_DataService_OneService-Lego%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0113_DataService_OneService-Lego应用架构"></p>
+<li><p><strong>Lego应用架构</strong>：面向中度和高度定制化数据查询需求、支持插件机制的服务容器；本身提供日志 、服务注册、 Diamond 配置监听、鉴权、数据源管理等一系列基础设施，数据服务由服务插件提供；采用轻量级的 Node.JS 技术核实现，适合处理高并发、低延迟的 IO 密集型场景 ，目前主要支撑用户识别发码、用户识别、用户画像、人群透视和人群圈选等在线服务；底层根据需求选用 Tair、HBase、ADS 存储数据<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0113_DataService_OneService-Lego%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0113_DataService_OneService-Lego应用架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0113_DataService_OneService-Lego%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></p>
 </li>
-<li><p><strong>uTiming应用架构</strong>：是基于在云端的任务调度应用，提供批量数据处理服务，支撑用户识别、用户画像、人群圈选三类服务的离线计算，以及用户识别、用户画像、人群透视的服务数据预处理、人库；uTiming-scheduler 负责调度执行 SQL 或特定配置的离线任务，用户使用数据超市工具或 Lego API 建立任务，保证任务调度接口透明<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0114_DataService_OneService-uTiming%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0114_DataService_OneService-uTiming应用架构"></p>
+<li><p><strong>uTiming应用架构</strong>：是基于在云端的任务调度应用，提供批量数据处理服务，支撑用户识别、用户画像、人群圈选三类服务的离线计算，以及用户识别、用户画像、人群透视的服务数据预处理、人库；uTiming-scheduler 负责调度执行 SQL 或特定配置的离线任务，用户使用数据超市工具或 Lego API 建立任务，保证任务调度接口透明<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0114_DataService_OneService-uTiming%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" alt="0114_DataService_OneService-uTiming应用架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0114_DataService_OneService-uTiming%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></p>
 </li>
 </ul>
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
@@ -681,8 +681,8 @@
 </blockquote>
 <p>云数据库 ApsaraDB for RDS （简称“ RDS ”）和表格存储（Table Store ）</p>
 <h1 id="数据挖掘"><a href="#数据挖掘" class="headerlink" title="数据挖掘"></a>数据挖掘</h1><p><strong>数据挖掘</strong>：包含特征数据与结果数据两类数据</p>
-<h2 id="阿里巴巴数据挖掘算法平台"><a href="#阿里巴巴数据挖掘算法平台" class="headerlink" title="阿里巴巴数据挖掘算法平台"></a>阿里巴巴数据挖掘算法平台</h2><p><strong>阿里巴巴数据挖掘算法平台</strong>：支持海量样本的高维特征训练，是基于阿里云 MaxCompute 的MPI 实现<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0115_MaxComputeMPI_%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="0115_MaxComputeMPI_处理流程"><br>伏羲为阿里云飞天系统的分布式调度系统，女娲为阿里云飞天系统的分布式一致性协同服务系统，盘古为阿里云飞天系统的分布式文件存储系统</p>
-<h3 id="挖掘数据中台"><a href="#挖掘数据中台" class="headerlink" title="挖掘数据中台"></a>挖掘数据中台</h3><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0116_%E6%8C%96%E6%8E%98%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0.png" alt="0116_挖掘数据中台"></p>
+<h2 id="阿里巴巴数据挖掘算法平台"><a href="#阿里巴巴数据挖掘算法平台" class="headerlink" title="阿里巴巴数据挖掘算法平台"></a>阿里巴巴数据挖掘算法平台</h2><p><strong>阿里巴巴数据挖掘算法平台</strong>：支持海量样本的高维特征训练，是基于阿里云 MaxCompute 的MPI 实现<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0115_MaxComputeMPI_%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="0115_MaxComputeMPI_处理流程" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0115_MaxComputeMPI_%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" class="lozad post-image"><br>伏羲为阿里云飞天系统的分布式调度系统，女娲为阿里云飞天系统的分布式一致性协同服务系统，盘古为阿里云飞天系统的分布式文件存储系统</p>
+<h3 id="挖掘数据中台"><a href="#挖掘数据中台" class="headerlink" title="挖掘数据中台"></a>挖掘数据中台</h3><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0116_%E6%8C%96%E6%8E%98%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0.png" alt="0116_挖掘数据中台" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0116_%E6%8C%96%E6%8E%98%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0.png" class="lozad post-image"></p>
 <ul>
 <li><strong>FDM 层</strong>：用于存储在模型训练前常用的特征指标，并进行统一的清洗和去噪处理，提升机器学习特征工程环节的效率</li>
 <li><strong>IDM 层</strong>：个体挖掘指标中间层，面向个体挖掘场景，用于存储通用性强的结果数据，主要包含商品、卖家、买家、行业等维度的个体数据挖掘的相关指标</li>
@@ -716,7 +716,7 @@
 <li><strong>市场行情</strong>：以行业分析、竞争情况为切入点，对市场动态进行分析</li>
 <li><strong>自助取数</strong>：提供数据定制、查询、导出等离端数据服务、灵活可配置，周期可定制</li>
 <li><strong>专题工具</strong>：着重专细分析和一站式优化工具，含竞争情报、流量纵横等</li>
-<li><strong>数据学院</strong>：教学相长，可帮助商家快速提升数据化运营能力<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0117_%E7%94%9F%E6%84%8F%E5%8F%82%E8%B0%8B%E6%9E%B6%E6%9E%84.png" alt="0117_生意参谋架构"><br><strong>看我情</strong>：优先关注自身店铺<br><strong>看行情</strong>：关注行业动态<br><strong>看敌情</strong>：在保障商家隐私和数据安全的前提下提供竞争分析</li>
+<li><strong>数据学院</strong>：教学相长，可帮助商家快速提升数据化运营能力<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0117_%E7%94%9F%E6%84%8F%E5%8F%82%E8%B0%8B%E6%9E%B6%E6%9E%84.png" alt="0117_生意参谋架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0117_%E7%94%9F%E6%84%8F%E5%8F%82%E8%B0%8B%E6%9E%B6%E6%9E%84.png" class="lozad post-image"><br><strong>看我情</strong>：优先关注自身店铺<br><strong>看行情</strong>：关注行业动态<br><strong>看敌情</strong>：在保障商家隐私和数据安全的前提下提供竞争分析</li>
 </ul>
 <h2 id="阿里数据产品平台"><a href="#阿里数据产品平台" class="headerlink" title="阿里数据产品平台"></a>阿里数据产品平台</h2><p><strong>数据产品</strong></p>
 <blockquote>
@@ -854,7 +854,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -901,7 +901,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -1042,21 +1042,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -1069,6 +1063,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -1104,6 +1104,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -1116,11 +1121,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -1144,7 +1144,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

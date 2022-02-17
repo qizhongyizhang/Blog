@@ -321,8 +321,8 @@
 <blockquote>
 <p>开启事务环境：begin/start transaction;<br>提交事务：commit; 将数据更新修改操作本地持久化，在物理层面执行更新修改；一般采取隐含提交，即提交（写或保存）操作是自动进行，开启事务后需要手动提交<br>回滚事务：rollback; 撤销数据的更新修改操作，可以回退整个事务，也可以回退到某个保留点；只能在一个事务处理内使用，不能回退CREATE或DROP操作<br>保留点：savepoint； 指事务处理中设置的临时占位符，可以进行回退；保留点在事务处理完成后自动释放</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">savepoint savepoint_name;  -- 申明保留点</span><br><span class="line">RELEASE SAVEPOINT;  -- 释放保留点</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set autocommit &#x3D; 0&#x2F;1;  -- 设置是否自动提交，1 为是，0 为否</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">savepoint savepoint_name;  -- 申明保留点</span><br><span class="line">RELEASE SAVEPOINT;  -- 释放保留点</span><br></pre>
+<pre class="highlight"><span class="line">set autocommit &#x3D; 0&#x2F;1;  -- 设置是否自动提交，1 为是，0 为否</span><br></pre>
 
 <h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>RU：read uncommited；读未提交，产生脏读<br>RC：read committed；读已提交，产生不可重复读<br>RR：repeatable read；可重复读，产生脏读（MySQL 在 RR 级别，脏读不存在）<br>Serializable：不存在事务并发问题，为读写都加锁，效率不高</p>
 <p>MySQL的 RC 和 RR 是通过 MVCC (多版本并发控制)机制实现：读不加锁，写加锁，读写不冲突</p>
@@ -482,7 +482,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -529,7 +529,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -670,21 +670,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -697,6 +691,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -732,6 +732,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -744,11 +749,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -772,7 +772,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

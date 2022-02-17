@@ -49,7 +49,7 @@
         content="2021-06-13">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -326,7 +326,7 @@
 <li>测试：url localhost:8080，可以访问则安装成功</li>
 <li>开放外网访问，需要打开防火墙，重启防火墙，重启Tomcat</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;sysconfig&#x2F;iptables</span><br><span class="line">加入-A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT</span><br><span class="line">service iptables restart</span><br><span class="line">service iptables status，查看当前防火墙状态</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">vim &#x2F;etc&#x2F;sysconfig&#x2F;iptables</span><br><span class="line">加入-A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT</span><br><span class="line">service iptables restart</span><br><span class="line">service iptables status，查看当前防火墙状态</span><br></pre>
 </blockquote>
 </blockquote>
 <p>Windows</p>
@@ -335,7 +335,7 @@
 <li>将下载的压缩包选择合适的位置解压即可</li>
 <li>配置环境变量</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CATALINA_HOME</span><br><span class="line">C:\Install\Tomcat\apache-tomcat-8.5.65</span><br><span class="line"></span><br><span class="line">TOMCAT_HOME</span><br><span class="line">C:\Install\Tomcat\apache-tomcat-8.5.65</span><br><span class="line"></span><br><span class="line">PATH 里面加上：%CATALINA_HOME%\lib;%CATALINA_HOME%\bin;%TOMCAT_HOME%\bin</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">CATALINA_HOME</span><br><span class="line">C:\Install\Tomcat\apache-tomcat-8.5.65</span><br><span class="line"></span><br><span class="line">TOMCAT_HOME</span><br><span class="line">C:\Install\Tomcat\apache-tomcat-8.5.65</span><br><span class="line"></span><br><span class="line">PATH 里面加上：%CATALINA_HOME%\lib;%CATALINA_HOME%\bin;%TOMCAT_HOME%\bin</span><br></pre>
 
 <ol start="3">
 <li>启动<ul>
@@ -345,7 +345,7 @@
 <li>关闭直接将弹出的 Java 黑窗关掉即可</li>
 </ul>
 </li>
-<li>测试：浏览器输入：localhost:8080，可以出现界面则安装成功<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/Tomcat_Start.png" alt="Tomcat_Start"></li>
+<li>测试：浏览器输入：localhost:8080，可以出现界面则安装成功<br><img src="https://alexedwardz.gitee.io/images/Tools/Java/Tomcat_Start.png" alt="Tomcat_Start" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Tools/Java/Tomcat_Start.png" class="lozad post-image"></li>
 </ol>
 </blockquote>
 <h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><p>问题1：若启动 Tomcat 时闪退，可在 startup.bat 文件最后加入 pause 保存退出，进行启动过程展示，定位问题</p>
@@ -481,7 +481,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -528,7 +528,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -669,21 +669,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -696,6 +690,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -731,6 +731,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -743,11 +748,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -771,7 +771,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

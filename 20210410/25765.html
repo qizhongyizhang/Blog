@@ -49,7 +49,7 @@
         content="2021-04-10">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-17">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -401,7 +401,7 @@
 <p>单向通信（单工通信）：只能有一个方向的通信而没有反方向的交互<br>双向交替通信（半双工通信）：通信的双方都可以发送信息，但不能双方同时发送(当然也就不能同时接收)<br>双向同时通信（全双工通信）：通信的双方可以同时发送和接收信息</p>
 </blockquote>
 <h2 id="信噪比"><a href="#信噪比" class="headerlink" title="信噪比"></a>信噪比</h2><p>香农公式：计算带宽受限且有高斯白噪声干扰的信道的极限、无差错的信息传输速率</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C &#x3D; W log2(1+S&#x2F;N) b&#x2F;s </span><br><span class="line">信道的极限信息传输速率为 C， W 为信道的带宽（以 Hz 为单位）；S 为信道内所传信号的平均功率；N 为信道内部的高斯噪声功率</span><br><span class="line">信道的带宽或信道中的信噪比越大，则信息的极限传输速率就越高</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">C &#x3D; W log2(1+S&#x2F;N) b&#x2F;s </span><br><span class="line">信道的极限信息传输速率为 C， W 为信道的带宽（以 Hz 为单位）；S 为信道内所传信号的平均功率；N 为信道内部的高斯噪声功率</span><br><span class="line">信道的带宽或信道中的信噪比越大，则信息的极限传输速率就越高</span><br></pre>
 
 <h2 id="信道复用"><a href="#信道复用" class="headerlink" title="信道复用"></a>信道复用</h2><blockquote>
 <p>频分复用：用户在分配到一定的频带后，在通信过程中自始至终都占用这个频带。频分复用的所有用户在同样的时间占用不同的带宽（频率带宽）资源<br>时分复用：将时间划分为一段段等长的时分复用帧（TDM 帧），每一个时分复用的用户在每一个 TDM帧中占用固定序号的时隙，所有用户是在各自的时间复用帧占用同样的频带宽度；（TDM信号也称为等时(isochronous)信号）<br>波分复用：波分复用就是光的频分复用<br>码分复用：各用户使用经过特殊挑选不会造成干扰的不同码型，常用的名词是码分多址 CDMA (Code Division Multiple Access)，这种系统发送的信号有强抗干扰能力，其频谱类似于白噪声，不易被敌人发现。 每一个比特时间划分为 m 个短的间隔，称为码片(chip)</p>
@@ -472,12 +472,12 @@
   
     <div class="nav-item-next">
       <a 
-        href="/20210410/51734.html" 
+        href="/20210410/16033.html" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">计算机-通识 </div>
+            <div class="nav-title">程序设计-通识 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -550,7 +550,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -597,7 +597,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -738,21 +738,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -765,6 +759,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -800,6 +800,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -812,11 +817,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -840,7 +840,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

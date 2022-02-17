@@ -49,7 +49,7 @@
         content="2021-05-16">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-09">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -316,11 +316,11 @@
     <p>写在前面：本文主要记录MySQL查询基础语法的相关内容，包括查询结构和查询顺序等</p>
 <span id="more"></span>
 
-<h1 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">书写规范</span><br><span class="line">select repeat_options select_expr </span><br><span class="line">from tb_name                    -- 可以对表进行重命名，便于书写</span><br><span class="line">where condition </span><br><span class="line">group by col_name_list </span><br><span class="line">	having condition </span><br><span class="line">order by col_name_list desc </span><br><span class="line">limit a[,b]</span><br><span class="line"></span><br><span class="line">允许子句 clause&#x2F;子查询 subquery</span><br><span class="line">可以对查询结果进行集合操作：交、并、差 ： union&#x2F;intersect&#x2F;except</span><br></pre></td></tr></table></figure>
+<h1 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h1><pre class="highlight"><span class="line">书写规范</span><br><span class="line">select repeat_options select_expr </span><br><span class="line">from tb_name                    -- 可以对表进行重命名，便于书写</span><br><span class="line">where condition </span><br><span class="line">group by col_name_list </span><br><span class="line">	having condition </span><br><span class="line">order by col_name_list desc </span><br><span class="line">limit a[,b]</span><br><span class="line"></span><br><span class="line">允许子句 clause&#x2F;子查询 subquery</span><br><span class="line">可以对查询结果进行集合操作：交、并、差 ： union&#x2F;intersect&#x2F;except</span><br></pre>
 
 <h2 id="语法结构"><a href="#语法结构" class="headerlink" title="语法结构"></a>语法结构</h2><ul>
 <li><strong>repeat_options</strong>：面对重复值的选项，有 all 和 distinct 两个选项，all：展示全部内容，包括重复值；distinct 去除重复值的所有内容；默认返回的数据不进行去重，多列视为一个元组，整体进行去重</li>
-<li><strong>select_expr</strong>：查询列可以是一个列名或表达式，多列之间使用逗号分割；AS(可省略，建议保留)为每一个列指明一个别名，可用于group by，having或 order by子句中，允许通配符 all 或 *；不建议使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 1+2    -- 可以使用表达式</span><br></pre></td></tr></table></figure></li>
+<li><strong>select_expr</strong>：查询列可以是一个列名或表达式，多列之间使用逗号分割；AS(可省略，建议保留)为每一个列指明一个别名，可用于group by，having或 order by子句中，允许通配符 all 或 *；不建议使用<pre class="highlight"><span class="line">select 1+2    -- 可以使用表达式</span><br></pre></li>
 <li><strong>from</strong>：可以是tb_name或者db_name.tb_name，多表使用逗号分割。AS(可省略，建议保留)为表名起别名。可以不存在表名，使用 dual 作为伪表名，来保证 sql 语法的兼容性（有些服务器要求必须有表名）</li>
 <li><strong>where</strong>：用于检索数据（先判断每条记录是否符合条件，符合则可以获取当前记录信息，否则不能获取；条件可由多个条件组合完成（and/or），比较运算产生的结果为1(TRUE)、0 (FALSE)或 NULL）</li>
 <li><strong>group by</strong>：根据一个或多个列对结果集进行分组（[GROUP BY {col_name | expr | position} [ASC | DESC], … [WITH ROLLUP]]，分组后，每组内显示一条记录，分组后查询其他字段就只是组内第一条记录的信息，不能准确表示组内所有数据信息，可利用分组字段进行排序显示结果，可以使用多个字段进行分组，每个字段可以设置排序规则，可以使用with rollup 进行组内聚合计算，与聚合函数一起使用，用于统计组内的信息）</li>
@@ -329,39 +329,39 @@
 <li><strong>limit</strong>：用于限制被SELECT语句返回的行数（[LIMIT {[offset,] row_count | row_count OFFSET offset}]，从offset索引位置开始获取row_count条记录）</li>
 </ul>
 <h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><p><strong>检索单列</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br></pre>
 <p><strong>检索多列</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_id, prod_name  from products;</span><br><span class="line">-- 检索 products 表中  prod_id、prod_name 列下的数据，多列之间用（,）分隔</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_id, prod_name  from products;</span><br><span class="line">-- 检索 products 表中  prod_id、prod_name 列下的数据，多列之间用（,）分隔</span><br></pre>
 <p><strong>检索所有列</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from products; </span><br><span class="line">-- 查询 products 表中所有数据，采用通配符星号（*）表示，也可以将所有字段全部 列举额出来；除非特殊需求，一般不建议查询所有列；可以检索出列名未知的列</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * from products; </span><br><span class="line">-- 查询 products 表中所有数据，采用通配符星号（*）表示，也可以将所有字段全部 列举额出来；除非特殊需求，一般不建议查询所有列；可以检索出列名未知的列</span><br></pre>
 <p><strong>去重检索</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select distinct prod_name from products;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，去重展示；默认返回的数据不进行去重</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select distinct prod_name from products;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，去重展示；默认返回的数据不进行去重</span><br></pre>
 <p><strong>限制结果</strong>：也叫分页</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products limit 5; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，仅展示5行</span><br><span class="line"></span><br><span class="line">select prod_name from products limit 5,10; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，从第5行开始展示10行，即5~14行；第一行的索引值为0，即 limit 5 &#x3D; limit 0,5 &#x3D; limit 5 offset 0</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products limit 5; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，仅展示5行</span><br><span class="line"></span><br><span class="line">select prod_name from products limit 5,10; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据，从第5行开始展示10行，即5~14行；第一行的索引值为0，即 limit 5 &#x3D; limit 0,5 &#x3D; limit 5 offset 0</span><br></pre>
 <p><strong>完全限定表名</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select products.prod_name from crashcourse.products; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select products.prod_name from crashcourse.products; </span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br></pre>
 <p><strong>排序数据</strong>：根据指定列的数据按照一定大小进行排序，asc：升序排序（从A到Z）或者 desc 降序排序（从Z到A），默认为升序；多个排序列也是通过逗号，分隔，优先级按照列名的前后顺序；可以为每个排序字段进行顺序指定；按照数据库的比较规则进行排序，一般默认 a 和 A 大小相同</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products order by prod_name asc &#x2F; desc;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_price from products order by prod_price [asc]&#x2F;desc limit 1  -- 查找某列最值</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products order by prod_name asc &#x2F; desc;</span><br><span class="line">-- 检索 products 表中 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_price from products order by prod_price [asc]&#x2F;desc limit 1  -- 查找某列最值</span><br></pre>
 
 <p><strong>过滤数据</strong>：根据指定的搜索条件检索所需数据，字符串类型需要引号进行限定，数值类型不需要</p>
 <blockquote>
 <p><strong>算术运算符</strong>：=/&lt;/&gt;/!=</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_price &#x3D; 2.5; </span><br><span class="line">--检索 products 表中 prod_price 等于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt; 2.5; </span><br><span class="line">--检索 products 表中 prod_price 小于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt;&#x3D; 2.5;</span><br><span class="line">-- 检索 products 表中 prod_price 小于或等于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt;&gt; 2.5;</span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 时 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_price &#x3D; 2.5; </span><br><span class="line">--检索 products 表中 prod_price 等于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt; 2.5; </span><br><span class="line">--检索 products 表中 prod_price 小于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt;&#x3D; 2.5;</span><br><span class="line">-- 检索 products 表中 prod_price 小于或等于 2.5 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price &lt;&gt; 2.5;</span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 时 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <p><strong>集合运算符</strong></p>
 <ul>
-<li>范围限定：BETWEEN min AND max：闭区间（大于等于，小于等于：min &lt;= expr &lt;= max）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_price between 2.5 and 3.0; </span><br><span class="line">-- 检索 products 表中 prod_price 大于等于 2.5 并且 小于或等于 3.0 时 prod_name 列下的数据</span><br><span class="line">结果包括指定的开始值和结束值，不同类型的数据库结果对边界值会有差别；相对于操作符，级别效率更高，但边界值不灵活</span><br></pre></td></tr></table></figure></li>
-<li>IN操作符：存在集合内的元素，指定条件范围，范围中的每个条件都可以进行匹配合法值的由逗号分隔的清单，全都括在圆括号中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_price in (2.5, 3.0); </span><br><span class="line">-- 检索 products 表中 prod_price 等于 2.5 或3.0 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price not in (2.5, 3.0); </span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre></td></tr></table></figure></li>
+<li>范围限定：BETWEEN min AND max：闭区间（大于等于，小于等于：min &lt;= expr &lt;= max）<pre class="highlight"><span class="line">select prod_name from products where prod_price between 2.5 and 3.0; </span><br><span class="line">-- 检索 products 表中 prod_price 大于等于 2.5 并且 小于或等于 3.0 时 prod_name 列下的数据</span><br><span class="line">结果包括指定的开始值和结束值，不同类型的数据库结果对边界值会有差别；相对于操作符，级别效率更高，但边界值不灵活</span><br></pre></li>
+<li>IN操作符：存在集合内的元素，指定条件范围，范围中的每个条件都可以进行匹配合法值的由逗号分隔的清单，全都括在圆括号中<pre class="highlight"><span class="line">select prod_name from products where prod_price in (2.5, 3.0); </span><br><span class="line">-- 检索 products 表中 prod_price 等于 2.5 或3.0 时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price not in (2.5, 3.0); </span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre></li>
 <li>Any操作符：任意一个</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x3D; any(数据集合) 相当于in</span><br><span class="line">&lt; any(数据集合) 小于最大值</span><br><span class="line">&gt; any(数据集合) 大于最小值</span><br><span class="line">!&#x3D;any(数据集合) 只要与集合内的一个元素不相等</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">&#x3D; any(数据集合) 相当于in</span><br><span class="line">&lt; any(数据集合) 小于最大值</span><br><span class="line">&gt; any(数据集合) 大于最小值</span><br><span class="line">!&#x3D;any(数据集合) 只要与集合内的一个元素不相等</span><br></pre>
 
 <ul>
 <li>All操作符：所有</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x3D; all(数据集合) 等于集合内的所有元素</span><br><span class="line">&lt; all(数据集合) 小于最小值</span><br><span class="line">&gt; all(数据集合) 大于最大值</span><br><span class="line">!&#x3D;all(数据集合) 相当于not in</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">&#x3D; all(数据集合) 等于集合内的所有元素</span><br><span class="line">&lt; all(数据集合) 小于最小值</span><br><span class="line">&gt; all(数据集合) 大于最大值</span><br><span class="line">!&#x3D;all(数据集合) 相当于not in</span><br></pre>
 
 <ul>
 <li>Some操作符：一些，语法上与any一致，not some() 等价于 !=any()</li>
@@ -371,27 +371,27 @@
 <blockquote>
 <p><strong>空值检查</strong>：一个列不包含值时，称其为包含空值NULL</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_price IS NULL; </span><br><span class="line">select prod_name from products where ISNULL( prod_price);</span><br><span class="line">-- 检索 products 表中 prod_price 为空（无值，no value）时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price IS NOT NULL; </span><br><span class="line">-- 检索 products 表中 prod_price 不为空时 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_price IS NULL; </span><br><span class="line">select prod_name from products where ISNULL( prod_price);</span><br><span class="line">-- 检索 products 表中 prod_price 为空（无值，no value）时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price IS NOT NULL; </span><br><span class="line">-- 检索 products 表中 prod_price 不为空时 prod_name 列下的数据</span><br></pre>
 <blockquote>
 <p><strong>LIKE通配符</strong>：用来匹配值的一部分的特殊字符，支持百分号（%）通配符和下划线（_）通配符；% 匹配任意个字符，包括0个；_ 只能匹配一个字符，代表该位置有且仅有一个字符，通配符可用于匹配字符的任意位置，根据需要进行选择，如 A%c、A%、%c 等；且此时是区分大小写的，ABC 和 ABc 是不同的数据，上文只能匹配 ABc，无法匹配 ABC；尽量不使用通配符，查询效率较低</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name like &#39;%ABc%&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 的 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_name like &#39;_ABc_&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 且长度为5的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name like &#39;%ABc%&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 的 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_name like &#39;_ABc_&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 且长度为5的 prod_name 列下的数据</span><br></pre>
 <blockquote>
 <p><strong>NOT操作符</strong>：否定它之后所跟的任何条件，包括集合运算、空值检查、Like通配符等</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_price IS NOT NULL;</span><br><span class="line">-- 检索 products 表中 prod_price 不为空时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_price IS NOT NULL;</span><br><span class="line">-- 检索 products 表中 prod_price 不为空时 prod_name 列下的数据</span><br><span class="line"></span><br><span class="line">select prod_name from products where prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <p><strong>逻辑操作符</strong>：多条件过滤，将上文的多重过滤条件进行逻辑组合，支持 AND/&amp;&amp; 操作符和 OR/|| 操作符</p>
 <ul>
 <li><p>AND操作符：也可以用 &amp;&amp; 表示，只有前后的条件都满足才能匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where vend_id &#x3D; 1001 and&#x2F;&amp;&amp; prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 vend_id &#x3D; 1001 并且prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">select prod_name from products where vend_id &#x3D; 1001 and&#x2F;&amp;&amp; prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 vend_id &#x3D; 1001 并且prod_price 不等于 2.5 且不等于 3.0 时 prod_name 列下的数据</span><br></pre></li>
 <li><p>OR操作符：也可以用 || 表示，前后条件满足一个即可匹配</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where vend_id &#x3D; 1001 or&#x2F;|| prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 vend_id &#x3D; 1001 或者（prod_price 不等于 2.5 且不等于 3.0 ）时 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where vend_id &#x3D; 1001 or&#x2F;|| prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中 vend_id &#x3D; 1001 或者（prod_price 不等于 2.5 且不等于 3.0 ）时 prod_name 列下的数据</span><br></pre>
 <ul>
-<li>XOR操作符：异或，两个条件都满足，则结果为 0；两个条件只满足一个，则结果为 1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where vend_id &#x3D; 1001 xor prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中仅满足 vend_id &#x3D; 1001 、 prod_price 不等于 2.5 且不等于 3.0 其中一个条件的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<li>XOR操作符：异或，两个条件都满足，则结果为 0；两个条件只满足一个，则结果为 1<pre class="highlight"><span class="line">select prod_name from products where vend_id &#x3D; 1001 xor prod_price not in (2.5, 3.0);</span><br><span class="line">-- 检索 products 表中仅满足 vend_id &#x3D; 1001 、 prod_price 不等于 2.5 且不等于 3.0 其中一个条件的 prod_name 列下的数据</span><br></pre>
 <blockquote>
 <p>AND 操作符的优先级高于 OR 操作符，在处理 OR 操作符前，优先处理 AND 操作符；可使用<strong>圆括号</strong>明确地分组相应的操作符，提高对应运算的优先级</p>
 </blockquote>
@@ -401,28 +401,28 @@
 <blockquote>
 <p><strong>正则表达式</strong>：用来匹配文本的特殊的串（字符集合），使用 REGEXP 关键字进行申明</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name regexp &#39;ABc&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name regexp &#39;ABc&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 的 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <ul>
 <li>进行OR匹配：搜索两个串其中的一个，用“|”连接</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name regexp &#39;ABc|ABC&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 或 ABC 的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name regexp &#39;ABc|ABC&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABc 或 ABC 的 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <ul>
 <li>匹配字符集：自定义匹配字符集，用[]包裹，可用[^]进行否定</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name regexp &#39;[ABCc]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABCc其中之一的 prod_name 列下的数据</span><br><span class="line">select prod_name from products where prod_name regexp &#39;[^ABCc]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 不带有 ABCc其中任意之一的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name regexp &#39;[ABCc]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有 ABCc其中之一的 prod_name 列下的数据</span><br><span class="line">select prod_name from products where prod_name regexp &#39;[^ABCc]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 不带有 ABCc其中任意之一的 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <ul>
 <li>匹配范围：用集合来定义要匹配的一个或多个字符，如 0-9表示 0123456789，a-z表示所有小写字母，A-Z表示所有大写字母；也可以是一部分范围，如1-5，a-d等</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name regexp &#39;[0-9a-zA-Z]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 存在数字或大小写字母的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name regexp &#39;[0-9a-zA-Z]&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 存在数字或大小写字母的 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <table>
@@ -485,7 +485,7 @@
 <li>匹配特殊字符：转义特殊符号的字符，用\进行转义</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select prod_name from products where prod_name regexp &#39;\\.&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有.的 prod_name 列下的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select prod_name from products where prod_name regexp &#39;\\.&#39;;</span><br><span class="line">-- 检索 products 表中 prod_name 带有.的 prod_name 列下的数据</span><br></pre>
 
 <blockquote>
 <table>
@@ -521,12 +521,12 @@
 <blockquote>
 <p><strong>过滤分组</strong>：通过 having 子句对分组结果进行筛选，用法与where相似；WHERE排除的行不包括在分组中</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select col_name from tb_name group by col_name_list having condition;</span><br><span class="line">-- 将数据按照 col_name_list 进行分组，按照 condition 过滤分组</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select col_name from tb_name group by col_name_list having condition;</span><br><span class="line">-- 将数据按照 col_name_list 进行分组，按照 condition 过滤分组</span><br></pre>
 
 <blockquote>
 <p><strong>注意事项</strong><br>GROUP BY子句可以包含任意数目的列<br>数据在最后规定的分组上进行汇总<br>GROUP BY子句中列出的每个列都必须是检索列或有效的表达式，不能是聚集函数<br>除聚集计算语句外，SELECT语句中的每个列都必须在GROUP BY子句中给出<br>如果分组列中具有NULL值，则NULL将作为一个分组返回<br>GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前</p>
 </blockquote>
-<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><h3 id="系统执行顺序"><a href="#系统执行顺序" class="headerlink" title="系统执行顺序"></a>系统执行顺序</h3><p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Select_Order.png" alt="Data_Select_Order"></p>
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><h3 id="系统执行顺序"><a href="#系统执行顺序" class="headerlink" title="系统执行顺序"></a>系统执行顺序</h3><p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Select_Order.png" alt="Data_Select_Order" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Select_Order.png" class="lozad post-image"></p>
 <p>MySQL可以分为Server层和存储引擎层<br>Server层：连接器、查询缓存区、解析器、优化器、执行器，支持客户端与存储引擎层进行交互<br>存储引擎层：负责数据的存储和提取，架构是插件式</p>
 <ol>
 <li>客户端通过连接器连接上数据库服务端，由连接器负责建立、维持和管理连接，获取权限</li>
@@ -615,10 +615,10 @@
 </tr>
 </tbody></table>
 <h3 id="语句执行顺序"><a href="#语句执行顺序" class="headerlink" title="语句执行顺序"></a>语句执行顺序</h3><p><strong>语句执行顺序</strong>：from -&gt; on -&gt; join -&gt; where -&gt; group by -&gt; having -&gt; select -&gt; distinct -&gt; order by -&gt; limit<br>解析顺序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from : 对查询指定的表计算笛卡尔积</span><br><span class="line">on   ： 按照 join_condition 过滤数据</span><br><span class="line">join ： 关联外部表获取数据</span><br><span class="line">where： 按照 where_condition 过滤数据</span><br><span class="line">group by： 进行分组</span><br><span class="line">having：按照 having_condition 过滤数据</span><br><span class="line">select：选择指定列</span><br><span class="line">distinct： 进行去重</span><br><span class="line">order by：按照 order_condition 过滤数据</span><br><span class="line">limit ：取出指定数量的记录</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">from : 对查询指定的表计算笛卡尔积</span><br><span class="line">on   ： 按照 join_condition 过滤数据</span><br><span class="line">join ： 关联外部表获取数据</span><br><span class="line">where： 按照 where_condition 过滤数据</span><br><span class="line">group by： 进行分组</span><br><span class="line">having：按照 having_condition 过滤数据</span><br><span class="line">select：选择指定列</span><br><span class="line">distinct： 进行去重</span><br><span class="line">order by：按照 order_condition 过滤数据</span><br><span class="line">limit ：取出指定数量的记录</span><br></pre>
 
 <h2 id="子查询-subquery"><a href="#子查询-subquery" class="headerlink" title="子查询 - subquery"></a>子查询 - subquery</h2><p><strong>子查询</strong>：指的是一个查询语句被其他语句包裹，子查询和外部查询可以是任意表，不要求是同表；子查询总是从内向外处理；子查询可以迭代多次</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from (select_result) where condition in (select_result);</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * from (select_result) where condition in (select_result);</span><br></pre>
 
 <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
 <li><p><strong>返回值</strong></p>
@@ -639,7 +639,7 @@
 </blockquote>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select * from employees a</span><br><span class="line">where not exists (</span><br><span class="line"> select emp_no from dept_emp b</span><br><span class="line"> where a.emp_no &#x3D; b.emp_no</span><br><span class="line">);</span><br><span class="line">-- 查找 employees 表中 emp_no 不出现在 dept_emp 表中的所有信息</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * from employees a</span><br><span class="line">where not exists (</span><br><span class="line"> select emp_no from dept_emp b</span><br><span class="line"> where a.emp_no &#x3D; b.emp_no</span><br><span class="line">);</span><br><span class="line">-- 查找 employees 表中 emp_no 不出现在 dept_emp 表中的所有信息</span><br></pre>
 
 <blockquote>
 <ul>
@@ -651,12 +651,12 @@
 <p>子查询必须位于小括号中<br>子查询外部语句可以是：SELECT, INSERT, UPDATE, DELETE, SET 或 DO<br>不能在子查询时修改</p>
 </blockquote>
 <h2 id="横向连接-JOIN"><a href="#横向连接-JOIN" class="headerlink" title="横向连接 - JOIN"></a>横向连接 - JOIN</h2><p><strong>横向连接</strong>：关联多张表进行查询；没有条件就是笛卡尔积，先进行连接，再判断是否保留，一般大表在左，小表在右；连接表的数量没有限制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors, products</span><br><span class="line">where vendors.vend_id &#x3D; products.vend_id</span><br><span class="line">order by vend_name,prod_name</span><br><span class="line"></span><br><span class="line">tb_left join tb_right 连接条件</span><br><span class="line">inner&#x2F;outer&#x2F;natural&#x2F;cross&#x2F;Left&#x2F;right join </span><br><span class="line">where&#x2F;on&#x2F;using() tb_left.Column &#x3D; tb_right.Column；一定要给出连接条件，否则两表进行一一配对，返回结果形成笛卡尔积，浪费资源</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors, products</span><br><span class="line">where vendors.vend_id &#x3D; products.vend_id</span><br><span class="line">order by vend_name,prod_name</span><br><span class="line"></span><br><span class="line">tb_left join tb_right 连接条件</span><br><span class="line">inner&#x2F;outer&#x2F;natural&#x2F;cross&#x2F;Left&#x2F;right join </span><br><span class="line">where&#x2F;on&#x2F;using() tb_left.Column &#x3D; tb_right.Column；一定要给出连接条件，否则两表进行一一配对，返回结果形成笛卡尔积，浪费资源</span><br></pre>
 
 <ul>
 <li><strong>内连接</strong>：左右两边的数据都存在才能进行连接（内连接），内连接可以省略连接条件：左表的所有数据都要与右表的所有数据进行连接/笛卡尔积连接（M &gt; &gt; N），可以使用 cross join 替代 inner join，默认是 inner join（可省写为join）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors inner join products</span><br><span class="line">on vendors.vend_id &#x3D; products.vend_id</span><br><span class="line">-- 返回 vend_id 同时存在于 vendors 和 products 两张表的数据</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors inner join products</span><br><span class="line">on vendors.vend_id &#x3D; products.vend_id</span><br><span class="line">-- 返回 vend_id 同时存在于 vendors 和 products 两张表的数据</span><br></pre>
 
 <ul>
 <li><strong>外连接</strong>：如果存在左右两边不能匹配的数据，也会进行连接，此时匹配不上的记录用null值填充字段，Mysql暂时不支持全外连接。外连接不能使用where条件，不能省略连接条件</li>
@@ -668,12 +668,12 @@
 <li>全外连接：left join union right join(full outer join)，两边的数据都保留，MySQL不支持全外连接</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors left&#x2F;right&#x2F;full [outer] join products</span><br><span class="line">on vendors.vend_id &#x3D; products.vend_id</span><br><span class="line"></span><br><span class="line">left：返回 vend_id 存在于 vendors 表中的数据，不能匹配的数据置空</span><br><span class="line">right：返回 vend_id 存在于 products 表中的数据，不能匹配的数据置空</span><br><span class="line">full：返回 vend_id 存在于 vendors 和 products 两张表中数据的交集，不能匹配的数据置空</span><br><span class="line">outer 关键字可以省略，连接条件由 on 给出</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select vend_name, prod_name, prod_price</span><br><span class="line">from vendors left&#x2F;right&#x2F;full [outer] join products</span><br><span class="line">on vendors.vend_id &#x3D; products.vend_id</span><br><span class="line"></span><br><span class="line">left：返回 vend_id 存在于 vendors 表中的数据，不能匹配的数据置空</span><br><span class="line">right：返回 vend_id 存在于 products 表中的数据，不能匹配的数据置空</span><br><span class="line">full：返回 vend_id 存在于 vendors 和 products 两张表中数据的交集，不能匹配的数据置空</span><br><span class="line">outer 关键字可以省略，连接条件由 on 给出</span><br></pre>
 
 <ul>
 <li><strong>自连接</strong>：左表与右表为同一张表，通过定义别名进行区分</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select p1.prod_id,p2.prod_name</span><br><span class="line">from products as p1, products as p2</span><br><span class="line">where p1.vend_id &#x3D; p2.vend_id and p2.prod_id &#x3D; &#39;DTNTR&#39;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select p1.prod_id,p2.prod_name</span><br><span class="line">from products as p1, products as p2</span><br><span class="line">where p1.vend_id &#x3D; p2.vend_id and p2.prod_id &#x3D; &#39;DTNTR&#39;</span><br></pre>
 
 <ul>
 <li><strong>自然连接</strong>：natural left/right join，mysql自动判断连接条件，通过多表的相同字段自动进行连接，且每个表只返回一次；支持内自然连接和外自然连接，重复列只出现一次</li>
@@ -694,16 +694,16 @@
 </ul>
 </blockquote>
 <h2 id="纵向连接-UNION"><a href="#纵向连接-UNION" class="headerlink" title="纵向连接 - UNION"></a>纵向连接 - UNION</h2><p><strong>纵向连接</strong>：UNION 用于把来自许多 SELECT 语句的结果组合到一个结果集合中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select vend_id, prod_id, prod_price</span><br><span class="line">from products</span><br><span class="line">where prod_price &lt;&#x3D; 5</span><br><span class="line">union</span><br><span class="line">select vend_id, prod_id, prod_price</span><br><span class="line">from products</span><br><span class="line">where vend_id in (1001,1002);</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select vend_id, prod_id, prod_price</span><br><span class="line">from products</span><br><span class="line">where prod_price &lt;&#x3D; 5</span><br><span class="line">union</span><br><span class="line">select vend_id, prod_id, prod_price</span><br><span class="line">from products</span><br><span class="line">where vend_id in (1001,1002);</span><br></pre>
 
 <p><strong>注意</strong>：</p>
 <blockquote>
 <p>要求查询结果的字段数要求一致，字段类型也应一致<br>数据列是根据列的顺序进行匹配，而不是根据列名称；在第一个SELECT语句中被使用的列名称被用于结果的列名称<br>默认使用 DISTINCT 去除重复行，可通过 ALL 关键字申明保留<br>如要对 union 的结果作为整体进行排序或 limit，需要对单个地SELECT语句加圆括号限定范围，在联合后的结果增加 order by 或 limit；order by引用的数据列来自最后一个select<br>分别排序，再联合，则需要用括号将各select语句括起来，且order by只能在limit 出现时才有效</p>
 </blockquote>
 <h2 id="校对规则"><a href="#校对规则" class="headerlink" title="校对规则"></a>校对规则</h2><p><strong>校对规则</strong>：比较数据的大小关系，进行排序操作；如果参与比较的数据类型不同，则会发生类型转换<br><strong>显示校对规则</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show collation;   -- 显示所有可用的校对，以及它们适用的字符集；区分大小写由_cs表示，不区分大小写由_ci表示</span><br><span class="line">show variables like &#39;character%&#39;;  -- 显示字符集</span><br><span class="line">show variables like &#39;collation%&#39;;  -- 显示排序规则</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">show collation;   -- 显示所有可用的校对，以及它们适用的字符集；区分大小写由_cs表示，不区分大小写由_ci表示</span><br><span class="line">show variables like &#39;character%&#39;;  -- 显示字符集</span><br><span class="line">show variables like &#39;collation%&#39;;  -- 显示排序规则</span><br></pre>
 <p><strong>设定字符集</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">create table tb_name(</span><br><span class="line">...</span><br><span class="line">)default character set hebrew collate hebrew_general_ci;</span><br><span class="line"></span><br><span class="line">可针对列设置字符集</span><br><span class="line">create table tb_name(</span><br><span class="line">...</span><br><span class="line">col_name varchar(10) character set latinl collate latinl_general_ci</span><br><span class="line">)default character set hebrew collate hebrew_general_ci;</span><br><span class="line"></span><br><span class="line">临时设置比较规则，COLLATE 还可以用于 GROUP BY、HAVING、聚集函数、别名等</span><br><span class="line">select user_id from user_info order by first_name collate latinl_general_ci desc;</span><br><span class="line"></span><br><span class="line">可以使用 Cast() 或 Convert() 函数实现串在字符集之间转换</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">create table tb_name(</span><br><span class="line">...</span><br><span class="line">)default character set hebrew collate hebrew_general_ci;</span><br><span class="line"></span><br><span class="line">可针对列设置字符集</span><br><span class="line">create table tb_name(</span><br><span class="line">...</span><br><span class="line">col_name varchar(10) character set latinl collate latinl_general_ci</span><br><span class="line">)default character set hebrew collate hebrew_general_ci;</span><br><span class="line"></span><br><span class="line">临时设置比较规则，COLLATE 还可以用于 GROUP BY、HAVING、聚集函数、别名等</span><br><span class="line">select user_id from user_info order by first_name collate latinl_general_ci desc;</span><br><span class="line"></span><br><span class="line">可以使用 Cast() 或 Convert() 函数实现串在字符集之间转换</span><br></pre>
 
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote>
 <ul>
@@ -838,7 +838,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -885,7 +885,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -1026,21 +1026,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -1053,6 +1047,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -1088,6 +1088,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -1100,11 +1105,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -1128,7 +1128,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

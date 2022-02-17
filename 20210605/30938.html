@@ -49,7 +49,7 @@
         content="2021-06-05">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-04">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>1.4k 字</span>
+      <span>1.3k 字</span>
     
   </div>
   
@@ -331,7 +331,7 @@
 <li><strong>封装</strong></li>
 <li><strong>继承</strong></li>
 <li><strong>多态</strong></li>
-<li>跨平台：通过JVM实现跨平台，Windows、Linux、Mac都有各自的JVM运行字节码文件（.class），一次编译全平台运行<br><img src="https://alexedwardz.gitee.io/images/Java/Java_KuaPingTai%E5%8E%9F%E7%90%86.png" alt="Java_KuaPingTai原理"></li>
+<li>跨平台：通过JVM实现跨平台，Windows、Linux、Mac都有各自的JVM运行字节码文件（.class），一次编译全平台运行<br><img src="https://alexedwardz.gitee.io/images/Java/Java_KuaPingTai%E5%8E%9F%E7%90%86.png" alt="Java_KuaPingTai原理" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Java/Java_KuaPingTai%E5%8E%9F%E7%90%86.png" class="lozad post-image"></li>
 <li>健壮性，由强制类型检查、自动回收垃圾、异常处理保证</li>
 <li>自动回收垃圾（GC:Garbage Collection）<ul>
 <li>通过引用计数法和根搜索算法（引用链：Reference Chain）判断是否为垃圾</li>
@@ -349,12 +349,12 @@
 <li>傻瓜安装，选择安装路径，持续下一步</li>
 <li>配置环境变量：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Windows：</span><br><span class="line">依次打开我的电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量，</span><br><span class="line">新建JAVA_HOME：变量名为JAVA_HOME；变量值为Java的安装目录</span><br><span class="line">编辑PATH：加入%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</span><br><span class="line">编辑CLASSPATH：加入%JAVA_HOME%\bin\dt.jar;%JAVA_HOME%\bin\tools.jar</span><br><span class="line"></span><br><span class="line">Linux：</span><br><span class="line">JAVA_HOME：Java的安装目录</span><br><span class="line">PATH：.&#x2F;JAVA_HOME&#x2F;lib;$JAVA_HOME&#x2F;jre&#x2F;lib:$PATH</span><br><span class="line">Linux需要注销用户，环境变量才能生效：在3运行级别下使用logout指令，在5运行级别下点击退出-注销-重新登陆</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Windows：</span><br><span class="line">依次打开我的电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量，</span><br><span class="line">新建JAVA_HOME：变量名为JAVA_HOME；变量值为Java的安装目录</span><br><span class="line">编辑PATH：加入%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</span><br><span class="line">编辑CLASSPATH：加入%JAVA_HOME%\bin\dt.jar;%JAVA_HOME%\bin\tools.jar</span><br><span class="line"></span><br><span class="line">Linux：</span><br><span class="line">JAVA_HOME：Java的安装目录</span><br><span class="line">PATH：.&#x2F;JAVA_HOME&#x2F;lib;$JAVA_HOME&#x2F;jre&#x2F;lib:$PATH</span><br><span class="line">Linux需要注销用户，环境变量才能生效：在3运行级别下使用logout指令，在5运行级别下点击退出-注销-重新登陆</span><br></pre>
 
 <ol start="5">
 <li>测试：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac：编译</span><br><span class="line">java：执行</span><br><span class="line">注：javac将.java文件编译形成.class文件，java将.class文件里面的主类加载到JVM里面运行，当.java文件修改后，需要重新编译，在运行新生成的.class文件</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">java -version</span><br><span class="line">javac：编译</span><br><span class="line">java：执行</span><br><span class="line">注：javac将.java文件编译形成.class文件，java将.class文件里面的主类加载到JVM里面运行，当.java文件修改后，需要重新编译，在运行新生成的.class文件</span><br></pre>
 
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>标识符：对各种变量、方法和类等命令是使用的字符序列，即自定义的名称<br>以字母、数字、下划线_和$(美元符号)组成，不能以数字开头，不能使用关键字和保留字，但可以包含，区分大小写，长度不限制，标识符不能包含空格</p>
 <ul>
@@ -368,7 +368,7 @@
 <li>多行注释：形如/* 内容 */，不允许多行注释嵌套多行注释</li>
 <li>文档注释：生成一套以网页文件形式体现的该程序的说明文档，一般写在类里面，通常用于对方法和类进行注释</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式</span><br><span class="line">&#x2F;\*\*</span><br><span class="line">\* @javadoc标签</span><br><span class="line">\* @version</span><br><span class="line">...</span><br><span class="line">\*&#x2F;</span><br><span class="line">输出：javadoc -d 保存路径 -javadoc标签 源文件名</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">格式</span><br><span class="line">&#x2F;\*\*</span><br><span class="line">\* @javadoc标签</span><br><span class="line">\* @version</span><br><span class="line">...</span><br><span class="line">\*&#x2F;</span><br><span class="line">输出：javadoc -d 保存路径 -javadoc标签 源文件名</span><br></pre>
 
 <h1 id="编写规范"><a href="#编写规范" class="headerlink" title="编写规范"></a>编写规范</h1><ul>
 <li>行宽不要超过80个字符</li>
@@ -380,7 +380,7 @@
 <li>Java源文件编译后，每一个类都会生成一个对应的.class文件</li>
 <li>Java应用程序的执行入口是main()方法，有固定的书写格式：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	程序段</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	程序段</span><br><span class="line">&#125;</span><br></pre>
 
 <ul>
 <li>Java语言严格区分大小写，每条语句以分号’；’结束，包裹程序段的大括号成对出现</li>
@@ -514,7 +514,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -561,7 +561,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -702,21 +702,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -729,6 +723,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -764,6 +764,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -776,11 +781,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -804,7 +804,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

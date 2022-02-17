@@ -49,7 +49,7 @@
         content="2021-04-13">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -303,7 +303,7 @@
     <p>写在前面：本文主要记录Shell编程的相关知识</p>
 <span id="more"></span>
 
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Shell是一个命令行解释器，为用户提供一个项Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来启动、挂起、停止和编写程序<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png" alt="Shell_Principle"></p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Shell是一个命令行解释器，为用户提供一个项Linux内核发送请求以便运行程序的界面系统级程序，用户可以用Shell来启动、挂起、停止和编写程序<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png" alt="Shell_Principle" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Shell_Principle.png" class="lozad post-image"></p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li>Shell脚本以#!/bin/bash开始，告诉系统使用bash进行解析</li>
 <li>脚本需要可执行权限</li>
@@ -326,7 +326,7 @@
 <p>查看所有系统变量：set</p>
 </blockquote>
 <p><strong>用户自定义变量</strong>：用户定义变量，仅对当前脚本有效<br><strong>定义</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">普通变量：variable_name&#x3D;value，等号两端不要有空格</span><br><span class="line">静态变量：readonly variable_name&#x3D;value，静态变量不能注销 unset</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">普通变量：variable_name&#x3D;value，等号两端不要有空格</span><br><span class="line">静态变量：readonly variable_name&#x3D;value，静态变量不能注销 unset</span><br></pre>
 
 <blockquote>
 <p>定义规则</p>
@@ -363,7 +363,7 @@
 <li>$((运算表达式))或$[运算表达式]（推荐）</li>
 <li>expr m +，-，*，/，% n：加、减、乘、除、取余，可嵌套使用，也可计算中间值</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RESULT&#x3D;$(((2 * 3) + 4))</span><br><span class="line">RESULT&#x3D;$[(2 * 3) + 4]    # 推荐</span><br><span class="line"></span><br><span class="line"># 嵌套使用</span><br><span class="line">RESULT&#x3D;expr expr 2 \* 3  + 4</span><br><span class="line"></span><br><span class="line"># 计算中间值</span><br><span class="line">TEMP&#x3D;&#96;expr 2 \* 5&#96;</span><br><span class="line">RESULT1&#x3D;&#96;expr $TEMP + 4&#96;</span><br><span class="line">注：使用expr时，需要用反引号包裹，运算符两边需要加上空格</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">RESULT&#x3D;$(((2 * 3) + 4))</span><br><span class="line">RESULT&#x3D;$[(2 * 3) + 4]    # 推荐</span><br><span class="line"></span><br><span class="line"># 嵌套使用</span><br><span class="line">RESULT&#x3D;expr expr 2 \* 3  + 4</span><br><span class="line"></span><br><span class="line"># 计算中间值</span><br><span class="line">TEMP&#x3D;&#96;expr 2 \* 5&#96;</span><br><span class="line">RESULT1&#x3D;&#96;expr $TEMP + 4&#96;</span><br><span class="line">注：使用expr时，需要用反引号包裹，运算符两边需要加上空格</span><br></pre>
 
 <h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h3 id="条件判断—CONDITION"><a href="#条件判断—CONDITION" class="headerlink" title="条件判断—CONDITION"></a>条件判断—CONDITION</h3><p>[ 条件 ]，条件两端有空格，非空为true，可使用$?判断（0为true，&gt;1为false）<br><strong>两个整数比较</strong></p>
 <blockquote>
@@ -377,23 +377,23 @@
 <blockquote>
 <p>-f：文件存在且是一个常规文件<br>-e：文件存在<br>-d：文件存在并且是一个目录</p>
 </blockquote>
-<h3 id="if分支"><a href="#if分支" class="headerlink" title="if分支"></a>if分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">	程序段</span><br><span class="line">[elif conditon</span><br><span class="line">then</span><br><span class="line">	程序段]</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="if分支"><a href="#if分支" class="headerlink" title="if分支"></a>if分支</h3><pre class="highlight"><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">	程序段</span><br><span class="line">[elif conditon</span><br><span class="line">then</span><br><span class="line">	程序段]</span><br><span class="line">fi</span><br></pre>
 
-<h3 id="case分支"><a href="#case分支" class="headerlink" title="case分支"></a>case分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">case variable_name in</span><br><span class="line">&quot;value1&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">&quot;value2&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<h3 id="case分支"><a href="#case分支" class="headerlink" title="case分支"></a>case分支</h3><pre class="highlight"><span class="line">case variable_name in</span><br><span class="line">&quot;value1&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">&quot;value2&quot;)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">	程序段</span><br><span class="line">;;</span><br><span class="line">esac</span><br></pre>
 
-<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for variable_name value1 value2 value3...</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><pre class="highlight"><span class="line">for variable_name value1 value2 value3...</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre>
 
 <p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for ((初始值;循环控制条件;变量变化))</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">for ((初始值;循环控制条件;变量变化))</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre>
 
-<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while [condition]</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br><span class="line">注：while于中括号之间要有空格</span><br></pre></td></tr></table></figure>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><pre class="highlight"><span class="line">while [condition]</span><br><span class="line">do</span><br><span class="line">	程序段</span><br><span class="line">done</span><br><span class="line">注：while于中括号之间要有空格</span><br></pre>
 
 <h2 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h2><ul>
 <li><strong>read读取控制台输入</strong>：read 选项 参数</li>
 </ul>
 <blockquote>
 <p>-p：指定读取值的提示符<br>-t：指定读取的访问时间（秒）<br>参数为读取数据的变量名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read -t 5 -p &quot;请输入一个整数：&quot; NUM</span><br><span class="line">echo &quot;输入的值是：$NUM&quot;</span><br><span class="line">5秒内在控制台输入一个整数，用NUM存储，并打印到控制台窗口</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">read -t 5 -p &quot;请输入一个整数：&quot; NUM</span><br><span class="line">echo &quot;输入的值是：$NUM&quot;</span><br><span class="line">5秒内在控制台输入一个整数，用NUM存储，并打印到控制台窗口</span><br></pre>
 </blockquote>
 <ul>
 <li><p><strong>读取命令行输入</strong>：获取到的内容为设置位置参数：$n、$*、$@、$#</p>
@@ -406,19 +406,19 @@
 </ul>
 <ol>
 <li>basename：返回完整路径最后/的部分，常用来获取文件名<br>basename [string]  [suffix]，若指定suffix后缀，则返回string里的文件名，不保留文件类型；若省略，则返回string里的文件名和文件类型</li>
-<li>dirname：返回完整路径最后/的前面部分，常用来获取文件目录<br>dirname [string]<br><img src="https://alexedwardz.gitee.io/images/System/Linux/System_Function_01.png" alt="System_Function_01"></li>
+<li>dirname：返回完整路径最后/的前面部分，常用来获取文件目录<br>dirname [string]<br><img src="https://alexedwardz.gitee.io/images/System/Linux/System_Function_01.png" alt="System_Function_01" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/System_Function_01.png" class="lozad post-image"></li>
 </ol>
 <ul>
 <li><strong>用户自定义函数</strong>：由用户根据实际业务需求定制的函数</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[function] function_name()&#123;</span><br><span class="line">	程序段</span><br><span class="line">	[返回值]</span><br><span class="line">&#125;</span><br><span class="line">注：不需要配置形参，调用时直接使用函数名，后面接上实际参数</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">[function] function_name()&#123;</span><br><span class="line">	程序段</span><br><span class="line">	[返回值]</span><br><span class="line">&#125;</span><br><span class="line">注：不需要配置形参，调用时直接使用函数名，后面接上实际参数</span><br></pre>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">function Sum()&#123;</span><br><span class="line">        SUM&#x3D;$[$A+$B]</span><br><span class="line">        echo &quot;$A与$B的和是：$SUM&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read -p &quot;请输入X：&quot; A</span><br><span class="line">read -p &quot;请输入Y：&quot; B</span><br><span class="line"></span><br><span class="line">Sum $A $B</span><br><span class="line">注：命令行输入两个数，计算这两个数的和</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">例：</span><br><span class="line">function Sum()&#123;</span><br><span class="line">        SUM&#x3D;$[$A+$B]</span><br><span class="line">        echo &quot;$A与$B的和是：$SUM&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read -p &quot;请输入X：&quot; A</span><br><span class="line">read -p &quot;请输入Y：&quot; B</span><br><span class="line"></span><br><span class="line">Sum $A $B</span><br><span class="line">注：命令行输入两个数，计算这两个数的和</span><br></pre>
 
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li><strong>注释</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">单行注释：#内容</span><br><span class="line"></span><br><span class="line">多行注释</span><br><span class="line">:&lt;&lt;!</span><br><span class="line">内容</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">单行注释：#内容</span><br><span class="line"></span><br><span class="line">多行注释</span><br><span class="line">:&lt;&lt;!</span><br><span class="line">内容</span><br><span class="line">!</span><br></pre>
 
   </div>
   <div>
@@ -544,7 +544,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -591,7 +591,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -732,21 +732,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -759,6 +753,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -794,6 +794,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -806,11 +811,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -834,7 +834,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

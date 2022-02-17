@@ -49,7 +49,7 @@
         content="2021-05-10">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-18">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -447,7 +447,7 @@
 <li>可维护性（Maintainability）：确保创建、存储、维护、使用数据的成本不超过其对组织的价值</li>
 </ol>
 <h2 id="键-码"><a href="#键-码" class="headerlink" title="键/码"></a>键/码</h2><p>超码可以唯一确定一个元组，最小的超码为候选码；主码从候选码中挑选；外码，连接到另一个表的的主码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">column_name data_type primary key auto_increment;</span><br><span class="line">&#x2F;&#x2F; 自增长：属性为整型，属性有索引，可以设置初始值</span><br><span class="line">primary key (column_name)</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">column_name data_type primary key auto_increment;</span><br><span class="line">&#x2F;&#x2F; 自增长：属性为整型，属性有索引，可以设置初始值</span><br><span class="line">primary key (column_name)</span><br></pre>
 
 <h2 id="完整性约束"><a href="#完整性约束" class="headerlink" title="完整性约束"></a>完整性约束</h2><ul>
 <li>实体完整性：每个实体都是独一无二的，没有冗余，且主码不为空</li>
@@ -540,7 +540,7 @@
 <li>两阶段封锁协议：增长阶段：只允许增加锁，不允许释放；消减阶段：只允许释放，不允许增加锁</li>
 </ul>
 <h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><p>字符集是一套字符与字符编码的集合，常用字符集见 <a href="https://alexedwardz.gitee.io/20210410/16033.html"><font face = "微软雅黑" color = 1E90FF size = 5> 链接文档 </font></a> 的字符编码部分</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Show character set; 可以获得支持的所有字符集</span><br><span class="line">character set gbk collate gbk_chinese_ci;设置字符集，也可在配置文件中修改</span><br><span class="line"> - character_set_database：默认数据库字符集（数据）</span><br><span class="line"> - character_set_sever：默认mysql服务器字符集</span><br><span class="line"> - character_set_system：标识符的字符集（库名，表名）</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Show character set; 可以获得支持的所有字符集</span><br><span class="line">character set gbk collate gbk_chinese_ci;设置字符集，也可在配置文件中修改</span><br><span class="line"> - character_set_database：默认数据库字符集（数据）</span><br><span class="line"> - character_set_sever：默认mysql服务器字符集</span><br><span class="line"> - character_set_system：标识符的字符集（库名，表名）</span><br></pre>
 
 <p>校对规则：当前字符集内，字符之间的比较关系。每一套字符集都有一套相应的校对规则/按照ASCLL码表大小比较规则（ci不区分大小写，cs区分大小写，bin二进制下区分，一般认为不区分），查看字符集：Show collation like ‘xxx’;</p>
 
@@ -668,7 +668,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -715,7 +715,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -856,21 +856,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -883,6 +877,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -918,6 +918,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -930,11 +935,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -958,7 +958,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

@@ -49,7 +49,7 @@
         content="2021-04-08">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-17">
+        content="2022-02-17">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>3k 字</span>
+      <span>3.3k 字</span>
     
   </div>
   
@@ -343,101 +343,108 @@
 <h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="配置密钥"><a href="#配置密钥" class="headerlink" title="配置密钥"></a>配置密钥</h2><ol>
 <li>设置用户、邮箱</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置用户：git config --global user.name &quot;用户名&quot;</span><br><span class="line">设置邮箱：git config --global user.email &quot;邮箱&quot;</span><br><span class="line">查看用户：git config user.name</span><br><span class="line">查看邮箱：git config user.email</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">设置用户：git config --global user.name &quot;用户名&quot;</span><br><span class="line">设置邮箱：git config --global user.email &quot;邮箱&quot;</span><br><span class="line">查看用户：git config user.name</span><br><span class="line">查看邮箱：git config user.email</span><br></pre>
 
 <ol start="2">
 <li>生成密钥</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">生成密钥：ssh-keygen -t rsa</span><br><span class="line">查看密钥：cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">生成密钥：ssh-keygen -t rsa</span><br><span class="line">查看密钥：cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre>
 
 <ol start="3">
-<li>将密钥加入 Github、Gitee 的 ssh 公钥池里面，步骤如下图：<br><img src="https://alexedwardz.gitee.io/images/Tools/Git_sshKey.png" alt="Git_sshKey"></li>
+<li>将密钥加入 Github、Gitee 的 ssh 公钥池里面，步骤如下图：<br><img src="https://alexedwardz.gitee.io/images/Tools/Git_sshKey.png" alt="Git_sshKey" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Tools/Git_sshKey.png" class="lozad post-image"></li>
 </ol>
 <h2 id="推拉版本库"><a href="#推拉版本库" class="headerlink" title="推拉版本库"></a>推拉版本库</h2><ol>
 <li>新建目录：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir dir_name</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">mkdir dir_name</span><br></pre>
 
 <ol start="2">
 <li>初始化仓库：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">进入目录，将目录变成Git可以管理的仓库，自动创建一个 master 分支</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git init</span><br><span class="line">进入目录，将目录变成Git可以管理的仓库，自动创建一个 master 分支；当前目录下会增加一个.git目录，用来跟踪管理版本库</span><br></pre>
 
 <ol start="3">
 <li>建立远程仓库关联：推拉之前，需要建立本地仓库和远程仓库之间的联系；同时关联多个远程库时，关联时需要为每一个远程库取名</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add d_name&#x2F;origin git@gitee.com:alexedwardz&#x2F;resource.git</span><br><span class="line">将本地仓库与 Github、Gitee 等远程仓库连接起来，默认是 origin</span><br><span class="line">git remote -v  ：查看远程库信息</span><br><span class="line">git remote rm d_name：删除远程库，解除本地和远程的绑定关系，并不是物理上删除远程库</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git remote add d_name&#x2F;origin git@gitee.com:alexedwardz&#x2F;resource.git</span><br><span class="line">将本地仓库与 Github、Gitee 等远程仓库连接起来，默认是 origin</span><br><span class="line"></span><br><span class="line">git remote -v  ：查看远程库信息</span><br><span class="line">git remote rm d_name：删除远程库，解除本地和远程的绑定关系，并不是物理上删除远程库</span><br></pre>
 
 <ol start="4">
 <li>添加修改：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add f_name</span><br><span class="line">将 f_name 添加到本地仓库的暂存区，git add . 表示添加所有文件和文件夹</span><br><span class="line">git add -f f_name：强制将 f_name 添加到本地仓库的暂存区</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git add f_name</span><br><span class="line">将 f_name 添加到本地仓库的暂存区，git add . 表示添加所有文件和文件夹</span><br><span class="line">git add -f f_name：强制将 f_name 添加到本地仓库的暂存区</span><br></pre>
 
 <ol start="5">
 <li>提交修改：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#39;自定义备注内容&#39;</span><br><span class="line">将暂存区内容提交到当前分支</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git commit -m &#39;自定义备注内容&#39;</span><br><span class="line">将暂存区内容提交到当前分支</span><br></pre>
 
 <ol start="6">
 <li>推送：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line">推送代码到远程仓库的 master 分支，第一次提交需要增加 -u 参数，之后提交可以省略</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git push -u origin master</span><br><span class="line">推送代码到远程仓库的 master 分支，第一次提交需要增加 -u 参数，之后提交可以省略</span><br></pre>
 
 <ol start="7">
 <li>拉取：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master：拉取有关联远程仓库的 master 分支</span><br><span class="line">git clone git@gitee.com:alexedwardz&#x2F;resource.git：克隆没有关联的远程仓库到本地，git@ 采用的是 ssh 协议</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git pull origin master：拉取有关联远程仓库的 master 分支</span><br><span class="line">git clone git@gitee.com:alexedwardz&#x2F;resource.git：克隆没有关联的远程仓库到本地，git@ 采用的是 ssh 协议</span><br></pre>
 
 <h2 id="返回版本"><a href="#返回版本" class="headerlink" title="返回版本"></a>返回版本</h2><p><strong>未添加</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- f_name</span><br><span class="line">撤销 f_name 文件未添加 git add 的修改；git checkout 用版本库里的版本替换工作区的版本</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git checkout -- f_name</span><br><span class="line">撤销 f_name 文件未添加 git add 的修改；git checkout 用版本库里的版本替换工作区的版本</span><br></pre>
 
 <p><strong>已添加未提交</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. git reset HEAD f_name；撤销 f_name 文件已添加未提交 git commit 的修改到工作区</span><br><span class="line">2. git checkout -- f_name；撤销 f_name 文件在工作区的修改</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">1. git reset HEAD f_name；撤销 f_name 文件已添加未提交 git commit 的修改到工作区</span><br><span class="line">2. git checkout -- f_name；撤销 f_name 文件在工作区的修改添加后的新修改</span><br></pre>
 
 <p><strong>已提交</strong>：</p>
 <ol>
-<li>查看日志：</li>
+<li>查看更改日志：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git log [--pretty&#x3D;oneline]</span><br><span class="line">查出对应的对应的版本号和版本描述，参数表示一行显示一个更改</span><br><span class="line"></span><br><span class="line">git log -1 ：显示最近一个提交</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git log [--pretty&#x3D;oneline --abbrev-commit]</span><br><span class="line">查出对应的对应的版本号和版本描述，参数表示一行显示一个更改；在英文状态下输入 q 可退出 log</span><br><span class="line"></span><br><span class="line">git log -1 ：显示最近一个提交</span><br></pre>
 
 <ol start="2">
 <li>恢复版本：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br><span class="line">此时在本地文件夹中会恢复到对应版本，git上还是保留最新版本，通过 HEAD 指针指向当前版本，可以快速返回</span><br><span class="line">当前版本可以用 HEAD 表示，上一个版本是 HEAD^，上两个版本是 HEAD^^，上100个版本是 HEAD~100</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git reset --hard 版本号</span><br><span class="line">此时在本地文件夹中会恢复到对应版本，git上还是保留最新版本，通过 HEAD 指针指向当前版本，可以快速返回</span><br><span class="line">当前版本可以用 HEAD 表示，上一个版本是 HEAD^，上两个版本是 HEAD^^，上100个版本是 HEAD~100</span><br></pre>
+<p><strong>已退回</strong>：已经退回到历史版本，想要恢复到最版版本</p>
+<ol>
+<li>查看命令日志：<pre class="highlight"><span class="line">git reflog</span><br><span class="line">用来记录每一次命令</span><br></pre></li>
+<li>恢复版本：</li>
+</ol>
+<pre class="highlight"><span class="line">git reset --hard 版本号</span><br></pre>
 
-<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p><strong>创建分支</strong>：git branch b_name<br><strong>查看分支</strong>：git branch，列出所有分支，当前分支前面会标一个 *号<br><strong>切换分支</strong>：git checkout b_name 或者 git switch b_name<br><strong>创建+切换分支</strong>：git checkout -b b_name 或者 git switch -c b_name<br><strong>合并分支</strong>：git merge b_name，合并指定分支 b_name 到当前分支</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p><strong>创建分支</strong>：git branch b_name<br><strong>切换分支</strong>：git checkout b_name 或者 git switch b_name<br><strong>创建+切换分支</strong>：git checkout -b b_name 或者 git switch -c b_name<br><strong>查看分支</strong>：git branch，列出所有分支，当前分支前面会标一个 * 号<br><strong>合并分支</strong>：git merge b_name，合并指定分支 b_name 到当前分支</p>
 <blockquote>
-<p>Git 默认执行”快进式合并”（fast-farward merge），会直接将 Master 分支指向  Develop 分支；git merge –no-ff -m ‘xxx’ b_name：使用–no-ff参数，执行正常合并，在 Master 分支上生成一个新节点</p>
+<p>Git 默认执行”快进式合并”（fast-farward merge），会直接将 Master 分支指向  Develop 分支；使用 –no-ff 参数，执行普通模式合并，创建一个新的commit；普通模式合并后的历史有分支，能看出来曾经做过合并，快进式合并看不出来曾经做过合并</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">合并出现冲突时，需要手动解决冲突再合并：直接在当前分支修改冲突文件，修改成希望的内容，然后添加、提交</span><br><span class="line">git status：可以显示冲突文件</span><br><span class="line">cat f_name：查看文件，通过 &lt;&lt;&lt;&lt;&lt;&lt;&lt;，&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;，&gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记不同分支的内容</span><br><span class="line">git log --graph：可以查看分支的合并情况； git log --graph --pretty&#x3D;oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">合并出现冲突时，需要手动解决冲突再合并：直接在当前分支修改冲突文件，修改成希望的内容，然后添加、提交</span><br><span class="line">git status：可以显示冲突文件</span><br><span class="line">cat f_name：查看文件，通过 &lt;&lt;&lt;&lt;&lt;&lt;&lt;，&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;，&gt;&gt;&gt;&gt;&gt;&gt;&gt; 标记不同分支的内容</span><br><span class="line">git log --graph：可以查看分支的合并情况； git log --graph --pretty&#x3D;oneline --abbrev-commit</span><br><span class="line"></span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev：本次合并要创建一个新的commit，需要加上-m参数，添加 commit描述</span><br></pre>
 
 <p><strong>删除分支</strong>：合并完成后删除分支，则又变成一条分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d b_name：删除已合并的分支</span><br><span class="line">git branch -D b_name：强制删除未合并的分支</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git branch -d b_name：删除已合并的分支</span><br><span class="line">git branch -D b_name：强制删除未合并的分支</span><br></pre>
 
-<p><strong>隐藏修改</strong>：git stash，把当前工作现场“储藏”起来，等以后恢复现场后继续工作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git stash list ：查看隐藏修改内容，</span><br><span class="line">git stash apply [stash@&#123;0&#125;]：恢复不删除 stash内容，通过 list 索引恢复特定的 stash内容</span><br><span class="line">git stash drop  [stash@&#123;0&#125;]：删除 stash内容</span><br><span class="line">git stash pop   [stash@&#123;0&#125;]：恢复、同时删除 stash内容</span><br></pre></td></tr></table></figure>
-<p><strong>整理分支</strong>：git rebase，把本地未 push 的分叉提交历史整理成直线<br><strong>多人协作</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. git checkout -b dev origin&#x2F;dev：新建分支</span><br><span class="line">2. git branch --set-upstream-to&#x3D;origin&#x2F;dev dev ：建立新分支与远端仓库的联系</span><br><span class="line">3. git pull：拉去远端仓库的分支内容</span><br><span class="line">4. 修改：自己进行修改的内容</span><br><span class="line">5. git add：添加修改</span><br><span class="line">6. git commit -m &quot;xxx&quot;：提交修改</span><br><span class="line">7. git push origin b_name：将修改推送到远端仓库</span><br></pre></td></tr></table></figure>
-
-<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h2><p><strong>添加标签</strong>：先切换到需要打标签的分支，默认标签打在最新的 commit 上，创建的标签都只存储在本地，不会自动推送到远程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag t_name：创建名为 t_name</span><br><span class="line">git tag -a t_name -m &quot;xxx&quot; ：创建名为 t_name，说明为 xxx 的标签</span><br></pre></td></tr></table></figure>
+<p><strong>BUG分支</strong>：git stash，把当前工作现场“储藏”起来，等以后恢复现场后继续工作</p>
+<pre class="highlight"><span class="line">git stash list ：查看隐藏修改内容，</span><br><span class="line">git stash apply [stash@&#123;0&#125;]：恢复不删除 stash内容，通过 list 索引恢复特定的 stash内容</span><br><span class="line">git stash drop  [stash@&#123;0&#125;]：删除 stash内容</span><br><span class="line">git stash pop   [stash@&#123;0&#125;]：恢复、同时删除 stash内容</span><br></pre>
+<p><strong>多人协作</strong></p>
+<pre class="highlight"><span class="line">1. git checkout -b dev origin&#x2F;dev：在本地创建和远程分支对应的分支，名称最好一致</span><br><span class="line">2. git branch --set-upstream-to&#x3D;origin&#x2F;dev dev ：建立本地分支和远程分支的关联</span><br><span class="line">3. git pull：拉去远端仓库的分支内容</span><br><span class="line">4. 修改：自己进行修改的内容</span><br><span class="line">5. git add：添加修改</span><br><span class="line">6. git commit -m &quot;xxx&quot;：提交修改</span><br><span class="line">7. git push origin b_name：将修改推送到远端仓库</span><br></pre>
+<p><strong>整理分支</strong>：git rebase，把本地未 push 的分叉提交历史整理成直线</p>
+<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h2><p><strong>添加标签</strong>：发布版本前，通常先在版本库中打一个标签，唯一确定打标签时刻的版本，标签也是版本库的一个快照；先切换到需要打标签的分支，默认标签打在最新的 commit 上，创建的标签都只存储在本地，不会自动推送到远程</p>
+<pre class="highlight"><span class="line">git tag t_name [版本号]：创建名为 t_name，针对特定的版本添加标签</span><br><span class="line">git tag -a t_name -m &quot;xxx&quot; ：创建名为 t_name，说明为 xxx 的标签</span><br></pre>
 <p><strong>查看标签列表</strong>：git tag，标签按字母排序，不是按时间排序<br><strong>查看标签信息</strong>：git show t_name<br><strong>推送到远端</strong>：git push origin t_name：推送  t_name 标签到远端；git push origin –tags：推送所有标签到远端<br><strong>删除标签</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">删除未推送到远端的标签：git tag -d t_name</span><br><span class="line">删除以推送到远端的标签：</span><br><span class="line">1. git tag -d t_name</span><br><span class="line">2. git push origin :refs&#x2F;tags&#x2F;t_name</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">删除未推送到远端的标签：git tag -d t_name</span><br><span class="line">删除以推送到远端的标签：</span><br><span class="line">1. git tag -d t_name；先删除本地标签</span><br><span class="line">2. git push origin :refs&#x2F;tags&#x2F;t_name；再删除远程标签</span><br></pre>
 
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>查询状态</strong>：git status；显示当前分支，当前工作区的文件提交状态<br><strong>查看区别</strong>：git diff HEAD [– f_name]；工作区和版本库里面 f_name 最新版本的区别<br><strong>删除文件</strong>：git rm f_name；删除 f_name 文件；确认删除可以 add、 commit，取消删除可以 checkout<br><strong>查看所有提交</strong>：git reflog<br><strong>忽略文件</strong>：在 Git 工作区的根目录下创建一个特殊的 .gitignore文件，填写需要忽略的文件名，Git会自动忽略这些文件</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>查询状态</strong>：git status；显示当前分支，当前工作区的文件提交状态<br><strong>查看区别</strong>：git diff HEAD [– f_name]；工作区和版本库里面 f_name 最新版本的区别<br><strong>删除文件</strong>：git rm f_name；删除 f_name 文件；确认删除可以 add、 commit，取消删除可以 checkout<br><strong>忽略文件</strong>：在 Git 工作区的根目录下创建一个特殊的 .gitignore文件，填写需要忽略的文件名，Git会自动忽略这些文件</p>
 <blockquote>
-<p>git check-ignore：检查 ignore规则错误<br>.*：排除所有.开头的隐藏文件<br>!+f_name：排除指定文件，f_name 满足忽略条件，但要求保留</p>
+<p>git check-ignore -v f_name：检查 ignore规则错误<br>.*：排除所有.开头的隐藏文件<br>!f_name：排除指定文件，f_name 满足忽略条件，但要求保留</p>
 </blockquote>
-<p><strong>配置别名</strong>：git config –global alias.n_name command；也可以直接修改当前仓库的 .git/config文件，将别名配置在 [alias] 后面，删除别名可以直接删除行后保存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.st status ：将 status 指令简写成 st</span><br><span class="line">git config --global alias.lg &quot;log --color --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</span><br><span class="line"></span><br><span class="line">--global 是针对当前用户起作用；如果不加，只针对当前的仓库起作用</span><br><span class="line">当前用户的Git配置文件是用户主目录下的一个隐藏文件.gitconfig</span><br></pre></td></tr></table></figure>
+<p><strong>复制提交</strong>：git cherry-pick 版本号，制一个特定的提交到当前分支</p>
+<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><p><strong>显示颜色</strong>：git config –global color.ui true<br><strong>配置命令别名</strong>：git config –global alias.n_name command；也可以直接修改当前仓库的 .git/config文件，将别名配置在 [alias] 后面，删除别名可以直接删除行后保存</p>
+<pre class="highlight"><span class="line">git config --global alias.st status ：将 status 指令简写成 st</span><br><span class="line">git config --global alias.lg &quot;log --color --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</span><br><span class="line"></span><br><span class="line">--global 是针对当前用户起作用；如果不加，只针对当前的仓库起作用</span><br><span class="line">当前用户的 Git 配置文件是用户主目录下的一个隐藏文件.git&#x2F;config；别名就在[alias]后面，要删除别名，直接把对应的行删掉即可</span><br></pre>
 
 <h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="搭建Git服务器"><a href="#搭建Git服务器" class="headerlink" title="搭建Git服务器"></a>搭建Git服务器</h2><ol>
-<li>安装Git<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure></li>
-<li>创建用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser git</span><br></pre></td></tr></table></figure></li>
+<li>安装Git<pre class="highlight"><span class="line">sudo apt-get install git</span><br></pre></li>
+<li>创建用户<pre class="highlight"><span class="line">sudo adduser git</span><br></pre></li>
 <li>创建证书登录：收集所有需要登录的用户的公钥 id_rsa.pub文件，导入到 /home/git/.ssh/authorized_keys 文件里，一行一个</li>
-<li>初始化仓库：在目标目录下操作，如 /srv<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. sudo git init --bare p_name.git ：创建一个裸仓库没有工作区，仅为了共享</span><br><span class="line">2. sudo chown -R git:git p_name.git：将仓库所有者改为之前创建的用户 git</span><br></pre></td></tr></table></figure></li>
-<li>禁用Shell登录：编辑/etc/passwd文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将   git:x:1001:1001:,,,:&#x2F;home&#x2F;git:&#x2F;bin&#x2F;bash</span><br><span class="line">改为 git:x:1001:1001:,,,:&#x2F;home&#x2F;git:&#x2F;usr&#x2F;bin&#x2F;git-shell</span><br></pre></td></tr></table></figure></li>
-<li>克隆远程仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server:&#x2F;srv&#x2F;p_name.git</span><br></pre></td></tr></table></figure></li>
+<li>初始化仓库：在目标目录下操作，如 /srv<pre class="highlight"><span class="line">1. sudo git init --bare p_name.git ：创建一个裸仓库没有工作区，仅为了共享</span><br><span class="line">2. sudo chown -R git:git p_name.git：将仓库所有者改为之前创建的用户 git</span><br></pre></li>
+<li>禁用Shell登录：编辑/etc/passwd文件<pre class="highlight"><span class="line">将   git:x:1001:1001:,,,:&#x2F;home&#x2F;git:&#x2F;bin&#x2F;bash</span><br><span class="line">改为 git:x:1001:1001:,,,:&#x2F;home&#x2F;git:&#x2F;usr&#x2F;bin&#x2F;git-shell</span><br></pre></li>
+<li>克隆远程仓库<pre class="highlight"><span class="line">git clone git@server:&#x2F;srv&#x2F;p_name.git</span><br></pre></li>
 <li>即可进行推拉</li>
 </ol>
 <h2 id="账户密码类"><a href="#账户密码类" class="headerlink" title="账户密码类"></a>账户密码类</h2><p>问题1：密码错误，不再出现输入框</p>
@@ -448,23 +455,23 @@
 <h2 id="仓库权限类"><a href="#仓库权限类" class="headerlink" title="仓库权限类"></a>仓库权限类</h2><p>问题1：远程关联已存在：remote origin already exists</p>
 <ol>
 <li>先删除远程 Git 仓库：git remote rm origin</li>
-<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x65;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x65;&#x65;&#46;&#x63;&#x6f;&#x6d;</a>:alexedwardz/resource.git</li>
+<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#101;&#101;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#101;&#101;&#x2e;&#x63;&#x6f;&#109;</a>:alexedwardz/resource.git</li>
 </ol>
 <h2 id="日常操作类"><a href="#日常操作类" class="headerlink" title="日常操作类"></a>日常操作类</h2><p>问题1：拉取前先提交更新，或者隐藏。 Please commit your changes or stash them before you merge.</p>
 <ol>
 <li>提交</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#39;xxx&#39;</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git add .</span><br><span class="line">git commit -m &#39;xxx&#39;</span><br><span class="line">git pull origin master</span><br></pre>
 
 <ol start="2">
 <li>隐藏</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git pull</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git stash</span><br><span class="line">git pull</span><br><span class="line">git stash pop</span><br></pre>
 
 <ol start="3">
 <li>覆盖本地修改</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">git reset --hard</span><br><span class="line">git pull</span><br></pre>
 
   </div>
   <div>
@@ -571,7 +578,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-text">自定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -590,7 +597,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -619,7 +626,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-text">自定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -637,7 +644,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -778,21 +785,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -805,6 +806,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -825,7 +832,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="toc-text">配置密钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E6%8B%89%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">推拉版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%89%88%E6%9C%AC"><span class="toc-text">返回版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-text">标签管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-text">自定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">搭建Git服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E7%B1%BB"><span class="toc-text">账户密码类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%93%E5%BA%93%E6%9D%83%E9%99%90%E7%B1%BB"><span class="toc-text">仓库权限类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-text">日常操作类</span></a></li></ol></li></ol>
     </article>
   
   
@@ -840,6 +847,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -852,11 +864,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -880,7 +887,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

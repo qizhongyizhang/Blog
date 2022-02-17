@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -346,14 +346,14 @@
 <li><p>修改网络配置文件:vi /etc/sysconfig/network-scripts/# ###fcfg-ens33,修改”ONBOOT=yes”，保存退出;</p>
 </li>
 <li><p>关闭防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld # 临时关闭防火墙</span><br><span class="line">systemctl disable firewalld # 禁止开机启动</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">systemctl stop firewalld # 临时关闭防火墙</span><br><span class="line">systemctl disable firewalld # 禁止开机启动</span><br></pre></li>
 <li><p>重启网络服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br><span class="line">隔天打开若无法连接，可以查看虚拟机相关服务是否打开</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">service network restart</span><br><span class="line">隔天打开若无法连接，可以查看虚拟机相关服务是否打开</span><br></pre></li>
 </ul>
 <h3 id="网络连接模式"><a href="#网络连接模式" class="headerlink" title="网络连接模式"></a>网络连接模式</h3><ul>
 <li><p><strong>桥连接模式</strong>：虚拟机IP与本机在同一个网端，通讯通畅，但是会出现IP冲突的危险</p>
 </li>
-<li><p><strong>NAT连接模式</strong>：网络地址转换方式，Linux可以访问外网，不会出现IP冲突<br><img src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" alt="NAT_Net_Model"></p>
+<li><p><strong>NAT连接模式</strong>：网络地址转换方式，Linux可以访问外网，不会出现IP冲突<br><img src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" alt="NAT_Net_Model" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" class="lozad post-image"></p>
 <blockquote>
 <p>配置IP</p>
 <blockquote>
@@ -363,7 +363,7 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ONBOOT &#x3D; yes   -- 启用</span><br><span class="line">BOOTPROTO &#x3D; static  -- 指定以静态方式获取IP</span><br><span class="line">IPADDR &#x3D; xxx.xxx.xxx.xxx  -- 指定IP</span><br><span class="line">GATEWAY &#x3D; xxx.xxx.xxx.xxx  -- 网关</span><br><span class="line">DNS1 &#x3D; xxx.xxx.xxx.xxx     -- DNS和网管保持一致即可</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">ONBOOT &#x3D; yes   -- 启用</span><br><span class="line">BOOTPROTO &#x3D; static  -- 指定以静态方式获取IP</span><br><span class="line">IPADDR &#x3D; xxx.xxx.xxx.xxx  -- 指定IP</span><br><span class="line">GATEWAY &#x3D; xxx.xxx.xxx.xxx  -- 网关</span><br><span class="line">DNS1 &#x3D; xxx.xxx.xxx.xxx     -- DNS和网管保持一致即可</span><br></pre>
 <blockquote>
 <blockquote>
 <blockquote>
@@ -379,7 +379,7 @@
 </ul>
 <h1 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h1><p>关机重启前应该将内存的数据同步到磁盘上</p>
 <ul>
-<li>shutdown<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now；立即关机</span><br><span class="line">shutdown -h 1：一分钟后关机</span><br><span class="line">shutdown -r now：立即重启</span><br></pre></td></tr></table></figure></li>
+<li>shutdown<pre class="highlight"><span class="line">shutdown -h now；立即关机</span><br><span class="line">shutdown -h 1：一分钟后关机</span><br><span class="line">shutdown -r now：立即重启</span><br></pre></li>
 <li>halt：立即关机</li>
 <li>rebot：重启系统</li>
 <li>sync：将内存的数据同步到磁盘上</li>
@@ -403,12 +403,12 @@
 <h2 id="硬盘"><a href="#硬盘" class="headerlink" title="硬盘"></a>硬盘</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><blockquote>
 <p>IDE硬盘：并口，用hdxn进行标识，hd表示IDE硬盘，x代表盘号（a：基本盘、b：基本从属盘、c：辅助主盘、d：辅助从属盘），n表示分区数：1-4表示主分区或扩展分区，5以上是逻辑分区<br>SCSI硬盘：串口，用sdxn进行标识，sd表示SCSI硬盘，x代表盘号（a：基本盘、b：基本从属盘、c：辅助主盘、d：辅助从属盘），n表示分区数：1-4表示主分区或扩展分区，5以上是逻辑分区</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看硬盘分区挂载情况：lsblk -f</span><br><span class="line">返回分区情况、分区类型、UUID（40位字符串的唯一标识）、挂载目录</span><br><span class="line"></span><br><span class="line">查看分区大小：lsblk</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">查看硬盘分区挂载情况：lsblk -f</span><br><span class="line">返回分区情况、分区类型、UUID（40位字符串的唯一标识）、挂载目录</span><br><span class="line"></span><br><span class="line">查看分区大小：lsblk</span><br></pre>
 
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><ol>
 <li>新增硬盘</li>
 <li>重启服务器</li>
-<li>创建分区<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">fdisk &#x2F;dev&#x2F;sdb Enter</span><br><span class="line">输入n           Enter</span><br><span class="line">输入p           Enter</span><br><span class="line">连续两次默认选择  Enter</span><br><span class="line">输入w           Enter</span><br></pre></td></tr></table></figure></li>
+<li>创建分区<pre class="highlight"><span class="line">操作：</span><br><span class="line">fdisk &#x2F;dev&#x2F;sdb Enter</span><br><span class="line">输入n           Enter</span><br><span class="line">输入p           Enter</span><br><span class="line">连续两次默认选择  Enter</span><br><span class="line">输入w           Enter</span><br></pre></li>
 </ol>
 <p><strong>命令</strong></p>
 <blockquote>
@@ -432,11 +432,11 @@
 <h2 id="管理-1"><a href="#管理-1" class="headerlink" title="管理"></a>管理</h2><blockquote>
 <p>新建文件：touch file_name<br>删除文件：rm file_name<br>修改所有者：chown user_name file_name；将file_name的所有者改为user_name</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">同时修改所有者和所在组：chown user_name:group_name file_name，将file_name的所有者改为user_name、所在组改为group_name</span><br><span class="line">级联修改：chown -R user_name dictionary_name，将dictionary_name目录下的所有文件的所有者改为user_name</span><br><span class="line">修改所有组：chgrp group_name file_name，将file_name的所在组改为group_name</span><br><span class="line">级联修改：chgrp -R group_name dictionary_name，将dictionary_name目录下的所有文件的所在组改为group_name</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">同时修改所有者和所在组：chown user_name:group_name file_name，将file_name的所有者改为user_name、所在组改为group_name</span><br><span class="line">级联修改：chown -R user_name dictionary_name，将dictionary_name目录下的所有文件的所有者改为user_name</span><br><span class="line">修改所有组：chgrp group_name file_name，将file_name的所在组改为group_name</span><br><span class="line">级联修改：chgrp -R group_name dictionary_name，将dictionary_name目录下的所有文件的所在组改为group_name</span><br></pre>
 <blockquote>
 <p>查看文件信息：ls -ahl；以列表形式将所有文件以方便用户查看的形式返回，会显示文件类型、文件权限、所有者、所在组、最新更新时间、文件大小的信息</p>
 </blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" alt="File_Info"></p>
+<p><img src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" alt="File_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" class="lozad post-image"></p>
 <h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>Linux是一个多用户多任务的操作系统，任何一个用户必须使用合法的账号才能登入系统，每一个用户账号至少属于一个用户组，存储在/home目录下</p>
 <ul>
 <li><p><strong>用户组</strong>：类似于角色，对有共性的多个用户进行统一的管理</p>
@@ -469,27 +469,27 @@
 <p>chmod u=rwx,g=rw,o=r file_name，设置file_name所有者的权限为读、写、执行，所在组的权限为读、写，其他人的权限为读<br>chmod o+x file_name，给file_name的所在组增加执行权限<br>通过数字进行权限变更，权限可用数字表示：r=4、w=2、x=1<br>chmod 764 file_name，设置file_name所有者的权限为读、写、执行，所在组的权限为读、写，其他人的权限为读</p>
 </blockquote>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7&#x3D;4+2+1</span><br><span class="line">6&#x3D;4+2</span><br><span class="line">5&#x3D;4+1</span><br><span class="line">4&#x3D;4</span><br><span class="line">3&#x3D;2+1</span><br><span class="line">2&#x3D;2</span><br><span class="line">1&#x3D;1</span><br><span class="line">0：无权限</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">7&#x3D;4+2+1</span><br><span class="line">6&#x3D;4+2</span><br><span class="line">5&#x3D;4+1</span><br><span class="line">4&#x3D;4</span><br><span class="line">3&#x3D;2+1</span><br><span class="line">2&#x3D;2</span><br><span class="line">1&#x3D;1</span><br><span class="line">0：无权限</span><br></pre>
 
 <h1 id="Linux安装软件的方式"><a href="#Linux安装软件的方式" class="headerlink" title="Linux安装软件的方式"></a>Linux安装软件的方式</h1><ul>
 <li><strong>rpm</strong>（RedHat Package Manager），用于互联网下载包的打包和安装工具，类似于Windows的setup.exe程序</li>
 </ul>
 <p><strong>查看</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看全部：rpm -qa</span><br><span class="line">查看指定条件过滤：rpm -qa | grep RPM_packake_name</span><br><span class="line">查看软件包是否安装：rpm -q RPM_packake_name</span><br><span class="line">查看软件包信息：rpm -qi RPM_packake_name</span><br><span class="line">查询安装软件包的文件及存放目录：rpm -ql RPM_packake_name</span><br><span class="line">查询指定文件所属软件包：rpm -qf RPM_file_name</span><br></pre></td></tr></table></figure>
-<img src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" alt="RPM_Info" style="zoom:200%;" />
+<pre class="highlight"><span class="line">查看全部：rpm -qa</span><br><span class="line">查看指定条件过滤：rpm -qa | grep RPM_packake_name</span><br><span class="line">查看软件包是否安装：rpm -q RPM_packake_name</span><br><span class="line">查看软件包信息：rpm -qi RPM_packake_name</span><br><span class="line">查询安装软件包的文件及存放目录：rpm -ql RPM_packake_name</span><br><span class="line">查询指定文件所属软件包：rpm -qf RPM_file_name</span><br></pre>
+<img src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" alt="RPM_Info" style="zoom:200%;" / srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" class="lozad post-image">
 
 <p><strong>管理</strong></p>
 <blockquote>
 <p>安装</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm [选项] RPM_packake_name</span><br><span class="line"></span><br><span class="line">-i：install，安装</span><br><span class="line">-v：verbose，提示</span><br><span class="line">-h：hash，显示进度条</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">rpm [选项] RPM_packake_name</span><br><span class="line"></span><br><span class="line">-i：install，安装</span><br><span class="line">-v：verbose，提示</span><br><span class="line">-h：hash，显示进度条</span><br></pre>
 <blockquote>
 <blockquote>
 <p>U盘安装：先挂载CentOS的iso文件，在/media/CentOS/下找到到需要安装的软件rpm包，拷贝到/opt/目录下，在/opt/目录下，执行rpm -ivh RPM_packake_name，安装完成</p>
 </blockquote>
 <p>删除</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e RPM_packake_name</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">rpm -e RPM_packake_name</span><br></pre>
 <blockquote>
 <blockquote>
 <p>删除时如果报错：removing these packages would break dependencies …表示会破坏这个包的相关依赖，可采用rpm -e –nodeps RPM_packake_name进行强制删除，一般不采用，会导致依赖于该软件包的程序无法使用</p>
@@ -499,19 +499,19 @@
 <li><strong>yum</strong>，是Shell前端软件包管理器，基于rpm包管理器，能顾从指定的服务器自动下载RPM包并安装，可以自动处理依赖关系，一次性安装所有以来的软件包，使用yum时需要保证网络通畅，默认安装最新版本</li>
 </ul>
 <p><strong>查看</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看全部：yum list installed</span><br><span class="line">查看指定条件过滤：yum list installed | grep name</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">查看全部：yum list installed</span><br><span class="line">查看指定条件过滤：yum list installed | grep name</span><br></pre>
 
 <p><strong>管理</strong></p>
 <blockquote>
 <p>安装</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install 软件名</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">yum install 软件名</span><br></pre>
 
 <ul>
 <li><strong>deb</strong></li>
 </ul>
 <p><strong>查看</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l(查看全部)</span><br><span class="line">dpkg-l|grep name(查看特定)</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">dpkg -l(查看全部)</span><br><span class="line">dpkg-l|grep name(查看特定)</span><br></pre>
 
 <ul>
 <li><strong>apt</strong>：Advanced Packaging Tool，是一个安装包管理管理工具，常用于Ubuntu中，用于软件包的安装、删除和管理，在/etc/apt/source.list中制定了官方的软件仓库地址（通常在美国）；当执行install时，安装相应的包，下载并更新，写入source.list文件；当执行update时，程序分析source.list文件是否有对应的Packages/Sources/lelease列表文件，如果有就下载，存入/var/lib/apt/lists/目录中</li>
@@ -519,7 +519,7 @@
 <p><strong>修改镜像源</strong></p>
 <blockquote>
 <ol>
-<li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source"></li>
+<li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" class="lozad post-image"></li>
 <li>更新源：sudo apt-get update</li>
 </ol>
 </blockquote>
@@ -527,7 +527,7 @@
 <blockquote>
 <p>更新源：apt-get update<br>搜索：apt-cache search package_name<br>获取包信息：apt-cache show package_name，包括说明、大小、版本等<br>查看包依赖：apt-cache rdepends package_name<br>安装：apt-get install package_name<br>修复安装：apt-get -f install package_name<br>重装：apt-get install package_name –reinstall<br>升级更新：apt-get upgrade package_name<br>删除：apt-get remove package_name<br>安装编译环境：apt-get build_dep package_name<br>下载源码：apt-get source package_name<br>删除包和配置文件：apt-get remove package_name –purge<br>升级系统：apt-get dist_upgrade package_name<br>若提示权限不够，可在指令前面加上sudo或者切换到root目录下运行</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例：安装sshd服务</span><br><span class="line">安装：sudo apt-get install openssh-server，默认安装服务器端和客户端</span><br><span class="line">启动服务：service sshd start</span><br><span class="line">本机测试：netstat -anp | more</span><br><span class="line">Windows测试：telnet ip port</span><br><span class="line">Linux测试：ssh user_name@ip，退出用exit 或 logout</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">例：安装sshd服务</span><br><span class="line">安装：sudo apt-get install openssh-server，默认安装服务器端和客户端</span><br><span class="line">启动服务：service sshd start</span><br><span class="line">本机测试：netstat -anp | more</span><br><span class="line">Windows测试：telnet ip port</span><br><span class="line">Linux测试：ssh user_name@ip，退出用exit 或 logout</span><br></pre>
 
 <h1 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h1><p><strong>vi/vim（vi的增强版）</strong></p>
 <blockquote>
@@ -545,7 +545,7 @@
 </li>
 </ul>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="连通Windows和Linux"><a href="#连通Windows和Linux" class="headerlink" title="连通Windows和Linux"></a>连通Windows和Linux</h2><p>安装vmtool</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre>
   </div>
   <div>
     
@@ -670,7 +670,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -717,7 +717,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -858,21 +858,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -885,6 +879,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -920,6 +920,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -932,11 +937,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -960,7 +960,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

@@ -49,7 +49,7 @@
         content="2021-05-26">
       <meta 
         property="og:article:modified_time" 
-        content="2021-09-03">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -316,7 +316,7 @@
     <p>写在前面：本文主要记录Hive的基础知识-查询</p>
 <span id="more"></span>
 
-<h1 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select [all | distinct ] col_name[,col_name] from tb_name </span><br><span class="line">[where condition]</span><br><span class="line">[group by col_name_list [having condition]]</span><br><span class="line">[cluster by col_name_list | distribute by col_name_list]</span><br><span class="line">[sort by | order by col_name_list]</span><br><span class="line">[limit n];</span><br><span class="line">cluster by：通过hash散列分发算法根据指定的字段将数据分散到不同的 reducer 中，并进行排序</span><br><span class="line">distribute by：通过hash散列分发算法根据指定的字段将数据分散到不同的 reducer 中</span><br><span class="line">order by：对数据进行全局排序，只有一个 reducer ，当数据规模较大时，耗时较长</span><br><span class="line">sort by：不是全局排序，在数据进行 reducer 之前完成排序。使用 sort by 并设置 mapred.reduce.tasks&gt;1，仅能保证每个 reducer 的输出有序，不能保证全局有序</span><br><span class="line">如果 distribute by 和 sort by 是同一个字段时，cluster by &#x3D; distribute by + sort by</span><br></pre></td></tr></table></figure>
+<h1 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h1><pre class="highlight"><span class="line">select [all | distinct ] col_name[,col_name] from tb_name </span><br><span class="line">[where condition]</span><br><span class="line">[group by col_name_list [having condition]]</span><br><span class="line">[cluster by col_name_list | distribute by col_name_list]</span><br><span class="line">[sort by | order by col_name_list]</span><br><span class="line">[limit n];</span><br><span class="line">cluster by：通过hash散列分发算法根据指定的字段将数据分散到不同的 reducer 中，并进行排序</span><br><span class="line">distribute by：通过hash散列分发算法根据指定的字段将数据分散到不同的 reducer 中</span><br><span class="line">order by：对数据进行全局排序，只有一个 reducer ，当数据规模较大时，耗时较长</span><br><span class="line">sort by：不是全局排序，在数据进行 reducer 之前完成排序。使用 sort by 并设置 mapred.reduce.tasks&gt;1，仅能保证每个 reducer 的输出有序，不能保证全局有序</span><br><span class="line">如果 distribute by 和 sort by 是同一个字段时，cluster by &#x3D; distribute by + sort by</span><br></pre>
 
 <h2 id="查询顺序"><a href="#查询顺序" class="headerlink" title="查询顺序"></a>查询顺序</h2><p>from -&gt; where -&gt; group by -&gt; having -&gt; select -&gt; order by -&gt; limit</p>
 <h2 id="查询解释"><a href="#查询解释" class="headerlink" title="查询解释"></a>查询解释</h2><p><strong>where</strong></p>
@@ -324,13 +324,13 @@
 <p>A &lt;=&gt; B：若A、B都为Null，则返回True；任意一方结果部位Null，结果为Null，其他情况与’= ‘操作符结果一致<br>A rlike B：模糊查询，B为正则表达式，若A与B匹配，则返回True，%匹配任意多个字符，_匹配任意一个字符</p>
 </blockquote>
 <p><strong>sort by</strong>：局部排序，仅在Reduce内部进行局部排序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set mapreduce.job.reduces&#x3D;3;  &#x2F;&#x2F; 设置 Reduce 的个数</span><br><span class="line">set mapreduce.job.reduces;    &#x2F;&#x2F; 查看 Reduce 的个数</span><br><span class="line"></span><br><span class="line">select * from tb_name sort by col_name;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">set mapreduce.job.reduces&#x3D;3;  &#x2F;&#x2F; 设置 Reduce 的个数</span><br><span class="line">set mapreduce.job.reduces;    &#x2F;&#x2F; 查看 Reduce 的个数</span><br><span class="line"></span><br><span class="line">select * from tb_name sort by col_name;</span><br></pre>
 
 <p><strong>distribute by</strong>：类似于MR的partition，进行分区，可结合sort by 使用，需要写在sort by 之前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set mapreduce.job.reduces&#x3D;3;  &#x2F;&#x2F; 设置 Reduce 的个数;</span><br><span class="line"></span><br><span class="line">select * from tb_name distribute by col_name1 sort by col_name2;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">set mapreduce.job.reduces&#x3D;3;  &#x2F;&#x2F; 设置 Reduce 的个数;</span><br><span class="line"></span><br><span class="line">select * from tb_name distribute by col_name1 sort by col_name2;</span><br></pre>
 
 <p><strong>cluster by</strong>： distribute by 和 sort by 是同一个字段时，可用 cluster by 替换，只能使用默认的排序规则倒序，不能指定排序规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_name distribute by col_name1 sort by col_name1;</span><br><span class="line">select * from tb_name cluster by col_name1;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * from tb_name distribute by col_name1 sort by col_name1;</span><br><span class="line">select * from tb_name cluster by col_name1;</span><br></pre>
 
 <p><strong>join</strong>：表连接时必须进行重命名</p>
 <ul>
@@ -343,7 +343,7 @@
 <blockquote>
 <p>字段名称必须一致<br>字段顺序必须一致<br>没有条件</p>
 </blockquote>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set role admin;</span><br><span class="line">show grant on tb_name;</span><br><span class="line"></span><br><span class="line">grant select on tb_name to user user_name;</span><br><span class="line">revoke select on tb_name from user user_name;</span><br></pre></td></tr></table></figure>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><pre class="highlight"><span class="line">set role admin;</span><br><span class="line">show grant on tb_name;</span><br><span class="line"></span><br><span class="line">grant select on tb_name to user user_name;</span><br><span class="line">revoke select on tb_name from user user_name;</span><br></pre>
 
 <h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ol>
 <li>没有对子查询的表进行重命名，按照思路顺序重命名</li>
@@ -474,7 +474,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -521,7 +521,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -662,21 +662,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -689,6 +683,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -724,6 +724,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -736,11 +741,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -764,7 +764,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

@@ -49,7 +49,7 @@
         content="2021-09-02">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -314,7 +314,7 @@
 <p><strong>OneData 元数据</strong>：如维度及属性、业务过程、指标等的规范化定义，用于更好地管理和使用数据<br><strong>数据应用元数据</strong>：如数据报表、数据产品等的配置和运行元数据</p>
 </blockquote>
 </blockquote>
-<h2 id="统一元数据体系建设"><a href="#统一元数据体系建设" class="headerlink" title="统一元数据体系建设"></a>统一元数据体系建设</h2><p><img src="https://alexedwardz.gitee.io/images//Data/DataManage/Ali_Practice/0301_%E5%85%83%E6%95%B0%E6%8D%AE%E4%BD%93%E7%B3%BB%E5%BB%BA%E8%AE%BE.png" alt="0301_元数据体系建设"></p>
+<h2 id="统一元数据体系建设"><a href="#统一元数据体系建设" class="headerlink" title="统一元数据体系建设"></a>统一元数据体系建设</h2><p><img src="https://alexedwardz.gitee.io/images//Data/DataManage/Ali_Practice/0301_%E5%85%83%E6%95%B0%E6%8D%AE%E4%BD%93%E7%B3%BB%E5%BB%BA%E8%AE%BE.png" alt="0301_元数据体系建设" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images//Data/DataManage/Ali_Practice/0301_%E5%85%83%E6%95%B0%E6%8D%AE%E4%BD%93%E7%B3%BB%E5%BB%BA%E8%AE%BE.png" class="lozad post-image"></p>
 <blockquote>
 <p>首先梳理清楚元仓底层数据，对元数据做分类，减少数据重复建设，保障数据的唯一性<br>丰富表和字段使用说明，方便使用和理解<br>根据元仓底层数据构建元仓中间层，依据 OneData 规范，建设元数据基础宽表,打通从数据产生到消费整个链路<br>基于元数据中间层，对外提供标准统一的元数据服务出口，保障元数据产出的质量</p>
 </blockquote>
@@ -421,7 +421,7 @@
 <ul>
 <li><strong>优化器使用</strong>：提供 set 等命令支持用户自定义设置优化器规则黑白名单</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set odps.optimizer.cbo.rule.filter.white &#x3D; pojr, hj;  &#x2F;&#x2F; 开启规则</span><br><span class="line">set odps.optimizer.cbo.rule.filter.black &#x3D; pojr, hj;  &#x2F;&#x2F; 关闭规则</span><br><span class="line"></span><br><span class="line">注：重新排序 Join 和自动 MapJoin ，对应的标记分别是 porj 和 hj</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">set odps.optimizer.cbo.rule.filter.white &#x3D; pojr, hj;  &#x2F;&#x2F; 开启规则</span><br><span class="line">set odps.optimizer.cbo.rule.filter.black &#x3D; pojr, hj;  &#x2F;&#x2F; 关闭规则</span><br><span class="line"></span><br><span class="line">注：重新排序 Join 和自动 MapJoin ，对应的标记分别是 porj 和 hj</span><br></pre>
 
 <ul>
 <li><strong>注意事项</strong>：Optimizer 提供谓词下推（ Predicate Push Down ）优化 ，尽量早地进行谓词过滤，以减少后续操作的数据量，提高性能</li>
@@ -435,7 +435,7 @@
 <blockquote>
 <p>MaxCompute Instance：类似于 Hive Job 的概念<br>Fuxi Job：对于 MaxCompute Instance 生成一个或多个由 Fuxi Task 组成的有向无环图，即 Fuxi Job<br>Fuxi Task：主要包含三种类型，分别是 Map Reduce 和 Join 类似于 Hive 中 Task 的概念<br>Fuxi Instance：真正的计算单元，和 Hive 中的槽位（ slot ）对应</p>
 </blockquote>
-<h3 id="Map倾斜"><a href="#Map倾斜" class="headerlink" title="Map倾斜"></a>Map倾斜</h3><p><strong>背景</strong>：Map 端是 MR 任务的起始阶段， 主要将磁盘中的数据读人内存<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0302_Map%E7%AB%AF%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="0302_Map端过程示意图"></p>
+<h3 id="Map倾斜"><a href="#Map倾斜" class="headerlink" title="Map倾斜"></a>Map倾斜</h3><p><strong>背景</strong>：Map 端是 MR 任务的起始阶段， 主要将磁盘中的数据读人内存<br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0302_Map%E7%AB%AF%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="0302_Map端过程示意图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0302_Map%E7%AB%AF%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.png" class="lozad post-image"></p>
 <blockquote>
 <p>每个输入分片会由一个 Map Instance 来处理，在默认情况下，以 Pangu 文件系统的一个文件块的大小（默认为 256MB ）为一个分片；Map Instance 输出的结果会暂时放在 个环形内存缓冲区中，当该缓冲区快要溢出时会在本地文件系统中创建一个溢出文件 Write Dump；通过“ set odps.mapper.split.size=256 ”来调节 Map Instance 的个数，提高数据读入的效率，通过“ set odps.mapper.merge.limit.size=64 ”来控制 Map Instance 读取文件的个数<br>写人磁盘之前，线程首先根据 Reduce Instance 的个数划分分区，数据会根据 Key 值Hash 到不同的分区上，一个 Reduce Instance 对应一个分区的数据；Map 端也会做部分聚合操作，减少输入 Reduce 端的数据量；数据是根据 Hash 分配的可能会导致数据资源分配不均的问题</p>
 </blockquote>
@@ -459,7 +459,7 @@
 </blockquote>
 <h1 id="存储和成本管理"><a href="#存储和成本管理" class="headerlink" title="存储和成本管理"></a>存储和成本管理</h1><h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2><p><strong>数据备份</strong>：为提高数据的可用性与性能 ，通常会将数据存储3份<br><strong>数据压缩</strong>：MaxCompute 中提供 archive 压缩方法，将数据保存为 RAID file 的形式，存储比由1:3 提高到 1:1.5；恢复数据块的时间将要比原来的方式更长，损失一定的读性能；应用于冷备数据与日志数据的压缩存储</p>
 <h2 id="数据重分布"><a href="#数据重分布" class="headerlink" title="数据重分布"></a>数据重分布</h2><p><strong>数据重分布</strong>：通过修改表的数据重分布，避免基于列存储导致的列热点，主要通过修改 distribute by 和 sort by 字段的方法进行数据重分布，一般筛选出、重分布效果高于 15% 表进行优化处理</p>
-<h2 id="存储治理项优化"><a href="#存储治理项优化" class="headerlink" title="存储治理项优化"></a>存储治理项优化</h2><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0303_%E5%AD%98%E5%82%A8%E6%B2%BB%E7%90%86%E9%A1%B9%E4%BC%98%E5%8C%96.png" alt="0303_存储治理项优化"><br><strong>存储优化治理项</strong>：未管理表、 空表、最近 62 天未访问表、数据无更新无任务表 、数据无更新有任务表、开发库数据大于 100GB 且无访问表、长周期表等<br><strong>存储治理项优化流程</strong>：现状分析、 问题诊断、管理优化、效果反馈闭环</p>
+<h2 id="存储治理项优化"><a href="#存储治理项优化" class="headerlink" title="存储治理项优化"></a>存储治理项优化</h2><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0303_%E5%AD%98%E5%82%A8%E6%B2%BB%E7%90%86%E9%A1%B9%E4%BC%98%E5%8C%96.png" alt="0303_存储治理项优化" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0303_%E5%AD%98%E5%82%A8%E6%B2%BB%E7%90%86%E9%A1%B9%E4%BC%98%E5%8C%96.png" class="lozad post-image"><br><strong>存储优化治理项</strong>：未管理表、 空表、最近 62 天未访问表、数据无更新无任务表 、数据无更新有任务表、开发库数据大于 100GB 且无访问表、长周期表等<br><strong>存储治理项优化流程</strong>：现状分析、 问题诊断、管理优化、效果反馈闭环</p>
 <h2 id="生命周期管理"><a href="#生命周期管理" class="headerlink" title="生命周期管理"></a>生命周期管理</h2><h3 id="生命周期管理策略"><a href="#生命周期管理策略" class="headerlink" title="生命周期管理策略"></a>生命周期管理策略</h3><ol>
 <li><strong>周期性删除策略</strong>：周期性删除一定期限的失效数据</li>
 <li><strong>彻底删除策略</strong>：及时删除无用表数据或者 ETL 过程产生的临时数据，以及不需要保留的数据，包括相关元数据</li>
@@ -673,7 +673,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -720,7 +720,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -861,21 +861,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -888,6 +882,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -923,6 +923,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -935,11 +940,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -963,7 +963,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

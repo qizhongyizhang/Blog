@@ -49,7 +49,7 @@
         content="2021-05-12">
       <meta 
         property="og:article:modified_time" 
-        content="2021-09-13">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -358,7 +358,7 @@
 <li>编译：</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql</span><br><span class="line">-DMYSQL_DATADIR&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data -DSYSCONFDIR&#x3D;&#x2F;etc</span><br><span class="line">-DWITH_MYISAM_STORAGE_ENGINE&#x3D;1 -DWITH_INNOBASE_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DWITH_MEMORY_STORAGE_ENGINE&#x3D;1 -DWITH_READLINE&#x3D;1</span><br><span class="line">-DMYSQL_UNIX_ADDR&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock -DMYSQL_TCP_PORT&#x3D;3306</span><br><span class="line">-DENABLED_LOCAL_INFILE&#x3D;1 -DWITH_PARTITION_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DEXTRA_CHARSETS&#x3D;all -DDEFAULT_CHARSET&#x3D;utf8</span><br><span class="line">-DDEFAULT_COLLATION&#x3D;utf8_general_ci</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql</span><br><span class="line">-DMYSQL_DATADIR&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data -DSYSCONFDIR&#x3D;&#x2F;etc</span><br><span class="line">-DWITH_MYISAM_STORAGE_ENGINE&#x3D;1 -DWITH_INNOBASE_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DWITH_MEMORY_STORAGE_ENGINE&#x3D;1 -DWITH_READLINE&#x3D;1</span><br><span class="line">-DMYSQL_UNIX_ADDR&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock -DMYSQL_TCP_PORT&#x3D;3306</span><br><span class="line">-DENABLED_LOCAL_INFILE&#x3D;1 -DWITH_PARTITION_STORAGE_ENGINE&#x3D;1</span><br><span class="line">-DEXTRA_CHARSETS&#x3D;all -DDEFAULT_CHARSET&#x3D;utf8</span><br><span class="line">-DDEFAULT_COLLATION&#x3D;utf8_general_ci</span><br></pre>
 
 <blockquote>
 <ul>
@@ -373,14 +373,14 @@
 <li>添加用户和用户组</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看用户列表：cat &#x2F;etc&#x2F;passwd</span><br><span class="line">查看用户列表：cat &#x2F;etc&#x2F;group</span><br><span class="line">创建组：groupadd mysql</span><br><span class="line">创建用户：useradd -g mysql mysql</span><br><span class="line">修改&#x2F;usr&#x2F;local&#x2F;mysql权限：chown -R mysql:mysql &#x2F;usr&#x2F;local&#x2F;mysql</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">查看用户列表：cat &#x2F;etc&#x2F;passwd</span><br><span class="line">查看用户列表：cat &#x2F;etc&#x2F;group</span><br><span class="line">创建组：groupadd mysql</span><br><span class="line">创建用户：useradd -g mysql mysql</span><br><span class="line">修改&#x2F;usr&#x2F;local&#x2F;mysql权限：chown -R mysql:mysql &#x2F;usr&#x2F;local&#x2F;mysql</span><br></pre>
 
 <blockquote>
 <ul>
 <li>初始化配置</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;mysql   进入安装目录</span><br><span class="line">scripts&#x2F;mysql_install_db --basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql --datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data --user&#x3D;mysql，配置数据库和数据表存储位置</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">cd &#x2F;usr&#x2F;local&#x2F;mysql   进入安装目录</span><br><span class="line">scripts&#x2F;mysql_install_db --basedir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql --datadir&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data --user&#x3D;mysql，配置数据库和数据表存储位置</span><br></pre>
 
 <ol start="5">
 <li>启动，在/usr/local/mysql/下运行</li>
@@ -407,29 +407,29 @@
 <li>控制面板下卸载MySQL，删除ProgramData下的MySQL数据文件</li>
 <li>删除注册表：win + r下输入regedit，进入注册表，进行删除</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\eventlog\Application\MySQL</span><br><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\services\eventlog\Application\MySQL（可能没有） HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\eventlog\Application\MySQL</span><br><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\services\eventlog\Application\MySQL（可能没有） HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application</span><br></pre>
 
 <h1 id="连接启动"><a href="#连接启动" class="headerlink" title="连接启动"></a>连接启动</h1><ul>
 <li>连接前要先开启服务</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">开启服务：net start MySQL; (net start service_name);</span><br><span class="line">关闭服务：net stop MySQL;</span><br><span class="line">重启服务：net restart MySQL;</span><br><span class="line"></span><br><span class="line">cmd下操作：配置环境变量，可以在任意路径下运行；没配置环境变量，需要在安装路径下的bin目录下运行，下文全是，服务名默认是 MySQL</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">开启服务：net start MySQL; (net start service_name);</span><br><span class="line">关闭服务：net stop MySQL;</span><br><span class="line">重启服务：net restart MySQL;</span><br><span class="line"></span><br><span class="line">cmd下操作：配置环境变量，可以在任意路径下运行；没配置环境变量，需要在安装路径下的bin目录下运行，下文全是，服务名默认是 MySQL</span><br></pre>
 
 <ul>
 <li>登录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql [-h host_ip -P port] -u user_name -p [passwaord]</span><br><span class="line"></span><br><span class="line">主机：运行 MySQL 服务器的主机名地址，如果连接到本地MySQL服务器，为localhost 或 127.0.0.1</span><br><span class="line">端口：默认端口 3306，用默认可省略；修改端口后，需要指定</span><br><span class="line">用户名：一个合法的用户名</span><br><span class="line">密码：用户的登陆密码</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">mysql [-h host_ip -P port] -u user_name -p [passwaord]</span><br><span class="line"></span><br><span class="line">主机：运行 MySQL 服务器的主机名地址，如果连接到本地MySQL服务器，为localhost 或 127.0.0.1</span><br><span class="line">端口：默认端口 3306，用默认可省略；修改端口后，需要指定</span><br><span class="line">用户名：一个合法的用户名</span><br><span class="line">密码：用户的登陆密码</span><br></pre>
 
 <ul>
 <li>测试</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出数据库列表：show databases;  -- 包含MySQL内部使用的数据库，如mysql、information_schema</span><br><span class="line">切换数据库：use database_name;</span><br><span class="line">输出数据表列表：show tables;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">输出数据库列表：show databases;  -- 包含MySQL内部使用的数据库，如mysql、information_schema</span><br><span class="line">切换数据库：use database_name;</span><br><span class="line">输出数据表列表：show tables;</span><br></pre>
 
 <ul>
 <li>断开连接：exit; /quit; /q;</li>
 </ul>
-<h2 id="简单查看"><a href="#简单查看" class="headerlink" title="简单查看"></a>简单查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查看所有的数据库：show databases [like ‘xxx’];</span><br><span class="line">查看创建数据库的DDL：show create database db_name;</span><br><span class="line">查看当前数据库的所有表：show tables [like ‘xxx’];</span><br><span class="line">查看创建数据表的DDL：show create table tb_name;</span><br><span class="line">查看指定数据库的所有表：show tables from db_name;</span><br><span class="line">查看指定数据表的属性列：show columns from tb_name;</span><br><span class="line">查看广泛的服务器状态信息：show status;</span><br><span class="line">查看授予用户（所有用户或特定用户）的安全权限：show grants；</span><br><span class="line">查看服务器错误或警告消息：show errors &#x2F; warnings;</span><br></pre></td></tr></table></figure>
+<h2 id="简单查看"><a href="#简单查看" class="headerlink" title="简单查看"></a>简单查看</h2><pre class="highlight"><span class="line">查看所有的数据库：show databases [like ‘xxx’];</span><br><span class="line">查看创建数据库的DDL：show create database db_name;</span><br><span class="line">查看当前数据库的所有表：show tables [like ‘xxx’];</span><br><span class="line">查看创建数据表的DDL：show create table tb_name;</span><br><span class="line">查看指定数据库的所有表：show tables from db_name;</span><br><span class="line">查看指定数据表的属性列：show columns from tb_name;</span><br><span class="line">查看广泛的服务器状态信息：show status;</span><br><span class="line">查看授予用户（所有用户或特定用户）的安全权限：show grants；</span><br><span class="line">查看服务器错误或警告消息：show errors &#x2F; warnings;</span><br></pre>
 
-<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on dbname.tbname to &#39;username&#39;@&#39;loginip&#39; identified by &#39;password&#39; with grant option;</span><br><span class="line"></span><br><span class="line">all privileges：表示所有权限（insert、delete、update、select、create、drop、alter等）</span><br><span class="line">dbname：表示数据库名，\* 表示所有数据库</span><br><span class="line">tbname：表示数据表名，\* 表示所有数据表</span><br><span class="line">username：表示用户名</span><br><span class="line">loginip：表示允许远程IP地址，% 表示所有IP地址</span><br><span class="line">password：表示登录密码，为空表示不需要密码登录</span><br><span class="line">with grant option：表示允许级联授权</span><br><span class="line"></span><br><span class="line">设置好了之后需要刷新权限：flush privileges;</span><br></pre></td></tr></table></figure>
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><pre class="highlight"><span class="line">grant all privileges on dbname.tbname to &#39;username&#39;@&#39;loginip&#39; identified by &#39;password&#39; with grant option;</span><br><span class="line"></span><br><span class="line">all privileges：表示所有权限（insert、delete、update、select、create、drop、alter等）</span><br><span class="line">dbname：表示数据库名，\* 表示所有数据库</span><br><span class="line">tbname：表示数据表名，\* 表示所有数据表</span><br><span class="line">username：表示用户名</span><br><span class="line">loginip：表示允许远程IP地址，% 表示所有IP地址</span><br><span class="line">password：表示登录密码，为空表示不需要密码登录</span><br><span class="line">with grant option：表示允许级联授权</span><br><span class="line"></span><br><span class="line">设置好了之后需要刷新权限：flush privileges;</span><br></pre>
 
 <h1 id="知识查阅"><a href="#知识查阅" class="headerlink" title="知识查阅"></a>知识查阅</h1><h2 id="网站资讯"><a href="#网站资讯" class="headerlink" title="网站资讯"></a>网站资讯</h2><blockquote>
 <ul>
@@ -455,7 +455,7 @@
 </ul>
 </blockquote>
 <h1 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h1><h2 id="语法校验规则（sql-mode）"><a href="#语法校验规则（sql-mode）" class="headerlink" title="语法校验规则（sql_mode）"></a>语法校验规则（sql_mode）</h2><p><strong>查看sql_mode</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局：select @@global.sql_mode;</span><br><span class="line">当前进程：select @@SESSION.sql_mode;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">全局：select @@global.sql_mode;</span><br><span class="line">当前进程：select @@SESSION.sql_mode;</span><br></pre>
 
 <p><strong>设置sql_mode</strong>：set @@sql_mode = sql_mode选项列表<br>仅对当前进程有效，想要永久有效，需要修改MySQL的配置文件（Wnidows：my.ini/my_dufault.ini；Linux：my.cnf）</p>
 <blockquote>
@@ -600,7 +600,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -647,7 +647,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -788,21 +788,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -815,6 +809,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -850,6 +850,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -862,11 +867,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -890,7 +890,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

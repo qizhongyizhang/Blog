@@ -49,7 +49,7 @@
         content="2021-05-15">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-09">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -342,9 +342,9 @@
 <h1 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h1><h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><ul>
 <li><strong>创建数据表</strong>：创建一个表，会在数据目录创建对应的文件保存表信息；tb_name 命名规范与 db_name 相同，可使用逻辑前缀或后缀进行区分</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create table [if not exists] tb_name(</span><br><span class="line">列定义</span><br><span class="line">) [表选项(引擎:engine|type,字符集:charset set,校对集:collate)]  [注释(comment)];</span><br><span class="line"></span><br><span class="line">create table if not exists tb_user_info( </span><br><span class="line">user_id int NOT NULL AUTO_INCREMENT,    -- 设置自增长</span><br><span class="line">user_name char(20) NOT NULL,</span><br><span class="line">user_sex boolean DEFAULT 1,        -- 设置默认值，即默认值约束</span><br><span class="line">user_address varchar(100),</span><br><span class="line">user_Email char(30) unique         -- 设置唯一值约束</span><br><span class="line">PRIMARY KEY(user_id),              -- 申明主键</span><br><span class="line">FULLTEXT(user_address)             -- 申明全文本索引</span><br><span class="line">)ENGINE &#x3D; InnoDB DEFAULT CHARSET&#x3D;utf8mb4 ROW_FORMAT&#x3D;DYNAMIC COMMENT &#x3D; &#39;客户信息表&#39;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">create table [if not exists] tb_name(</span><br><span class="line">列定义</span><br><span class="line">) [表选项(引擎:engine|type,字符集:charset set,校对集:collate)]  [注释(comment)];</span><br><span class="line"></span><br><span class="line">create table if not exists tb_user_info( </span><br><span class="line">user_id int NOT NULL AUTO_INCREMENT,    -- 设置自增长</span><br><span class="line">user_name char(20) NOT NULL,</span><br><span class="line">user_sex boolean DEFAULT 1,        -- 设置默认值，即默认值约束</span><br><span class="line">user_address varchar(100),</span><br><span class="line">user_Email char(30) unique         -- 设置唯一值约束</span><br><span class="line">PRIMARY KEY(user_id),              -- 申明主键</span><br><span class="line">FULLTEXT(user_address)             -- 申明全文本索引</span><br><span class="line">)ENGINE &#x3D; InnoDB DEFAULT CHARSET&#x3D;utf8mb4 ROW_FORMAT&#x3D;DYNAMIC COMMENT &#x3D; &#39;客户信息表&#39;</span><br></pre>
 
-<h3 id="表选项"><a href="#表选项" class="headerlink" title="表选项"></a>表选项</h3><p><strong>引擎类型</strong>：ENGINE ，也叫表类型，指的是数据表的存储机制，索引方案等配套相关功能；具体管理和处理数据的内部引擎，引擎在内部处理 SQL请求；MySQL 具有多种引擎，都隐藏在MySQL服务器内，为不同的任务选择正确的引擎以获得良好的功能和灵活性<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine"><br><strong>选择表的存储引擎的标准</strong></p>
+<h3 id="表选项"><a href="#表选项" class="headerlink" title="表选项"></a>表选项</h3><p><strong>引擎类型</strong>：ENGINE ，也叫表类型，指的是数据表的存储机制，索引方案等配套相关功能；具体管理和处理数据的内部引擎，引擎在内部处理 SQL请求；MySQL 具有多种引擎，都隐藏在MySQL服务器内，为不同的任务选择正确的引擎以获得良好的功能和灵活性<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" class="lozad post-image"><br><strong>选择表的存储引擎的标准</strong></p>
 <blockquote>
 <ul>
 <li>是否需要事务支持</li>
@@ -355,43 +355,43 @@
 </ul>
 </blockquote>
 <h3 id="列定义"><a href="#列定义" class="headerlink" title="列定义"></a>列定义</h3><p><strong>设置主键</strong>：PRIMARY KEY，数据唯一且不为空，支持多列组合主键，多列用逗号‘，’分隔</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">col_name primary key, 在定义表的时候直接在列定义时指明；</span><br><span class="line">primary key (col_name), 在完成表定义时，在小括号内部指明主键列</span><br><span class="line"></span><br><span class="line">user_id char(9) primary key</span><br><span class="line">PRIMARY KEY(user_id, user_name)  -- 定义组合主键，（id， name） 组合构成主键</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name primary key, 在定义表的时候直接在列定义时指明；</span><br><span class="line">primary key (col_name), 在完成表定义时，在小括号内部指明主键列</span><br><span class="line"></span><br><span class="line">user_id char(9) primary key</span><br><span class="line">PRIMARY KEY(user_id, user_name)  -- 定义组合主键，（id， name） 组合构成主键</span><br></pre>
 
 <p><strong>设置外键</strong>：FOREIGN KEY，关联其他表的主键，不能跨引擎使用，col_name 必须是其他表的主键</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">col_name foreign key references tb_name (col_name)</span><br><span class="line">[CONSTRAINT name] foreign key(col_name) references tb_name (col_name) [on delete set null];</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name foreign key references tb_name (col_name)</span><br><span class="line">[CONSTRAINT name] foreign key(col_name) references tb_name (col_name) [on delete set null];</span><br></pre>
 <p>**唯一约束(unique)**：该列的所有数据都唯一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">col_name unique</span><br><span class="line"></span><br><span class="line">user_id char(9) unique</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name unique</span><br><span class="line"></span><br><span class="line">user_id char(9) unique</span><br></pre>
 <p><strong>指定默认值</strong>：DEFAULT，性别在未给出数据的情况下使用 1-男性；不允许使用函数作为默认值，只支持常量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">col_name default value,</span><br><span class="line"></span><br><span class="line">sex bool default 1,</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name default value,</span><br><span class="line"></span><br><span class="line">sex bool default 1,</span><br></pre>
 <p>**空值约束(NOT NULL)**：表示没有值，什么都没有，与任何数据不同；如果一个列不允许为空，但是在赋值时，没有为该字段赋值，则会报错；使用 is null or is not null来判断，不能直接比较=/&gt;null</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">col_name [not null]</span><br><span class="line"></span><br><span class="line">user_id char(9) not null, 表名 user_id 不允许为空，省略 not null 表明该列可以为空</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name [not null]</span><br><span class="line"></span><br><span class="line">user_id char(9) not null, 表名 user_id 不允许为空，省略 not null 表明该列可以为空</span><br></pre>
 <p><strong>设置自增长</strong>：AUTO_INCREMENT，每当增加一行时该列自动增长，每个表只允许一个AUTO_INCREMENT 列，且必须被索引；可通过 last_insert_id() 函数获得最后一个```</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">col_name AUTO_INCREMENT value</span><br><span class="line"></span><br><span class="line">user_id char(5) AUTO_INCREMENT &#39;00001&#39;, user_id 列从 00001 开始，每增加一行，数据自动加一</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">col_name AUTO_INCREMENT value</span><br><span class="line"></span><br><span class="line">user_id char(5) AUTO_INCREMENT &#39;00001&#39;, user_id 列从 00001 开始，每增加一行，数据自动加一</span><br></pre>
 
 <h4 id="修改列定义"><a href="#修改列定义" class="headerlink" title="修改列定义"></a>修改列定义</h4><p><strong>增加约束</strong>：对数据列添加相关的约束条件，满足数据使用需求；都支持在表定义的时候添加，也支持表定义后单独添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter table tb_name </span><br><span class="line">add constraint constraint_name constraint_type (column_name) </span><br><span class="line">[on delete&#x2F;update cascade(级联操作)&#x2F;restrict(不允许操作)&#x2F;set null];</span><br><span class="line"></span><br><span class="line">alter table test add constraint unique_constraint unique unique (id,name); 在test表的(id,name)组合增加唯一性约束，省略约束名</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">alter table tb_name </span><br><span class="line">add constraint constraint_name constraint_type (column_name) </span><br><span class="line">[on delete&#x2F;update cascade(级联操作)&#x2F;restrict(不允许操作)&#x2F;set null];</span><br><span class="line"></span><br><span class="line">alter table test add constraint unique_constraint unique unique (id,name); 在test表的(id,name)组合增加唯一性约束，省略约束名</span><br></pre>
 
 <ul>
 <li>**主键约束(Primary Key)**：表中的一个或多个字段，唯一标识一条记录的字段集合，只能有一个主键；尽量不使用真实实体的属性，利用一个或多个与实体不相关的字段，作为唯一标识，主键不能为空，不能重复，看成一个唯一索引</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table test add constraint P_Key primary Key (id);</span><br><span class="line"></span><br><span class="line">删除主键:alter table tb_name drop primary key; 主键字段原则上在插入后，不应该修改，但是语法支持，要求修改后的值不能与已有值冲突</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">alter table test add constraint P_Key primary Key (id);</span><br><span class="line"></span><br><span class="line">删除主键:alter table tb_name drop primary key; 主键字段原则上在插入后，不应该修改，但是语法支持，要求修改后的值不能与已有值冲突</span><br></pre>
 
 <ul>
 <li>**外键约束(Foreign Key)**：如果A表的一个字段指向B表的主键，则此字段就为A表的外键。用于表示表之间的关系：存在外键的表，称之为从表(子表)，外键指向的表，称之为主表(父表)，一个表可以有外键，可以重复、可以为空；保持数据一致性，参照完整性，主要目的是控制存储在外键表(从表)中的数据；只有innodb存储引擎支持外键，其他引擎不支持</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table tb_name_p add [foreign_key_name] foreign key (col_name) references tb_name_s(col_name);</span><br><span class="line"></span><br><span class="line">ALTER TABLE audit ADD FOREIGN KEY (EMP_no) REFERENCES employees_test (ID); 在 audit 表的 EMP_no 字段上添加外键约束，引用 employees_test 表的ID字段，省略外键名</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">alter table tb_name_p add [foreign_key_name] foreign key (col_name) references tb_name_s(col_name);</span><br><span class="line"></span><br><span class="line">ALTER TABLE audit ADD FOREIGN KEY (EMP_no) REFERENCES employees_test (ID); 在 audit 表的 EMP_no 字段上添加外键约束，引用 employees_test 表的ID字段，省略外键名</span><br></pre>
 
 <ul>
 <li><p>**唯一约束(unique)**：该列的所有数据都唯一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tb_name add constraint unique_name unique(col_name);</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">alter table tb_name add constraint unique_name unique(col_name);</span><br></pre></li>
 <li><p>**自动增长约束(auto_increment)**：column_name auto_increment，整型，必须建立在索引之上，通常定义在主索引(主键)字段上；通常自动增长是从1开始递增，可以通过修改表属性，更改初始值</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table tb_name auto_increment value; 可重复设置，新增数据从最大值开始增长，可以手动插入数据(可重复插入，可更新)</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">alter table tb_name auto_increment value; 可重复设置，新增数据从最大值开始增长，可以手动插入数据(可重复插入，可更新)</span><br></pre>
 
 <ul>
 <li><p><strong>级联操作约束</strong>：主表改变时，从表的反应</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. cascade ：关联操作，从表进行相应操作：主表数据更新(主键值更新)，从表也更新(外键值更新)；主表记录删除，从表相关记录也删除。</span><br><span class="line">2. set null：设为null，不在指向任何主表记录，主表数据被更新(主键值更新)，从表的外键被设置为null</span><br><span class="line">3. restrict：拒绝，拒绝主表的相关操作</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">1. cascade ：关联操作，从表进行相应操作：主表数据更新(主键值更新)，从表也更新(外键值更新)；主表记录删除，从表相关记录也删除。</span><br><span class="line">2. set null：设为null，不在指向任何主表记录，主表数据被更新(主键值更新)，从表的外键被设置为null</span><br><span class="line">3. restrict：拒绝，拒绝主表的相关操作</span><br></pre></li>
 <li><p><strong>检查约束(CHECK)</strong></p>
 </li>
 <li><p>**默认值约束(DEFAULT)**：为列指定一个默认值，当该字段不存在值时启用；默认值必须是常数，不能是函数或表达式；如果该列可以为空，则默认值为null；blob，text数据列不能有默认值；时间戳类型，可以设置一个特殊的默认值 CURRENT_TIMESTAMP；在当列不存在或者传递的值为null时，使用当前的时间戳</p>
@@ -399,31 +399,31 @@
 <li><p>**空值约束(NOT NULL)**：表示没有值，什么都没有。与任何数据不同。如果一个列不允许为空，但是在赋值时，没有为该字段赋值，则会报错。使用 is null or is not null来判断，不能直接比较=/&gt;null</p>
 </li>
 <li><p><strong>注释</strong>：进行字段描述</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">column_name comment ‘description’;</span><br><span class="line">comment on column tb_name. column_name is ‘description’;</span><br></pre></td></tr></table></figure></li>
+<pre class="highlight"><span class="line">column_name comment ‘description’;</span><br><span class="line">comment on column tb_name. column_name is ‘description’;</span><br></pre></li>
 <li><p><strong>其他</strong></p>
 <blockquote>
 <p>MySQL回味每一条记录加上三个属性：trx_id(事务ID)、roll_point(回滚指针，存储历史版本数据的地址)、row_id(行号)</p>
 </blockquote>
 </li>
 </ul>
-<h3 id="快速创建"><a href="#快速创建" class="headerlink" title="快速创建"></a>快速创建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table [if not exists] tb_name like old_tb_name;</span><br><span class="line">create table [if not exists] tb_name select 结果集;</span><br></pre></td></tr></table></figure>
+<h3 id="快速创建"><a href="#快速创建" class="headerlink" title="快速创建"></a>快速创建</h3><pre class="highlight"><span class="line">create table [if not exists] tb_name like old_tb_name;</span><br><span class="line">create table [if not exists] tb_name select 结果集;</span><br></pre>
 
 <h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
 <li><strong>删除表</strong>：表名不存在无法删除，可同时删除多个表，表名之间用逗号分割，没有确认，不能撤销</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table [if exists] tb_name [CASCADE]; </span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">drop table [if exists] tb_name [CASCADE]; </span><br></pre>
 
 <ul>
 <li><strong>重命名</strong>：可同时重命名多个表，表名之间用逗号分割；剪切复制，可以跨库操作</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename table old_tb_name to new_tb_name[, old_tb_name to new_tb_name];</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">rename table old_tb_name to new_tb_name[, old_tb_name to new_tb_name];</span><br></pre>
 
 <ul>
 <li><strong>更新表</strong>：更新表定义，即表结构</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">增加：alter table tb_name add 列定义 after col_name|first（第一列）</span><br><span class="line">删除：alter table tb_name drop col_name;</span><br><span class="line">修改：alter table tb_name modify 列定义; -- 修改数据类型</span><br><span class="line">重命名：alter table tb_name charge old_col_name new_col_name 列定义;</span><br><span class="line"></span><br><span class="line">修改表选项：alter table tb_name 新表选项;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">增加：alter table tb_name add 列定义 after col_name|first（第一列）</span><br><span class="line">删除：alter table tb_name drop col_name;</span><br><span class="line">修改：alter table tb_name modify 列定义; -- 修改数据类型</span><br><span class="line">重命名：alter table tb_name charge old_col_name new_col_name 列定义;</span><br><span class="line"></span><br><span class="line">修改表选项：alter table tb_name 新表选项;</span><br></pre>
 
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看所有表：show tables [like &#39;_&#x2F;%xxx&#39;];</span><br><span class="line">查看表的DDL：show create table tb_name;</span><br><span class="line">查看表的描述性信息：show table status from db_name;</span><br><span class="line">描述表：describe&#x2F;desc tb_name;</span><br><span class="line">查看列信息：show columns from tb_name;</span><br><span class="line">查看索引信息：show index from tb_name;</span><br></pre></td></tr></table></figure>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><pre class="highlight"><span class="line">查看所有表：show tables [like &#39;_&#x2F;%xxx&#39;];</span><br><span class="line">查看表的DDL：show create table tb_name;</span><br><span class="line">查看表的描述性信息：show table status from db_name;</span><br><span class="line">描述表：describe&#x2F;desc tb_name;</span><br><span class="line">查看列信息：show columns from tb_name;</span><br><span class="line">查看索引信息：show index from tb_name;</span><br></pre>
 
 <h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p><strong>视图</strong>：是一个虚拟表，视图不保存数据，通过完成相应的SQL语句得到相应数据，视图的内容可以来自当前或其它数据库的一个或多个表，或者其它视图；视图常用来缩减业务逻辑，保存复杂逻辑，通常只对视图只进行简单逻辑操作</p>
 <ul>
@@ -456,17 +456,17 @@
 <h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
 <li><strong>创建视图</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create [OR REPLACE] [ALGORITHM &#x3D; &#123;UNDEFINED | MERGE | TEMPTABLE&#125;] view view_name as (select result);</span><br><span class="line"></span><br><span class="line">create view actor_name_view as select first_name first_name_v,last_name last_name_v from actor; 对 actor 表创建仅有first_name、last_name 两列，且视图字段名为 first_name_v、last_name_v 的actor_name_view 视图</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">create [OR REPLACE] [ALGORITHM &#x3D; &#123;UNDEFINED | MERGE | TEMPTABLE&#125;] view view_name as (select result);</span><br><span class="line"></span><br><span class="line">create view actor_name_view as select first_name first_name_v,last_name last_name_v from actor; 对 actor 表创建仅有first_name、last_name 两列，且视图字段名为 first_name_v、last_name_v 的actor_name_view 视图</span><br></pre>
 
 <ul>
 <li><strong>删除视图</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Drop view [if exists] view_name;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Drop view [if exists] view_name;</span><br></pre>
 
 <ul>
 <li><strong>修改视图</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Alter view view_name as new_select_result;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Alter view view_name as new_select_result;</span><br></pre>
 
 <blockquote>
 <ul>
@@ -482,14 +482,14 @@
 <ul>
 <li><strong>查看结构</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW CREATE VIEW view_name;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">SHOW CREATE VIEW view_name;</span><br></pre>
 
 <h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><ol>
 <li>在登录mysql的情况下：source  文件路径/文件名</li>
 <li>在不登录的情况下：mysql -u 用户名 -p 密码 库名 &lt; 备份文件</li>
 <li><strong>导入</strong>：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Load data infile ‘f_name’   -- 数据文件</span><br><span class="line">[REPLACE | IGNORE]     -- 主键冲突： Ignore(忽略) | REPLACE(替换)</span><br><span class="line">INTO TABLE tb_name     -- 目标表</span><br><span class="line">[FIELDS [TERMINATED BY &#39;string&#39;] [[OPTIONALLY] ENCLOSED BY &#39;char&#39;] [ESCAPED BY &#39;char&#39;]] -- 字段切割：fields terminated by &#39;\t&#39; enclosed by &#39;&#39; escaped by &#39;\\&#39;</span><br><span class="line">[LINES [STARTING BY &#39;string&#39;] [TERMINATED BY &#39;string&#39;]]   -- 记录行切割：lines terminated by &#39;\n&#39; starting by &#39;&#39;</span><br><span class="line">[IGNORE N LINES]   -- 跳过n行数据</span><br><span class="line"></span><br><span class="line">按照指定数据格式导入(默认)：字段使用逗号分割，而使用引号包裹</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">Load data infile ‘f_name’   -- 数据文件</span><br><span class="line">[REPLACE | IGNORE]     -- 主键冲突： Ignore(忽略) | REPLACE(替换)</span><br><span class="line">INTO TABLE tb_name     -- 目标表</span><br><span class="line">[FIELDS [TERMINATED BY &#39;string&#39;] [[OPTIONALLY] ENCLOSED BY &#39;char&#39;] [ESCAPED BY &#39;char&#39;]] -- 字段切割：fields terminated by &#39;\t&#39; enclosed by &#39;&#39; escaped by &#39;\\&#39;</span><br><span class="line">[LINES [STARTING BY &#39;string&#39;] [TERMINATED BY &#39;string&#39;]]   -- 记录行切割：lines terminated by &#39;\n&#39; starting by &#39;&#39;</span><br><span class="line">[IGNORE N LINES]   -- 跳过n行数据</span><br><span class="line"></span><br><span class="line">按照指定数据格式导入(默认)：字段使用逗号分割，而使用引号包裹</span><br></pre>
 
 <h2 id="导出-备份"><a href="#导出-备份" class="headerlink" title="导出/备份"></a>导出/备份</h2><ul>
 <li><p><strong>命令行实用程序</strong>：mysqldump</p>
@@ -507,9 +507,9 @@
 </li>
 </ul>
 <p><strong>SELECT INTO OUTFILE</strong>：自动创建文件，但不能重写已有文件，默认采用换行符区分记录，制表符区分字段；支持配置字段分隔符、包裹符和转义符；配置行(记录)结束符和起始符，常使用逗号分割字段，引号包裹；导出的数据文件可以使用 LOAD DATA INFILE 语句载入到某个数据表内；支持 INTO dumpfile，作用与 outfile 一致，不做任何换行和转义处理导出结果到文件；常用来保存二进制数据；数据可以用 RESTORE TABLE 复原</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select * INTO outfile ‘文件地址&#x2F;文件名’   -- 目标文件</span><br><span class="line">fields(字段) terminated by ‘，’ starting by ‘aaa’ enclosed by  ‘bbb’ escaped by &#39;\\&#39;    -- 字段切割</span><br><span class="line">lines(记录) terminated by ‘\n’   -- 记录行切割</span><br><span class="line">from tb_name;   -- 源数据表</span><br><span class="line"></span><br><span class="line">每一行为一条数据，每个字段之间使用水平制表符分隔</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * INTO outfile ‘文件地址&#x2F;文件名’   -- 目标文件</span><br><span class="line">fields(字段) terminated by ‘，’ starting by ‘aaa’ enclosed by  ‘bbb’ escaped by &#39;\\&#39;    -- 字段切割</span><br><span class="line">lines(记录) terminated by ‘\n’   -- 记录行切割</span><br><span class="line">from tb_name;   -- 源数据表</span><br><span class="line"></span><br><span class="line">每一行为一条数据，每个字段之间使用水平制表符分隔</span><br></pre>
 
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INSERT [LOW_PRIORITY] INTO tb_name (col_name_list) </span><br><span class="line">values (data_list) </span><br><span class="line">[on duplicat key update col_name &#x3D; data[,col_name&#x3D; data]]  (没有set); </span><br><span class="line"></span><br><span class="line">LOW_PRIORITY：降低 INSERT 语句的优先级</span><br><span class="line">Into：可以省略(不建议)</span><br></pre></td></tr></table></figure>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><pre class="highlight"><span class="line">INSERT [LOW_PRIORITY] INTO tb_name (col_name_list) </span><br><span class="line">values (data_list) </span><br><span class="line">[on duplicat key update col_name &#x3D; data[,col_name&#x3D; data]]  (没有set); </span><br><span class="line"></span><br><span class="line">LOW_PRIORITY：降低 INSERT 语句的优先级</span><br><span class="line">Into：可以省略(不建议)</span><br></pre>
 
 <blockquote>
 <ul>
@@ -524,7 +524,7 @@
 <li>INSERT INTO tb_name (col_name_list) values (data_list) on duplicate key update col_name = data, …;<br>指定在插入的值出现主键(或唯一索引)冲突时，更新其他非主键列的信息</li>
 </ul>
 </blockquote>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from tb_name [WHERE where_condition] [ORDER BY ...] [LIMIT N];</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><pre class="highlight"><span class="line">delete from tb_name [WHERE where_condition] [ORDER BY ...] [LIMIT N];</span><br></pre>
 
 <ul>
 <li>支持多表删除：Delete from tb_name_1,tb_name_2 using 表连接条件</li>
@@ -538,14 +538,14 @@
 <li>truncate不返回删除条数，delete会返回</li>
 </ol>
 </blockquote>
-<h2 id="修改-1"><a href="#修改-1" class="headerlink" title="修改"></a>修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">update [LOW_PRIORITY] [IGNORE] tb_name set col_name &#x3D; data [WHERE where_condition] [ORDER BY ...] [LIMIT N];</span><br><span class="line"></span><br><span class="line">IGNORE：忽略插入过程中的错误，继续更新；正常出现错误就会把错误发生前更新的所有行恢复到原来的值</span><br><span class="line">支持更新多列，用逗号分隔</span><br></pre></td></tr></table></figure>
+<h2 id="修改-1"><a href="#修改-1" class="headerlink" title="修改"></a>修改</h2><pre class="highlight"><span class="line">update [LOW_PRIORITY] [IGNORE] tb_name set col_name &#x3D; data [WHERE where_condition] [ORDER BY ...] [LIMIT N];</span><br><span class="line"></span><br><span class="line">IGNORE：忽略插入过程中的错误，继续更新；正常出现错误就会把错误发生前更新的所有行恢复到原来的值</span><br><span class="line">支持更新多列，用逗号分隔</span><br></pre>
 
 <blockquote>
 <p>多表更新：Update [LOW_PRIORITY]  [IGNORE] t1 join t2 on t1.x=t2.x where cond;多表更新时ORDER BY和LIMIT不能被使用；</p>
 </blockquote>
 <ul>
 <li><strong>替换</strong>： REPLACE INTO tb_name values (data_list);  存在更新，不存在插入。但如果表中的一个旧记录与一个用于PRIMARY KEY或一个UNIQUE索引的新记录具有相同的值，则在新记录被插入之前，旧记录被删除(替换原有记录)</li>
-<li><strong>数据更改操作流程</strong>：数据产生变更时，会先在内存更改数据，当在特定时期再写入磁盘(频繁的I/O操作会降低性能)<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" alt="Data_Change_Order"></li>
+<li><strong>数据更改操作流程</strong>：数据产生变更时，会先在内存更改数据，当在特定时期再写入磁盘(频繁的I/O操作会降低性能)<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" alt="Data_Change_Order" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" class="lozad post-image"></li>
 </ul>
 <p>脏页：指的是存储引擎内存中的数据与磁盘中的数据不一致，进行数据更改操作(增删改)时，会先写预写日志(WAL)，再更改内存中的数据，最后在合适时机进行脏页落盘</p>
 <ol>
@@ -689,7 +689,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -736,7 +736,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -877,21 +877,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -904,6 +898,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -939,6 +939,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -951,11 +956,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -979,7 +979,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

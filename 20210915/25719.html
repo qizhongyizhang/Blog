@@ -49,7 +49,7 @@
         content="2021-09-15">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-09">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -369,27 +369,27 @@
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
 <li><strong>建立索引</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE|FULLTEXT] INDEX index_name on tb_name (col_name [(length)]  [ASC|DESC], …..);</span><br><span class="line">ALTER TABLE tb_name ADD INDEX [index_name]  (index_col_name,...)</span><br><span class="line"></span><br><span class="line">alter table actor add unique index uniq_idx_firstname(first_name);在 actor 表的first_name 字段上添加唯一性索引 uniq_idx_firstname</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">CREATE [UNIQUE|FULLTEXT] INDEX index_name on tb_name (col_name [(length)]  [ASC|DESC], …..);</span><br><span class="line">ALTER TABLE tb_name ADD INDEX [index_name]  (index_col_name,...)</span><br><span class="line"></span><br><span class="line">alter table actor add unique index uniq_idx_firstname(first_name);在 actor 表的first_name 字段上添加唯一性索引 uniq_idx_firstname</span><br></pre>
 
 <ul>
 <li><strong>删除索引</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX index_name ON tb_name;</span><br><span class="line">ALTER TABLE tb_name drop index index_name;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">DROP INDEX index_name ON tb_name;</span><br><span class="line">ALTER TABLE tb_name drop index index_name;</span><br></pre>
 
 <ul>
 <li><strong>查询索引</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM tb_name;</span><br><span class="line">SHOW KEYS FROM tb_name;</span><br><span class="line">DESC tb_name;</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">SHOW INDEX FROM tb_name;</span><br><span class="line">SHOW KEYS FROM tb_name;</span><br><span class="line">DESC tb_name;</span><br></pre>
 
 <ul>
 <li><strong>查看索引使用情况</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show status like ‘Handler_read%’;</span><br><span class="line"></span><br><span class="line">handler_read_key：这个值越高越好，越高表示使用索引查询到的次数越多</span><br><span class="line">handler_read_rnd_next：这个值越低越好，越高表示查询越低效</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">show status like ‘Handler_read%’;</span><br><span class="line"></span><br><span class="line">handler_read_key：这个值越高越好，越高表示使用索引查询到的次数越多</span><br><span class="line">handler_read_rnd_next：这个值越低越好，越高表示查询越低效</span><br></pre>
 
 <ul>
 <li><strong>使用索引</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from salaries FORCE INDEX (idx_emp_no) where emp_no &#x3D; 10005;  强制按照 idx_emp_no 索引查询 salaries 表里 emp_no &#x3D; 10005 的所有信息</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select * from salaries FORCE INDEX (idx_emp_no) where emp_no &#x3D; 10005;  强制按照 idx_emp_no 索引查询 salaries 表里 emp_no &#x3D; 10005 的所有信息</span><br></pre>
 
 <ul>
 <li><strong>使用条件</strong></li>
@@ -408,10 +408,10 @@
 <p>空间占用增加<br>影响 I/O 效率，数据改变，会引发索引值改变</p>
 </blockquote>
 <h1 id="全文本搜索"><a href="#全文本搜索" class="headerlink" title="全文本搜索"></a>全文本搜索</h1><p><strong>全文本搜索</strong>：创建时使用 FULLTEXT 关键字进行申明，其他操作与普通索引相同；定义之后在增加、更新或删除行时，索引自动更新，使用 Match() 和 Against() 两个函数执行全文本搜索；全文本搜索的性能优于 like 和正则，可以明确配置匹配的关键字，可以智能化选择结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MATCH (col_name_list) AGAINST (expr)：Match()指定被搜索的列，Against()指定要使用的搜索表达式，传递给 Match() 的值必须与 FULLTEXT()定义中的相同；默认不区分大小写，可使用 BINARY 方式</span><br><span class="line"></span><br><span class="line">FULLTEXT(col_name)：可在建表字段定义之后申明，也可通过创建索引方式申明</span><br><span class="line"></span><br><span class="line">select note_text</span><br><span class="line">from productnotes</span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit&#39;); 等价于 where  note_text like &#39;%rabbit%&#39;;</span><br><span class="line">使用全文本搜索返回以文本匹配良好程度排序的数据，可使用 select 查询文本匹配良好程度值，文本中词靠前行的等级值高</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">MATCH (col_name_list) AGAINST (expr)：Match()指定被搜索的列，Against()指定要使用的搜索表达式，传递给 Match() 的值必须与 FULLTEXT()定义中的相同；默认不区分大小写，可使用 BINARY 方式</span><br><span class="line"></span><br><span class="line">FULLTEXT(col_name)：可在建表字段定义之后申明，也可通过创建索引方式申明</span><br><span class="line"></span><br><span class="line">select note_text</span><br><span class="line">from productnotes</span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit&#39;); 等价于 where  note_text like &#39;%rabbit%&#39;;</span><br><span class="line">使用全文本搜索返回以文本匹配良好程度排序的数据，可使用 select 查询文本匹配良好程度值，文本中词靠前行的等级值高</span><br></pre>
 
 <h2 id="查询扩展"><a href="#查询扩展" class="headerlink" title="查询扩展"></a>查询扩展</h2><p><strong>查询扩展</strong>：查询与指定关键词可能相关的数据，即使不包含给定关键字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH (col_name_list) AGAINST (&#39;xxx&#39; with query expansion) </span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">MATCH (col_name_list) AGAINST (&#39;xxx&#39; with query expansion) </span><br></pre>
 
 <ol>
 <li>首先，进行一个基本的全文本搜索，找出与搜索条件匹配的所有行</li>
@@ -428,7 +428,7 @@
 <li>不具有词分隔符（包括日语和汉语）的语言不能恰当地返回全文本搜索结果</li>
 </ol>
 <h2 id="布尔文本搜索"><a href="#布尔文本搜索" class="headerlink" title="布尔文本搜索"></a>布尔文本搜索</h2><p><strong>布尔文本搜索</strong>：全文本搜索的另外一种形式，即使没有定义 FULLTEXT 索引，也可以使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MATCH (col_name_list) AGAINST (&#39;xxx&#39; in boolean mode)；支持布尔操作符限定词语</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">MATCH (col_name_list) AGAINST (&#39;xxx&#39; in boolean mode)；支持布尔操作符限定词语</span><br></pre>
 
 <table>
 <thead>
@@ -470,7 +470,7 @@
 <td align="left">定义一个短语（匹配整个短语以便包含或排除这个短语）</td>
 </tr>
 </tbody></table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select note_text</span><br><span class="line">from productnotes</span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 或 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit -dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 且不含 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;+rabbit +dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中必须同时含有 rabbit 和 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;&quot;rabbit dog&quot;&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit dog 短语的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;&gt;rabbit &lt;dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 或 dog 的数据，且以 rabbit 为主计算文本匹配良好程度</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;+rabbit +(&lt;dog)&#39; in boolean mode); 检索 productnotes 表的 note_text 中必须同时含有 rabbit 和 dog 的数据，且以 rabbit 为主计算文本匹配良好程度</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">select note_text</span><br><span class="line">from productnotes</span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 或 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;rabbit -dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 且不含 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;+rabbit +dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中必须同时含有 rabbit 和 dog 的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;&quot;rabbit dog&quot;&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit dog 短语的数据</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;&gt;rabbit &lt;dog&#39; in boolean mode); 检索 productnotes 表的 note_text 中含有 rabbit 或 dog 的数据，且以 rabbit 为主计算文本匹配良好程度</span><br><span class="line"></span><br><span class="line">where MATCH (note_text) AGAINST (&#39;+rabbit +(&lt;dog)&#39; in boolean mode); 检索 productnotes 表的 note_text 中必须同时含有 rabbit 和 dog 的数据，且以 rabbit 为主计算文本匹配良好程度</span><br></pre>
 
 <p><strong>提供数据</strong></p>
 <blockquote>
@@ -601,7 +601,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -648,7 +648,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -789,21 +789,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -816,6 +810,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -851,6 +851,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -863,11 +868,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -891,7 +891,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

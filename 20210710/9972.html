@@ -49,7 +49,7 @@
         content="2021-07-10">
       <meta 
         property="og:article:modified_time" 
-        content="2021-09-15">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -329,13 +329,13 @@
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>启动：命令行下输入：jupyter notebook，回车；即可在设置的浏览器上打开 jupyter</p>
 <h3 id="设置默认浏览器"><a href="#设置默认浏览器" class="headerlink" title="设置默认浏览器"></a>设置默认浏览器</h3><ol>
 <li>找到浏览器的起始位置（以 chrome 为例）：C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</li>
-<li>在 C:\Users\xxx.jupyter 目录下创建 jupyter_notebook_config.py 文件（有就覆盖，没有就新建），输入以下内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import webbrowser</span><br><span class="line">webbrowser.register(&#39;chrome&#39;, None, webbrowser.GenericBrowser(u&#39;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe&#39;))</span><br><span class="line">c.NotebookApp.browser &#x3D; &#39;chrome&#39;</span><br><span class="line">修改自己电脑上 chrome 对应的位置</span><br></pre></td></tr></table></figure></li>
+<li>在 C:\Users\xxx.jupyter 目录下创建 jupyter_notebook_config.py 文件（有就覆盖，没有就新建），输入以下内容<pre class="highlight"><span class="line">import webbrowser</span><br><span class="line">webbrowser.register(&#39;chrome&#39;, None, webbrowser.GenericBrowser(u&#39;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe&#39;))</span><br><span class="line">c.NotebookApp.browser &#x3D; &#39;chrome&#39;</span><br><span class="line">修改自己电脑上 chrome 对应的位置</span><br></pre></li>
 </ol>
 <h2 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h2><ul>
 <li>Jupyter导入.py文件：% load &lt;文件名，带后缀名&gt;</li>
 </ul>
 <h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p><strong>自动补全</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter_contrib_nbextensions</span><br><span class="line">jupyter contrib nbextension install --user</span><br><span class="line">pip install jupyter_nbextensions_configurator</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">pip install jupyter_contrib_nbextensions</span><br><span class="line">jupyter contrib nbextension install --user</span><br><span class="line">pip install jupyter_nbextensions_configurator</span><br></pre>
 
 
 
@@ -465,7 +465,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -512,7 +512,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -653,21 +653,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -680,6 +674,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -715,6 +715,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -727,11 +732,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -755,7 +755,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 

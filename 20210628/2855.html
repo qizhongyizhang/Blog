@@ -49,7 +49,7 @@
         content="2021-06-28">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-08">
+        content="2021-11-22">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -311,7 +311,7 @@
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="高并发场景的负载均衡"><a href="#高并发场景的负载均衡" class="headerlink" title="高并发场景的负载均衡"></a>高并发场景的负载均衡</h3><p>高并发指的是在同一时间点有很多请求访问同一 API 接口或者 Url 地址，会给服务器和硬件环境带来很大压力，通过负载均衡(将请求和数据分摊到多个操作单元进行执行)进行处理</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载安装包<br>解压安装包<br>安装依赖：yum install gcc pcre-devel zlib-devel openssi-devel -y, nginx需要进行源码编译安装，需要具备C语言编译环境<br>配置安装目录： ./configure –prefix=catalogue(安装目录)<br>编译安装：make &amp;&amp; make install<br>开启服务：进入安装目录下， ./sbin/nginx<br>Ngiinx 的启动都依赖于配置文件：安装目录下的conf目录下的 nginx.conf 文件</p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><strong>upstream</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">upstream name&#123;</span><br><span class="line">	[least_conn&#x2F;ip_hash;]   &#x2F;&#x2F; 最少连接数&#x2F;IPHash</span><br><span class="line">	server ip:port [weight &#x3D; n];  &#x2F;&#x2F; 设置权重</span><br><span class="line">	server ip:port;</span><br><span class="line">	server ip:port;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.&#x2F;nginx -s reload  &#x2F;&#x2F; 重新加载配置文件，更新配置文件后，需要重新加载才能生效</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><span class="line">upstream name&#123;</span><br><span class="line">	[least_conn&#x2F;ip_hash;]   &#x2F;&#x2F; 最少连接数&#x2F;IPHash</span><br><span class="line">	server ip:port [weight &#x3D; n];  &#x2F;&#x2F; 设置权重</span><br><span class="line">	server ip:port;</span><br><span class="line">	server ip:port;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.&#x2F;nginx -s reload  &#x2F;&#x2F; 重新加载配置文件，更新配置文件后，需要重新加载才能生效</span><br></pre>
 
 <h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
 <li><strong>软件负载均衡</strong>(常见软件有LVS、Nginx、HAProxy)：软件负载均衡可以分为四层负载均衡和七层负载均衡：四层负载均衡利用在网络层中IP地址端口进行请求的转发，起到转发分配作用；七层负载均衡根据访问用户的HTTP请求头、URL信息将请求转发到特定的主机。LVS为四层负载均衡，Nginx、HAProxy可四可七。Nginx是万级的，通常用来做七层负载；LVS是十万级的，可以组合成：LVS+n个Nginx。</li>
@@ -319,7 +319,7 @@
 <li><strong>DNS负载均衡</strong>：DNS解析同一个域名可以返回不同的ip，用来实现地理级别的负载均衡</li>
 </ul>
 <blockquote>
-<p>DNS负载均衡是地理级别的，硬件负载均衡对应的是集群级别的，软件负载均衡对应的是机器级别的<br><img src="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png" alt="Load_Balance"><br>对比：</p>
+<p>DNS负载均衡是地理级别的，硬件负载均衡对应的是集群级别的，软件负载均衡对应的是机器级别的<br><img src="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png" alt="Load_Balance" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Tools/Nginx/Load_Balance.png" class="lozad post-image"><br>对比：</p>
 <blockquote>
 <ul>
 <li><strong>软件负载均衡</strong>：优点：便宜而且简单灵活，仅安装软件即可，适用于一般小型企业，或者并发量不高的企业，扩展性较好；缺点：和硬件负载均衡比性能一般，不适用于流量很大的企业没防火墙或者防DDos攻击等安全性功能</li>
@@ -455,7 +455,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>82</span>
+    <span>83</span>
     <span>文章</span>
   </a>
   <a 
@@ -502,7 +502,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
@@ -643,21 +643,15 @@
       </a>
     
       <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
+        href="/tags/Windows/" 
+        title="Windows">
+        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
-      </a>
-    
-      <a 
-        href="/tags/Windows/" 
-        title="Windows">
-        <div class="tags-list-item">Windows</div>
       </a>
     
       <a 
@@ -670,6 +664,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
         title="数据仓库">
         <div class="tags-list-item">数据仓库</div>
+      </a>
+    
+      <a 
+        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
+        title="程序设计">
+        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -705,6 +705,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
       </div>
@@ -717,11 +722,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-10-18</div>
         <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-09-18</div>
-        <a href="/20210918/48384.html"><div class="recent-posts-item-content">MySQL进阶-事务</div></a>
       </div>
     
   </div>
@@ -745,7 +745,7 @@
           
             2020 -
           
-          2021
+          2022
         </span>
         &nbsp;
         <a 
