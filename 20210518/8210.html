@@ -49,7 +49,7 @@
         content="2021-05-18">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-25">
+        content="2022-03-02">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -277,7 +277,7 @@
     
     
       <span class="dot"></span>
-      <span>1.3k 字</span>
+      <span>2.5k 字</span>
     
   </div>
   
@@ -326,10 +326,41 @@
 <li>SQL操作变慢</li>
 <li>存储出现问题</li>
 </ul>
-<h1 id="优化策略"><a href="#优化策略" class="headerlink" title="优化策略"></a>优化策略</h1><h2 id="SQL层面-SQL优化"><a href="#SQL层面-SQL优化" class="headerlink" title="SQL层面-SQL优化"></a>SQL层面-SQL优化</h2><p><strong>开启慢SQL记录</strong></p>
-<pre class="highlight"><span class="line">slow_query_log &#x3D; on</span><br><span class="line">long_query_time &#x3D; 1</span><br><span class="line">slow_query_log_file &#x3D; &#x2F;path&#x2F;to&#x2F;log</span><br></pre>
+<h1 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h1><p><strong>系统状态</strong></p>
+<ul>
+<li>show status ： 显示状态信息（扩展show status like ‘XXX’，show global status like ‘%slow%’; ）</li>
+<li>show variables ： 显示系统变量（扩展show variables like ‘XXX’）</li>
+<li>show innodb status ： 显示InnoDB存储引擎的状态</li>
+<li>show processlist ： 查看当前 SQL 执行，包括执行状态、是否锁表等</li>
+<li>mysqladmin variables -u username -p password ： 显示系统变量</li>
+<li>mysqladmin extended-status -u username -p password ： 显示状态信息</li>
+</ul>
+<p><strong>开启慢SQL记录</strong>：在配置文件 my.cnf 或 my.ini 中在[mysqld]一行下面加入配置参数</p>
+<pre class="highlight"><span class="line">slow_query_log &#x3D; on     # 开启慢查询日志</span><br><span class="line">long_query_time &#x3D; 2     # 规定语句执行查过两秒就会记录，最好在5秒以内</span><br><span class="line">log-slow-queries&#x3D;&#x2F;data&#x2F;mysqldata&#x2F;slow-query.log       # 规定慢查询日志文件存放位置，slow_query_log_file &#x3D; &#x2F;path&#x2F;to&#x2F;log</span><br></pre>
 
-<p><strong>调优工具-生成执行计划</strong>：在查询语句之前加上 explain 关键字<br><strong>SQL细节</strong>：尽量避免全表扫描，首先考虑在 where 及 order by 经常涉及的列上建立索引</p>
+<p><strong>调优工具-生成执行计划</strong>：在查询语句之前加上 explain 关键字可以得到 <strong>表的读取顺序、数据读取操作的操作类型、可以使用和实际使用的索引、表之间的引用、被优化器查询记录数</strong></p>
+<p><strong>连接数</strong>：connections</p>
+<pre class="highlight"><span class="line">show variables like &#39;max_connections&#39;; </span><br><span class="line">show global status like ‘Max_used_connections’;</span><br><span class="line">Max_used_connections &#x2F; max_connections * 100% ≈ 85%</span><br></pre>
+<p><strong>索引丢失率</strong>：key_buffer_size，Key_read_requests，Key_reads，key_cache_miss_rate</p>
+<pre class="highlight"><span class="line">show variables like ‘key_buffer_size’;   # 查看索引缓存大小</span><br><span class="line">show global status like &#39;Key_read_requests&#39;;     # 查看索引请求数</span><br><span class="line">show global status like &#39;Key_reads&#39;;     # 查看索引未命中数</span><br><span class="line">key_cache_miss_rate &#x3D; Key_reads &#x2F; Key_read_requests * 100%  # 索引丢失率，在0.1%以下较好(每1000个请求有一个直接读硬盘)，如果key_cache_miss_rate在0.01%以下的话，key_buffer_size分配的过多，可以适当减少。</span><br></pre>
+<p><strong>临时表创建</strong>：Created_tmp_disk_tables ，Created_tmp_tables ，max_heap_table_size </p>
+<pre class="highlight"><span class="line">show global status like &#39;Created_tmp_disk_tables&#39;; # 查看在磁盘上创建临时表数量</span><br><span class="line">show global status like &#39;Created_tmp_tables&#39;;      # 查看创建临时表数量</span><br><span class="line">show global status like &#39;Created_tmp_files&#39;;       # 查看创建临时文件数</span><br><span class="line">Created_tmp_disk_tables &#x2F; Created_tmp_tables * 100% &lt;&#x3D; 25% </span><br><span class="line"></span><br><span class="line">show variables where Variable_name in (&#39;tmp_table_size&#39;, &#39;max_heap_table_size&#39;); </span><br><span class="line">max_heap_table_size  # 内存临时表大小，规定值以下的临时表才能全部放内存</span><br><span class="line">tmp_table_size       # 临时表大小，超过 max_heap_table_size 但在规定值以下创建磁盘临时表</span><br></pre>
+<p><strong>打开表情况</strong>：Open_tables，Opened_tables，table_cache</p>
+<pre class="highlight"><span class="line">show global status like &#39;open%tables%&#39;; </span><br><span class="line">show variables like &#39;table_cache&#39;; </span><br><span class="line">如果Opened_tables数量过大，说明配置中table_cache(5.1.3之后叫做table_open_cache)值可能太小</span><br><span class="line"></span><br><span class="line">Open_tables &#x2F; Opened_tables * 100% &gt;&#x3D; 85%</span><br><span class="line">Open_tables &#x2F; table_cache * 100% &lt;&#x3D; 95%</span><br></pre>
+<p><strong>进程使用情况</strong>：Threads_created ，thread_cache_size，当客户端断开之后，服务器处理此客户的线程将会缓存起来以响应下一个客户而不是销毁</p>
+<pre class="highlight"><span class="line">show global status like &#39;Threads_created&#39;;</span><br><span class="line">show variables like &#39;thread_cache_size&#39;; </span><br><span class="line"></span><br><span class="line">如果 Threads_created值过大，表明MySQL服务器一直在创建线程，比较耗资源，可以适当增加配置文件中thread_cache_size值</span><br></pre>
+<p><strong>查询缓存</strong>：qcache、query_cache</p>
+<pre class="highlight"><span class="line">show global status like &#39;qcache%&#39;; </span><br><span class="line">show variables like &#39;query_cache%&#39;; </span><br><span class="line">查询缓存碎片率 &#x3D; Qcache_free_blocks &#x2F; Qcache_total_blocks * 100%；查询缓存碎片率超过20%，可以用FLUSH QUERY CACHE整理缓存碎片，如果查询都是小数据量的话可以减小query_cache_min_res_unit</span><br><span class="line">查询缓存利用率 &#x3D; (query_cache_size - Qcache_free_memory) &#x2F; query_cache_size * 100%；查询缓存利用率在25%以下的话说明query_cache_size设置的过大，可适当减小；查询缓存利用率在80%以上且Qcache_lowmem_prunes &gt; 50 说明 query_cache_size 可能有点小，或者是碎片太多</span><br><span class="line">查询缓存命中率 &#x3D; (Qcache_hits - Qcache_inserts) &#x2F; Qcache_hits * 100%；命中率较差，可能写操作比较频繁，而且可能有些碎片</span><br></pre>
+<p><strong>查询排序</strong>：Sort_buffer_size ，Sort_merge_passes </p>
+<pre class="highlight"><span class="line">show global status like &#39;Sort_merge_passes&#39;; </span><br><span class="line">show variables like &#39;Sort_buffer_size&#39;; </span><br><span class="line">如果 Sort_buffer_size 的大小不够把所有的记录都读到内存中，MySQL 就会把每次在内存中排序的结果存到临时文件中，等 MySQL 找到所有记录之后，再把临时文件中的记录做一次排序；这次排序就会增加 Sort_merge_passes；实际上，MySQL 会用另一个临时文件来存再次排序的结果，通常 Sort_merge_passes 增加的数值是建临时文件数的两倍</span><br></pre>
+<p><strong>文件打开数</strong>：open_files、open_files_limit</p>
+<pre class="highlight"><span class="line">show global status like &#39;open_files&#39;;</span><br><span class="line">show variables like &#39;open_files_limit&#39;;</span><br><span class="line">比较合适的设置：Open_files &#x2F; open_files_limit * 100% &lt;&#x3D; 75%</span><br></pre>
+<p><strong>表锁情况</strong>：Table_locks_immediate ，Table_locks_waited </p>
+<pre class="highlight"><span class="line">show global status like &#39;table_locks%&#39;;</span><br><span class="line">Table_locks_immediate：表示立即释放表锁数</span><br><span class="line">Table_locks_waited：表示需要等待的表锁数</span><br><span class="line">如果Table_locks_immediate &#x2F; Table_locks_waited &gt; 5000，最好采用InnoDB引擎</span><br></pre>
+<p><strong>表扫描情况</strong>：Handler_read_rnd_next，Com_select、read_buffer_size</p>
+<pre class="highlight"><span class="line">show global status like &#39;Handler_read_rnd_next&#39;;  # 显示查询直接操作的数据文件数量</span><br><span class="line">show global status like &#39;com_select&#39;; # 调出服务器完成的查询请求次数</span><br><span class="line"></span><br><span class="line">表扫描率 &#x3D; Handler_read_rnd_next &#x2F; Com_select：如果表扫描率超过4000，说明进行了太多表扫描，很有可能索引没有建好，可以适当增加 read_buffer_size 值，但最好不要超过8MB</span><br></pre>
+
+<h1 id="优化策略"><a href="#优化策略" class="headerlink" title="优化策略"></a>优化策略</h1><h2 id="SQL层面-SQL优化"><a href="#SQL层面-SQL优化" class="headerlink" title="SQL层面-SQL优化"></a>SQL层面-SQL优化</h2><p><strong>SQL细节</strong>：尽量避免全表扫描，首先考虑在 where 及 order by 经常涉及的列上建立索引</p>
 <blockquote>
 <ul>
 <li><p>where 子句中，表连接写在最前面，可以过滤掉大量数据的条件写在最右边，having写在最后面，条件匹配从右向左依次进行</p>
@@ -505,7 +536,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-text">问题定位</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -524,7 +555,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>83</span>
+    <span>84</span>
     <span>文章</span>
   </a>
   <a 
@@ -553,7 +584,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-text">问题定位</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -568,17 +599,17 @@
   </div>
   <div class="categories-list">
     
-      <a href="/categories/%E5%9F%BA%E7%A1%80/">
-        <div class="categories-list-item">
-          基础
-          <span class="categories-list-item-badge">34</span>
-        </div>
-      </a>
-    
       <a href="/categories/%E9%80%9A%E8%AF%86/">
         <div class="categories-list-item">
           通识
           <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E5%9F%BA%E7%A1%80/">
+        <div class="categories-list-item">
+          基础
+          <span class="categories-list-item-badge">35</span>
         </div>
       </a>
     
@@ -603,16 +634,16 @@
         </div>
       </a>
     
-      <a href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+      <a href="/categories/%E5%8C%BA%E5%88%AB/">
         <div class="categories-list-item">
-          注意事项
+          区别
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
     
-      <a href="/categories/%E5%8C%BA%E5%88%AB/">
+      <a href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
         <div class="categories-list-item">
-          区别
+          注意事项
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
@@ -682,15 +713,15 @@
       </a>
     
       <a 
-        href="/tags/Tools/" 
-        title="Tools">
-        <div class="tags-list-item">Tools</div>
-      </a>
-    
-      <a 
         href="/tags/Python/" 
         title="Python">
         <div class="tags-list-item">Python</div>
+      </a>
+    
+      <a 
+        href="/tags/Tools/" 
+        title="Tools">
+        <div class="tags-list-item">Tools</div>
       </a>
     
       <a 
@@ -759,7 +790,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87"><span class="toc-text">查询效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">影响因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E8%A1%A8%E7%8E%B0"><span class="toc-text">外部表现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-text">问题定位</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E5%B1%82%E9%9D%A2-SQL%E4%BC%98%E5%8C%96"><span class="toc-text">SQL层面-SQL优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2"><span class="toc-text">表结构层面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E7%B4%A2%E5%BC%95"><span class="toc-text">表结构层面-索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">表结构层面-数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E8%A1%A8%E5%86%97%E4%BD%99"><span class="toc-text">表结构层面-表冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">表结构层面-创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%B1%82%E9%9D%A2-%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">表结构层面-锁机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E9%9B%86%E7%BE%A4"><span class="toc-text">数据库配置-集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">数据库配置-主从复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">数据库配置-读写分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">数据库配置-使用缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">数据库配置-分库分表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="toc-text">名词介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-%E8%B7%A8%E5%BA%93%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="toc-text">问题-跨库关联查询</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">硬件与操作系统</span></a></li></ol></li></ol>
     </article>
   
   
@@ -775,6 +806,11 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
       </div>
     
@@ -786,11 +822,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/65236.html"><div class="recent-posts-item-content">Python基础-数据类型</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-10-18</div>
-        <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
       </div>
     
   </div>

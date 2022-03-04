@@ -49,7 +49,7 @@
         content="2021-11-18">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-30">
+        content="2022-03-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>3.1k 字</span>
+      <span>3.5k 字</span>
     
   </div>
   
@@ -304,13 +304,13 @@
 <span id="more"></span>
 
 <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>Pyhton 没有数据类型关键字，能够直接处理的数据类型有：整数、浮点数、字符串、布尔值、列表、元组、集合、字典<br><strong>动态语言</strong>：变量本身数据类型不固定的语言，在赋值时确定对应变量的数据类型；如：Python<br><strong>静态语言</strong>：在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错；如：Java</p>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><p><strong>整数</strong>：可以处理任意大小的整数，包括负整数；表示方法和数学上的写法一模一样，Python 允许在数字中间以 _ 分隔数值较大的数，方便阅读</p>
+<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><p><strong>整数</strong>：可以处理任意大小的整数，包括负整数；表示方法和数学上的写法一模一样，Python 允许在数字中间以 _ 分隔数值较大的数，方便阅读，如：10_000_000_000，和 10000000000 完全一样，不可变对象</p>
 <pre class="highlight"><span class="line">int &#x3D; 2     # 十进制整数2</span><br><span class="line">int &#x3D; 0x11  # 十六进制整数17，二进制为 0b11 &#x3D; 3，八进制为 0o11 &#x3D; 9</span><br></pre>
 
 <h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><p><strong>浮点数</strong>：指按照科学记数法表示时，浮点数的小数点位置可变，如：1.23x10^9 = 12.3x10^8 ，在 Python 里面写作 1.23e9</p>
 <pre class="highlight"><span class="line">float &#x3D; 2.0  # 浮点数类型</span><br></pre>
 <blockquote>
-<p>整数和浮点数在计算机内部存储的方式不同：整数运算永远是精确的，普通除法结果是浮点数，地板除 // 结果都是整数，浮点数运算则可能会有四舍五入的误差</p>
+<p>整数和浮点数在计算机内部存储的方式不同：整数运算永远是精确的，普通除法结果是浮点数，浮点数运算则可能会有四舍五入的误差<br>/ 除法计算结果是浮点数，即使是两个整数恰好整除，结果也是浮点数<br>地板除 // （求商）：两个整数的除法仍然是整数，整数的地板除 // 永远是整数<br>取余 %：两个整数的除法仍然是整数</p>
 </blockquote>
 <h4 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h4><ul>
 <li>一元操作符：+、-、*、/、//（整数商）、%（求模或取余）、**（幂运算）</li>
@@ -321,37 +321,38 @@
 <li>round(x，d)：x四舍五入保留d位小数，省略d则保留整数</li>
 <li>max()、min()</li>
 </ul>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><strong>字符串</strong>：是以单引号 ‘ 或双引号 “ 括起来的任意文本，如果文本内包含 ‘ 或 “ ，可以通过 \ 进行转义，也可以 ‘ 和 “ 混用</p>
-<pre class="highlight"><span class="line">string &#x3D; &#39;2&#39;&#x2F;&quot;2&quot;     # 字符串 2</span><br><span class="line">string &#x3D; &#39;I\&#39;m OK!&#39;  # 字符串 I&#39;m OK!</span><br><span class="line">string &#x3D; &quot;I&#39;m OK!&quot;   # 字符串 I&#39;m OK!</span><br><span class="line"></span><br><span class="line">特殊含义转义</span><br><span class="line">\n：换行，显示 \n 需要写成 \\n，再次进行转义</span><br><span class="line">\t：制表位</span><br><span class="line">r&#39;&#39; 中包裹的字符不进行转义，print(r&#39;\\\t\\&#39;)，输出：\\\t\\</span><br></pre>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><strong>字符串</strong>：是以单引号 ‘ 或双引号 “ 括起来的任意文本，如果文本内包含 ‘ 或 “ ，可以通过 \ 进行转义，也可以 ‘ 和 “ 混用，不可变对象</p>
+<pre class="highlight"><span class="line">string &#x3D; &#39;2&#39;&#x2F;&quot;2&quot;     # 字符串 2</span><br><span class="line">string &#x3D; &#39;I\&#39;m OK!&#39;  # 字符串 I&#39;m OK!</span><br><span class="line">string &#x3D; &quot;I&#39;m OK!&quot;   # 字符串 I&#39;m OK!</span><br><span class="line"></span><br><span class="line">特殊含义转义</span><br><span class="line">\n：换行，显示 \n 需要写成 \\n，即进行转义</span><br><span class="line">\t：制表位</span><br><span class="line">r&#39;&#39; 中包裹的字符不进行转义，print(r&#39;\\\t\\&#39;)，输出：\\\t\\</span><br></pre>
 
 <p><strong>多行字符串</strong>：打印多行字符串时，可以通过 ‘’’ 或 “”” 括起来</p>
 <pre class="highlight"><span class="line">&gt;&gt;&gt; print(&#39;&#39;&#39;line1</span><br><span class="line">... line2</span><br><span class="line">... line3&#39;&#39;&#39;)</span><br><span class="line">在交互式命令行内输入多行内容时，提示符由 &gt;&gt;&gt; 变为 ... ，提示可以接着上一行输入；结束输入需要按两次回车重新回到 &gt;&gt;&gt; 提示符下</span><br></pre>
 
 <h4 id="字符串处理函数"><a href="#字符串处理函数" class="headerlink" title="字符串处理函数"></a>字符串处理函数</h4><p><strong>统计</strong></p>
-<pre class="highlight"><span class="line">len(str)：返回 str字符串 的字符数，len(str.encode(&#39;utf-8&#39;))：返回 str字符串 的字节数</span><br><span class="line">str.count(x)：返回 x子串 在 str字符串 中出现的次数</span><br><span class="line">str.index(x)：返回从左往右数在 str字符串 中第一次出现 x子串的索引值</span><br></pre>
-<p><strong>字符编码</strong>：</p>
-<pre class="highlight"><span class="line">ord(str)：返回 str字符 对应的十进制整数编码值</span><br><span class="line">chr(num)：返回十进制整数编码值对应的字符，可用&#39;\十进制整数编码&#39;直接输出对应字符</span><br><span class="line">str.encode()：指定编码方式，如：&#39;ABC&#39;.encode(&#39;ascii&#39;)，&#39;ABC&#39;.encode(&#39;utf-8&#39;)；显示 b&#39;ABC&#39; 编码字符，与字符串 &#39;ABC&#39; 不同</span><br><span class="line">b&#39;ABC&#39;.decode(&#39;utf-8&#39;)：指定解码，将 b&#39;ABC&#39; 编码字符按照 &#39;utf-8&#39; 编码方式解码成字符串，如果其中有无法解码的内容会报错，可以忽略： b&#39;\xe4\xb8\xad\xff&#39;.decode(&#39;utf-8&#39;, errors&#x3D;&#39;ignore&#39;)</span><br><span class="line">为了避免乱码问题，应当始终坚持使用 UTF-8编码方式对字符串进行编码解码</span><br><span class="line">hex(num)：返回十进制整数对应的十六进制数</span><br><span class="line">oct(num)：返回十进制整数对应的八进制数</span><br></pre>
+<pre class="highlight"><span class="line">len(str)：返回 str字符串的字符数，len(str.encode(&#39;utf-8&#39;))：返回 str字符串的字节数</span><br><span class="line">str.count(x)：返回 x子串 在 str字符串 中出现的次数</span><br><span class="line">str.index(x)：返回从左往右数在 str字符串 中第一次出现 x子串的索引值</span><br></pre>
+<p><strong>字符编码</strong></p>
+<pre class="highlight"><span class="line">ord(str)：返回 str字符 对应的十进制整数编码值</span><br><span class="line">hex(num)：返回十进制整数对应的十六进制数</span><br><span class="line">oct(num)：返回十进制整数对应的八进制数</span><br><span class="line">chr(num)：返回十进制整数编码值对应的字符，可用&#39;\十进制整数编码&#39;直接输出对应字符</span><br><span class="line"></span><br><span class="line">str.encode()：指定编码方式，如：&#39;ABC&#39;.encode(&#39;ascii&#39;)，&#39;ABC&#39;.encode(&#39;utf-8&#39;)；显示 b&#39;ABC&#39; 编码字符，与字符串 &#39;ABC&#39; 不同</span><br><span class="line">b&#39;ABC&#39;.decode(&#39;utf-8&#39;)：指定解码，将 b&#39;ABC&#39; 编码字符按照 &#39;utf-8&#39; 编码方式解码成字符串，如果其中有无法解码的内容会报错，可以忽略： b&#39;\xe4\xb8\xad\xff&#39;.decode(&#39;utf-8&#39;, errors&#x3D;&#39;ignore&#39;)</span><br><span class="line">为了避免乱码问题，应当始终坚持使用 UTF-8编码方式对字符串进行编码解码</span><br></pre>
 <p><strong>操作</strong></p>
 <pre class="highlight"><span class="line">str(value)：将x转换为字符串格式</span><br><span class="line">操作符：连接（a+b）、复制（a * n：将a复制n次）、判断存在（b in&#x2F;(not in) a：判断b是否在a中存在）</span><br><span class="line"></span><br><span class="line">str.lower()：返回str小写形式的副本</span><br><span class="line">str.upper()：返回str大写形式的副本</span><br><span class="line">str.split(sep&#x3D;&#39;&#39;)：返回根据sep字符分割的字符串列表</span><br><span class="line">str.replace(old,new)：返回 old 被 new 替代的新字符串，旧字符串未改变</span><br><span class="line">str.center(width,fillchar)：字符串根据给定宽度居中显示，多余位置按 fillchar 填充</span><br><span class="line">str.strip(char)：去掉字符串两端的指定char字符</span><br></pre>
 
 <h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p><strong>布尔值</strong>：仅代表是和否，用 True 、False 代替，注意首字母大写，可结合逻辑运算符 and、or、not 进行运算</p>
-<pre class="highlight"><span class="line">bool &#x3D; True&#x2F;False   # bool类型</span><br><span class="line"></span><br><span class="line">True and True    True</span><br><span class="line">True and False   False</span><br><span class="line">False and False  False</span><br><span class="line">True or True     True</span><br><span class="line">True or False    True</span><br><span class="line">False or False   False</span><br><span class="line">not True         False</span><br><span class="line">not False        True</span><br></pre>
+<pre class="highlight"><span class="line">bool &#x3D; True&#x2F;False   # bool类型</span><br><span class="line"></span><br><span class="line">True  and True    True</span><br><span class="line">True  and False   False</span><br><span class="line">False and False   False</span><br><span class="line">True  or  True    True</span><br><span class="line">True  or  False   True</span><br><span class="line">False or  False   False</span><br><span class="line">not True          False</span><br><span class="line">not False         True</span><br></pre>
+<h3 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h3><p>空值是Python里一个特殊的值，用 None 表示</p>
 <h3 id="基本数据类型操作"><a href="#基本数据类型操作" class="headerlink" title="基本数据类型操作"></a>基本数据类型操作</h3><pre class="highlight"><span class="line">type(value)      # 查看 value 的数据类型</span><br><span class="line"></span><br><span class="line">数据类型转换</span><br><span class="line">string &#x3D; str(value)   # 将 value 转为字符串，int(value)、float(value)、bool(value)</span><br></pre>
 
-<h2 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h2><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>列表类型</strong>：申明：l_name = [] 或者 l_name = list(values)，通过 list() 函数进行转换；列表里面元素的数据类型可以不同，可以嵌套列表，如：l_name = [‘python’, ‘java’, [‘asp’, ‘php’], ‘scheme’]；查找插入时间随着元素的增加而增加，但占用空间小</p>
+<h2 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h2><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>列表类型</strong>：申明：l_name = [] 或者 l_name = list(values)，通过 list() 函数进行转换；列表里面元素的数据类型可以不同，可以嵌套列表，如：l_name = [‘python’, ‘java’, [‘asp’, ‘php’], ‘scheme’]；查找插入时间随着元素的增加而增加，但占用空间小，可变对象</p>
 <p><strong>列表生成式创建</strong>：</p>
-<pre class="highlight"><span class="line">[x * x for x in range(1, 11)]   # 生成 [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]，for 前面是一个表达式，用于生成结果</span><br><span class="line">[x * x for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0]  # 生成 [4, 16, 36, 64, 100]，后面加 if筛选条件筛选数据，不能带 else</span><br><span class="line"></span><br><span class="line">两层循环</span><br><span class="line">[m + n for m in &#39;ABC&#39; for n in &#39;XYZ&#39;]  # 生成 [&#39;AX&#39;, &#39;AY&#39;, &#39;AZ&#39;, &#39;BX&#39;, &#39;BY&#39;, &#39;BZ&#39;, &#39;CX&#39;, &#39;CY&#39;, &#39;CZ&#39;]</span><br><span class="line">[x * y for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0 for y in range(1, 11) if y % 2 !&#x3D; 0]</span><br><span class="line"></span><br><span class="line">[x if x % 2 &#x3D;&#x3D; 0 else -x for x in range(1, 11)]   # 生成 [-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]</span><br></pre>
+<pre class="highlight"><span class="line">[x * x for x in range(1, 11)]   # 生成 [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]，for 前面是一个表达式，用于生成结果</span><br><span class="line">[x * x for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0]  # 生成 [4, 16, 36, 64, 100]，后面加 if筛选条件筛选数据，不能带 else</span><br><span class="line">[x if x % 2 &#x3D;&#x3D; 0 else -x for x in range(1, 11)]   # if在前，必须加else</span><br><span class="line"></span><br><span class="line">两层循环</span><br><span class="line">[m + n for m in &#39;ABC&#39; for n in &#39;XYZ&#39;]  # 生成 [&#39;AX&#39;, &#39;AY&#39;, &#39;AZ&#39;, &#39;BX&#39;, &#39;BY&#39;, &#39;BZ&#39;, &#39;CX&#39;, &#39;CY&#39;, &#39;CZ&#39;]</span><br><span class="line">[x * y for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0 for y in range(1, 11) if y % 2 !&#x3D; 0]</span><br><span class="line"></span><br><span class="line">[x if x % 2 &#x3D;&#x3D; 0 else -x for x in range(1, 11)]   # 生成 [-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]</span><br></pre>
 <p><strong>生成器</strong>：按照某种算法推算出来列表元素，边循环边计算</p>
 <pre class="highlight"><span class="line">g_name &#x3D; (x * x for x in range(10))  # 可以简单的将列表生成式的的 [] 改成 () ，就可以生成一个生成器</span><br><span class="line"></span><br><span class="line">next(g_name)  # 通过 next() 函数进行获取生成器里面的数据，每一次调用，就计算出下一个 g_name 的值，直到计算到最后一个元素，没有更多的元素时，抛出 StopIteration 错误</span><br><span class="line">一般通过 for 循环访问数据</span><br><span class="line">for n in g_name：</span><br><span class="line">    print(n)</span><br></pre>
 <p>通过 yield 关键字进行将不同函数定义成生成器函数，在每次调用 next() 时执行，遇到 yield 语句返回，再次执行时从上次返回的 yield 语句处继续执行</p>
-<pre class="highlight"><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        yield b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br><span class="line"></span><br><span class="line"></span><br></pre>
+<pre class="highlight"><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    list_fib &#x3D; []</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        # yield b</span><br><span class="line">        list_fib.append(b)</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return list_fib</span><br></pre>
 
 <h4 id="列表处理函数"><a href="#列表处理函数" class="headerlink" title="列表处理函数"></a>列表处理函数</h4><p><strong>统计</strong></p>
 <pre class="highlight"><span class="line">len(l_name)：返回列表长度，即列表里面的数据个数</span><br><span class="line">l_name.count(value) ：统计 value 在 l_name 中出现的次数</span><br><span class="line">max(l_name)、min(l_name)：返回列表最大最小值，需要列表的元素数据类型一致，即都为数值型或都为字符串</span><br></pre>
 <p><strong>读取</strong></p>
 <ul>
-<li>切片<pre class="highlight"><span class="line">l_name[start_idx: end_idx: sept]：从 start_idx 开始以 sept 的步长切片到 end_idx ，不包括 end_idx 位置的数据</span><br><span class="line">idx：从左往右，从 0 开始；从右往左，从 -1 开始；当索引超出范围时，会报 IndexError 的错误</span><br><span class="line"></span><br><span class="line">list_a &#x3D; [1, 2, 3, 4]，list_a &#x3D; [] 创建空列表</span><br><span class="line">list_a[1] 和 list_a[-3] 取出来的数据都是 2</span><br><span class="line"></span><br><span class="line">切片操作也可以运用到字符串、元组等序列元素集</span><br></pre></li>
-<li>迭代：通过 for 循环进行遍历<pre class="highlight"><span class="line">for p_name in l_name:</span><br><span class="line">    xxxx</span><br><span class="line"></span><br><span class="line">list_a &#x3D; [1, 2, 3, 4]</span><br><span class="line">for num in list_a:</span><br><span class="line">    print(num)</span><br><span class="line"></span><br><span class="line">只要是可迭代对象，无论有无下标，都可以迭代，迭代可以使用在字符串、列表、元组、字典；默认字典迭代 key值，可通过 d_name.value() 迭代 value，可以通过 d_name.items() 迭代 key-value</span><br><span class="line"></span><br><span class="line">d &#x3D; &#123;&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3&#125;</span><br><span class="line">for key,value in d.items():</span><br><span class="line">     print(key)      # 仅会输出 key (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)</span><br><span class="line"></span><br><span class="line">for a in d.items():</span><br><span class="line">     print(a)        # 会输出所有键值对：(&#39;a&#39;, 1)(&#39;b&#39;, 2)(&#39;c&#39;, 3)</span><br><span class="line"></span><br><span class="line">判断是否是可迭代对象：需要导入包：from collections.abc import Iterable</span><br><span class="line">isinstance(value&#x2F;v_name, Iterable)；</span><br><span class="line"></span><br><span class="line">内置的 enumerate函数可以把 list 变成索引-元素对，可以在 for循环中同时迭代索引和元素本身</span><br><span class="line">for i, value in enumerate([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]):</span><br><span class="line">    print(i, value)  # 会输出迭代索引和元素 0 A \n 1 B \n 2 C</span><br></pre></li>
+<li><strong>切片</strong><pre class="highlight"><span class="line">l_name[start_idx: end_idx: step]：从 start_idx 开始以 sept 的步长切片到 end_idx ，不包括 end_idx 位置的数据</span><br><span class="line">idx：从左往右，从 0 开始；从右往左，从 -1 开始；当索引超出范围时，会报 IndexError 的错误</span><br><span class="line"></span><br><span class="line">list_a &#x3D; [1, 2, 3, 4]，list_a &#x3D; [] 创建空列表</span><br><span class="line">list_a[1] 和 list_a[-3] 取出来的数据都是 2</span><br><span class="line"></span><br><span class="line">切片操作也可以运用到字符串、元组等序列元素集</span><br></pre></li>
+<li><strong>迭代</strong>：通过 for 循环进行遍历<pre class="highlight"><span class="line">for p_name in l_name:</span><br><span class="line">    xxxx</span><br><span class="line"></span><br><span class="line">list_a &#x3D; [1, 2, 3, 4]</span><br><span class="line">for num in list_a:</span><br><span class="line">    print(num)</span><br><span class="line"></span><br><span class="line">只要是可迭代对象，无论有无下标，都可以迭代，迭代可以使用在字符串、列表、元组、字典；默认字典迭代 key值，可通过 d_name.value() 迭代 value，可以通过 d_name.items() 迭代 key-value</span><br><span class="line"></span><br><span class="line">d &#x3D; &#123;&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3&#125;</span><br><span class="line">for key,value in d.items():</span><br><span class="line">     print(key)      # 仅会输出 key (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)</span><br><span class="line"></span><br><span class="line">for a in d.items():</span><br><span class="line">     print(a)        # 会输出所有键值对：(&#39;a&#39;, 1)(&#39;b&#39;, 2)(&#39;c&#39;, 3)</span><br><span class="line"></span><br><span class="line">判断是否是可迭代对象：需要导入包：from collections.abc import Iterable</span><br><span class="line">isinstance(value&#x2F;v_name, Iterable)；</span><br><span class="line"></span><br><span class="line">内置的 enumerate函数可以把 list 变成索引-元素对，可以在 for循环中同时迭代索引和元素本身</span><br><span class="line">for i, value in enumerate([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]):</span><br><span class="line">    print(i, value)  # 会输出迭代索引和元素 0 A \n 1 B \n 2 C</span><br></pre></li>
 </ul>
 <p><strong>操作</strong></p>
 <pre class="highlight"><span class="line">l_name.append(value):在列表末尾加入 value元素</span><br><span class="line">l_name.insert(idx_num, value)：在列表第 idx_num 位插入 value 元素</span><br><span class="line"></span><br><span class="line">l_name.pop()：取出列表末尾的元素并删除</span><br><span class="line">l_name.pop(idx_num)：从列表中取出第 idx_num 位元素并删除</span><br><span class="line">del l_name[idx_num_strat : idx_num_end]：不包含结束位置，不返回删除元素</span><br><span class="line">l_name.remove(value)：删除列表中第一次出现的 value 元素</span><br><span class="line">l_name.clear()：清空列表</span><br><span class="line"></span><br><span class="line">l_name[idx_num] &#x3D; value ：将 idx_num 位的元素改成 value</span><br><span class="line"></span><br><span class="line">list(values) ：将 values 序列变成一个列表，元素是 values</span><br><span class="line">l_name.reverse()：将列表倒序排列</span><br><span class="line"></span><br><span class="line">l_name.copy()：返回列表的副本</span><br><span class="line">l_name_a + l_name_b ：得到一个新列表，元素是a、b两个列表的所有元素</span><br><span class="line">l_name * num ：列表 l_name 以相同的顺序重复 num 次</span><br></pre>
@@ -360,10 +361,10 @@
 <h4 id="字典处理函数"><a href="#字典处理函数" class="headerlink" title="字典处理函数"></a>字典处理函数</h4><p><strong>统计</strong></p>
 <pre class="highlight"><span class="line">len(d_name)：返回字典键值对数量</span><br><span class="line">max(d_name)、min(d_name)：返回键的最大最小值，需要字典 key值数据类型一致，即都为数值型或都为字符串</span><br></pre>
 <p><strong>读取</strong></p>
-<pre class="highlight"><span class="line">dict_a &#x3D; &#123;&#39;a&#39;: 1, &#39;B&#39;: 2&#125;；dict_a &#x3D; &#123;&#125; 创建空字典</span><br><span class="line"></span><br><span class="line">dict_a[&#39;a&#39;]， 通过 key值读取相应的 value；如果 key值不存在，会报 KeyError 的错误；可以提前进行判断：key in dict_a，返回 True 或 False</span><br><span class="line"></span><br><span class="line">d_name.get(key[,default])：若 key值存在，则返回对应值；不存在且规定默认值，返回默认值；不存在未规定默认值，返回 None</span><br><span class="line"></span><br><span class="line">d_name.keys()：返回字典的所有键</span><br><span class="line">d_name.values()：返回字典所有的值</span><br><span class="line">d_name.items()：返回字典所有的键值对</span><br><span class="line">索引：&lt;接受变量&gt; &#x3D; &lt;字典名称&gt;[&lt;键&gt;]</span><br><span class="line">遍历：for &lt;变量名&gt; in &lt;字典名&gt;:&lt;语句块&gt;</span><br></pre>
+<pre class="highlight"><span class="line">dict_a &#x3D; &#123;&#39;a&#39;: 1, &#39;B&#39;: 2&#125;；dict_a &#x3D; &#123;&#125; 创建空字典</span><br><span class="line"></span><br><span class="line">dict_a[&#39;a&#39;]， 通过 key值读取相应的 value；如果 key值不存在，会报 KeyError 的错误；可以提前进行判断：key in dict_a，返回 True 或 False</span><br><span class="line"></span><br><span class="line">d_name.get(key[,default])：若 key值存在，则返回对应值；不存在且规定默认值，返回默认值；不存在未规定默认值，返回 None</span><br><span class="line"></span><br><span class="line">d_name.keys()：返回字典的所有键</span><br><span class="line">d_name.values()：返回字典所有的值</span><br><span class="line">d_name.items()：返回字典所有的键值对</span><br><span class="line">索引：&lt;接受变量&gt; &#x3D; &lt;字典名称&gt;[&lt;键&gt;]</span><br><span class="line">遍历：for &lt;变量名&gt; in &lt;字典名&gt;:</span><br><span class="line">	&lt;语句块&gt;</span><br></pre>
 <p><strong>操作</strong></p>
 <pre class="highlight"><span class="line">dict_a &#x3D; &#123;&#39;a&#39;: 1, &#39;B&#39;: 2&#125;</span><br><span class="line"></span><br><span class="line">dict_a[&#39;c&#39;] &#x3D; 3，如果字典中没有对应的 key值，就会添加到字典中；如果有对应的 key值，就会将对应 key值重新赋值</span><br><span class="line"></span><br><span class="line">d_name.pop(key[,default])：若 key值存在，返回对应 value值并删除该键值对；不存在且规定默认值，返回默认值；不存在未规定默认值，返回 None</span><br><span class="line">d_name.popitem()：将字典中末尾的键值对以元组形式输出，并删除该键值对</span><br><span class="line">d_name.clear()：清空字典</span><br><span class="line">删除：del d_nam3[key]</span><br></pre>
-<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p><strong>元组类型</strong>：申明 t_name = ()，元组与列表类似，但一旦初始化就不能修改，读取方式与列表一致，元组数据不可被修改，代码更安全，尽量使用元组代替列表</p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p><strong>元组类型</strong>：申明 t_name = ()，元组与列表类似，读取方式与列表一致，元组数据不可被修改，不可变对象，代码更安全，尽量使用元组代替列表</p>
 <pre class="highlight"><span class="line">t_name &#x3D; (1, 2, 3)， 当只有一个元素的元组时，需要定义成 t_name &#x3D; (1，)；因为括号()既可以表示 tuple，又可以表示数学公式中的小括号，为避免歧义，统一按小括号进行计算</span><br><span class="line">t_name &#x3D; () ，定义空元组</span><br></pre>
 
 <p><strong>可变元组</strong></p>
@@ -379,6 +380,10 @@
 <p><strong>集合计算</strong></p>
 <pre class="highlight"><span class="line">a-b：在集合a却不在集合b中的元素</span><br><span class="line">a&amp;b：同时在集合a、b中的元素</span><br><span class="line">a^b：集合a、b各自独有的元素</span><br><span class="line">a|b：集合a、b共有的元素</span><br></pre>
 
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>数量可变化的内容，大小写英文、数字和 _ 的组合，且不能用数字开头<br>等号 = 是赋值语句：可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量</p>
+<pre class="highlight"><span class="line">a &#x3D; 123 # a是整数，Python 解释器在内存中创建了一个&#39;123&#39;的整数；同时创建了一个名为a的变量，并把它指向&#39;123&#39;</span><br><span class="line">print(a)</span><br><span class="line">a &#x3D; &#39;ABC&#39; # a变为字符串</span><br><span class="line">b&#x3D; a  # 把变量a的值赋值给变量b，实际上是把变量b指向变量a所指向的数据</span><br><span class="line">print(a,b)</span><br><span class="line"></span><br><span class="line">变量本身类型不固定的语言称为动态语言，如 Python；在定义变量时必须指定变量类型的语言称为静态语言，如果赋值的时候类型不匹配会报错，如 C、Java</span><br></pre>
+
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>常量就是不能变的变量，如常用的数学常数 π，通常用全部大写的变量名表示常量</p>
 
   </div>
   <div>
@@ -485,7 +490,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC"><span class="toc-text">空值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -504,7 +509,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>83</span>
+    <span>84</span>
     <span>文章</span>
   </a>
   <a 
@@ -533,7 +538,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC"><span class="toc-text">空值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -548,17 +553,17 @@
   </div>
   <div class="categories-list">
     
-      <a href="/categories/%E5%9F%BA%E7%A1%80/">
-        <div class="categories-list-item">
-          基础
-          <span class="categories-list-item-badge">34</span>
-        </div>
-      </a>
-    
       <a href="/categories/%E9%80%9A%E8%AF%86/">
         <div class="categories-list-item">
           通识
           <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E5%9F%BA%E7%A1%80/">
+        <div class="categories-list-item">
+          基础
+          <span class="categories-list-item-badge">35</span>
         </div>
       </a>
     
@@ -583,16 +588,16 @@
         </div>
       </a>
     
-      <a href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+      <a href="/categories/%E5%8C%BA%E5%88%AB/">
         <div class="categories-list-item">
-          注意事项
+          区别
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
     
-      <a href="/categories/%E5%8C%BA%E5%88%AB/">
+      <a href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
         <div class="categories-list-item">
-          区别
+          注意事项
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
@@ -662,15 +667,15 @@
       </a>
     
       <a 
-        href="/tags/Tools/" 
-        title="Tools">
-        <div class="tags-list-item">Tools</div>
-      </a>
-    
-      <a 
         href="/tags/Python/" 
         title="Python">
         <div class="tags-list-item">Python</div>
+      </a>
+    
+      <a 
+        href="/tags/Tools/" 
+        title="Tools">
+        <div class="tags-list-item">Tools</div>
       </a>
     
       <a 
@@ -739,7 +744,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0"><span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">数值处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字符串处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-text">布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%80%BC"><span class="toc-text">空值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">基本数据类型操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">复杂数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">列表处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">字典处理函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-text">集合处理函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li></ol>
     </article>
   
   
@@ -755,6 +760,11 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
+        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
       </div>
     
@@ -766,11 +776,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/65236.html"><div class="recent-posts-item-content">Python基础-数据类型</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-10-18</div>
-        <a href="/20211018/8693.html"><div class="recent-posts-item-content">MySQL进阶-安全</div></a>
       </div>
     
   </div>
