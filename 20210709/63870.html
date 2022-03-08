@@ -49,7 +49,7 @@
         content="2021-07-09">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-02">
+        content="2022-03-08">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>2.1k 字</span>
+      <span>2.2k 字</span>
     
   </div>
   
@@ -350,10 +350,6 @@
 <li>结束位置：可省略，省略表示截取到最后</li>
 <li>步长：截取的刻度，正数从前往后截，负数从后往前截</li>
 </ul>
-<p>**map(f_name, Iterable)**：将传入的函数依次作用到序列的每个元素，并把结果作为新的 Iterator 返回；第一个参数是函数对象本身，Iterable 惰性序列</p>
-<pre class="highlight"><span class="line">def f(x):</span><br><span class="line">    return x * x</span><br><span class="line"></span><br><span class="line">r &#x3D; map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])</span><br><span class="line">list(r)  # 显示输出 [1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre>
-<p>**reduce(f_name, values)**：把一个元素的函数计算结果继续和序列的下一个元素做函数计算</p>
-<pre class="highlight"><span class="line">from functools import reduce</span><br><span class="line">def fn(x, y):</span><br><span class="line">    return x * 10 + y</span><br><span class="line"></span><br><span class="line">reduce(fn, [1, 3, 5, 7, 9])   # 显示输出 13579</span><br></pre>
 <p>**filter(f_name, values)**：把传入的函数依次作用于每个元素，然后根据返回的布尔值决定是否保留该元素</p>
 <pre class="highlight"><span class="line">def is_odd(n):</span><br><span class="line">    return n % 2 &#x3D;&#x3D; 1</span><br><span class="line"></span><br><span class="line">list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))  # 显示输出 [1, 5, 9, 15]</span><br></pre>
 <p>**sort(values，key)**：按照 key 函数进行排序，是否以 reverse 方式进行呼出</p>
@@ -362,6 +358,15 @@
 <h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><p><strong>递归函数</strong>：在函数内部调用其它函数，如果在一个函数在内部调用自身本身，则被称为递归函数，<strong>使用递归函数需要注意防止栈溢出</strong>，可以通过<strong>尾递归</strong>进行优化；理论上，所有的递归函数都可以写成循环的方式，但循环的逻辑不如递归清晰<br><strong>尾递归</strong>：是指在函数返回时，调用自身本身，并且，return语句不能包含表达式</p>
 <pre class="highlight"><span class="line">def fact(n):       # 计算 n 的阶乘</span><br><span class="line">    if n &#x3D;&#x3D; 0:</span><br><span class="line">        return 1</span><br><span class="line">    else:</span><br><span class="line">        return fact(n-1) * n</span><br></pre>
 <pre class="highlight"><span class="line">def fact(n):</span><br><span class="line">    return fact_iter(n, 1)</span><br><span class="line"></span><br><span class="line">def fact_iter(num, product):</span><br><span class="line">    if num &#x3D;&#x3D; 0:</span><br><span class="line">        return product</span><br><span class="line">    return fact_iter(num - 1, num * product)</span><br></pre>
+
+<h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><p><strong>高阶函数</strong>：接收另一个函数作为输入参数的函数</p>
+<pre class="highlight"><span class="line">def add(x, y, f):</span><br><span class="line">    return f(x) + f(y)</span><br><span class="line"></span><br><span class="line">f &#x3D; abs      # 函数名其实就是指向函数的变量，可以通过该变量来调用这个函数</span><br><span class="line">print(add(-5, 6, f))</span><br></pre>
+
+<p>**map(fun_name, Iterable)**：将传入的函数依次作用到序列的每个元素，并把结果作为新的 Iterator 返回；第一个参数是函数对象本身，Iterable 惰性序列</p>
+<pre class="highlight"><span class="line">def fun_square(x):</span><br><span class="line">    return x * x</span><br><span class="line"></span><br><span class="line">list_iter &#x3D; [1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line">list_result &#x3D; map(fun_square, list_iter)    # 返回 map 型数据</span><br><span class="line">print(list(list_result))  # 显示输出 [1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre>
+
+<p>**reduce(fun_name, values)**：把一个元素的函数计算结果继续和序列的下一个元素做函数计算</p>
+<pre class="highlight"><span class="line">from functools import reduce</span><br><span class="line">def fn(x, y):</span><br><span class="line">    return x * 10 + y</span><br><span class="line"></span><br><span class="line">reduce(fn, [1, 3, 5, 7, 9])   # 显示输出 13579</span><br></pre>
 
 
   </div>
@@ -469,7 +474,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">高阶函数</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -517,7 +522,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">高阶函数</span></a></li></ol>
       </div>
     </article>
   
@@ -723,7 +728,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="toc-text">查看函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">调用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">简单函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="toc-text">递归函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">高阶函数</span></a></li></ol>
     </article>
   
   
