@@ -49,7 +49,7 @@
         content="2021-08-31">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-03-15">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>2.5k 字</span>
+      <span>3k 字</span>
     
   </div>
   
@@ -303,8 +303,27 @@
     <p>写在前面：本文主要记录数据中台相关内容</p>
 <span id="more"></span>
 
-<h1 id="数据中台"><a href="#数据中台" class="headerlink" title="数据中台"></a>数据中台</h1><p>**数据中台 **：通过对企业内、外部多源异构数据进行采集、治理、建模、分析、应用，对内优化管理、赋能业务，对外开展数据合作，释放数据价值，是 数据 + 技术(向下连接后台、向上连接前端的先进的与时俱进的技术) + 产品(经过抽象和设计形成的通用化、标准化、可扩展的服务) + 组织的组合，包括所有数据资源、数据研发管理、数据资产管理的统一的数据资源池</p>
-<h2 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h2><p><strong>数据采集</strong>：又称为数据获取，利用一种装置从系统外部不同数据源经过收集、整理、清洗、转换后，加载到系统内部新数据源中</p>
+<h1 id="数据中台"><a href="#数据中台" class="headerlink" title="数据中台"></a>数据中台</h1><p><strong>数据中台</strong>：通过<strong>数据技术</strong>对<strong>企业内外部多源异构数据</strong>进行采集、存储、计算、服务（包括建模、分析）等，<strong>统一数据标准和口径</strong>，形成<strong>全域级、可复用</strong>的<strong>数据资产中心和数据存储中心</strong>，包括所有数据资源、数据研发管理、数据资产管理的统一的数据资源池，是 <strong>数据 + 技术</strong>(向下连接后台、向上连接前端的先进的与时俱进的技术) <strong>+ 产品</strong>(经过抽象和设计形成的通用化、标准化、可扩展的服务) <strong>+ 组织</strong>的组合，对内优化管理、赋能业务，对外开展数据合作，释放数据价值，核心理念是：<strong>数据取之于业务，用之于业务</strong></p>
+<blockquote>
+<p>效用意义：数据中台是实现数据资产化的工具，帮助企业实现数字化转型<br>技术角度：数据中台是新型的IT架构，底层是以Hadoop为代表的大数据计算、存储基础设施<br>管理角度：数据中台是新型的组织管理模式和理念</p>
+</blockquote>
+<h2 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h2><ul>
+<li><p>数据库阶段：Oracle、MySQL等</p>
+</li>
+<li><p>传统数仓：明确数据分析应该采用独立的解决方案实现，不再依赖于业务数据库；<strong>自顶(数据来源)向下(数据应用)，分层建模</strong>，构建成本较高，适用于应用场景固定的业务(金融)，数据冗余较少 和 <strong>自底向上（数据分析需求出发，拆分维度和事实），维度建模</strong>，适用于变化较快的业务(互联网)</p>
+</li>
+<li><p>大数据平台：大数据平台解决方案：CDH、HDP</p>
+</li>
+<li><p>数据中台</p>
+<blockquote>
+<p>解决指标口径不一致问题：源于业务口径不一致、计算逻辑不一致、数据来源不一致等</p>
+<p>实现数据复用：数据重复建设，需求响应时间长</p>
+<p>解决取数效率低问题：构建企业全局的数据资源目录，方便快捷的定位想要的数据</p>
+<p>解决数据质量差的问题：存储数据链路，进行数据稽核</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="数据中台技术组件"><a href="#数据中台技术组件" class="headerlink" title="数据中台技术组件"></a>数据中台技术组件</h1><h2 id="1-数据采集"><a href="#1-数据采集" class="headerlink" title="1. 数据采集"></a>1. 数据采集</h2><p><strong>数据采集</strong>：又称为数据获取，利用一种装置从系统外部不同数据源经过收集、整理、清洗、转换后，加载到系统内部新数据源中</p>
 <ul>
 <li><strong>通用数据采集</strong>：包括结构化数据和非结构化数据</li>
 </ul>
@@ -331,10 +350,8 @@
 <blockquote>
 <p>数据库视图：从指定数据库视图中提取数据<br>数据表：从指定数据表中提取数据<br>自定义SQL：用自定义SQL 从指定数据库提取数据<br>Web Service：从 Web Service 提供的方法中提取数据<br>文件：从 XML、Excel、Access、DBF文件中提取数据</p>
 </blockquote>
-<p><a href="https://alexedwardz.gitee.io/20210901/25760.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据技术 </font></a></p>
-<p><a href="https://alexedwardz.gitee.io/20210902/27125.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据模型 </font></a></p>
-<p><a href="https://alexedwardz.gitee.io/20210902/56600.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据管理 </font></a></p>
-<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><ul>
+<h2 id="2-数据存储"><a href="#2-数据存储" class="headerlink" title="2. 数据存储"></a>2. 数据存储</h2><p><strong>数据存储组件</strong>：HDFS、Kafka、Hbase、ElasticSearch</p>
+<ul>
 <li><strong>分布式数据存储</strong></li>
 </ul>
 <blockquote>
@@ -346,7 +363,8 @@
 <blockquote>
 <p>可扩展的分布式 Key-Value 数据库功能<br>支持对象存储<br>支持图数据库<br>支持高可用和故障自动切换部署<br>具备数据安全策略，避免数据丢失<br>具备 Web 图形化管理界面</p>
 </blockquote>
-<h2 id="数据计算"><a href="#数据计算" class="headerlink" title="数据计算"></a>数据计算</h2><h3 id="分布式查询"><a href="#分布式查询" class="headerlink" title="分布式查询"></a>分布式查询</h3><blockquote>
+<h2 id="3-数据计算"><a href="#3-数据计算" class="headerlink" title="3. 数据计算"></a>3. 数据计算</h2><p><strong>数据计算组件</strong>：MapReduce、Spark、Flink</p>
+<h3 id="分布式查询"><a href="#分布式查询" class="headerlink" title="分布式查询"></a>分布式查询</h3><blockquote>
 <p>支持联机分析处理 ROLAP<br>支持 SQL 语法，支持 UDF<br>具备良好的水平扩展性<br>支持高可用和故障自动切换部署<br>具备完善的用户及权限管理功能<br>具备 Web 图形化管理界面</p>
 </blockquote>
 <h3 id="分布式计算"><a href="#分布式计算" class="headerlink" title="分布式计算"></a>分布式计算</h3><blockquote>
@@ -356,9 +374,13 @@
 <p>提供数据库建模工具、可自动生成物理实体<br>提供基于 Web 的集成开发环境，支持数据库开发、数据处理、数据集成等<br>支持数据中台模型开发，可定义维度、度量、ODS、Cube 的大数据模型<br>支持特征工程创建<br>支持主流统计分析算法及模型<br>提供基于 Web 的图形化模型设计、训练、评估</p>
 </blockquote>
 <h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><blockquote>
-<p>支持对多维模型的钻取(Drill-down)操作<br>支持对多维模型的上卷(Roll-up)操作<br>支持对多维模型的切片(Slice)操作<br>支持对多维模型的切块(Dice)操作<br>支持对多维模型的旋转(Pivot)操作<br>支持用户多维度展示分析</p>
+<p>支持对多维模型的钻取(Drill-down)、上卷(Roll-up)、切片(Slice)、切块(Dice)、旋转(Pivot)等操作<br>支持用户多维度展示分析</p>
+<p>数据量小：MySQL、Hive数仓，Spark计算引擎的结果导出到MySQL</p>
+<p>数据量大：Hbase、ElasticSearch，解决海量数据的低延时高效查询</p>
+<p>多维分析：ClickHouse、Kylin、Greenplum，提供在线分析能力</p>
+<p>高时效性：Redis，提供高性能单点查询能力</p>
 </blockquote>
-<h2 id="数据服务"><a href="#数据服务" class="headerlink" title="数据服务"></a>数据服务</h2><p><strong>数据服务</strong>：是指数据在存储、应用程序和组织之间的移动及整合相关的过程。制定合适的数据服务标准，针对不用的场景合理采用相应的数据服务技术，为企业新的管理模式和业务模式提供灵活可靠的数据支持</p>
+<h2 id="4-数据服务"><a href="#4-数据服务" class="headerlink" title="4. 数据服务"></a>4. 数据服务</h2><p><strong>数据服务</strong>：是指数据在存储、应用程序和组织之间的移动及整合相关的过程。制定合适的数据服务标准，针对不用的场景合理采用相应的数据服务技术，为企业新的管理模式和业务模式提供灵活可靠的数据支持</p>
 <h3 id="数据服务技术"><a href="#数据服务技术" class="headerlink" title="数据服务技术"></a>数据服务技术</h3><ul>
 <li><strong>文件共享</strong>：从一个系统中导出数据文件，再导入另一个系统，需要双方规定好数据格式，数据传递不及时，需要人工干预，数据可能出现异常</li>
 <li><strong>数据库中间表</strong>：双方约定公用数据库，一方写入数据库，另一方读数据，跨系统可通过跨数据库实现</li>
@@ -392,6 +414,17 @@
 <blockquote>
 <p>支持不同地域的服务器端连接<br>支持 IaaS架构，提供多种高可用性，能够在服务器节点之间进行请求转移<br>具备事件触发、定时任务、数据触发（敏感数据变化时主动触发）等数据服务请求<br>具备完善的日志管理机制，对服务进行全过程监控合和日志管理<br>支持实时数据交换</p>
 </blockquote>
+<h2 id="5-其他组件"><a href="#5-其他组件" class="headerlink" title="5. 其他组件"></a>5. 其他组件</h2><p><strong>OLAP(数仓)组件</strong>：离线数仓：Hive；实时数仓：ClickHouse</p>
+<p><strong>集群资源管理调度组件</strong>：Yarn、Spark Standalone、Flink Standalone</p>
+<p><strong>通用协调服务组件</strong>：Zookeeper</p>
+<p><strong>数据集成</strong>：flume、canal、sqoop、datax、waterdrop</p>
+<p><strong>任务调度</strong>：azkaban、oozie、dophinscheduler、airflow</p>
+<p><strong>部署运维</strong>：cloudera、manager、ambari、saltstack</p>
+<p><strong>监控告警</strong>：Alertmanager+Prometheus、zabbix、openfalcon</p>
+<p><strong>安全权限</strong>：kerberos、ranger</p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ul>
+<li><strong>阿里</strong><br><a href="https://alexedwardz.gitee.io/20210901/25760.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据技术 </font></a><br><a href="https://alexedwardz.gitee.io/20210902/27125.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据模型 </font></a><br><a href="https://alexedwardz.gitee.io/20210902/56600.html"><font face = "微软雅黑" color = 1E90F size = 5> 实践1：阿里-数据管理 </font></a></li>
+</ul>
 
   </div>
   <div>
@@ -498,7 +531,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B1%95"><span class="toc-text">发展</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="toc-text">数据中台技术组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">1. 数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">2. 数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">3. 数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">4. 数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6"><span class="toc-text">5. 其他组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -517,7 +550,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>84</span>
+    <span>85</span>
     <span>文章</span>
   </a>
   <a 
@@ -529,7 +562,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>34</span>
+    <span>35</span>
     <span>标签</span>
   </a>
 </div>
@@ -546,7 +579,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B1%95"><span class="toc-text">发展</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="toc-text">数据中台技术组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">1. 数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">2. 数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">3. 数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">4. 数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6"><span class="toc-text">5. 其他组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol>
       </div>
     </article>
   
@@ -571,7 +604,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">35</span>
+          <span class="categories-list-item-badge">36</span>
         </div>
       </a>
     
@@ -657,15 +690,15 @@
       </a>
     
       <a 
-        href="/tags/Java/" 
-        title="Java">
-        <div class="tags-list-item">Java</div>
-      </a>
-    
-      <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
         title="数据治理">
         <div class="tags-list-item">数据治理</div>
+      </a>
+    
+      <a 
+        href="/tags/Java/" 
+        title="Java">
+        <div class="tags-list-item">Java</div>
       </a>
     
       <a 
@@ -752,7 +785,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0"><span class="toc-text">数据中台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B1%95"><span class="toc-text">发展</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="toc-text">数据中台技术组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-text">1. 数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">技术路线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">2. 数据存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97"><span class="toc-text">3. 数据计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="toc-text">分布式查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-text">分布式计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1"><span class="toc-text">数据建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">数据分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">4. 数据服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF"><span class="toc-text">数据服务技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">数据服务方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%B7%A5%E5%85%B7"><span class="toc-text">数据服务工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6"><span class="toc-text">5. 其他组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li></ol>
     </article>
   
   
@@ -767,6 +800,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-15</div>
+        <a href="/20220315/30301.html"><div class="recent-posts-item-content">数据指标管理-基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
       </div>
@@ -779,11 +817,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-11-18</div>
-        <a href="/20211118/65236.html"><div class="recent-posts-item-content">Python基础-数据类型</div></a>
       </div>
     
   </div>

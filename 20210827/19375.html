@@ -49,7 +49,7 @@
         content="2021-08-27">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-03-15">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -340,7 +340,7 @@
 <li><strong>业务元数据</strong>：关注数据的内容和条件，包括与数据治理详细信息：主题域、概念、实体、属性的非技术名称和定义、属性的数据类型和其他特征，如范围描述、计算公式、算法和业务规则、有效的值域及其定义</li>
 </ul>
 <blockquote>
-<p>程序和应用的名称和描述<br>数据集、表和字段的定义规范和有效值约束条件标准<br>数据模型、属性数据元定义及约束，数据模型与实物资产之间的对应关系<br>数据信息代码的数据结构和编码标准<br>业务领域、业务过程、业务活动定义及描述<br>业务规则、数据转换规则、计算公式和推导公式等<br>数据利益相关方（如数据所有者、数据管理员）的联系信息和操作信息等<br>数据质量评判规则和检核结果、数据质量问题<br>数据的安全 / 隐私级别评定标准<br>数据使用说明，恢复和备份规则<br>数据更新计划<br><strong>来源</strong></p>
+<p>程序、应用、数据的名称和描述，数据主题分类、关联指标等<br>数据信息的编码标准，包括数据定义规范、约束条件；数据安全标准、数据质量标准<br>业务活动定义及描述；业务规则、数据转换规则、计算公式和推导公式等<br>数据利益相关方（如数据所有者、数据管理员）的联系信息和操作信息等<br>数据使用说明，恢复和备份规则；数据更新计划等<br><strong>来源</strong></p>
 <blockquote>
 <p>ERP系统，如财务计算公式、过程逻辑、业务规则等<br>报表：包含合计、平均数等带有总结性质的列、计算公式等<br>表格：Excel的表头、计算公式、“描述”列等<br>文件：标题、作者、修改时间等<br>BI工具：上下钻取的过程中包含的产品等级和组织结构等级等</p>
 </blockquote>
@@ -349,13 +349,13 @@
 <li><strong>技术元数据</strong>：数据技术领域的实现，包括数据结构定义、数据映射关系、转换规则等</li>
 </ul>
 <blockquote>
-<p>数据库名、表名、字段名和之间的从属关系<br>数据库对象属性和字段属性，如数据类型、数据长度、数据约束条件等<br>物理数据模型，包括数据表主键、外键、索引、分区<br>数据来源、数据血缘和数据关联等<br>数据文件格式模式定义<br>数据的角色、用户组、访问权限之间的关系<br>数据 CRUD规则<br>数据源到目标数据的映射文档，数据血缘文档、包括上游和下游变更影响的信息<br>ETL作业详细信息<br>周期作业（内容更新）的调度计划和依赖</p>
+<p>数据库对象属性和字段属性，如数据类型、长度、值域、主键、外键、索引、分区、CRUD规则、存储大小等<br>数据库名、表名、字段名和之间的从属关系，数据血缘，包括上游和下游变更影响的信息等<br>数据的角色、用户组、访问权限之间的关系<br>ETL作业详细信息，周期作业（内容更新）的调度计划和依赖</p>
 </blockquote>
 <ul>
 <li><strong>操作元数据</strong>：数据处理的过程与关系</li>
 </ul>
 <blockquote>
-<p>报表和查询的访问模式、频率和执行时间<br>批处理程序的作业执行日志、抽取的历史和结果<br>调度异常处理、错误日志<br>补丁和版本的维护计划和执行情况，以及当前补丁级别<br>备份、保留、创建日期、灾备恢复预案<br>审计、平衡、控制度量的结果<br>数据技术人员的角色、职责和联系信息<br>数据清洗标准、SLA 要求和规定<br>数据共享规则和协议，容量使用模式<br>数据归档、保留规则和相关归档文件</p>
+<p>数据访问频率、调用次数<br>查询的访问模式、频率和执行时间<br>作业执行日志、抽取历史和结果；调度异常处理、错误日志<br>版本维护计划、系统执行情况，当前版本号<br>备份、保留、创建日期、灾备恢复预案<br>数据清洗标准、SLA 要求和规定，数据归档、保留规则和相关归档文件<br>数据共享规则和协议，容量使用模式</p>
 </blockquote>
 <p>在图书馆或信息科学领域</p>
 <ul>
@@ -389,7 +389,7 @@
 <li><strong>服务注册</strong>：是从面向服务的架构角度管理和存储有关服务和服务终端的技术信息，如定义、接口、操作、输入输出参数，还有与服务相关的最重要元数据包括服务版本、服务位置、数据中心、服务端口、IP地址等</li>
 <li><strong>其它元数据存储</strong>：只特定格式的清单，如事件注册表、源列表接口、代码集、时空模式、空间参考等</li>
 </ul>
-<h1 id="元数据管理实施"><a href="#元数据管理实施" class="headerlink" title="元数据管理实施"></a>元数据管理实施</h1><h2 id="确定元数据功能需求"><a href="#确定元数据功能需求" class="headerlink" title="确定元数据功能需求"></a>确定元数据功能需求</h2><ul>
+<h1 id="元数据管理实施"><a href="#元数据管理实施" class="headerlink" title="元数据管理实施"></a>元数据管理实施</h1><h2 id="1-确定元数据功能需求"><a href="#1-确定元数据功能需求" class="headerlink" title="1. 确定元数据功能需求"></a>1. 确定元数据功能需求</h2><ul>
 <li>更新频次：元数据属性和属性集更新的频率</li>
 <li>同步情况：数据源头变化后的更新时间</li>
 <li>历史信息：是否需要保留原数据的历史版本</li>
@@ -401,7 +401,7 @@
 <li>质量要求：元数据质量要求</li>
 <li>安全要求：确保元数据安全，以免泄露高度保密数据的信息</li>
 </ul>
-<h2 id="元数据国际规范"><a href="#元数据国际规范" class="headerlink" title="元数据国际规范"></a>元数据国际规范</h2><p><strong>ISO/IEC 11179元数据注册表</strong><br><strong>公共仓库元模型(CWM)</strong></p>
+<h2 id="2-元数据国际规范"><a href="#2-元数据国际规范" class="headerlink" title="2. 元数据国际规范"></a>2. 元数据国际规范</h2><p><strong>ISO/IEC 11179元数据注册表</strong><br><strong>公共仓库元模型(CWM)</strong></p>
 <blockquote>
 <p>管理类元模型：系统资源、人员管理、任务管理等<br>技术类元模型：关系型数据库、OLAP、接口、ETL、ERWin<br>业务类元模型：指标、API、报表<br>编码规则：信息分类及编码模型规则</p>
 </blockquote>
@@ -416,8 +416,8 @@
 <li>M0层，对象层：模型构造的实例，对象和数据，体现现实世界中的事物对象　</li>
 </ol>
 </blockquote>
-<h2 id="定义元数据架构"><a href="#定义元数据架构" class="headerlink" title="定义元数据架构"></a>定义元数据架构</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><blockquote>
-<p>元数据采集能力<br>元数据存储能力<br>元数据查找能力<br>血缘分析/关系分析能力<br>基于角色的访问权限控制和分层能力<br>业务元数据管理能力<br>元数据变更控制能力<br>元数据对比分析能力<br>数据生命周期管理能力<br>与其他系统的集成能力</p>
+<h2 id="3-定义元数据架构"><a href="#3-定义元数据架构" class="headerlink" title="3. 定义元数据架构"></a>3. 定义元数据架构</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><blockquote>
+<p>元数据采集能力，支持多种数据源<br>元数据存储能力<br>元数据查找能力<br>血缘分析/关系分析能力，支持字段级别的血缘<br>基于角色的访问权限控制和分层能力<br>业务元数据管理能力<br>元数据变更控制能力<br>元数据对比分析能力<br>数据生命周期管理能力<br>与其他系统的集成能力</p>
 </blockquote>
 <h3 id="元数据架构"><a href="#元数据架构" class="headerlink" title="元数据架构"></a>元数据架构</h3><ul>
 <li><strong>集中式元数据架构</strong>：单一的元数据存储库，包含来自不同的院的原数据副本</li>
@@ -472,7 +472,17 @@
 <p>教育和培训用户的数据专员<br>生成和分析管理指标<br>对控制活动、查询、报告进行培训</p>
 </blockquote>
 </blockquote>
-<h2 id="创建和维护元数据"><a href="#创建和维护元数据" class="headerlink" title="创建和维护元数据"></a>创建和维护元数据</h2><ol>
+<h2 id="4-创建和维护元数据"><a href="#4-创建和维护元数据" class="headerlink" title="4. 创建和维护元数据"></a>4. 创建和维护元数据</h2><h3 id="元数据技术"><a href="#元数据技术" class="headerlink" title="元数据技术"></a>元数据技术</h3><p>Metacat：管理技术元数据，数据字典类，支持多数据源的可扩展架构</p>
+<p>Atlas：管理数据血缘，采用方案2，通过 Neo4j （图数据库）存储</p>
+<blockquote>
+<ol>
+<li>静态解析SQL，获取输入表和输出表，获得血缘：存在SQL语法错误问题</li>
+<li>实时抓取正在执行的SQL，解析执行计划，获得血缘</li>
+<li>解析任务日志，获取已执行SQL的输入表和输出表，获得血缘：可以确保准确，但时效性较差，需要分析大量任务日志数据</li>
+</ol>
+</blockquote>
+<p>Clogdera Navigator：付费商业产品</p>
+<ol>
 <li><strong>整合元数据</strong>：集成过程中从整个企业范围内收集和整合元数据，包括从企业外部获取数据中的元数据，使用适配器、扫描仪、网桥应用程序或直接访问源数据存储来提取元数据</li>
 </ol>
 <blockquote>
@@ -599,7 +609,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">创建和维护元数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">1. 确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">2. 元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">3. 定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">4. 创建和维护元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF"><span class="toc-text">元数据技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -618,7 +628,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>84</span>
+    <span>85</span>
     <span>文章</span>
   </a>
   <a 
@@ -630,7 +640,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>34</span>
+    <span>35</span>
     <span>标签</span>
   </a>
 </div>
@@ -647,7 +657,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">创建和维护元数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">1. 确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">2. 元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">3. 定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">4. 创建和维护元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF"><span class="toc-text">元数据技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -672,7 +682,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">35</span>
+          <span class="categories-list-item-badge">36</span>
         </div>
       </a>
     
@@ -758,15 +768,15 @@
       </a>
     
       <a 
-        href="/tags/Java/" 
-        title="Java">
-        <div class="tags-list-item">Java</div>
-      </a>
-    
-      <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
         title="数据治理">
         <div class="tags-list-item">数据治理</div>
+      </a>
+    
+      <a 
+        href="/tags/Java/" 
+        title="Java">
+        <div class="tags-list-item">Java</div>
       </a>
     
       <a 
@@ -853,7 +863,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">创建和维护元数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-text">元数据管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90"><span class="toc-text">来源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD"><span class="toc-text">元数据管理实施</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%A1%AE%E5%AE%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD%E9%9C%80%E6%B1%82"><span class="toc-text">1. 确定元数据功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%83%E6%95%B0%E6%8D%AE%E5%9B%BD%E9%99%85%E8%A7%84%E8%8C%83"><span class="toc-text">2. 元数据国际规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">3. 定义元数据架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="toc-text">元数据架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%B4%E6%8A%A4%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">4. 创建和维护元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF"><span class="toc-text">元数据技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
     </article>
   
   
@@ -868,6 +878,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-15</div>
+        <a href="/20220315/30301.html"><div class="recent-posts-item-content">数据指标管理-基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
       </div>
@@ -880,11 +895,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-11-18</div>
-        <a href="/20211118/65236.html"><div class="recent-posts-item-content">Python基础-数据类型</div></a>
       </div>
     
   </div>

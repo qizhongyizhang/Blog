@@ -49,7 +49,7 @@
         content="2021-08-28">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-03-15">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -335,6 +335,7 @@
 </blockquote>
 <h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
 <p>重要认知：结合对企业和用户的重视程度和数据不正确的风险水平确定数据重要性，确定数据改进顺序<br>周期管理：数据质量管理覆盖从产生采集到处置的全数据生命周期，包括系统内部和系统之间的数据流转<br>预防为主：数据质量反感的重点应放在预防数据错误和降低数据可用性的情形<br>根因修正：优化数据流程和系统设计，从根本上解决数据质量问题<br>治理促进：数据治理活动和数据质量管理活动二者相互促进<br>标准驱动：用可测量的标准和期望定义可量化的数据质量需求<br>客观一致测量：数据质量水平需要得到客观一致的测量<br>嵌入业务流程：在各个业务流程中实时数据标准<br>系统强制执行：系统必须强制执行数据质量要求<br>关联服务水平：数据质量报告和问题应纳入服务水平协议（SLA）</p>
+<p><strong>早预防、早发现、早恢复</strong></p>
 </blockquote>
 <h1 id="数据质量"><a href="#数据质量" class="headerlink" title="数据质量"></a>数据质量</h1><h2 id="数据质量维度"><a href="#数据质量维度" class="headerlink" title="数据质量维度"></a>数据质量维度</h2><p><strong>Strong-Wang 框架</strong></p>
 <blockquote>
@@ -390,11 +391,11 @@
 </blockquote>
 <h2 id="数据质量低下的原因"><a href="#数据质量低下的原因" class="headerlink" title="数据质量低下的原因"></a>数据质量低下的原因</h2><p><strong>缺乏领导力</strong></p>
 <blockquote>
-<p>领导员工缺乏意识<br>缺乏治理<br>缺乏领导力和管理能力<br>难以证明改进的合理性<br>测量价值的工具不合适或不起作用</p>
+<p>领导员工缺乏意识<br>缺乏领导力和管理能力</p>
 </blockquote>
 <p><strong>数据输入过程中的问题</strong></p>
 <blockquote>
-<p>数据输入接口问题<br>列表条目放置<br>字段重载<br>培训问题，人员操作水平不一<br>业务流程变更<br>业务流程执行混乱</p>
+<p>人员操作问题<br>数据输入接口问题<br>业务系统变更：包括表结构变更、源数据格式异常</p>
 </blockquote>
 <p><strong>数据处理功能的问题</strong></p>
 <blockquote>
@@ -411,7 +412,6 @@
 <p>单源-多个本地实例<br>多源-单一本地实例</p>
 </blockquote>
 </blockquote>
-<p><strong>解决问题导致的问题</strong></p>
 <h3 id="常见脏数据"><a href="#常见脏数据" class="headerlink" title="常见脏数据"></a>常见脏数据</h3><blockquote>
 <p>缺失值：确定缺失值范围，根据字段的重要性和缺失率指定不同的清洗策略(重要缺多——重新取数，重要缺少——算法填充或业务逻辑填充等，不重要缺多——考虑删除或统一置数，为零、平均数、中位数、众数等，不重要缺少——统一置数)<br>逻辑异常值(离群点)：去重、不合理的值(修正、删除、缺失值处理)、矛盾内容(业务判断、删除、重构)<br>格式内容不一致：统一时间、日期、数值单位、语言、半全角等，数据出现不规范内容，如首尾空格、异常标点等，数据错列等<br>内容未知的值<br>无效值</p>
 </blockquote>
@@ -439,13 +439,13 @@
 <li>检查阶段（Check）：积极监控按要求测量的数据质量</li>
 <li>处理阶段（Act）：处理解决新出现的数据质量问题</li>
 </ul>
-<h2 id="数据质量管理过程"><a href="#数据质量管理过程" class="headerlink" title="数据质量管理过程"></a>数据质量管理过程</h2><h3 id="定义高质量数据"><a href="#定义高质量数据" class="headerlink" title="定义高质量数据"></a>定义高质量数据</h3><blockquote>
+<h2 id="数据质量管理过程"><a href="#数据质量管理过程" class="headerlink" title="数据质量管理过程"></a>数据质量管理过程</h2><h3 id="1-定义高质量数据"><a href="#1-定义高质量数据" class="headerlink" title="1. 定义高质量数据"></a>1. 定义高质量数据</h3><blockquote>
 <p>了解业务战略和目标<br>与利益相关方面谈，以识别痛点、风险和业务驱动因素<br>通过资料收集和其他剖析形式直接评估数据<br>记录业务流程中的数据依赖关系<br>记录业务流程中的技术架构和系统支持</p>
 </blockquote>
-<h3 id="定义数据质量战略"><a href="#定义数据质量战略" class="headerlink" title="定义数据质量战略"></a>定义数据质量战略</h3><blockquote>
+<h3 id="2-定义数据质量战略"><a href="#2-定义数据质量战略" class="headerlink" title="2. 定义数据质量战略"></a>2. 定义数据质量战略</h3><blockquote>
 <p>了解并优先考虑业务需求<br>确定满足业务需求的关键数据<br>根据业务需求定义业务规则和数据质量标准<br>根据预期评估数据<br>分享调查结果，并从利益相关方获得反馈<br>优先处理和管理问题<br>确定并优先考虑改进机会<br>测量、监控和报告数据质量<br>管理通过数据质量流程生成的元数据<br>将数据质量控制集成到业务和技术流程中</p>
 </blockquote>
-<h3 id="识别关键数据和业务规则"><a href="#识别关键数据和业务规则" class="headerlink" title="识别关键数据和业务规则"></a>识别关键数据和业务规则</h3><ul>
+<h3 id="3-识别关键数据和业务规则"><a href="#3-识别关键数据和业务规则" class="headerlink" title="3. 识别关键数据和业务规则"></a>3. 识别关键数据和业务规则</h3><ul>
 <li><strong>关键数据</strong></li>
 </ul>
 <blockquote>
@@ -457,7 +457,7 @@
 <blockquote>
 <p>定义一致性：确认对数据定义的理解相同，并在整个组织过程中得到实现和正确的使用<br>记录完整性：定义数值缺失的情况是否可接受的规则<br>格式符合性：按指定模式分配给数据元素的值，如设置电话号码格式的标准<br>值域匹配性：指定数据元素的赋值需包含在某数据值域的枚举值中<br>范围一致性：数据元素赋值必须在定义的数字、词典或时间范围内<br>映射一致性：表示分配给数据元素的值，必须映射到其他等效对应值域中选择的值<br>一致性规则：指根据某些属性的实际值，在两个或多个属性之间关系的条件判定<br>准确性验证：将数据值与记录系统或其他来源中的对应值进行比较，以验证是否匹配<br>及时性验证：表明与数据可访问性和可用性预期相关特征的规则</p>
 </blockquote>
-<h3 id="执行初始数据质量评估"><a href="#执行初始数据质量评估" class="headerlink" title="执行初始数据质量评估"></a>执行初始数据质量评估</h3><ol>
+<h3 id="4-执行初始数据质量评估"><a href="#4-执行初始数据质量评估" class="headerlink" title="4. 执行初始数据质量评估"></a>4. 执行初始数据质量评估</h3><ol>
 <li>定义评估目标，推动工作进展</li>
 <li>确定需要评估的数据，重点放在某个特定的数据集或特定数据质量问题上</li>
 <li>识别数据的用途和使用者</li>
@@ -476,13 +476,13 @@
 <blockquote>
 <p>找到问题的根本原因解决问题<br>控制改进处理流程，防止问题重复发生<br>持续控制和汇报</p>
 </blockquote>
-<h3 id="识别改进方向并确认优先排序"><a href="#识别改进方向并确认优先排序" class="headerlink" title="识别改进方向并确认优先排序"></a>识别改进方向并确认优先排序</h3><blockquote>
+<h3 id="5-识别改进方向并确认优先排序"><a href="#5-识别改进方向并确认优先排序" class="headerlink" title="5. 识别改进方向并确认优先排序"></a>5. 识别改进方向并确认优先排序</h3><blockquote>
 <p>通过对交大数据及进行全面的数据分析，了解现有问题<br>与利益相关方沟通数据影响问题，并跟踪分析其业务影响<br>结合数据分析人员和利益相关方的讨论排定最终优先顺序</p>
 </blockquote>
-<h3 id="定义数据质量改进目标"><a href="#定义数据质量改进目标" class="headerlink" title="定义数据质量改进目标"></a>定义数据质量改进目标</h3><blockquote>
+<h3 id="6-定义数据质量改进目标"><a href="#6-定义数据质量改进目标" class="headerlink" title="6. 定义数据质量改进目标"></a>6. 定义数据质量改进目标</h3><blockquote>
 <p>受影响数据的关键性（重要性排序）<br>受影响的数据量<br>数据的龄期<br>受问题影响的业务流程数量和类型<br>受问题影响的消费者、客户、供应商或员工数量<br>与问题相关的风险<br>纠正根本原因的成本<br>潜在的工作成本</p>
 </blockquote>
-<h3 id="开发和部署数据质量操作"><a href="#开发和部署数据质量操作" class="headerlink" title="开发和部署数据质量操作"></a>开发和部署数据质量操作</h3><ol>
+<h3 id="7-开发和部署数据质量操作"><a href="#7-开发和部署数据质量操作" class="headerlink" title="7. 开发和部署数据质量操作"></a>7. 开发和部署数据质量操作</h3><ol>
 <li><strong>管理数据质量规则</strong></li>
 </ol>
 <blockquote>
@@ -675,7 +675,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">1. 定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">2. 定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">3. 识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">4. 执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">5. 识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">6. 定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">7. 开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -694,7 +694,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>84</span>
+    <span>85</span>
     <span>文章</span>
   </a>
   <a 
@@ -706,7 +706,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>34</span>
+    <span>35</span>
     <span>标签</span>
   </a>
 </div>
@@ -723,7 +723,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">1. 定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">2. 定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">3. 识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">4. 执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">5. 识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">6. 定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">7. 开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -748,7 +748,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">35</span>
+          <span class="categories-list-item-badge">36</span>
         </div>
       </a>
     
@@ -834,15 +834,15 @@
       </a>
     
       <a 
-        href="/tags/Java/" 
-        title="Java">
-        <div class="tags-list-item">Java</div>
-      </a>
-    
-      <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
         title="数据治理">
         <div class="tags-list-item">数据治理</div>
+      </a>
+    
+      <a 
+        href="/tags/Java/" 
+        title="Java">
+        <div class="tags-list-item">Java</div>
       </a>
     
       <a 
@@ -929,7 +929,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">数据质量管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F"><span class="toc-text">数据质量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="toc-text">数据质量维度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">管理内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BC%B0%E5%86%85%E5%AE%B9"><span class="toc-text">常用评估内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%8E%E4%B8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">数据质量低下的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%84%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">常见脏数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据质量管理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-text">改进过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">数据质量管理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-text">1. 定义高质量数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%88%98%E7%95%A5"><span class="toc-text">2. 定义数据质量战略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%86%E5%88%AB%E5%85%B3%E9%94%AE%E6%95%B0%E6%8D%AE%E5%92%8C%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99"><span class="toc-text">3. 识别关键数据和业务规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0"><span class="toc-text">4. 执行初始数据质量评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AF%86%E5%88%AB%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91%E5%B9%B6%E7%A1%AE%E8%AE%A4%E4%BC%98%E5%85%88%E6%8E%92%E5%BA%8F"><span class="toc-text">5. 识别改进方向并确认优先排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B%E7%9B%AE%E6%A0%87"><span class="toc-text">6. 定义数据质量改进目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%BC%80%E5%8F%91%E5%92%8C%E9%83%A8%E7%BD%B2%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">7. 开发和部署数据质量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%B7%A5%E4%BD%9C"><span class="toc-text">数据治理下的数据质量工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E9%A2%84%E9%98%B2"><span class="toc-text">数据质量问题预防</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98%E7%BA%A0%E6%AD%A3"><span class="toc-text">数据质量问题纠正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
     </article>
   
   
@@ -944,6 +944,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-15</div>
+        <a href="/20220315/30301.html"><div class="recent-posts-item-content">数据指标管理-基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
       </div>
@@ -956,11 +961,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-11-18</div>
         <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-11-18</div>
-        <a href="/20211118/65236.html"><div class="recent-posts-item-content">Python基础-数据类型</div></a>
       </div>
     
   </div>
