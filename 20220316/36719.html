@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>Hive基础-函数</title>
+  <title>数据安全管理实践-Ranger</title>
   
     
       <meta 
         property="og:title" 
-        content="Hive基础-函数">
+        content="数据安全管理实践-Ranger">
     
     
       <meta 
         property="og:url" 
-        content="https://alexedwardz.gitee.io/20210528/60837.html">
+        content="https://alexedwardz.gitee.io/20220316/36719.html">
     
     
       <meta 
@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="&lt;p&gt;写在前面：本文主要记录Hive的基础知识-函数&lt;/p&gt;">
+        content="&lt;p&gt;写在前面：本文主要介绍数据安全管理实践-Ranger相关的基础内容&lt;/p&gt;">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-05-28">
+        content="2022-03-16">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-03-17">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -57,11 +57,15 @@
         
           <meta 
             property="og:article:tag" 
-            content="大数据">
+            content="数据管理">
         
           <meta 
             property="og:article:tag" 
-            content="Hive">
+            content="数据治理">
+        
+          <meta 
+            property="og:article:tag" 
+            content="数据安全">
         
       
     
@@ -254,30 +258,30 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Hive基础-函数
+      数据安全管理实践-Ranger
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-05-28T00:35:44.000Z">
+    <time datetime="2022-03-16T12:02:48.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-05-28</span>
+      <span>2022-03-16</span>
     </time>
     
       <span class="dot"></span>
       
         <a 
-          href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" 
+          href="/categories/%E5%9F%BA%E7%A1%80/" 
           class="post-meta-link">
-          常见操作指令
+          基础
         </a>
       
     
     
       <span class="dot"></span>
-      <span>608 字</span>
+      <span>880 字</span>
     
   </div>
   
@@ -292,18 +296,27 @@
         
           
           <a 
-            href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" 
+            href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" 
             class="post-meta-link">
-            大数据
+            数据管理
           </a>
         
           
             <span class="dot"></span>
           
           <a 
-            href="/tags/Hive/" 
+            href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
             class="post-meta-link">
-            Hive
+            数据治理
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" 
+            class="post-meta-link">
+            数据安全
           </a>
         
       </div>
@@ -313,52 +326,79 @@
   <div 
     id="section" 
     class="post-content">
-    <p>写在前面：本文主要记录Hive的基础知识-函数</p>
+    <p>写在前面：本文主要介绍数据安全管理实践-Ranger相关的基础内容</p>
 <span id="more"></span>
 
-<h1 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h1><p>查看内置函数：show functions;<br>查看内置函数的用法：desc function [extended] fun_name;使用 extended 会更加详细，带有示例</p>
-<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p><strong>concat</strong>：拼接字符串</p>
-<pre class="highlight"><span class="line">select concat(&#39;str1&#39;,&#39;str2&#39;[,str3]);直接拼接str1、str2[、str3]</span><br><span class="line">select concat_ws(&#39;&#39;,&#39;str1&#39;,&#39;str2&#39;[,str3]);将str1、str2[、str3]以  为分隔符进行拼接</span><br></pre>
-
-<h2 id="数据类型函数"><a href="#数据类型函数" class="headerlink" title="数据类型函数"></a>数据类型函数</h2><p><strong>cast</strong>：类型转换</p>
-<pre class="highlight"><span class="line">select cast(value as type);将 value 转化为 type 类型数据</span><br></pre>
-
-<p><strong>get_json_object</strong>：解析 json 型数据</p>
-<pre class="highlight"><span class="line">select get_json_object(&#39;&#123;json 数据&#125;&#39;,&#39;$.json_key&#39;);</span><br><span class="line"></span><br><span class="line">例: select get_json_object(&#39;&#123;&#39;name&#39;:&#39;Tom&#39;,&#39;age&#39;:&#39;18&#39;&#125;&#39;,&#39;$.name&#39;);</span><br></pre>
-
-<h2 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h2><p>function_name([ col_name_list ])  over ( [partition by (col_name_list)]  [ordr by (col_name_list)] [rows between … and …])</p>
-<blockquote>
-<p>function_name : 计算类型<br>partition by : 分组字段<br>order by : 排序字段<br>rows between … and … : 计算的行数</p>
-<blockquote>
-<p>rows between unbounded preceding and current row：包括本行和之前所有的行<br>rows between current row and current unbounded follow：包括本行和之后所有的行<br>rows between 3 preceding and current row：包括本行和前3行<br>rows between 3 preceding and 1 following：包括本行前3行和本行之后1行（共5行）</p>
+<h1 id="Ranger"><a href="#Ranger" class="headerlink" title="Ranger"></a>Ranger</h1><p><strong>Ranger</strong>：是 Hadoop 平台之上操作、监控、管理数据安全的集中式安全管理框架，可以细化到字段，通过访问控制策略提供一套标准的授权方法，提供集中式组件，用于审计用户的访问行为和管理组件之间的安全交互<br><a target="_blank" rel="noopener" href="http://ranger.apache.org/">官网</a></p>
+<p>RBAC授权原则</p>
+<h2 id="1-架构"><a href="#1-架构" class="headerlink" title="1. 架构"></a>1. 架构</h2><h3 id="1-1-核心组件"><a href="#1-1-核心组件" class="headerlink" title="1.1 核心组件"></a>1.1 核心组件</h3><ul>
+<li><strong>UserSync</strong>：定期将 Unix 系统或者 LDAP 、Active Directory 中的用户/组同步到 RangerAdmin 中，可用作 RangerAdmin 的身份验证服务器，以使用 Linux 用户/密码登录到 RangerAdmin<blockquote>
+<p>LDAP：全称 Light Directory Access Protocol，基于 x500标准 的轻量级目录访问协议<br>Active Directory：是微软 Windows Server 中负责架构中大型网路环境的集中式目录管理服务，处理在组织中的网路物件，包括计算机、用户、群组、组织单元(OU)等</p>
 </blockquote>
-</blockquote>
-<h3 id="累计窗口函数"><a href="#累计窗口函数" class="headerlink" title="累计窗口函数"></a>累计窗口函数</h3><ul>
-<li>sum(…) over( [partition by ()]  [ordr by ()] [rows between … and …] )</li>
-<li>avg(…) over( [partition by ()]  [ordr by ()] [rows between … and …] )</li>
-<li>max(…) over( [partition by ()]  [ordr by ()] [rows between … and …] )</li>
-<li>min(…) over( [partition by ()]  [ordr by ()] [rows between … and …] )</li>
+</li>
+<li><strong>RangerAdmin Server</strong>：简称 RangerAdmin，用于管理安全策略、用户/组的门户，并提供 Rest Server</li>
+<li><strong>Agent Plugin</strong>：插件是嵌入到 Hadoop 各个组件的轻量级 Java 程序，定期从 AdminServer 拉取策略，存储在本地文件中；当用户访问 Hadoop 组件时，插件会拦截请求根据策略进行安全评估，并且定期发送数据到审计服务器做记录</li>
 </ul>
-<h3 id="分组排序窗口函数"><a href="#分组排序窗口函数" class="headerlink" title="分组排序窗口函数"></a>分组排序窗口函数</h3><ul>
-<li>row_number() over( [partition by ()]  [ordr by ()]) ：1、2、3</li>
-<li>rank() over( [partition by ()]  [ordr by ()])：1、1、3</li>
-<li>dense_rank() over( [partition by ()]  [ordr by ()])：1、1、2</li>
-<li>ntile(n) over( [partition by ()]  [ordr by ()]) : n 切片的个数</li>
+<h3 id="1-2-核心特性"><a href="#1-2-核心特性" class="headerlink" title="1.2 核心特性"></a>1.2 核心特性</h3><ul>
+<li>集中管理：在 中央UI 或使用 REST API 管理所有与安全相关的业务</li>
+<li>精细授权：使用 Hadoop 组件/工具执行特定动作或操作，细化到字段，并通过集中管理工具进行管理</li>
+<li>标准化支持 Hadoop 组件的授权方法</li>
+<li>支持不同授权方法：包括基于角色的访问控制，基于属性的访问控制，基于 Tag 的访问控制（需结合 Atlas）</li>
+<li>集中审计用户访问和管理操作</li>
+<li>支持和 Kerberos 的集成</li>
 </ul>
-<h3 id="偏移分析窗口函数"><a href="#偏移分析窗口函数" class="headerlink" title="偏移分析窗口函数"></a>偏移分析窗口函数</h3><ul>
-<li>lag(col_name_list, offset, defval) over( [partition by ()]  [ordr by ()]) : 之前 offset 行的数据</li>
-<li>lead(col_name_list, offset, defval) over( [partition by ()]  [ordr by ()]) : 之后 offset 行的数据</li>
-</ul>
+<h2 id="2-安全方案"><a href="#2-安全方案" class="headerlink" title="2. 安全方案"></a>2. 安全方案</h2><h3 id="2-1-Kerberos"><a href="#2-1-Kerberos" class="headerlink" title="2.1 Kerberos"></a>2.1 Kerberos</h3><p><strong>Kerberos</strong>：开源常用方案，业界常用，非侵入式</p>
+<ul>
+<li><p><strong>组件</strong></p>
 <blockquote>
-<p>offset : 偏移量</p>
-<p>defval : 默认值，没有值时的默认值</p>
+<p>KDC：Kerberos 的服务器程序，用于验证各个模块<br>Client：需要访问服务的用户，kDC 和 Service 会对用户身份进行认证<br>Service：集成了 Kerberos 的服务，如 Hive、YARN、HBase</p>
 </blockquote>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>parse_url</strong>：解析 url 地址</p>
-<pre class="highlight"><span class="line">select parse_url(&#39;url 地址&#39;,&#39;参数&#39;);</span><br><span class="line"></span><br><span class="line">例</span><br><span class="line">select parse_url(&#39;https:&#x2F;&#x2F;www.baidu.com&#x2F;&#39;,&#39;HOST&#39;);</span><br><span class="line">select parse_url(&#39;https:&#x2F;&#x2F;www.baidu.com&#x2F;&#39;,&#39;PATH&#39;);</span><br><span class="line">select parse_url(&#39;https:&#x2F;&#x2F;www.baidu.com&#x2F;&#39;,&#39;QUERY&#39;[,key_name]);</span><br></pre>
-
-<p><strong>explode</strong>：将 map 集合中的每一个键值对或数组中的每一个元素都单独生成一行</p>
-<h1 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h1><p>**UDF(user defined function)**：一进一出<br>继承 org.apache.hadoop.ql.execc.UDF 类，实现 evalute 函数，支持重载，必须拥有返回类型(返回值可以为 null ，返回类型不能为 viod )，推荐使用 Hive 数据类型</p>
-<p>**UDAF(user defined aggregation function)**：多进一出<br>**UDTF(user defined generating function)**：一进多出</p>
+</li>
+<li><p><strong>验证过程</strong></p>
+<blockquote>
+<ol>
+<li>Client 向 KDC 申请 TGT( Ticket Granting Ticket，认购权，判断是否有资格进行权限操作的权限)</li>
+<li>Client 通过获得的 TGT 向 KDC 申请用于访问 Service 的 Ticket</li>
+<li>Client 用返回的 Ticket 访问 Service</li>
+</ol>
+</blockquote>
+</li>
+<li><p>优点</p>
+<blockquote>
+<ol>
+<li>服务认证，方式 broker、datanode、regionserver 等组件冒充加入集群</li>
+<li>解决了服务端到服务端、客户端到服务端的认证</li>
+</ol>
+</blockquote>
+</li>
+<li><p>缺点</p>
+<blockquote>
+<ol>
+<li>使用临时的 Ticket，认证信息会失效，重新认证频繁</li>
+<li>智能控制服务级别的访问，粒度较组</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-2-Apache-Sentry"><a href="#2-2-Apache-Sentry" class="headerlink" title="2.2 Apache Sentry"></a>2.2 Apache Sentry</h3><p><strong>Apache Sentry</strong>：是 Hadoop 之上基于角色的细粒度授权模块，为经过验证的用户和应用程序提供数据访问进行授权，Cloudera 选用的方案，CDH 版本中集成，CDP 中换成 Ranger，支持 Hive、HDFS、Impala 等</p>
+<ul>
+<li><p>优点</p>
+<blockquote>
+<ol>
+<li>支持细粒度的 HDFS元数据访问控制，支持 Hive 列级别的访问控制</li>
+<li>通过基于角色的授权简化了管理，将访问统一数据及的不同特权分别授予多个角色</li>
+<li>提供了一个平台方便管理</li>
+<li>支持集成 Kerberos</li>
+</ol>
+</blockquote>
+</li>
+<li><p>缺点</p>
+<blockquote>
+<p>只支持 Hive、HDFS、Impala；不支持 Kafka、HBase、YARN、Storm </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-3-Apache-Ranger"><a href="#2-3-Apache-Ranger" class="headerlink" title="2.3 Apache Ranger"></a>2.3 Apache Ranger</h3><p><strong>Apache Ranger</strong>：Hortonworks 选用的方案，HDP 版本中集成</p>
 
   </div>
   <div>
@@ -378,8 +418,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://alexedwardz.gitee.io/20210528/60837.html">
-            https://alexedwardz.gitee.io/20210528/60837.html
+            href="https://alexedwardz.gitee.io/20220316/36719.html">
+            https://alexedwardz.gitee.io/20220316/36719.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -391,13 +431,13 @@
   
     <div class="nav-item-prev">
       <a 
-        href="/20210529/53988.html" 
+        href="/20220317/17836.html" 
         class="nav-link">
         <i class="iconfont icon-left nav-prev-icon"></i>
         <div>
           <div class="nav-label">上一篇</div>
           
-            <div class="nav-title">HBase基础-创建 </div>
+            <div class="nav-title">数据中台实践-Dophinscheduler </div>
           
         </div>
       </a>
@@ -406,12 +446,12 @@
   
     <div class="nav-item-next">
       <a 
-        href="/20210527/35020.html" 
+        href="/20220315/30301.html" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">Hive基础-库表数操作 </div>
+            <div class="nav-title">数据指标管理-基础 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -465,7 +505,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%87%BD%E6%95%B0"><span class="toc-text">数据类型函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">窗口函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E8%AE%A1%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">累计窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%8E%92%E5%BA%8F%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">分组排序窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E7%A7%BB%E5%88%86%E6%9E%90%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">偏移分析窗口函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ranger"><span class="toc-text">Ranger</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84"><span class="toc-text">1. 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-text">1.1 核心组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 核心特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E5%85%A8%E6%96%B9%E6%A1%88"><span class="toc-text">2. 安全方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Kerberos"><span class="toc-text">2.1 Kerberos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Apache-Sentry"><span class="toc-text">2.2 Apache Sentry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Apache-Ranger"><span class="toc-text">2.3 Apache Ranger</span></a></li></ol></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -513,7 +553,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%87%BD%E6%95%B0"><span class="toc-text">数据类型函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">窗口函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E8%AE%A1%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">累计窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%8E%92%E5%BA%8F%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">分组排序窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E7%A7%BB%E5%88%86%E6%9E%90%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">偏移分析窗口函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ranger"><span class="toc-text">Ranger</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84"><span class="toc-text">1. 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-text">1.1 核心组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 核心特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E5%85%A8%E6%96%B9%E6%A1%88"><span class="toc-text">2. 安全方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Kerberos"><span class="toc-text">2.1 Kerberos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Apache-Sentry"><span class="toc-text">2.2 Apache Sentry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Apache-Ranger"><span class="toc-text">2.3 Apache Ranger</span></a></li></ol></li></ol></li></ol>
       </div>
     </article>
   
@@ -719,7 +759,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%87%BD%E6%95%B0"><span class="toc-text">数据类型函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">窗口函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E8%AE%A1%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">累计窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%8E%92%E5%BA%8F%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">分组排序窗口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E7%A7%BB%E5%88%86%E6%9E%90%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-text">偏移分析窗口函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ranger"><span class="toc-text">Ranger</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84"><span class="toc-text">1. 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-text">1.1 核心组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 核心特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E5%85%A8%E6%96%B9%E6%A1%88"><span class="toc-text">2. 安全方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Kerberos"><span class="toc-text">2.1 Kerberos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Apache-Sentry"><span class="toc-text">2.2 Apache Sentry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Apache-Ranger"><span class="toc-text">2.3 Apache Ranger</span></a></li></ol></li></ol></li></ol>
     </article>
   
   

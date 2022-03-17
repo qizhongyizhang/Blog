@@ -49,7 +49,7 @@
         content="2021-05-27">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-03-16">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -192,7 +192,7 @@
           src="https://alexedwardz.gitee.io/images/logo.jpg" 
           alt="blog logo">
       
-      <span class="navbar-logo-dsc">戚中一的个人博客</span>
+      <span class="navbar-logo-dsc">戚中一</span>
     </span>
   </div>
   <div class="navbar-menu">
@@ -324,7 +324,7 @@
 <h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><pre class="highlight"><span class="line">create [external] table [if not exists] tb_name(</span><br><span class="line">col_name1 type [comment &#39;xxx&#39;]</span><br><span class="line">[,col_name2 type,col_name3 type...])</span><br><span class="line">[comment &#39;xxx&#39;]</span><br><span class="line">[partitioned by (col_name type [comment &#39;xxx&#39;])]</span><br><span class="line">[clustered by (col_name type [comment &#39;xxx&#39;])]</span><br><span class="line">[sorted by (col_name [asc|desc] ) into N buckets buckets]</span><br><span class="line">[row format delimited fields terminated by &#39; &#39;]</span><br><span class="line">[storted as ...]</span><br><span class="line">[location &#39;catalogue&#39;];</span><br></pre>
 
 <blockquote>
-<p>if not exists：在不存在的情况下创建表<br>external：指明创建外部表：外部表仅存储指向实际数据的路径，删除时仅删除元数据；内部表会移动数据到数据仓库指定的路径进行存储，删除时会删除元数据和数据文件<br>comment：表或字段的描述性信息，默认不能使用中文<br>partitioned by()：分区表的分区字段，每一个分区单独存在一个目录下<br>clustered by()：对于每一个表分文件，Hive可以进一步组织成桶，进行更细粒度的范围划分<br>sorted by() into N buckets buckets：指明排序字段和排序方式<br>row format ：指明表数据文件的分隔符<br>storted as：指明数据表文件的数据存储类型</p>
+<p>if not exists：在不存在的情况下创建表<br>external：指明创建外部表：外部表仅存储指向实际数据的路径，删除时仅删除元数据；内部表会移动数据到数据仓库指定的路径进行存储，删除时会删除元数据和数据文件<br>comment：表或字段的描述性信息，默认不能使用中文<br>partitioned by()：分区表的分区字段，每一个分区单独存在一个目录下<br>clustered by()：对于每一个表文件，Hive可以进一步组织成桶，进行更细粒度的范围划分<br>sorted by() into N buckets buckets：指明排序字段和排序方式<br>row format ：指明表数据文件的分隔符<br>storted as：指明数据表文件的数据存储类型</p>
 <blockquote>
 <p>SEQUENCEFILE：数据需要压缩，二进制文件<br>TEXTFILE：纯文本，默认<br>RCFILE<br>location：指明数据表存放位置</p>
 </blockquote>
@@ -523,7 +523,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>85</span>
+    <span>88</span>
     <span>文章</span>
   </a>
   <a 
@@ -577,7 +577,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">36</span>
+          <span class="categories-list-item-badge">38</span>
         </div>
       </a>
     
@@ -626,7 +626,7 @@
       <a href="/categories/%E5%AE%9E%E8%B7%B5/">
         <div class="categories-list-item">
           实践
-          <span class="categories-list-item-badge">3</span>
+          <span class="categories-list-item-badge">4</span>
         </div>
       </a>
     
@@ -645,27 +645,27 @@
   <div class="tags-list">
     
       <a 
-        href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" 
-        title="数据库">
-        <div class="tags-list-item">数据库</div>
-      </a>
-    
-      <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" 
         title="数据管理">
         <div class="tags-list-item">数据管理</div>
       </a>
     
       <a 
-        href="/tags/MySQL/" 
-        title="MySQL">
-        <div class="tags-list-item">MySQL</div>
+        href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+        title="数据库">
+        <div class="tags-list-item">数据库</div>
       </a>
     
       <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
         title="数据治理">
         <div class="tags-list-item">数据治理</div>
+      </a>
+    
+      <a 
+        href="/tags/MySQL/" 
+        title="MySQL">
+        <div class="tags-list-item">MySQL</div>
       </a>
     
       <a 
@@ -711,6 +711,12 @@
       </a>
     
       <a 
+        href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" 
+        title="元数据">
+        <div class="tags-list-item">元数据</div>
+      </a>
+    
+      <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
@@ -723,21 +729,15 @@
       </a>
     
       <a 
+        href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" 
+        title="数据安全">
+        <div class="tags-list-item">数据安全</div>
+      </a>
+    
+      <a 
         href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" 
         title="数据分析">
         <div class="tags-list-item">数据分析</div>
-      </a>
-    
-      <a 
-        href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" 
-        title="数据仓库">
-        <div class="tags-list-item">数据仓库</div>
-      </a>
-    
-      <a 
-        href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" 
-        title="程序设计">
-        <div class="tags-list-item">程序设计</div>
       </a>
     
   </div>
@@ -773,23 +773,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-17</div>
+        <a href="/20220317/17836.html"><div class="recent-posts-item-content">数据中台实践-Dophinscheduler</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-16</div>
+        <a href="/20220316/36719.html"><div class="recent-posts-item-content">数据安全管理实践-Ranger</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-15</div>
         <a href="/20220315/30301.html"><div class="recent-posts-item-content">数据指标管理-基础</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-21</div>
-        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-库</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-21</div>
-        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-11-18</div>
-        <a href="/20211118/25209.html"><div class="recent-posts-item-content">Python基础-控制语句</div></a>
+        <div class="recent-posts-item-title">2022-03-15</div>
+        <a href="/20220315/19375.html"><div class="recent-posts-item-content">元数据管理-基础</div></a>
       </div>
     
   </div>
@@ -819,7 +819,7 @@
         <a 
           href="/" 
           class="footer-link">
-          戚中一的个人博客
+          戚中一
         </a>
       </div>
     </div>
