@@ -18,12 +18,12 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>Python基础-模块</title>
+  <title>Python基础-库</title>
   
     
       <meta 
         property="og:title" 
-        content="Python基础-模块">
+        content="Python基础-库">
     
     
       <meta 
@@ -49,7 +49,7 @@
         content="2021-12-21">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-17">
+        content="2022-02-25">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -250,7 +250,7 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Python基础-模块
+      Python基础-库
     </h1>
   </header>
   <div class="post-meta post-show-meta">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>16 字</span>
+      <span>264 字</span>
     
   </div>
   
@@ -303,7 +303,14 @@
     <p>写在前面：本文主要记录Python的数据类型</p>
 <span id="more"></span>
 
-
+<h1 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h1><p><strong>NumPy</strong> 是 Python 科学计算的基础包,作为在算法和库之间传递数据的容器；对于数值型数据，NumPy数组在存储和处理数据时要⽐内置的Python数据结构⾼效</p>
+<h2 id="功能点"><a href="#功能点" class="headerlink" title="功能点"></a>功能点</h2><ul>
+<li>快速⾼效的多维数组对象ndarray；</li>
+<li>⽤于对数组执⾏元素级计算以及直接对数组执⾏数学运算的函数；</li>
+<li>⽤于读写硬盘上基于数组的数据集的⼯具；</li>
+<li>线性代数运算、傅⾥叶变换，以及随机数⽣成；<br>成熟的C API， ⽤于Python插件和原⽣C、C++、Fortran代码访问NumPy的数据结构和计算⼯具</li>
+</ul>
+<h1 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h1><p><strong>pandas</strong>：提供快速便捷处理结构化数据的⼤量数据结构和函数，s兼具NumPy⾼性能的数组计算功能以及电⼦表格和关系型数据库（如SQL）灵活的数据处理功能，提供了复杂精细的索引功能，能便捷地完成重塑、切⽚和切块、聚合以及选<br>取数据⼦集等操作</p>
 
   </div>
   <div>
@@ -342,7 +349,7 @@
         <div>
           <div class="nav-label">上一篇</div>
           
-            <div class="nav-title">Python基础-库 </div>
+            <div class="nav-title">Python基础-模块 </div>
           
         </div>
       </a>
@@ -410,7 +417,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -458,7 +465,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol>
       </div>
     </article>
   
@@ -473,13 +480,6 @@
   </div>
   <div class="categories-list">
     
-      <a href="/categories/%E9%80%9A%E8%AF%86/">
-        <div class="categories-list-item">
-          通识
-          <span class="categories-list-item-badge">4</span>
-        </div>
-      </a>
-    
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
@@ -487,16 +487,23 @@
         </div>
       </a>
     
-      <a href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+      <a href="/categories/%E9%80%9A%E8%AF%86/">
         <div class="categories-list-item">
-          安装使用
-          <span class="categories-list-item-badge">14</span>
+          通识
+          <span class="categories-list-item-badge">4</span>
         </div>
       </a>
     
       <a href="/categories/%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">
         <div class="categories-list-item">
           常见操作指令
+          <span class="categories-list-item-badge">14</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+        <div class="categories-list-item">
+          安装使用
           <span class="categories-list-item-badge">14</span>
         </div>
       </a>
@@ -508,13 +515,6 @@
         </div>
       </a>
     
-      <a href="/categories/%E5%8C%BA%E5%88%AB/">
-        <div class="categories-list-item">
-          区别
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
       <a href="/categories/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
         <div class="categories-list-item">
           注意事项
@@ -522,10 +522,10 @@
         </div>
       </a>
     
-      <a href="/categories/%E8%BF%9B%E9%98%B6/">
+      <a href="/categories/%E5%8C%BA%E5%88%AB/">
         <div class="categories-list-item">
-          进阶
-          <span class="categories-list-item-badge">6</span>
+          区别
+          <span class="categories-list-item-badge">1</span>
         </div>
       </a>
     
@@ -533,6 +533,13 @@
         <div class="categories-list-item">
           实践
           <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E8%BF%9B%E9%98%B6/">
+        <div class="categories-list-item">
+          进阶
+          <span class="categories-list-item-badge">6</span>
         </div>
       </a>
     
@@ -617,12 +624,6 @@
       </a>
     
       <a 
-        href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" 
-        title="元数据">
-        <div class="tags-list-item">元数据</div>
-      </a>
-    
-      <a 
         href="/tags/IDEA/" 
         title="IDEA">
         <div class="tags-list-item">IDEA</div>
@@ -638,6 +639,12 @@
         href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" 
         title="数据安全">
         <div class="tags-list-item">数据安全</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/" 
+        title="元数据">
+        <div class="tags-list-item">元数据</div>
       </a>
     
       <a 
@@ -664,7 +671,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol>
     </article>
   
   
