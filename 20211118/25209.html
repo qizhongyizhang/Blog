@@ -49,7 +49,7 @@
         content="2021-11-18">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-28">
+        content="2022-05-24">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>454 字</span>
+      <span>503 字</span>
     
   </div>
   
@@ -307,12 +307,13 @@
 <li>import 库函数名</li>
 <li>from 库函数名 import 特定函数名</li>
 </ul>
-<h1 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h1><p><strong>单分支</strong>：if condition : …</p>
+<h1 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h1><p>if 语句 从上往下执行判断，如果在某个判断上是 True ，把该判断对应的语句执行后，就忽略掉剩下的 elif 和 else</p>
+<p><strong>单分支</strong>：if condition : …</p>
 <pre class="highlight"><span class="line">age &#x3D; 20</span><br><span class="line">if age &gt;&#x3D; 18:</span><br><span class="line">    print(&#39;adult&#39;)</span><br></pre>
 <p><strong>双分支</strong>：if condition: …else condition: …</p>
 <pre class="highlight"><span class="line">age &#x3D; 3</span><br><span class="line">if age &gt;&#x3D; 18:</span><br><span class="line">    print(&#39;adult&#39;)</span><br><span class="line">else:</span><br><span class="line">    print(&#39;teenager&#39;)</span><br></pre>
 <p><strong>多分支</strong>：if condition: …elif condition: … else condition: …<br>如果在某个判断上是 True ，只执行该判断对应的语句，忽略掉剩下的 elif 和 else</p>
-<pre class="highlight"><span class="line">age &#x3D; 3</span><br><span class="line">if age &gt;&#x3D; 18:</span><br><span class="line">    print(&#39;adult&#39;)</span><br><span class="line">elif age &gt;&#x3D; 6:</span><br><span class="line">    print(&#39;teenager&#39;)</span><br><span class="line">else:</span><br><span class="line">    print(&#39;kid&#39;)</span><br></pre>
+<pre class="highlight"><span class="line">age &#x3D; 3</span><br><span class="line">if age &gt;&#x3D; 18:</span><br><span class="line">    print(&#39;adult&#39;)</span><br><span class="line">elif age &gt;&#x3D; 6:          # 可以写多个 elif</span><br><span class="line">    print(&#39;teenager&#39;)</span><br><span class="line">else:</span><br><span class="line">    print(&#39;kid&#39;)</span><br></pre>
 
 <h1 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h1><p><strong>for遍历循环</strong>：for 循环变量 in 遍历数据: …</p>
 <pre class="highlight"><span class="line">sum &#x3D; 0</span><br><span class="line">for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:   # 计算 1~10 累加的和</span><br><span class="line">    sum &#x3D; sum + x</span><br><span class="line">print(sum)</span><br><span class="line"></span><br><span class="line">sum &#x3D; 0</span><br><span class="line">for x in range(11):</span><br><span class="line">    sum &#x3D; sum + x</span><br><span class="line">print(sum)</span><br><span class="line"></span><br><span class="line">range(11) 会生成一个(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)整数序列，可以在通过list()函数转换成 list数据，如：list(range(11)) 会得到一个元素为 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 的列表</span><br></pre>
@@ -320,7 +321,7 @@
 <pre class="highlight"><span class="line">sum &#x3D; 0</span><br><span class="line">n &#x3D; 99</span><br><span class="line">while n &gt; 0:        # 计算 100 以内的所有奇数和</span><br><span class="line">    sum &#x3D; sum + n</span><br><span class="line">    n &#x3D; n - 2</span><br><span class="line">print(sum)</span><br></pre>
 <p><strong>循环控制</strong>：</p>
 <ul>
-<li><strong>break</strong>：直接跳出循环语言，执行循环后的语句 <pre class="highlight"><span class="line">sum &#x3D; 0</span><br><span class="line">n &#x3D; 1</span><br><span class="line">while n &lt; 101:</span><br><span class="line">    if n % 2 &#x3D; 0:     # 判断n除以2的余数</span><br><span class="line">        break</span><br><span class="line">    sum &#x3D; sum + n</span><br><span class="line">    n &#x3D; n + 1</span><br><span class="line">print(sum)            # sum &#x3D; 1</span><br></pre></li>
+<li><strong>break</strong>：直接跳出循环循环，执行循环后的语句 <pre class="highlight"><span class="line">sum &#x3D; 0</span><br><span class="line">n &#x3D; 1</span><br><span class="line">while n &lt; 101:</span><br><span class="line">    if n % 2 &#x3D; 0:     # 判断n除以2的余数</span><br><span class="line">        break</span><br><span class="line">    sum &#x3D; sum + n</span><br><span class="line">    n &#x3D; n + 1</span><br><span class="line">print(sum)            # sum &#x3D; 1</span><br></pre></li>
 <li><strong>continue</strong>：退出本次循环过程，继续下一次循环<pre class="highlight"><span class="line">sum &#x3D; 0</span><br><span class="line">n &#x3D; 1</span><br><span class="line">while n &lt; 101:        # 计算 100 以内的所有奇数和</span><br><span class="line">    if n % 2 &#x3D; 0:</span><br><span class="line">        continue</span><br><span class="line">    sum &#x3D; sum + n</span><br><span class="line">    n &#x3D; n + 1</span><br><span class="line">print(sum)           # sum &#x3D; 2500</span><br></pre></li>
 </ul>
 <h1 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h1><ul>

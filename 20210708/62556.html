@@ -49,7 +49,7 @@
         content="2021-07-08">
       <meta 
         property="og:article:modified_time" 
-        content="2022-05-20">
+        content="2022-05-24">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -332,14 +332,14 @@
 <pre class="highlight"><span class="line">&gt;&gt;&gt; print(&#39;hello&#39;, &#39;world&#39;)</span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; print(100 + 200)  # 可计算结果</span><br><span class="line">300</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; print(&#39;100 + 200 &#x3D;&#39;, 100 + 200)  # 100 + 200 &#x3D; 用 &#39;&#39; 包裹，表示字符串，而非表达式</span><br><span class="line">100 + 200 &#x3D; 300</span><br></pre>
 <p><strong>格式化输出</strong>：</p>
 <ol>
-<li><p>占位符：<strong>print(“XXX 占位符 “%(参数1,参数2))</strong></p>
+<li><p>占位符：<strong>print(“XXX 占位符 “%(value1,value2))</strong></p>
 <pre class="highlight"><span class="line">%s：字符串类型占位符</span><br><span class="line">%d：整数类型占位符（直接截取整数位）</span><br><span class="line">%f：浮点型占位符</span><br><span class="line">%x：16进制数占位符</span><br><span class="line"></span><br><span class="line">print(&#39;Age: %s, Gender: %s, growth rate: %d %%&#39; % (25, True, 7));</span><br><span class="line">&#39;Age: 25, Gender: True, growth rate: 7 %&#39;</span><br><span class="line">输出内容中有 % 号时，需要用两个 %% 表示</span><br></pre></li>
-<li><p>format：<strong>print(‘XXX {字符填充序号 : [填充字符] [对齐方式] [数据宽度] [千位分隔符] [保留小数位数] [数据类型]}’.format(参数1,参数2))</strong></p>
+<li><p>format：<strong>print(‘XXX {字符填充序号 : [填充字符] [对齐方式] [数据宽度] [千位分隔符] [保留小数位数] [数据类型]}’.format(value1,value2))</strong></p>
 </li>
 </ol>
 <pre class="highlight"><span class="line">字符填充序号：format() 里面的数据索引，从零开始</span><br><span class="line">填充字符：数据长度不够时的填充字符，默认用空格进行填充</span><br><span class="line">对齐方式：数据对齐方式，^, &lt;, &gt; 分别是居中、左对齐、右对齐</span><br><span class="line">数据宽度：数据的实际显示长度，用正整数表示，默认宽度为10，数据超过宽度则省略后宽度之后的数据</span><br><span class="line">千位分隔符：数据级每隔 1000 的分隔标识符</span><br><span class="line">保留小数位数：用 .+正整数表示，如 .4 表示保留 4位整数</span><br><span class="line">数据类型：d 表示整数，f 表示浮点数</span><br><span class="line">&gt;&gt;&gt; print(&#39;&#123;0:@&lt;20,.4f&#125;&#39;.format(123456789.987654321))</span><br><span class="line">123,456,789.9877@@@@</span><br><span class="line"></span><br><span class="line">显示百分比：print(&#39;&#123;0:-&lt;30,.4%&#125;&#39;.format(123456789.987654321))</span><br><span class="line">12,345,678,998.7654%----------</span><br><span class="line">科学计数法：print(&#39;&#123;0:-&lt;30,.4e&#125;&#39;.format(12345646577886789.987654321))</span><br><span class="line">1.2346e+16--------------------</span><br><span class="line"></span><br><span class="line">二进制：&#39;&#123;:b&#125;&#39;.format(11)</span><br><span class="line">十进制：&#39;&#123;:d&#125;&#39;.format(11)</span><br><span class="line">八进制：&#39;&#123;:o&#125;&#39;.format(11)</span><br><span class="line">普通十六进制：&#39;&#123;:x&#125;&#39;.format(11)</span><br><span class="line">小写十六进制带b：&#39;&#123;:#x&#125;&#39;.format(11)</span><br><span class="line">大写十六进制带B：&#39;&#123;:#X&#125;&#39;.format(11)</span><br></pre>
 <ol start="3">
-<li>f-string：**var定义（换行）print(f’XXX {var_name[:format格式]}’)**，使用 f 开头申明，用前面申明的变量替换相同位置的申明<pre class="highlight"><span class="line">&gt;&gt;&gt; r &#x3D; 2.5</span><br><span class="line">&gt;&gt;&gt; s &#x3D; 3.14 * r ** 2</span><br><span class="line">&gt;&gt;&gt; print(f&#39;The area of a circle with radius &#123;r&#125; is &#123;s:.2f&#125;.&#39;)</span><br><span class="line">The area of a circle with radius 2.5 is 19.62.</span><br></pre></li>
+<li>f-string：**var定义（换行）print(f’XXX {var_name[:format格式]}’)**，使用 f 开头申明，用前面申明的对应变量替换相同位置的占位符<pre class="highlight"><span class="line">&gt;&gt;&gt; r &#x3D; 2.5</span><br><span class="line">&gt;&gt;&gt; s &#x3D; 3.14 * r ** 2</span><br><span class="line">&gt;&gt;&gt; print(f&#39;The area of a circle with radius &#123;r&#125; is &#123;s:.2f&#125;.&#39;)</span><br><span class="line">The area of a circle with radius 2.5 is 19.62.</span><br></pre></li>
 </ol>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.python.org/doc/"><font face = "微软雅黑" color = 1E90FF size = 5> 官方文档 </font></a></p>
 <p><a target="_blank" rel="noopener" href="http://docs.python.org/3/library/functions.html"><font face = "微软雅黑" color = 1E90FF size = 5> Python3内置函数官方文档 </font></a></p>
