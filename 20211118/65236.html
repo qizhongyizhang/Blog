@@ -49,7 +49,7 @@
         content="2021-11-18">
       <meta 
         property="og:article:modified_time" 
-        content="2022-05-27">
+        content="2022-05-30">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>3.8k 字</span>
+      <span>4k 字</span>
     
   </div>
   
@@ -349,7 +349,7 @@
 <p><strong>生成器</strong>：按照某种算法推算出来列表元素，边循环边计算</p>
 <pre class="highlight"><span class="line">g_name &#x3D; (x * x for x in range(10))  # 可以简单的将列表生成式的的 [] 改成 () ，就可以生成一个生成器</span><br><span class="line"></span><br><span class="line">next(g_name)  # 通过 next() 函数进行获取生成器里面的数据，每一次调用，就计算出下一个 g_name 的值，直到计算到最后一个元素，没有更多的元素时，抛出 StopIteration 错误</span><br><span class="line">一般通过 for 循环访问数据</span><br><span class="line">for n in g_name：</span><br><span class="line">    print(n)</span><br></pre>
 <p>通过 yield 关键字进行将不同函数定义成生成器函数，在每次调用 next() 时执行，遇到 yield 语句返回，再次执行时从上次返回的 yield 语句处继续执行</p>
-<pre class="highlight"><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    list_fib &#x3D; []</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        # yield b</span><br><span class="line">        list_fib.append(b)</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return list_fib</span><br></pre>
+<pre class="highlight"><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    list_fib &#x3D; []</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        list_fib.append(b)</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">        yield list_fib</span><br><span class="line"></span><br><span class="line">fib_num &#x3D; eval(input(&#39;Pleae input a number:&#39;))</span><br><span class="line">list_result &#x3D; fib(fib_num)    # 创建一个 generator 对象，然后不断调用 next()</span><br><span class="line">next(list_result)</span><br></pre>
 
 <h4 id="列表处理函数"><a href="#列表处理函数" class="headerlink" title="列表处理函数"></a>列表处理函数</h4><p><strong>统计</strong></p>
 <pre class="highlight"><span class="line">len(l_name)：返回列表长度，即列表里面的数据个数</span><br><span class="line">l_name.count(value) ：统计 value 在 l_name 中出现的次数</span><br><span class="line">max(l_name)、min(l_name)：返回列表最大最小值，需要列表的元素数据类型一致，即都为数值型或都为字符串</span><br></pre>
@@ -384,7 +384,12 @@
 <p><strong>集合计算</strong></p>
 <pre class="highlight"><span class="line">a-b：在集合a却不在集合b中的元素</span><br><span class="line">a&amp;b：同时在集合a、b中的元素</span><br><span class="line">a^b：集合a、b各自独有的元素</span><br><span class="line">a|b：集合a、b共有的元素</span><br></pre>
 
-<p><strong>可迭代对象</strong>：列表、字典、字符串、生成器（generator）</p>
+<p><strong>可迭代对象</strong>（Iterable）：可以直接作用于 for 循环的对象，如：列表（list）、字典（dict）、元组（tuple）、集合（set）、字符串（str）、生成器（generator）、列表生成式</p>
+<pre class="highlight"><span class="line">isinstance([], Iterable)   # 可使用 isinstance() 判断一个对象的类型，返回 True 或 False</span><br><span class="line">isinstance((x for x in range(10)), Iterable)  # 返回 True</span><br></pre>
+
+<p><strong>迭代器</strong>（Iterator）：可以被 next() 函数调用并不断返回下一个值的对象，表示一个<strong>惰性计算</strong>（只有在需要返回下一个数据时才计算）的序列，如：生成器（generator）、列表生成式</p>
+<pre class="highlight"><span class="line">isinstance([], Iterator)   # 返回 False</span><br><span class="line">isinstance((x for x in range(10)), Iterable)  # 返回 True</span><br><span class="line"></span><br><span class="line">可以使用 iter() 函数将 可迭代对象（Iterable）变成 迭代器（Iterator）</span><br><span class="line">isinstance(iter([]), Iterator)  # 返回 True</span><br></pre>
+
 <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>数量可变化的内容，大小写英文、数字和 _ 的组合，且不能用数字开头<br>等号 = 是赋值语句：可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量</p>
 <pre class="highlight"><span class="line">a &#x3D; 123 # a是整数，Python 解释器在内存中创建了一个&#39;123&#39;的整数；同时创建了一个名为a的变量，并把它指向&#39;123&#39;</span><br><span class="line">print(a)</span><br><span class="line">a &#x3D; &#39;ABC&#39; # a变为字符串</span><br><span class="line">b&#x3D; a  # 把变量a的值赋值给变量b，实际上是把变量b指向变量a所指向的数据</span><br><span class="line">print(a,b)</span><br><span class="line"></span><br><span class="line">变量本身类型不固定的语言称为动态语言，如 Python；在定义变量时必须指定变量类型的语言称为静态语言，如果赋值的时候类型不匹配会报错，如 C、Java</span><br></pre>
 
