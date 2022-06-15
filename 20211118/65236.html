@@ -49,7 +49,7 @@
         content="2021-11-18">
       <meta 
         property="og:article:modified_time" 
-        content="2022-05-30">
+        content="2022-06-15">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -349,7 +349,7 @@
 <p><strong>生成器</strong>：按照某种算法推算出来列表元素，边循环边计算</p>
 <pre class="highlight"><span class="line">g_name &#x3D; (x * x for x in range(10))  # 可以简单的将列表生成式的的 [] 改成 () ，就可以生成一个生成器</span><br><span class="line"></span><br><span class="line">next(g_name)  # 通过 next() 函数进行获取生成器里面的数据，每一次调用，就计算出下一个 g_name 的值，直到计算到最后一个元素，没有更多的元素时，抛出 StopIteration 错误</span><br><span class="line">一般通过 for 循环访问数据</span><br><span class="line">for n in g_name：</span><br><span class="line">    print(n)</span><br></pre>
 <p>通过 yield 关键字进行将不同函数定义成生成器函数，在每次调用 next() 时执行，遇到 yield 语句返回，再次执行时从上次返回的 yield 语句处继续执行</p>
-<pre class="highlight"><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    list_fib &#x3D; []</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        list_fib.append(b)</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">        yield list_fib</span><br><span class="line"></span><br><span class="line">fib_num &#x3D; eval(input(&#39;Pleae input a number:&#39;))</span><br><span class="line">list_result &#x3D; fib(fib_num)    # 创建一个 generator 对象，然后不断调用 next()</span><br><span class="line">next(list_result)</span><br></pre>
+<pre class="highlight"><span class="line">def fun_fib(fib_num):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; fib_num:</span><br><span class="line">        yield b            # 一个普通函数定义中包含 yield 关键字，就变成一个 generator 函数,调用next()时，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line"></span><br><span class="line">number &#x3D; eval(input(&#39;please entry a number: &#39;))</span><br><span class="line">generator_fun &#x3D; fun_fib(number)   # 调用一个generator函数将返回一个generator对象</span><br><span class="line"></span><br><span class="line">generator_list &#x3D; []</span><br><span class="line">for n in generator_fun:            # 通过 for 循环便利 generator对象(可迭代对象)</span><br><span class="line">    generator_list.append(n)</span><br><span class="line"></span><br><span class="line">print(generator_list)</span><br></pre>
 
 <h4 id="列表处理函数"><a href="#列表处理函数" class="headerlink" title="列表处理函数"></a>列表处理函数</h4><p><strong>统计</strong></p>
 <pre class="highlight"><span class="line">len(l_name)：返回列表长度，即列表里面的数据个数</span><br><span class="line">l_name.count(value) ：统计 value 在 l_name 中出现的次数</span><br><span class="line">max(l_name)、min(l_name)：返回列表最大最小值，需要列表的元素数据类型一致，即都为数值型或都为字符串</span><br></pre>
