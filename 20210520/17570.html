@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="&lt;p&gt;写在前面：本文主要记录PgSQL的基础知识-常用&lt;/p&gt;">
+        content="&lt;p&gt;写在前面：本文主要记录PostgreSQL的基础知识-常用&lt;/p&gt;">
     
     
       <meta 
@@ -49,7 +49,7 @@
         content="2021-05-20">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-06-20">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -313,7 +313,7 @@
   <div 
     id="section" 
     class="post-content">
-    <p>写在前面：本文主要记录PgSQL的基础知识-常用</p>
+    <p>写在前面：本文主要记录PostgreSQL的基础知识-常用</p>
 <span id="more"></span>
 
 <h1 id="常用SQL"><a href="#常用SQL" class="headerlink" title="常用SQL"></a>常用SQL</h1><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><pre class="highlight"><span class="line">-- 查看表结构</span><br><span class="line">select lower(pg_catalog.pg_namespace.nspname) as schema_name,</span><br><span class="line">	   pg_catalog.pg_class.relname as table_name,</span><br><span class="line">	   ttt.description as table_comment,</span><br><span class="line">	   pg_catalog.pg_attribute.attname as fields_name,</span><br><span class="line">	   pg_catalog.pg_attribute.attnum as fields_num,</span><br><span class="line">	   pg_catalog.pg_type.typname,</span><br><span class="line">	   format_type(pg_catalog.pg_attribute.atttypid,pg_catalog.pg_attribute.atttypmod) as type,</span><br><span class="line">	   pg_catalog.pg_description.description as fields_comment</span><br><span class="line">from pg_catalog.pg_attribute</span><br><span class="line">	 inner join pg_catalog.pg_class on pg_catalog.pg_attribute.attrelid &#x3D; pg_catalog.pg_class.oid</span><br><span class="line">	 inner join pg_catalog.pg_type  on pg_catalog.pg_attribute.atttypid &#x3D; pg_catalog.pg_type.oid</span><br><span class="line">	 left outer join pg_catalog.pg_attrdef on pg_catalog.pg_attrdef.adrelid &#x3D; pg_catalog.pg_class.oid and pg_catalog.pg_attrdef.adnum &#x3D; pg_catalog.pg_attribute.attnum</span><br><span class="line">	 left outer join pg_catalog.pg_description on pg_catalog.pg_description.objoid &#x3D; pg_catalog.pg_class.oid and pg_catalog.pg_description.objsubid &#x3D; pg_catalog.pg_attribute.attnum</span><br><span class="line">	 inner join pg_catalog.pg_namespace on pg_catalog.pg_class.relnamespace &#x3D; pg_catalog.pg_namespace.oid</span><br><span class="line">	 left join (select objoid,description from pg_catalog.pg_description where  objsubid &#x3D; &#39;0&#39;) ttt on ttt.objoid &#x3D; pg_catalog.pg_class.oid</span><br><span class="line">where pg_catalog.pg_attribute.attnum &gt; 0</span><br><span class="line">	  and attisdropped &lt;&gt; &#39;t&#39;</span><br><span class="line">	  and lower(pg_catalog.pg_namespace.nspname) &#x3D; lower(&#39;schema_name&#39;)</span><br><span class="line">	  and lower(pg_catalog.pg_class.relname) &#x3D; lower(&#39;table_name&#39;)</span><br><span class="line">order by schema_name,table_name,pg_catalog.pg_attribute.attnum;</span><br></pre>
@@ -711,6 +711,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-06-20</div>
+        <a href="/20220620/24645.html"><div class="recent-posts-item-content">Python基础-面向对象编程</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-16</div>
         <a href="/20220316/36719.html"><div class="recent-posts-item-content">数据安全管理实践-Ranger</div></a>
       </div>
@@ -723,11 +728,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-15</div>
         <a href="/20220315/19375.html"><div class="recent-posts-item-content">元数据管理-基础</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-21</div>
-        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
       </div>
     
   </div>
