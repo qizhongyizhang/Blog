@@ -49,7 +49,7 @@
         content="2021-07-09">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-20">
+        content="2022-06-21">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -342,7 +342,8 @@
 <p><strong>参数组合</strong>：函数的参数可以是上面5种参数的任意组合；参数定义的顺序必须是：必选参数、默认参数、可变位置参数、关键字参数和可变关键字参数</p>
 <pre class="highlight"><span class="line">def func_1(a, b, c &#x3D; 0, *args, d, **kw):     # 如果函数定义中有可变位置参数，后面跟着的关键字参数就不再需要特殊分隔符 *</span><br><span class="line">    print(&#39;a &#x3D; &#39;, a, &#39;b &#x3D; &#39;, b, &#39;c &#x3D; &#39;, c, args, &#39;d &#x3D; &#39;, d, kw)</span><br><span class="line"></span><br><span class="line">func_1(1, 2, 3, 4, 5, d &#x3D; 6, e &#x3D; 7, f &#x3D; 8)</span><br><span class="line">输出：1 2 3 (4, 5) 6 &#123;&#39;e&#39;: 7, &#39;f&#39;: 8&#125;</span><br></pre>
 
-<h1 id="简单函数"><a href="#简单函数" class="headerlink" title="简单函数"></a>简单函数</h1><h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p>**isinstance(value, datatype)**：数据类型检查，判断给定的数据是否是给定的数据类型，返回对应布尔值</p>
+<h1 id="简单函数"><a href="#简单函数" class="headerlink" title="简单函数"></a>简单函数</h1><h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p><strong>内置函数</strong>：语言自身封装的函数，也称为<a target="_blank" rel="noopener" href="http://docs.python.org/3/library/functions.html"><font face = "微软雅黑" color = 1E90FF size = 5> 官方函数 </font></a></p>
+<p>**isinstance(value, datatype)**：数据类型检查，判断给定的数据是否是给定的数据类型，返回对应布尔值</p>
 <pre class="highlight"><span class="line">num &#x3D; 12</span><br><span class="line">b &#x3D; isinstance(num, string)  # 返回 False</span><br><span class="line">b &#x3D; isinstance(num, (int, float))  # 返回 True</span><br></pre>
 
 <p><strong>range</strong>(&lt;起始位置&gt;:&lt;结束位置&gt;:&lt;步长&gt;)（包含起始位置，不包含结束位置）</p>
@@ -352,6 +353,8 @@
 <li>结束位置：可省略，省略表示截取到最后</li>
 <li>步长：截取的刻度，正数从前往后截，负数从后往前截</li>
 </ul>
+<p>**type(value)**：返回数据的类型</p>
+<pre class="highlight"><span class="line">type(123)   # 返回 int</span><br></pre>
 <h2 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h2><p><strong>递归函数</strong>：在一个函数在内部调用自身本身，则被称为递归函数，<strong>使用递归函数需要注意防止栈溢出</strong>，可以通过<strong>尾递归</strong>进行优化；理论上，所有的递归函数都可以写成循环的方式，但循环的逻辑不如递归清晰<br><strong>尾递归</strong>：是指在函数返回时，调用自身本身，并且，return语句不能包含表达式</p>
 <pre class="highlight"><span class="line">def fact(n):       # 计算 n 的阶乘</span><br><span class="line">    if n &#x3D;&#x3D; 0:</span><br><span class="line">        return 1</span><br><span class="line">    else:</span><br><span class="line">        return fact(n-1) * n</span><br></pre>
 <pre class="highlight"><span class="line"># 尾递归实现</span><br><span class="line">def fact(n):</span><br><span class="line">    return fact_iter(n, 1)</span><br><span class="line"></span><br><span class="line">def fact_iter(num, product):</span><br><span class="line">    if num &#x3D;&#x3D; 0:</span><br><span class="line">        return product</span><br><span class="line">    return fact_iter(num - 1, num * product)</span><br><span class="line"></span><br><span class="line">fact(5)  # 调用，得到 fact_iter(5,1)</span><br></pre>
@@ -772,6 +775,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-06-20</div>
+        <a href="/20220620/24645.html"><div class="recent-posts-item-content">Python基础-面向对象编程</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-16</div>
         <a href="/20220316/36719.html"><div class="recent-posts-item-content">数据安全管理实践-Ranger</div></a>
       </div>
@@ -784,11 +792,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-15</div>
         <a href="/20220315/19375.html"><div class="recent-posts-item-content">元数据管理-基础</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-21</div>
-        <a href="/20211221/17947.html"><div class="recent-posts-item-content">Python基础-模块</div></a>
       </div>
     
   </div>
