@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>121 字</span>
+      <span>818 字</span>
     
   </div>
   
@@ -305,7 +305,78 @@
 
 <h1 id="IO编程"><a href="#IO编程" class="headerlink" title="IO编程"></a>IO编程</h1><p><strong>IO编程</strong>：IO在计算机中指Input/Output，也就是输入和输出；从磁盘读取文件到内存，就只有Input操作；把数据写到磁盘文件里，就只是一个Output操作</p>
 <h2 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h2><p><strong>读文件</strong>：使用Python内置的 open() 函数，可以以读文件的模式打开一个文件对象</p>
-<pre class="highlight"><span class="line">f &#x3D; open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;test.txt&#39;, &#39;r&#39;)  </span><br></pre>
+<p><strong>open</strong>(file_name, mode=’r’, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</p>
+<ul>
+<li><strong>file_name</strong>：文件名，允许通过绝对路径和相对路径指定文件</li>
+<li><strong>mode</strong>：文件打开方式</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">Character</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&#39;r&#39;</code></td>
+<td align="left">只读，open for reading (default)</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;w&#39;</code></td>
+<td align="left">清空写，open for writing, truncating the file first</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;x&#39;</code></td>
+<td align="left">新建写，如果已存在则失败；open for exclusive creation, failing if the file already exists</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;a&#39;</code></td>
+<td align="left">追加写，open for writing, appending to the end of the file if it exists</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;b&#39;</code></td>
+<td align="left">以二进制方式读写，binary mode</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;t&#39;</code></td>
+<td align="left">以文本方式读写，默认为t；text mode (default)</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;+&#39;</code></td>
+<td align="left">追加功能：r+ 给r增加写功能，w+ 给写增加读功能；open for updating (reading and writing)</td>
+</tr>
+<tr>
+<td align="left">组合：r+、w+、a+、x+；rb、wb、ab、xb；rt、at、wt、xt</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+</blockquote>
+<ul>
+<li><strong>encoding</strong>：字符编码，’utf-8’、’gbk’ 、’ascii’等</li>
+<li><strong>errors</strong>：对待错误的方式</li>
+</ul>
+<blockquote>
+<p><strong>strict</strong>：存在编码错误时抛出ValueError异常；默认值None具有相同的效果<br><strong>ignore</strong>：忽略错误；忽略编码错误可能会导致数据丢失<br><strong>replace</strong>：将错误编码内容替换为指定内容</p>
+</blockquote>
+<ul>
+<li>其他：不常用，buffering：设置缓冲区大小</li>
+</ul>
+<pre class="highlight"><span class="line">f &#x3D; open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;Gitee&#x2F;Resource&#x2F;python_self&#x2F;test.txt&#39;, &#39;r&#39;)     # 如果文件不存在，会抛出一个IOError(FileNotFoundError)的错误</span><br><span class="line"># f &#x3D; open(&#39;f_path&#x2F;test.jpg&#39;, &#39;rb&#39;)  # 以二进制形式打开文件，常用于图片</span><br><span class="line">result &#x3D; f.read()                # 调用read()方法可以一次读取文件的全部内容</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"># result &#x3D; read(size)            # 按照一定大小读取</span><br><span class="line"># for line in f.readlines():     # 按行读取</span><br><span class="line">#     print(line.strip())        # 把末尾的&#39;\n&#39;删掉</span><br><span class="line"></span><br><span class="line">f.close()                        # 关闭文件；文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也有限</span><br></pre>
+
+<pre class="highlight"><span class="line"># 文件读写时都有可能产生IOError，一旦出错，后面的f.close()就不会调用；可以使用try ... finally来实现无论是否出错都能正确地关闭文件</span><br><span class="line">try:</span><br><span class="line">    f &#x3D; open(&#39;&#x2F;path&#x2F;to&#x2F;file&#39;, &#39;r&#39;)</span><br><span class="line">    print(f.read())</span><br><span class="line">finally:</span><br><span class="line">    if f:</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line"># method-2：简化写法</span><br><span class="line">with open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;Gitee&#x2F;Resource&#x2F;python_self&#x2F;test.txt&#39;, &#39;r&#39;) as f:</span><br><span class="line">    print(f.read())</span><br></pre>
+
+<h2 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h2><p><strong>StringIO</strong>：在内存中读写str</p>
+<pre class="highlight"><span class="line">from io import StringIO</span><br><span class="line">f &#x3D; StringIO()</span><br><span class="line">f.write(&#39;hello&#39;)       # 返回写入的字符数</span><br><span class="line">f.write(&#39; world!&#39;)</span><br><span class="line"></span><br><span class="line">print(f.getvalue())    # getvalue()方法用于获得写入后的str</span><br></pre>
+
+<p><strong>读取StringIO</strong>：可以用一个str初始化StringIO，然后像读文件一样读取</p>
+<pre class="highlight"><span class="line">from io import StringIO</span><br><span class="line">f &#x3D; StringIO(&#39;Hello!\nHi!\nGoodbye!&#39;)</span><br><span class="line">while True:</span><br><span class="line">    s &#x3D; f.readline()</span><br><span class="line">    if s &#x3D;&#x3D; &#39;&#39;:</span><br><span class="line">        break</span><br><span class="line">    print(s.strip())</span><br></pre>
+
+<h2 id="BytesIO"><a href="#BytesIO" class="headerlink" title="BytesIO"></a>BytesIO</h2><p><strong>BytesIO</strong>：在内存中操作二进制数据</p>
+<pre class="highlight"><span class="line">from io import BytesIO</span><br><span class="line">f &#x3D; BytesIO()</span><br><span class="line">f.write(&#39;中文&#39;.encode(&#39;utf-8&#39;))</span><br><span class="line"></span><br><span class="line">print(f.getvalue())                    # 返回二进制</span><br><span class="line">print(f.getvalue().decode(&#39;utf-8&#39;))    # 解码返回中文</span><br></pre>
+
+<p><strong>读取BytesIO</strong>：与 StringIO 类似</p>
+<pre class="highlight"><span class="line">from io import BytesIO</span><br><span class="line">f &#x3D; BytesIO(b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;)</span><br><span class="line">f.read()</span><br></pre>
 
 
   </div>
@@ -399,7 +470,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -447,7 +518,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -653,7 +724,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
     </article>
   
   
