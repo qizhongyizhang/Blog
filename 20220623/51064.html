@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>818 字</span>
+      <span>1k 字</span>
     
   </div>
   
@@ -304,6 +304,7 @@
 <span id="more"></span>
 
 <h1 id="IO编程"><a href="#IO编程" class="headerlink" title="IO编程"></a>IO编程</h1><p><strong>IO编程</strong>：IO在计算机中指Input/Output，也就是输入和输出；从磁盘读取文件到内存，就只有Input操作；把数据写到磁盘文件里，就只是一个Output操作</p>
+<p><strong>os模块</strong>：操作文件和目录的函数一部分放在 os 模块中，一部分放在 os.path 模块中</p>
 <h2 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h2><p><strong>读文件</strong>：使用Python内置的 open() 函数，可以以读文件的模式打开一个文件对象</p>
 <p><strong>open</strong>(file_name, mode=’r’, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</p>
 <ul>
@@ -362,7 +363,7 @@
 <ul>
 <li>其他：不常用，buffering：设置缓冲区大小</li>
 </ul>
-<pre class="highlight"><span class="line">f &#x3D; open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;Gitee&#x2F;Resource&#x2F;python_self&#x2F;test.txt&#39;, &#39;r&#39;)     # 如果文件不存在，会抛出一个IOError(FileNotFoundError)的错误</span><br><span class="line"># f &#x3D; open(&#39;f_path&#x2F;test.jpg&#39;, &#39;rb&#39;)  # 以二进制形式打开文件，常用于图片</span><br><span class="line">result &#x3D; f.read()                # 调用read()方法可以一次读取文件的全部内容</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"># result &#x3D; read(size)            # 按照一定大小读取</span><br><span class="line"># for line in f.readlines():     # 按行读取</span><br><span class="line">#     print(line.strip())        # 把末尾的&#39;\n&#39;删掉</span><br><span class="line"></span><br><span class="line">f.close()                        # 关闭文件；文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也有限</span><br></pre>
+<pre class="highlight"><span class="line">import os</span><br><span class="line"></span><br><span class="line">f &#x3D; open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;Gitee&#x2F;Resource&#x2F;python_self&#x2F;test.txt&#39;, &#39;r&#39;)     # 如果文件不存在，会抛出一个IOError(FileNotFoundError)的错误</span><br><span class="line"># f &#x3D; open(&#39;f_path&#x2F;test.jpg&#39;, &#39;rb&#39;)  # 以二进制形式打开文件，常用于图片</span><br><span class="line">result &#x3D; f.read()                # 调用read()方法可以一次读取文件的全部内容</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"># result &#x3D; read(size)            # 按照一定大小读取</span><br><span class="line"># for line in f.readlines():     # 按行读取</span><br><span class="line">#     print(line.strip())        # 把末尾的&#39;\n&#39;删掉</span><br><span class="line"></span><br><span class="line">f.close()                        # 关闭文件；文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也有限</span><br></pre>
 
 <pre class="highlight"><span class="line"># 文件读写时都有可能产生IOError，一旦出错，后面的f.close()就不会调用；可以使用try ... finally来实现无论是否出错都能正确地关闭文件</span><br><span class="line">try:</span><br><span class="line">    f &#x3D; open(&#39;&#x2F;path&#x2F;to&#x2F;file&#39;, &#39;r&#39;)</span><br><span class="line">    print(f.read())</span><br><span class="line">finally:</span><br><span class="line">    if f:</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line"># method-2：简化写法</span><br><span class="line">with open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;Gitee&#x2F;Resource&#x2F;python_self&#x2F;test.txt&#39;, &#39;r&#39;) as f:</span><br><span class="line">    print(f.read())</span><br></pre>
 
@@ -377,6 +378,8 @@
 
 <p><strong>读取BytesIO</strong>：与 StringIO 类似</p>
 <pre class="highlight"><span class="line">from io import BytesIO</span><br><span class="line">f &#x3D; BytesIO(b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;)</span><br><span class="line">f.read()</span><br></pre>
+
+<h2 id="操作文件和目录"><a href="#操作文件和目录" class="headerlink" title="操作文件和目录"></a>操作文件和目录</h2><pre class="highlight"><span class="line">import os</span><br><span class="line"></span><br><span class="line">print(os.name)        # 如果是posix，说明系统是Linux、Unix或Mac OS X；如果是nt，就是Windows系统</span><br><span class="line"></span><br><span class="line"># print(os.uname())   # uname()函数在Windows上不提供；os模块的某些函数与操作系统相关</span><br><span class="line"></span><br><span class="line">print(os.environ)     # 查看系统环境变量，返回字典</span><br><span class="line">print(os.environ.get(&#39;Path&#39;))   # 查看具体环境变量的值</span><br><span class="line">print(os.path.abspath(&#39;.&#39;))     # 查看当前目录的绝对路径</span><br><span class="line"></span><br><span class="line">print(os.path.join(&#39;&#x2F;Users&#x2F;michael&#39;, &#39;testdir&#39;))   # 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来</span><br><span class="line">os.mkdir(&#39;.&#x2F;testdir&#39;)      # 然后创建一个目录</span><br><span class="line">os.rmdir(&#39;.&#x2F;testdir&#39;)      # 删掉一个目录</span><br></pre>
 
 
   </div>
@@ -470,7 +473,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">操作文件和目录</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -518,7 +521,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">操作文件和目录</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -724,7 +727,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E7%BC%96%E7%A8%8B"><span class="toc-text">IO编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%96%87%E4%BB%B6"><span class="toc-text">读文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringIO"><span class="toc-text">StringIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BytesIO"><span class="toc-text">BytesIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-text">操作文件和目录</span></a></li></ol></li></ol>
     </article>
   
   
