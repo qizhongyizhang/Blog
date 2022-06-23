@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Python基础-IO编程</title>
+      <link href="/20220623/51064.html"/>
+      <url>/20220623/51064.html</url>
+      
+        <content type="html"><![CDATA[<p>写在前面：本文主要记录Python的数据类型</p><span id="more"></span><h1 id="IO编程"><a href="#IO编程" class="headerlink" title="IO编程"></a>IO编程</h1><p><strong>IO编程</strong>：IO在计算机中指Input/Output，也就是输入和输出；从磁盘读取文件到内存，就只有Input操作；把数据写到磁盘文件里，就只是一个Output操作</p><h2 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h2><p><strong>读文件</strong>：使用Python内置的 open() 函数，可以以读文件的模式打开一个文件对象</p><pre class="highlight"><span class="line">f &#x3D; open(&#39;C:&#x2F;Users&#x2F;tanhh&#x2F;Desktop&#x2F;test.txt&#39;, &#39;r&#39;)  </span><br></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python基础-面向对象编程</title>
       <link href="/20220620/24645.html"/>
       <url>/20220620/24645.html</url>
