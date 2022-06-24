@@ -8,7 +8,7 @@
       <link href="/20220624/46563.html"/>
       <url>/20220624/46563.html</url>
       
-        <content type="html"><![CDATA[<p>写在前面：本文主要记录正则表达式的基础知识</p><span id="more"></span><h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p><strong>正则表达式</strong>：是一种用来匹配字符串的强有力的武器。它的设计思想是用一种描述性的语言来给字符串定义一个规则，凡是符合规则的字符串，我们就认为它“匹配”了，否则，该字符串就是不合法的</p>]]></content>
+        <content type="html"><![CDATA[<p>写在前面：本文主要记录正则表达式的基础知识</p><span id="more"></span><h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p><strong>正则表达式</strong>：由一些具有特殊含义的字符组成的字符串，多用于查找、替换符合规则的字符串</p>]]></content>
       
       
       <categories>
