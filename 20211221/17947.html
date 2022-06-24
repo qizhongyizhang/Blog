@@ -49,7 +49,7 @@
         content="2021-12-21">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-20">
+        content="2022-06-24">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -343,6 +343,7 @@
 <li>设置环境变量 PYTHONPATH</li>
 </ul>
 </blockquote>
+<h2 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h2><p><strong>re</strong>：通过正则表达式来匹配处理字符串</p>
 <h2 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h2><p><strong>NumPy</strong> 是 Python 科学计算的基础包，作为在算法和库之间传递数据的容器；对于数值型数据，NumPy数组在存储和处理数据时要⽐内置的Python数据结构⾼效</p>
 <h3 id="功能点"><a href="#功能点" class="headerlink" title="功能点"></a>功能点</h3><ul>
 <li>快速⾼效的多维数组对象ndarray；</li>
@@ -457,7 +458,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE"><span class="toc-text">RE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -476,13 +477,13 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>89</span>
+    <span>91</span>
     <span>文章</span>
   </a>
   <a 
     class="author-categories-count" 
     href="/categories">
-    <span>9</span>
+    <span>10</span>
     <span>分类</span>
   </a>
   <a 
@@ -505,7 +506,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE"><span class="toc-text">RE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -523,7 +524,7 @@
       <a href="/categories/%E5%9F%BA%E7%A1%80/">
         <div class="categories-list-item">
           基础
-          <span class="categories-list-item-badge">39</span>
+          <span class="categories-list-item-badge">40</span>
         </div>
       </a>
     
@@ -583,6 +584,13 @@
         </div>
       </a>
     
+      <a href="/categories/%E6%A8%A1%E5%9D%97/">
+        <div class="categories-list-item">
+          模块
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
   </div>
 </div>
   </article>
@@ -622,6 +630,12 @@
       </a>
     
       <a 
+        href="/tags/Python/" 
+        title="Python">
+        <div class="tags-list-item">Python</div>
+      </a>
+    
+      <a 
         href="/tags/Java/" 
         title="Java">
         <div class="tags-list-item">Java</div>
@@ -631,12 +645,6 @@
         href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" 
         title="大数据">
         <div class="tags-list-item">大数据</div>
-      </a>
-    
-      <a 
-        href="/tags/Python/" 
-        title="Python">
-        <div class="tags-list-item">Python</div>
       </a>
     
       <a 
@@ -711,7 +719,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE"><span class="toc-text">RE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
     </article>
   
   
@@ -727,6 +735,11 @@
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-06-24</div>
+        <a href="/20220624/46563.html"><div class="recent-posts-item-content">正则表达式</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-06-24</div>
         <a href="/20220624/891.html"><div class="recent-posts-item-content">Python基础-进程和线程</div></a>
       </div>
     
@@ -738,11 +751,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-06-20</div>
         <a href="/20220620/24645.html"><div class="recent-posts-item-content">Python基础-面向对象编程</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-16</div>
-        <a href="/20220316/36719.html"><div class="recent-posts-item-content">数据安全管理实践-Ranger</div></a>
       </div>
     
   </div>
