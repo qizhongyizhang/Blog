@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>数据库概念-区别</title>
+  <title>Python基础-进程和线程</title>
   
     
       <meta 
         property="og:title" 
-        content="数据库概念-区别">
+        content="Python基础-进程和线程">
     
     
       <meta 
         property="og:url" 
-        content="https://alexedwardz.gitee.io/20210519/48941.html">
+        content="https://alexedwardz.gitee.io/20220624/891.html">
     
     
       <meta 
@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="&lt;p&gt;写在前面：本文主要记录数据库相关概念的区别&lt;/p&gt;">
+        content="&lt;p&gt;写在前面：本文主要记录Python的IO编程的相关知识&lt;/p&gt;">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-05-19">
+        content="2022-06-24">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-20">
+        content="2022-06-24">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -57,7 +57,7 @@
         
           <meta 
             property="og:article:tag" 
-            content="数据库">
+            content="Python">
         
       
     
@@ -250,30 +250,30 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      数据库概念-区别
+      Python基础-进程和线程
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-05-19T15:48:59.000Z">
+    <time datetime="2022-06-24T03:15:33.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-05-19</span>
+      <span>2022-06-24</span>
     </time>
     
       <span class="dot"></span>
       
         <a 
-          href="/categories/%E5%8C%BA%E5%88%AB/" 
+          href="/categories/%E5%9F%BA%E7%A1%80/" 
           class="post-meta-link">
-          区别
+          基础
         </a>
       
     
     
       <span class="dot"></span>
-      <span>377 字</span>
+      <span>1.2k 字</span>
     
   </div>
   
@@ -288,9 +288,9 @@
         
           
           <a 
-            href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+            href="/tags/Python/" 
             class="post-meta-link">
-            数据库
+            Python
           </a>
         
       </div>
@@ -300,121 +300,33 @@
   <div 
     id="section" 
     class="post-content">
-    <p>写在前面：本文主要记录数据库相关概念的区别</p>
+    <p>写在前面：本文主要记录Python的IO编程的相关知识</p>
 <span id="more"></span>
 
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p><strong>进程</strong>：对于操作系统来说，一个任务就是一个进程（Process）；如：打开一个Word就启动了一个Word进程；<strong>multiprocessing</strong> 模块通过 <strong>Process类</strong> 代表一个进程对象</p>
+<pre class="highlight"><span class="line">from multiprocessing import Process</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"># 子进程要执行的代码</span><br><span class="line">def run_proc(name):</span><br><span class="line">    print(&#39;Run child process %s (%s)...&#39; % (name, os.getpid()))</span><br><span class="line"></span><br><span class="line">if __name__&#x3D;&#x3D;&#39;__main__&#39;:</span><br><span class="line">    print(&#39;Parent process %s.&#39; % os.getpid())</span><br><span class="line">    p &#x3D; Process(target&#x3D;run_proc, args&#x3D;(&#39;test&#39;,))</span><br><span class="line">    print(&#39;Child process will start.&#39;)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(&#39;Child process end.&#39;)</span><br></pre>
+
+<p><strong>启动大量子进程</strong></p>
+<pre class="highlight"><span class="line">from multiprocessing import Pool</span><br><span class="line">import os, time, random</span><br><span class="line"></span><br><span class="line">def long_time_task(name):</span><br><span class="line">    print(&#39;Run task %s (%s)...&#39; % (name, os.getpid()))</span><br><span class="line">    start &#x3D; time.time()</span><br><span class="line">    time.sleep(random.random() * 3)</span><br><span class="line">    end &#x3D; time.time()</span><br><span class="line">    print(&#39;Task %s runs %0.2f seconds.&#39; % (name, (end - start)))</span><br><span class="line"></span><br><span class="line">if __name__&#x3D;&#x3D;&#39;__main__&#39;:</span><br><span class="line">    print(&#39;Parent process %s.&#39; % os.getpid())</span><br><span class="line">    p &#x3D; Pool(4)                                         # 设置可以同时运行的进程个数，默认大小是CPU的核数</span><br><span class="line">    for i in range(5):</span><br><span class="line">        p.apply_async(long_time_task, args&#x3D;(i,))</span><br><span class="line">    print(&#39;Waiting for all subprocesses done...&#39;)</span><br><span class="line">    p.close()                                           # 调用join()之前必须先调用close()，调用close()之后就不能继续添加新的Process</span><br><span class="line">    p.join()                                            # 会等待所有子进程执行完毕</span><br><span class="line">    print(&#39;All subprocesses done.&#39;)</span><br></pre>
+
+<pre class="highlight"><span class="line">import subprocess             # subprocess模块可以非常方便地启动一个子进程，然后控制其输入和输出</span><br><span class="line"></span><br><span class="line">print(&#39;$ nslookup www.python.org&#39;)</span><br><span class="line">r &#x3D; subprocess.call([&#39;nslookup&#39;, &#39;www.python.org&#39;])</span><br><span class="line">print(&#39;Exit code:&#39;, r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import subprocess</span><br><span class="line"></span><br><span class="line">print(&#39;$ nslookup&#39;)</span><br><span class="line">p &#x3D; subprocess.Popen([&#39;nslookup&#39;], stdin&#x3D;subprocess.PIPE, stdout&#x3D;subprocess.PIPE, stderr&#x3D;subprocess.PIPE)</span><br><span class="line">output, err &#x3D; p.communicate(b&#39;set q&#x3D;mx\npython.org\nexit\n&#39;)</span><br><span class="line">print(output.decode(&#39;utf-8&#39;))     # 通过communicate()方法输入进程需要的内容</span><br><span class="line">print(&#39;Exit code:&#39;, p.returncode)</span><br></pre>
+
+<pre class="highlight"><span class="line">from multiprocessing import Process, Queue</span><br><span class="line">import os, time, random</span><br><span class="line"></span><br><span class="line"># 写数据进程执行的代码:</span><br><span class="line">def write(q):</span><br><span class="line">    print(&#39;Process to write: %s&#39; % os.getpid())</span><br><span class="line">    for value in [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;]:</span><br><span class="line">        print(&#39;Put %s to queue...&#39; % value)</span><br><span class="line">        q.put(value)</span><br><span class="line">        time.sleep(random.random())</span><br><span class="line"></span><br><span class="line"># 读数据进程执行的代码:</span><br><span class="line">def read(q):</span><br><span class="line">    print(&#39;Process to read: %s&#39; % os.getpid())</span><br><span class="line">    while True:</span><br><span class="line">        value &#x3D; q.get(True)</span><br><span class="line">        print(&#39;Get %s from queue.&#39; % value)</span><br><span class="line"></span><br><span class="line">if __name__&#x3D;&#x3D;&#39;__main__&#39;:</span><br><span class="line">    # 父进程创建Queue，并传给各个子进程：</span><br><span class="line">    q &#x3D; Queue()</span><br><span class="line">    pw &#x3D; Process(target&#x3D;write, args&#x3D;(q,))</span><br><span class="line">    pr &#x3D; Process(target&#x3D;read, args&#x3D;(q,))</span><br><span class="line">    </span><br><span class="line">    pw.start()        # 启动子进程pw，写入</span><br><span class="line">    pr.start()        # 启动子进程pr，读取</span><br><span class="line">    pw.join()         # 等待pw结束</span><br><span class="line">    pr.terminate()    # pr进程里是死循环，无法等待其结束，只能强行终止</span><br></pre>
+
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p><strong>线程</strong>：进程内的子任务称为线程（Thread），是最小的执行单元；如Word可以同时进行打字、拼写检查、打印等，<strong>一个进程至少有一个线程</strong></p>
+<pre class="highlight"><span class="line">import time, threading</span><br><span class="line"></span><br><span class="line"># 新线程执行的代码:</span><br><span class="line">def loop():              # 启动一个线程就是把一个函数传入并创建Thread实例</span><br><span class="line">    print(&#39;thread %s is running...&#39; % threading.current_thread().name)    # current_thread()，永远返回当前线程的实例</span><br><span class="line">    n &#x3D; 0</span><br><span class="line">    while n &lt; 5:</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">        print(&#39;thread %s &gt;&gt;&gt; %s&#39; % (threading.current_thread().name, n))</span><br><span class="line">        time.sleep(1)</span><br><span class="line">    print(&#39;thread %s ended.&#39; % threading.current_thread().name)</span><br><span class="line"></span><br><span class="line">print(&#39;thread %s is running...&#39; % threading.current_thread().name)        # 何进程默认就会启动一个线程，称为主线程；主线程可以启动新的线程</span><br><span class="line">t &#x3D; threading.Thread(target&#x3D;loop, name&#x3D;&#39;LoopThread&#39;)                      # 在创建时可以指定子线程的名字</span><br><span class="line">t.start()                # 调用start()开始执行</span><br><span class="line">t.join()</span><br><span class="line">print(&#39;thread %s ended.&#39; % threading.current_thread().name)</span><br></pre>
+
+<p><strong>ThreadLocal</strong>：用一个全局 dict 存放所有的Student对象，然后以 thread 自身作为 key 获得线程对应的Student对象；ThreadLocal 帮助自动做查找dict</p>
+<pre class="highlight"><span class="line">import threading</span><br><span class="line">    </span><br><span class="line"># 创建全局ThreadLocal对象:</span><br><span class="line">local_school &#x3D; threading.local()</span><br><span class="line"></span><br><span class="line">def process_student():</span><br><span class="line">    # 获取当前线程关联的student:</span><br><span class="line">    std &#x3D; local_school.student</span><br><span class="line">    print(&#39;Hello, %s (in %s)&#39; % (std, threading.current_thread().name))</span><br><span class="line"></span><br><span class="line">def process_thread(name):</span><br><span class="line">    # 绑定ThreadLocal的student:</span><br><span class="line">    local_school.student &#x3D; name</span><br><span class="line">    process_student()</span><br><span class="line"></span><br><span class="line">t1 &#x3D; threading.Thread(target&#x3D; process_thread, args&#x3D;(&#39;Alice&#39;,), name&#x3D;&#39;Thread-A&#39;)</span><br><span class="line">t2 &#x3D; threading.Thread(target&#x3D; process_thread, args&#x3D;(&#39;Bob&#39;,), name&#x3D;&#39;Thread-B&#39;)</span><br><span class="line">t1.start()</span><br><span class="line">t2.start()</span><br><span class="line">t1.join()</span><br><span class="line">t2.join()</span><br></pre>
+
+<p><strong>区别</strong></p>
 <ul>
-<li><strong>数据库与数据仓库</strong>：数据库与数据仓库的区别实际上是OLTP与OLAP的区别；数据库捕获业务数据，数据仓库分析历史数据</li>
+<li><p>多进程模式最大的优点就是稳定性高，因为一个子进程崩溃，不会影响主进程和其他子进程；（当然主进程崩溃会导致所有进程崩溃，但是Master进程只负责分配任务，崩溃概率低）；多进程模式的缺点是创建进程的代价大，在Unix/Linux系统下，用 fork 调用还行，在Windows下创建进程开销巨大；另外，操作系统能同时运行的进程数也有限；推荐使用多线程</p>
+</li>
+<li><p>多线程模式通常比多进程快（不明显）；由于所有线程共享进程的内存，所以任何一个线程挂掉都可能直接造成整个进程崩溃</p>
+</li>
 </ul>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/Difference/Database_DataWarehouse.png" alt="Database_DataWarehouse" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/Difference/Database_DataWarehouse.png" class="lozad post-image"></p>
-<ul>
-<li>联机事务处理OLTP（On-Line Transaction Processing）：也叫操作型处理或面向交易的处理系统，针对具体业务在数据库联机的日常操作，对少数记录进行增删改查等，用于业务处理</li>
-<li>联机分析处理OLAP（On-Line Analytical Processing）：也叫分析型处理，针对某些主题的历史数据进行分析，用于支持管理决策</li>
-</ul>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/Difference/OLAP_OLTP.png" alt="OLAP_OLTP" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/Difference/OLAP_OLTP.png" class="lozad post-image"></p>
-<p>数据库和数据仓库都是用来做数据存储和数据分析的</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="center">Hive</th>
-<th align="center">RDBMS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查询语言</td>
-<td align="center">HQL</td>
-<td align="center">SQL</td>
-</tr>
-<tr>
-<td>数据存储位置</td>
-<td align="center">HDFS</td>
-<td align="center">块设备或本地文件系统</td>
-</tr>
-<tr>
-<td>数据更新</td>
-<td align="center">不建议</td>
-<td align="center">经常修改</td>
-</tr>
-<tr>
-<td>索引</td>
-<td align="center">0.8以后加入位图索引</td>
-<td align="center">复杂的索引</td>
-</tr>
-<tr>
-<td>数据规模</td>
-<td align="center">非常大</td>
-<td align="center">较小</td>
-</tr>
-<tr>
-<td>执行</td>
-<td align="center">MapReduce</td>
-<td align="center">自己的执行引擎</td>
-</tr>
-<tr>
-<td>执行延迟</td>
-<td align="center">较高</td>
-<td align="center">低</td>
-</tr>
-<tr>
-<td>可扩展性</td>
-<td align="center">很好</td>
-<td align="center">扩展性非常有限</td>
-</tr>
-</tbody></table>
-<p><strong>MySQL、Oracle、SQLService的区别</strong>：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="center">MySQL</th>
-<th align="center">Oracle</th>
-<th align="center">SQLService</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>开源与否</td>
-<td align="center">开源免费</td>
-<td align="center">收费</td>
-<td align="center">收费</td>
-</tr>
-<tr>
-<td>使用系统</td>
-<td align="center">多系统</td>
-<td align="center">多系统</td>
-<td align="center">Windows</td>
-</tr>
-<tr>
-<td>体量</td>
-<td align="center">小</td>
-<td align="center">大</td>
-<td align="center">中</td>
-</tr>
-<tr>
-<td>并发</td>
-<td align="center">-</td>
-<td align="center">居中</td>
-<td align="center">支持大并发量、大访问量</td>
-</tr>
-<tr>
-<td>权限</td>
-<td align="center">登录可操作全部数据库</td>
-<td align="center">支持多用户不同权限进行操作</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td>分页</td>
-<td align="center">limit</td>
-<td align="center">row</td>
-<td align="center">top</td>
-</tr>
-<tr>
-<td>自增长</td>
-<td align="center">支持</td>
-<td align="center">不支持</td>
-<td align="center">支持</td>
-</tr>
-</tbody></table>
+<h1 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h1><p>异步IO：可以用单进程单线程模型来执行多任务（事件驱动模型）</p>
 
   </div>
   <div>
@@ -434,8 +346,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://alexedwardz.gitee.io/20210519/48941.html">
-            https://alexedwardz.gitee.io/20210519/48941.html
+            href="https://alexedwardz.gitee.io/20220624/891.html">
+            https://alexedwardz.gitee.io/20220624/891.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -445,29 +357,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/20210520/17570.html" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">PostgreSQL基础-指令 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/20210518/8210.html" 
+        href="/20220623/51064.html" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">MySQL进阶-查询优化 </div>
+            <div class="nav-title">Python基础-IO编程 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -521,7 +419,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B"><span class="toc-text">线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5IO"><span class="toc-text">异步IO</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -569,7 +467,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B"><span class="toc-text">线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5IO"><span class="toc-text">异步IO</span></a></li></ol>
       </div>
     </article>
   
@@ -775,7 +673,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B"><span class="toc-text">线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5IO"><span class="toc-text">异步IO</span></a></li></ol>
     </article>
   
   
