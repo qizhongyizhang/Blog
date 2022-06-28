@@ -49,7 +49,7 @@
         content="2021-07-07">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-24">
+        content="2022-06-28">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>195 字</span>
+      <span>336 字</span>
     
   </div>
   
@@ -313,6 +313,21 @@
 <li><p>下载地址：<a target="_blank" rel="noopener" href="https://www.python.org/downloads"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a></p>
 </li>
 <li><p>选择合适的安装包</p>
+</li>
+</ol>
+<h2 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h2><p><strong>virtualenv</strong>：为一个应用创建一套隔离的Python运行环境</p>
+<ol>
+<li><p>pip安装virtualenv：pip3 install virtualenv</p>
+</li>
+<li><p>创建目录：</p>
+<pre class="highlight"><span class="line">mkdir myproject</span><br><span class="line">cd myproject&#x2F;</span><br></pre></li>
+<li><p>创建一个独立的Python运行环境，命名为venv：virtualenv –no-site-packages venv  ；把系统Python复制一份到virtualenv的环境</p>
+</li>
+<li><p>进入该环境：source venv/bin/activate  ；virtualenv会修改相关环境变量，让命令 python 和 pip 均指向当前 virtualenv环境</p>
+</li>
+<li><p>安装第三方包：pip install jinja2  ；用 pip 安装的包都被安装到 venv 这个环境下，系统Python环境不受任何影响</p>
+</li>
+<li><p>退出venv环境：deactivate</p>
 </li>
 </ol>
 
@@ -421,7 +436,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -469,7 +484,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -684,7 +699,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
     </article>
   
   

@@ -18,12 +18,12 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>元数据管理-基础</title>
+  <title>元数据管理实践-Atlas</title>
   
     
       <meta 
         property="og:title" 
-        content="元数据管理-基础">
+        content="元数据管理实践-Atlas">
     
     
       <meta 
@@ -49,7 +49,7 @@
         content="2022-03-15">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-17">
+        content="2022-06-28">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -250,7 +250,7 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      元数据管理-基础
+      元数据管理实践-Atlas
     </h1>
   </header>
   <div class="post-meta post-show-meta">
@@ -273,7 +273,7 @@
     
     
       <span class="dot"></span>
-      <span>892 字</span>
+      <span>893 字</span>
     
   </div>
   
@@ -321,8 +321,7 @@
     <p>写在前面：本文主要记录元数据管理实践-Atlas的相关内容</p>
 <span id="more"></span>
 
-<h1 id="Atlas"><a href="#Atlas" class="headerlink" title="Atlas"></a>Atlas</h1><p><strong>Atlas</strong>：是 hadoop 的数据治理和元数据框架，提供包括数据分类、集中策略引擎、数据血缘、安全和生命周期管理的元数据治理核心能力</p>
-<p><a target="_blank" rel="noopener" href="http://atlas.apache.org/">官网</a></p>
+<h1 id="Atlas"><a href="#Atlas" class="headerlink" title="Atlas"></a>Atlas</h1><p><strong>Atlas</strong>：是 hadoop 的数据治理和元数据框架，提供包括数据分类、集中策略引擎、数据血缘、安全和生命周期管理的元数据治理核心能力，<a target="_blank" rel="noopener" href="http://atlas.apache.org/"><font face = "微软雅黑" color = 1E90FF size = 5> <strong>Atlas官网</strong> </font></a></p>
 <h2 id="1-架构"><a href="#1-架构" class="headerlink" title="1. 架构"></a>1. 架构</h2><h3 id="1-1-核心组件-Core"><a href="#1-1-核心组件-Core" class="headerlink" title="1.1 核心组件-Core"></a>1.1 核心组件-Core</h3><ul>
 <li><strong>Type System</strong>：允许用户定义和管理类型和实体，对所有的元数据对象（Hive表）进行建模，并表示为实体</li>
 <li><strong>Ingest/Export</strong>：Ingest 组件允许将元数据添加到 Atlas 中，Export 暴露由 Atlas 检测到的元数据更改，作为事件引发，消费者通过事件响应</li>

@@ -49,7 +49,7 @@
         content="2021-04-08">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-17">
+        content="2022-06-28">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>3.3k 字</span>
+      <span>3.5k 字</span>
     
   </div>
   
@@ -447,9 +447,9 @@
 <h2 id="仓库权限类"><a href="#仓库权限类" class="headerlink" title="仓库权限类"></a>仓库权限类</h2><p>问题1：远程关联已存在：remote origin already exists</p>
 <ol>
 <li>先删除远程 Git 仓库：git remote rm origin</li>
-<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#101;&#101;&#x2e;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#101;&#101;&#x2e;&#99;&#x6f;&#109;</a>:alexedwardz/resource.git</li>
+<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#103;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#101;&#x65;&#46;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#101;&#x65;&#46;&#x63;&#x6f;&#109;</a>:alexedwardz/resource.git</li>
 </ol>
-<h2 id="日常操作类"><a href="#日常操作类" class="headerlink" title="日常操作类"></a>日常操作类</h2><p>问题1：拉取前先提交更新，或者隐藏。 Please commit your changes or stash them before you merge.</p>
+<h2 id="日常操作类"><a href="#日常操作类" class="headerlink" title="日常操作类"></a>日常操作类</h2><p>问题1：Please commit your changes or stash them before you merge(拉取前先提交更新，或者隐藏). 本地分支和远程文件不一致，pull 时出现冲突</p>
 <ol>
 <li>提交</li>
 </ol>
@@ -464,6 +464,14 @@
 <li>覆盖本地修改</li>
 </ol>
 <pre class="highlight"><span class="line">git reset --hard</span><br><span class="line">git pull</span><br></pre>
+
+<p>问题2：The file will have its original line endings in your working directory(在您的工作目录中，该文件将具有其原始行结束符). windows commit代码时git会把CRLF转LF，update代码时LF换CRLF，通过修改配置禁用该功能，或者清除缓存</p>
+<ol>
+<li><p>修改配置禁用该功能</p>
+<pre class="highlight"><span class="line">git config --global core.autocrlf false</span><br><span class="line"></span><br><span class="line"># git的家目录下面的config文件修改也可以：</span><br><span class="line">[core]</span><br><span class="line">    repositoryformatversion &#x3D; 0</span><br><span class="line">    filemode &#x3D; false</span><br><span class="line">    bare &#x3D; false</span><br><span class="line">    logallrefupdates &#x3D; true</span><br><span class="line">    symlinks &#x3D; false</span><br><span class="line">    ignorecase &#x3D; true</span><br><span class="line">    longpaths &#x3D; true</span><br><span class="line">    autocrlf &#x3D; false            # 改为false</span><br></pre></li>
+<li><p>清除缓存</p>
+<pre class="highlight"><span class="line">git rm -r --cached .    # 注意 这里有 &quot;.&quot; ,  &quot;. &quot; 代表当前目录</span><br><span class="line"></span><br><span class="line"># 或者将.git隐藏文件夹删除，会丢失一切git相关记录</span><br></pre></li>
+</ol>
 
   </div>
   <div>
