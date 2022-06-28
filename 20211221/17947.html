@@ -302,7 +302,26 @@
 <li>模块名要遵循Python变量命名规范，不要使用中文、特殊字符</li>
 <li>模块名不要和系统模块名冲突，最好先查看系统是否已存在该模块，检查方法是在Python交互环境执行 <strong>import module_name</strong>，若成功则说明系统存在此模块</li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><strong>pip安装</strong>：在Python中，安装第三方模块，通过包管理工具pip完成<br><a target="_blank" rel="noopener" href="https://pypi.org/"><font face = "微软雅黑" color = 1E90FF size = 5> 第三方库网址 </font></a></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><strong>使用</strong>：import mod_name                   # 导入 mod_name 模块</p>
+<h2 id="模块搜索路径"><a href="#模块搜索路径" class="headerlink" title="模块搜索路径"></a>模块搜索路径</h2><p><strong>模块搜索路径</strong>：导入一个模块时，Python会在指定的路径下搜索对应的.py文件，如果找不到，就会报错；默认情况下，Python解释器会搜索当前目录、所有已安装的内置模块和第三方模块，搜索路径存放在<code>sys</code>模块的<code>path</code>变量中</p>
+<p><strong>新增搜索目录</strong></p>
+<blockquote>
+<ul>
+<li>直接修改 sys.path<pre class="highlight"><span class="line">import sys</span><br><span class="line">sys.path.append(&#39;&#x2F;xxx&#x2F;xxx&#x2F;...&#39;)</span><br></pre></li>
+<li>设置环境变量 PYTHONPATH</li>
+</ul>
+</blockquote>
+<h1 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h1><h2 id="数据处理类"><a href="#数据处理类" class="headerlink" title="数据处理类"></a>数据处理类</h2><h3 id="re"><a href="#re" class="headerlink" title="re"></a>re</h3><p><a href="https://alexedwardz.gitee.io/20220424/24494.html"><font face = "微软雅黑" color = 1E90FF size = 5> <strong>re</strong> </font></a>：通过正则表达式来匹配处理字符串</p>
+<h3 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h3><p><a href="https://alexedwardz.gitee.io/20220424/24494.html"><font face = "微软雅黑" color = 1E90FF size = 5> <strong>datetime</strong> </font></a>：处理日期和时间的标准库</p>
+<h3 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h3><p><strong>NumPy</strong> 是 Python 科学计算的基础作为在算法和库之间传递数据的容器；对于数值型数据，NumPy数组在存储和处理数据时要⽐内置的Python数据结构⾼效</p>
+<h4 id="功能点"><a href="#功能点" class="headerlink" title="功能点"></a>功能点</h4><ul>
+<li>快速⾼效的多维数组对象ndarray；</li>
+<li>⽤于对数组执⾏元素级计算以及直接对数组执⾏数学运算的函数；</li>
+<li>⽤于读写硬盘上基于数组的数据集的⼯具；</li>
+<li>线性代数运算、傅⾥叶变换，以及随机数⽣成；<br>成熟的C API， ⽤于Python插件和原⽣C、C++、Fortran代码访问NumPy的数据结构和计算⼯具</li>
+</ul>
+<h3 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h3><p><strong>pandas</strong>：提供快速便捷处理结构化数据的⼤量数据结构和函数，s兼具NumPy⾼性能的数组计算功能以及电⼦表格和关系型数据库（如SQL）灵活的数据处理功能，提供了复杂精细的索引功能，能便捷地完成重塑、切⽚和切块、聚合以及选<br>取数据⼦集等操作</p>
+<h3 id="math"><a href="#math" class="headerlink" title="math"></a>math</h3><h1 id="安装第三方模块"><a href="#安装第三方模块" class="headerlink" title="安装第三方模块"></a>安装第三方模块</h1><p><strong>pip安装</strong>：在Python中，安装第三方模块，通过包管理工具pip完成<br><a target="_blank" rel="noopener" href="https://pypi.org/"><font face = "微软雅黑" color = 1E90FF size = 5> 第三方库网址 </font></a></p>
 <pre class="highlight"><span class="line">pip install mod_name</span><br><span class="line">pip uninsatll mod_name</span><br><span class="line">pip list：列出当前系统已安装的第三方库</span><br><span class="line">pip show mod_name</span><br><span class="line">pip download mod_name</span><br><span class="line">pip search mod_name</span><br></pre>
 
 <p><strong>修改pip镜像源下载地址</strong></p>
@@ -322,29 +341,13 @@
 <li>更新：pip install –upgrade pip</li>
 <li>启动：jupyter notebook</li>
 <li>使用<ul>
-<li>修改默认启动路径：<pre class="highlight"><span class="line">jupyter notebook --generate-config</span><br><span class="line">c.NotebookApp.notebook_dir</span><br></pre></li>
+<li>修改默认启动路径：</li>
 </ul>
 </li>
 </ul>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><strong>使用</strong>：import mod_name                   # 导入 mod_name 模块</p>
-<h2 id="模块搜索路径"><a href="#模块搜索路径" class="headerlink" title="模块搜索路径"></a>模块搜索路径</h2><p><strong>模块搜索路径</strong>：导入一个模块时，Python会在指定的路径下搜索对应的.py文件，如果找不到，就会报错；默认情况下，Python解释器会搜索当前目录、所有已安装的内置模块和第三方模块，搜索路径存放在<code>sys</code>模块的<code>path</code>变量中</p>
-<p><strong>新增搜索目录</strong></p>
-<blockquote>
-<ul>
-<li>直接修改 sys.path<pre class="highlight"><span class="line">import sys</span><br><span class="line">sys.path.append(&#39;&#x2F;xxx&#x2F;xxx&#x2F;...&#39;)</span><br></pre></li>
-<li>设置环境变量 PYTHONPATH</li>
-</ul>
-</blockquote>
-<h2 id="re"><a href="#re" class="headerlink" title="re"></a>re</h2><p><strong>re</strong>：通过正则表达式来匹配处理字符串</p>
-<h2 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h2><p><strong>NumPy</strong> 是 Python 科学计算的基础包，作为在算法和库之间传递数据的容器；对于数值型数据，NumPy数组在存储和处理数据时要⽐内置的Python数据结构⾼效</p>
-<h3 id="功能点"><a href="#功能点" class="headerlink" title="功能点"></a>功能点</h3><ul>
-<li>快速⾼效的多维数组对象ndarray；</li>
-<li>⽤于对数组执⾏元素级计算以及直接对数组执⾏数学运算的函数；</li>
-<li>⽤于读写硬盘上基于数组的数据集的⼯具；</li>
-<li>线性代数运算、傅⾥叶变换，以及随机数⽣成；<br>成熟的C API， ⽤于Python插件和原⽣C、C++、Fortran代码访问NumPy的数据结构和计算⼯具</li>
-</ul>
-<h2 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h2><p><strong>pandas</strong>：提供快速便捷处理结构化数据的⼤量数据结构和函数，s兼具NumPy⾼性能的数组计算功能以及电⼦表格和关系型数据库（如SQL）灵活的数据处理功能，提供了复杂精细的索引功能，能便捷地完成重塑、切⽚和切块、聚合以及选<br>取数据⼦集等操作</p>
-<h2 id="math"><a href="#math" class="headerlink" title="math"></a>math</h2>
+<pre class="highlight"><span class="line">jupyter notebook --generate-config</span><br><span class="line">c.NotebookApp.notebook_dir</span><br></pre>
+
+
   </div>
   <div>
     
@@ -450,7 +453,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B1%BB"><span class="toc-text">数据处理类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -469,7 +472,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>91</span>
+    <span>92</span>
     <span>文章</span>
   </a>
   <a 
@@ -498,7 +501,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B1%BB"><span class="toc-text">数据处理类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol>
       </div>
     </article>
   
@@ -533,15 +536,15 @@
       </a>
     
       <a 
-        href="/tags/MySQL/" 
-        title="MySQL">
-        <div class="tags-list-item">MySQL</div>
-      </a>
-    
-      <a 
         href="/tags/Python/" 
         title="Python">
         <div class="tags-list-item">Python</div>
+      </a>
+    
+      <a 
+        href="/tags/MySQL/" 
+        title="MySQL">
+        <div class="tags-list-item">MySQL</div>
       </a>
     
       <a 
@@ -690,7 +693,7 @@
       <a href="/categories/%E6%A8%A1%E5%9D%97/">
         <div class="categories-list-item">
           模块
-          <span class="categories-list-item-badge">1</span>
+          <span class="categories-list-item-badge">2</span>
         </div>
       </a>
     
@@ -713,7 +716,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">模块搜索路径</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B1%BB"><span class="toc-text">数据处理类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#re"><span class="toc-text">re</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NumPy"><span class="toc-text">NumPy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-text">功能点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math"><span class="toc-text">math</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol>
     </article>
   
   
@@ -726,6 +729,11 @@
     </i>最近文章
   </div>
   <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-06-27</div>
+        <a href="/20220627/36392.html"><div class="recent-posts-item-content">Python模块-datetime</div></a>
+      </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-06-24</div>
@@ -750,11 +758,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-24</div>
         <a href="/20220424/24494.html"><div class="recent-posts-item-content">Python模块-re</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-16</div>
-        <a href="/20220316/36719.html"><div class="recent-posts-item-content">数据安全管理实践-Ranger</div></a>
       </div>
     
   </div>

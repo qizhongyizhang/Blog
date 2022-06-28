@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>PyCharm-安装使用</title>
+  <title>Python模块-datetime</title>
   
     
       <meta 
         property="og:title" 
-        content="PyCharm-安装使用">
+        content="Python模块-datetime">
     
     
       <meta 
         property="og:url" 
-        content="https://alexedwardz.gitee.io/20210711/18374.html">
+        content="https://alexedwardz.gitee.io/20220627/36392.html">
     
     
       <meta 
@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="&lt;p&gt;写在前面：本文介绍Python的实用工具-PyCharm安装使用的相关知识&lt;/p&gt;">
+        content="&lt;p&gt;写在前面：本文主要记录Python模块-datetime-的基础知识&lt;/p&gt;">
     
     
       <meta 
@@ -46,18 +46,14 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-07-11">
+        content="2022-06-27">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-06-28">
       <meta 
         property="og:article:author" 
         content="戚中一">
       
-        
-          <meta 
-            property="og:article:tag" 
-            content="Tools">
         
           <meta 
             property="og:article:tag" 
@@ -246,30 +242,30 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      PyCharm-安装使用
+      Python模块-datetime
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-07-11T15:37:49.000Z">
+    <time datetime="2022-06-27T08:54:34.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-07-11</span>
+      <span>2022-06-27</span>
     </time>
     
       <span class="dot"></span>
       
         <a 
-          href="/categories/%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" 
+          href="/categories/%E6%A8%A1%E5%9D%97/" 
           class="post-meta-link">
-          安装使用
+          模块
         </a>
       
     
     
       <span class="dot"></span>
-      <span>165 字</span>
+      <span>695 字</span>
     
   </div>
   
@@ -284,15 +280,6 @@
         
           
           <a 
-            href="/tags/Tools/" 
-            class="post-meta-link">
-            Tools
-          </a>
-        
-          
-            <span class="dot"></span>
-          
-          <a 
             href="/tags/Python/" 
             class="post-meta-link">
             Python
@@ -305,23 +292,27 @@
   <div 
     id="section" 
     class="post-content">
-    <p>写在前面：本文介绍Python的实用工具-PyCharm安装使用的相关知识</p>
+    <p>写在前面：本文主要记录Python模块-datetime-的基础知识</p>
 <span id="more"></span>
 
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li>下载地址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a></li>
-<li>选择对应的系统、位数和版本，点击下载，双击下载好的exe文件，开始安装</li>
-<li>点击Next；</li>
-<li>选择安装路径；</li>
-<li>选择64位launcher，加入到环境变量（可选），选择.py，点击Next；</li>
-<li>默认选择，开始安装，时间较久</li>
-</ol>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><strong>忽略代码风格警告</strong></p>
-<ul>
-<li>File - Settings -&gt; Editor -&gt; Inspections -&gt; PEP8 coding style violation(python下)，在下角的Ignore errors里添加需要忽略的警告信息ID（<a target="_blank" rel="noopener" href="http://pep8.readthedocs.io/en/latest/intro.html#configuration">相关警告ID</a>）</li>
-<li>将鼠标移到提示的地方，按 Alt + Enter，选择忽略（Ignore）<br><img src="https://alexedwardz.gitee.io/images/Tools/Python/PEP8_Code_Warning.png" alt="PEP8_Code_Warning" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Tools/Python/PEP8_Code_Warning.png" class="lozad post-image"></li>
-</ul>
+<h1 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h1><p><strong>datetime</strong>：处理日期和时间的标准库</p>
+<pre class="highlight"><span class="line">from datetime import datetime   # datetime模块还包含datetime类，通过from datetime import datetime导入datetime这个类；如果仅导入import datetime，则必须引用全名datetime.datetime</span><br><span class="line"></span><br><span class="line">now &#x3D; datetime.now()    # 获取当前datetime，具体到秒后六位</span><br><span class="line">print(now)</span><br><span class="line">print(type(now))</span><br></pre>
 
+<pre class="highlight"><span class="line"># 获取指定日期和时间</span><br><span class="line">from datetime import datetime</span><br><span class="line">dt &#x3D; datetime(2015, 4, 19, 12, 20)   # 用指定日期时间创建datetime</span><br><span class="line">print(dt)</span><br></pre>
+
+<p><strong>timestamp</strong>：1970年1月1日 00:00:00 UTC+00:00时区的时刻称为epoch time，记为0（1970年以前的时间timestamp为负数），当前时间就是相对于epoch time的秒数，称为timestamp；用timestamp数字表示时间</p>
+<pre class="highlight"><span class="line">from datetime import datetime</span><br><span class="line"></span><br><span class="line">datetime_now &#x3D; datetime.now()</span><br><span class="line">timestamp_now &#x3D; datetime_now.timestamp()                        # 把datetime转换为timestamp，timestamp是一个浮点数，整数位表示秒</span><br><span class="line">print(timestamp_now)</span><br><span class="line">datetime_now &#x3D; datetime.fromtimestamp(timestamp_now)            # 将timestamp转换成本地时间（北京时区、东8区，比标准时区时间早8小时）</span><br><span class="line">datetime_now_UTC &#x3D; datetime.utcfromtimestamp(timestamp_now)     # 将timestamp转换成UTC时间（格林威治标准时区时间）</span><br><span class="line">print(datetime_now)</span><br><span class="line">print(datetime_now_UTC)</span><br></pre>
+
+<p><strong>str转换</strong>：通常用户输入的日期和时间是字符串，需要 通过 <strong>datetime.strptime()</strong> 把str转换为datetime，再进行处理</p>
+<pre class="highlight"><span class="line">from datetime import datetime</span><br><span class="line"></span><br><span class="line">cday &#x3D; datetime.strptime(&#39;2022-06-27 18:19:59&#39;, &#39;%Y-%m-%d %H:%M:%S&#39;)      # 把str转换为datetime</span><br><span class="line">print(cday)</span><br><span class="line"></span><br><span class="line">now &#x3D; datetime.now()</span><br><span class="line">print(now.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;))                                  # 把datetime转换为str</span><br></pre>
+
+<p><strong>datetime加减</strong>：导入timedelta类，直接用+和-运算符</p>
+<pre class="highlight"><span class="line">from datetime import datetime, timedelta</span><br><span class="line"></span><br><span class="line">now &#x3D; datetime.now()</span><br><span class="line">print(now)</span><br><span class="line">print(now + timedelta(hours&#x3D;10))</span><br><span class="line">print(now - timedelta(days&#x3D;1))</span><br><span class="line">print(now + timedelta(days&#x3D;2, hours&#x3D;12))</span><br></pre>
+
+<p><strong>时区转换</strong></p>
+<pre class="highlight"><span class="line">from datetime import datetime, timedelta, timezone</span><br><span class="line"></span><br><span class="line">tz_utc_8 &#x3D; timezone(timedelta(hours&#x3D;8))              # 创建时区UTC+8:00</span><br><span class="line">now &#x3D; datetime.now()</span><br><span class="line">print(now)</span><br><span class="line">dt &#x3D; now.replace(tzinfo&#x3D;tz_utc_8)                    # 强制设置为UTC+8:00，在时间后显示时区</span><br><span class="line">print(dt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">utc_dt &#x3D; datetime.utcnow().replace(tzinfo&#x3D;timezone.utc)        # 拿到UTC时间，并强制设置时区为UTC+0:00</span><br><span class="line">print(utc_dt)</span><br><span class="line">bj_dt &#x3D; utc_dt.astimezone(timezone(timedelta(hours&#x3D;8)))        # astimezone()将转换时区为北京时间；通过astimezone()方法，可以转换到任意时区</span><br><span class="line">print(bj_dt)</span><br><span class="line">tokyo_dt &#x3D; utc_dt.astimezone(timezone(timedelta(hours&#x3D;9)))     # astimezone()将转换时区为东京时间</span><br><span class="line">print(tokyo_dt)</span><br><span class="line">bj_dt2 &#x3D; tokyo_dt.astimezone(timezone(timedelta(hours&#x3D;8)))     # astimezone()将tokyo_dt转换时区为北京时间</span><br><span class="line">print(bj_dt2)</span><br></pre>
+
+<pre class="highlight"><span class="line"># 获取用户输入的日期和时间，以及一个时区信息，请编写一个函数将其转换为timestamp</span><br><span class="line">import re</span><br><span class="line">from datetime import datetime, timezone, timedelta</span><br><span class="line">def to_timestamp(dt_str, tz_str):</span><br><span class="line">    tz_timezone &#x3D; int(re.split(r&#39;[\+\:]+&#39;, tz_str)[1])              # 获取时区值</span><br><span class="line">    dt_datetime &#x3D; datetime.strptime(dt_str, &#39;%Y-%m-%d %H:%M:%S&#39;)    # 将字符串转换为datetime类型</span><br><span class="line">    dt_datetime_UTC &#x3D; dt_datetime.replace(tzinfo&#x3D;timezone(timedelta(hours&#x3D;tz_timezone)))       # 转换为UTC时间</span><br><span class="line">    dt_timestamp &#x3D; dt_datetime_UTC.timestamp()                      # 转换为timestamp</span><br><span class="line">    return dt_timestamp</span><br><span class="line"></span><br><span class="line">dt_str, tz_str &#x3D; input(&#39;Please input datetime and timezone: &#39;)</span><br><span class="line"># dt_str, tz_str &#x3D; &#39;2022-06-28 09:38:40&#39;, &#39;UTC+8:00&#39;    # 1656380320.0</span><br><span class="line"></span><br><span class="line">dt_result &#x3D; to_timestamp(dt_str, tz_str)</span><br><span class="line">print(dt_result)</span><br></pre>
   </div>
   <div>
     
@@ -340,8 +331,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://alexedwardz.gitee.io/20210711/18374.html">
-            https://alexedwardz.gitee.io/20210711/18374.html
+            href="https://alexedwardz.gitee.io/20220627/36392.html">
+            https://alexedwardz.gitee.io/20220627/36392.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -351,29 +342,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/20210817/16965.html" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">数据管理-基础 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/20210710/9972.html" 
+        href="/20220624/46563.html" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">Anaconda-安装使用 </div>
+            <div class="nav-title">正则表达式 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -427,7 +404,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -475,7 +452,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li></ol>
       </div>
     </article>
   
@@ -690,7 +667,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li></ol>
     </article>
   
   
