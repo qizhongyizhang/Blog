@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://alexedwardz.gitee.io/images/logo.jpg">
-  <title>数据集成和互操作-基础</title>
+  <title>Python模块-colllections</title>
   
     
       <meta 
         property="og:title" 
-        content="数据集成和互操作-基础">
+        content="Python模块-colllections">
     
     
       <meta 
         property="og:url" 
-        content="https://alexedwardz.gitee.io/20210823/11121.html">
+        content="https://alexedwardz.gitee.io/20220629/1075.html">
     
     
       <meta 
@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="&lt;p&gt;写在前面：本文主要介绍数据集成和互操作相关的基础内容&lt;/p&gt;">
+        content="&lt;p&gt;写在前面：本文主要记录Python模块-colllections-的基础知识&lt;/p&gt;">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-08-23">
+        content="2022-06-29">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-06-29">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -57,11 +57,7 @@
         
           <meta 
             property="og:article:tag" 
-            content="数据管理">
-        
-          <meta 
-            property="og:article:tag" 
-            content="数据治理">
+            content="Python">
         
       
     
@@ -246,30 +242,30 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      数据集成和互操作-基础
+      Python模块-colllections
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-08-23T13:21:19.000Z">
+    <time datetime="2022-06-29T12:45:12.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-08-23</span>
+      <span>2022-06-29</span>
     </time>
     
       <span class="dot"></span>
       
         <a 
-          href="/categories/%E5%9F%BA%E7%A1%80/" 
+          href="/categories/%E6%A8%A1%E5%9D%97/" 
           class="post-meta-link">
-          基础
+          模块
         </a>
       
     
     
       <span class="dot"></span>
-      <span>1.9k 字</span>
+      <span>785 字</span>
     
   </div>
   
@@ -284,18 +280,9 @@
         
           
           <a 
-            href="/tags/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" 
+            href="/tags/Python/" 
             class="post-meta-link">
-            数据管理
-          </a>
-        
-          
-            <span class="dot"></span>
-          
-          <a 
-            href="/tags/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/" 
-            class="post-meta-link">
-            数据治理
+            Python
           </a>
         
       </div>
@@ -305,81 +292,27 @@
   <div 
     id="section" 
     class="post-content">
-    <p>写在前面：本文主要介绍数据集成和互操作相关的基础内容</p>
+    <p>写在前面：本文主要记录Python模块-colllections-的基础知识</p>
 <span id="more"></span>
 
-<h1 id="数据集成和互操作"><a href="#数据集成和互操作" class="headerlink" title="数据集成和互操作"></a>数据集成和互操作</h1><p><strong>数据集成和互操作</strong>：描述了数据在不同数据存储、应用程序和组织三者内部和之间进行移动和整合的相关过程，数据集成是将数据整合成，核心是ETL操作</p>
-<h2 id="业务目标"><a href="#业务目标" class="headerlink" title="业务目标"></a>业务目标</h2><blockquote>
-<p>及时以数据消费者所需的格式提供数据<br>将数据物理地或虚拟地合并到数据中心<br>通过开发共享模型和接口来降低管理解决方案的成本和复杂度<br>识别有意义的事件，自动触发警报并采取行动<br>支持商务智能、数据分析、主数据管理以及运营效率的提升</p>
-</blockquote>
-<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
-<p>采用企业视角通过迭代和增量交付确保未来的可扩展性设计<br>平衡本地数据需求与企业需求<br>确保数据集成和互操作设计和活动的可靠性</p>
-</blockquote>
-<h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><blockquote>
-<p>数据迁移和转换<br>数据整合到数据中心或数据集市<br>将供应商的软件包集成到组织的应用系统框架中<br>在不同应用程序或组织之间数据共享<br>跨数据存储库和数据中心分发数据<br>数据归档<br>数据接口管理<br>获取接受外部数据<br>结构化和非结构化数据集成<br>提供运营智能化和管理决策支持</p>
-</blockquote>
-<h2 id="ETL"><a href="#ETL" class="headerlink" title="ETL"></a>ETL</h2><p>ETL：将数据通过Extract（抽取）、Transform（转换）、Load（加载）的过程从源系统转移到目标系统，结合实际情况支持ELT<br><strong>抽取</strong>：从源数据中选择所需的数据进行提取<br><strong>转换</strong>：让选定的数据库与目标数据库结构相融</p>
-<blockquote>
-<p>格式变化：如从EBCDIC到ASCLL的格式转换<br>结构变化：从非规范化到规范化的记录<br>语义变化：保持语义的一致性表达，如代码变解释<br>消除重复：在满足业务需求的前提下，删除重复键值或记录<br>重新排序：在满足业务需求的前提下，改变数据元素或记录顺序以适应已定义的模式</p>
-</blockquote>
-<p><strong>加载</strong>：在目标系统中物理存储或呈现转换结果<br><strong>映射</strong>：建立源结构到目标结构的查找矩阵，明确需求源数据、抽取转换规则和使用目标数据</p>
-<h2 id="交互模型"><a href="#交互模型" class="headerlink" title="交互模型"></a>交互模型</h2><ul>
-<li><strong>点到点</strong>：适用于小组系统模型，系统增加时，带来的风险如下</li>
-</ul>
-<blockquote>
-<p>影响处理：操作性系统中提供数据的工作量可能会影响交易处理<br>管理接口：管理系统互联接口的工作量巨大<br>潜在不一致：当多个系统需要不同的版本或数据格式时，会由于设计问题导致接口接受的数据与提供的数据不一致</p>
-</blockquote>
-<ul>
-<li><strong>中心辐射型</strong>：将共享数据整合到应用程序都偶可以使用的中央数据中心</li>
-<li><strong>发布与订阅</strong>数据订阅系统订阅数据发布系统，数据发布系统会自动推送更新数据到数据订阅系统</li>
-</ul>
-<h2 id="数据集成解决"><a href="#数据集成解决" class="headerlink" title="数据集成解决"></a>数据集成解决</h2><h3 id="集成规划"><a href="#集成规划" class="headerlink" title="集成规划"></a>集成规划</h3><ol>
-<li><strong>定义数据继承和生命周期需求</strong>：涉及理解组织的业务目标，以及实现这些目标需要的数据和建议的技术方案，包括与业务数据相关的法律法规</li>
-<li><strong>进行数据探索</strong>：确定数据集成工作确定潜在的数据来源和数据在组织中的流动信息</li>
-<li><strong>记录数据血缘</strong>：包括组织获取或创建数据的方式，在组织中移动变化轨迹和用于分析、决策或事件触发的方式</li>
-<li><strong>剖析数据</strong>：理解数据的内容和结构</li>
-</ol>
-<blockquote>
-<p>数据结构中定义的数据格式和从实际数据中推断出的格式<br>数据的数量，包括null值、空或默认数据的级别<br>数据值以及其与定义的有效值集合的紧密联系<br>数据及内部的模式和关系，如相关字段和基数规则<br>与其他数据集的关系</p>
-</blockquote>
-<ol start="5">
-<li><strong>收集业务规则</strong>：用于定义或约束业务处理，业务规则分为专业术语定义、相互关联的术语事实、约束或行为断言以及派生</li>
-</ol>
-<blockquote>
-<p>评估潜在的源数据集和目标数据集的数据<br>管理组织中的数据流<br>监控组织中的操作数据<br>指示何时自动触发事件和警报</p>
-</blockquote>
-<h3 id="设计解决方案"><a href="#设计解决方案" class="headerlink" title="设计解决方案"></a>设计解决方案</h3><ol>
-<li><strong>设计解决方案</strong>：基于企业和单个解决方案两个层面统筹考虑</li>
-</ol>
-<blockquote>
-<p>选择交互模式：选择点到点、中心辐射型或发布订阅交互模式，尽可能重用系统，减少开发<br>设计数据服务或交换模式：创建或重用现有的集成流来移动数据</p>
-</blockquote>
-<ol start="2">
-<li><strong>建模数据中心、接口、消息、数据服务</strong>：对数据集成和互操作中所需的数据结构、数据持久化数据结构、临时用于移动或转换的数据结构进行建模</li>
-<li><strong>映射数据源到目标</strong>：解决源结构到目标结构的数据转换</li>
-</ol>
-<blockquote>
-<p>指明源数据和目标数据的技术格式<br>指明源数据和目标数据之间所有中间暂存点所需的转换<br>描述最终或中间目标数据存储区中每个属性的填充方式<br>描述是否需要对数据值进行转换，如通过在表示适当目标值的表中查找源值<br>描述需要进行的计算类型</p>
-</blockquote>
-<ol start="4">
-<li><strong>设计数据编排</strong>：数据流程编排是从开始到结束的数据流模式，包括完成转换、事务所需的所有中间步骤</li>
-</ol>
-<h3 id="开发数据集成"><a href="#开发数据集成" class="headerlink" title="开发数据集成"></a>开发数据集成</h3><ol>
-<li><strong>开发数据服务</strong>：开发服务来获取、转换和交付指定的数据，并且匹配所选的交互模型</li>
-<li><strong>开发数据流编排</strong>：对集成或ETL数据流通常会采用专用工具以特有的方式进行开发，批量数据流通常在一个调度器（企业标准调度器）中开发，以管理执行已开发的数据集成组建的顺序、频率和依赖关系，互操作性要求开发数据存储之间的映射或协调点</li>
-<li><strong>制定数据迁移方法</strong>：数据迁移需要将数据转换为接收应用程序的格式，数据迁移一般出现在上线新程序、应用程序退役或合并时</li>
-<li><strong>制定发布方式</strong>：创建和维护关键数据提供给其他系统制度</li>
-<li><strong>开发复杂事件处理流</strong></li>
-</ol>
-<blockquote>
-<p>准备有关预测模型的个人、组织、产品或市场和迁移前的历史数据<br>处理实时数据流，充分填充预测模型、识别有意义的事件<br>根据预测执行触发的动作</p>
-</blockquote>
-<ol start="6">
-<li><strong>维护数据集成和互操作元数据</strong></li>
-</ol>
-<h2 id="度量指标"><a href="#度量指标" class="headerlink" title="度量指标"></a>度量指标</h2><blockquote>
-<p>数据可用性：请求数据的可获得性<br>数据量和速度：包括传送和转换的数据量、分析数据量、传送速度、数据更新与可用性之间的时延、事件触发动作之间的时延、新数据元的可用时间<br>解决方案成本和复杂度：包括及解决方案开发和管理成本、获取新数据的便利性、解决和运营的复杂度、使用数据集成方案的系统数量</p>
-</blockquote>
+<h1 id="colllections"><a href="#colllections" class="headerlink" title="colllections"></a>colllections</h1><p><strong>colllections</strong>：内建的一个集合模块，提供了许多有用的集合类</p>
+<h2 id="namedtuple"><a href="#namedtuple" class="headerlink" title="namedtuple"></a>namedtuple</h2><p><strong>namedtuple</strong>：用来创建一个自定义的tuple对象，规定tuple元素的个数，可以用属性来引用tuple的某个元素；具备tuple的不变性，又可以根据属性来引用</p>
+<pre class="highlight"><span class="line">from collections import namedtuple</span><br><span class="line">Point &#x3D; namedtuple(&#39;Point&#39;, [&#39;x&#39;, &#39;y&#39;])    # namedtuple(&#39;名称&#39;, [属性list]) </span><br><span class="line">p &#x3D; Point(1, 2)    # 显示二维坐标</span><br><span class="line">print(p.x, p.y)</span><br><span class="line"></span><br><span class="line"># Circle &#x3D; namedtuple(&#39;Circle&#39;, [&#39;x&#39;, &#39;y&#39;, &#39;r&#39;])     # 定义一个圆</span><br></pre>
+
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p><strong>deque</strong>：实现高效插入和删除操作的双向列表，适合用于队列和栈，解决线性存储 list 数据量大时插入和删除效率低问题</p>
+<pre class="highlight"><span class="line">from collections import deque</span><br><span class="line">queue &#x3D; deque([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span><br><span class="line">queue.append(&#39;x&#39;)               # 从列表最后（右边）新增</span><br><span class="line">queue.appendleft(&#39;y&#39;)           # 从列表左边新增</span><br><span class="line">print(queue)</span><br><span class="line">pop &#x3D; queue.pop()               # 从列表最后（右边）删除</span><br><span class="line">pop_left &#x3D; queue.popleft()      # 从列表左边删除</span><br><span class="line">print(pop, pop_left, queue)</span><br></pre>
+
+<h2 id="defaultdict"><a href="#defaultdict" class="headerlink" title="defaultdict"></a>defaultdict</h2><p><strong>defaultdict</strong>：key不存在时，返回一个默认值；也可以统计数量</p>
+<pre class="highlight"><span class="line">from collections import defaultdict</span><br><span class="line">def fun_default():</span><br><span class="line">    return &#39;default&#39;</span><br><span class="line"></span><br><span class="line">default_dict &#x3D; defaultdict(fun_default)         # defaultdict 默认值通过调用函数返回</span><br><span class="line">default_dict[&#39;x&#39;] &#x3D; 1                           # 新增字典，其他行为跟dict完全一样</span><br><span class="line">print(default_dict[&#39;x&#39;], default_dict[&#39;y&#39;])     # 存在时返回值；不存在时返回默认值</span><br><span class="line"></span><br><span class="line"># 统计数量</span><br><span class="line">from collections import defaultdict</span><br><span class="line"></span><br><span class="line">blanket &#x3D; [&#39;apple&#39;, &#39;apple&#39;, &#39;orange&#39;, &#39;banana&#39;]</span><br><span class="line">default_dict_count &#x3D; defaultdict(int)              # int 默认值为0，也可使用 set、list、str等工厂函数</span><br><span class="line">for fruit in blanket:</span><br><span class="line">    default_dict_count[fruit] +&#x3D; 1</span><br><span class="line"></span><br><span class="line">print(default_dict_count)</span><br></pre>
+
+<h2 id="OrderedDict"><a href="#OrderedDict" class="headerlink" title="OrderedDict"></a>OrderedDict</h2><p><strong>OrderedDict</strong>：保持Key的顺序</p>
+<pre class="highlight"><span class="line">from collections import OrderedDict</span><br><span class="line">normal_dict &#x3D; dict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3), (&#39;d&#39;, 4), (&#39;e&#39;, 5)])</span><br><span class="line">order_dict &#x3D; OrderedDict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3), (&#39;d&#39;, 4), (&#39;e&#39;, 5)])    # Key按照插入的顺序排列，不是Key本身排序</span><br><span class="line">print(normal_dict, order_dict)</span><br></pre>
+
+<pre class="highlight"><span class="line"># OrderedDict实现一个FIFO（先进先出）的dict，当容量超出限制时，先删除最早添加的Key</span><br><span class="line">from collections import OrderedDict</span><br><span class="line"></span><br><span class="line">class LastUpdatedOrderedDict(OrderedDict):</span><br><span class="line"></span><br><span class="line">    def __init__(self, capacity):</span><br><span class="line">        super(LastUpdatedOrderedDict, self).__init__()</span><br><span class="line">        self._capacity &#x3D; capacity</span><br><span class="line"></span><br><span class="line">    def __setitem__(self, key, value):</span><br><span class="line">        containsKey &#x3D; 1 if key in self else 0</span><br><span class="line">        if len(self) - containsKey &gt;&#x3D; self._capacity:</span><br><span class="line">            last &#x3D; self.popitem(last&#x3D;False)</span><br><span class="line">            print(&#39;remove:&#39;, last)</span><br><span class="line">        if containsKey:</span><br><span class="line">            del self[key]</span><br><span class="line">            print(&#39;set:&#39;, (key, value))</span><br><span class="line">        else:</span><br><span class="line">            print(&#39;add:&#39;, (key, value))</span><br><span class="line">        OrderedDict.__setitem__(self, key, value)</span><br></pre>
+
+<h2 id="ChainMap"><a href="#ChainMap" class="headerlink" title="ChainMap"></a>ChainMap</h2><p><strong>ChainMap</strong>：可以把一组dict串起来并组成一个逻辑上的dict；ChainMap本身也是一个dict，查找时按照顺序在内部的dict依次查找</p>
+<pre class="highlight"><span class="line"># 按照指定顺序查找参数</span><br><span class="line">from collections import ChainMap</span><br><span class="line">import os, argparse</span><br><span class="line"></span><br><span class="line"># 构造缺省参数</span><br><span class="line">defaults &#x3D; &#123;</span><br><span class="line">    &#39;color&#39;: &#39;red&#39;,</span><br><span class="line">    &#39;user&#39;: &#39;guest&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 构造命令行参数</span><br><span class="line">parser &#x3D; argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(&#39;-u&#39;, &#39;--user&#39;)</span><br><span class="line">parser.add_argument(&#39;-c&#39;, &#39;--color&#39;)</span><br><span class="line">namespace &#x3D; parser.parse_args()</span><br><span class="line">command_line_args &#x3D; &#123; k: v for k, v in vars(namespace).items() if v &#125;</span><br><span class="line"></span><br><span class="line"># 组合成ChainMap</span><br><span class="line">combined &#x3D; ChainMap(command_line_args, os.environ, defaults)</span><br><span class="line"></span><br><span class="line"># 打印参数</span><br><span class="line">print(&#39;color&#x3D;%s&#39; % combined[&#39;color&#39;])</span><br><span class="line">print(&#39;user&#x3D;%s&#39; % combined[&#39;user&#39;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Counter：计数器，统计字符出现的个数</span><br><span class="line">from collections import Counter</span><br><span class="line">char_count &#x3D; Counter()</span><br><span class="line">for ch in &#39;programming&#39;:</span><br><span class="line">    char_count[ch] &#x3D; char_count[ch] + 1</span><br><span class="line"></span><br><span class="line">print(char_count)</span><br><span class="line">char_count.update(&#39;hello&#39;)</span><br><span class="line">print(char_count)</span><br></pre>
+
 
   </div>
   <div>
@@ -399,8 +332,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://alexedwardz.gitee.io/20210823/11121.html">
-            https://alexedwardz.gitee.io/20210823/11121.html
+            href="https://alexedwardz.gitee.io/20220629/1075.html">
+            https://alexedwardz.gitee.io/20220629/1075.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -410,29 +343,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/20210824/26382.html" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">数据文件和内容管理-基础 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/20210822/28179.html" 
+        href="/20220628/4922.html" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">数据安全管理-基础 </div>
+            <div class="nav-title">计算机网络-UDP </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -486,7 +405,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E5%92%8C%E4%BA%92%E6%93%8D%E4%BD%9C"><span class="toc-text">数据集成和互操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-text">功能实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETL"><span class="toc-text">ETL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">交互模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E8%A7%A3%E5%86%B3"><span class="toc-text">数据集成解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%A7%84%E5%88%92"><span class="toc-text">集成规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">设计解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90"><span class="toc-text">开发数据集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#colllections"><span class="toc-text">colllections</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#namedtuple"><span class="toc-text">namedtuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque"><span class="toc-text">deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defaultdict"><span class="toc-text">defaultdict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OrderedDict"><span class="toc-text">OrderedDict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChainMap"><span class="toc-text">ChainMap</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -534,7 +453,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E5%92%8C%E4%BA%92%E6%93%8D%E4%BD%9C"><span class="toc-text">数据集成和互操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-text">功能实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETL"><span class="toc-text">ETL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">交互模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E8%A7%A3%E5%86%B3"><span class="toc-text">数据集成解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%A7%84%E5%88%92"><span class="toc-text">集成规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">设计解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90"><span class="toc-text">开发数据集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#colllections"><span class="toc-text">colllections</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#namedtuple"><span class="toc-text">namedtuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque"><span class="toc-text">deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defaultdict"><span class="toc-text">defaultdict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OrderedDict"><span class="toc-text">OrderedDict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChainMap"><span class="toc-text">ChainMap</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -749,7 +668,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E5%92%8C%E4%BA%92%E6%93%8D%E4%BD%9C"><span class="toc-text">数据集成和互操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">业务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-text">原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="toc-text">功能实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETL"><span class="toc-text">ETL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">交互模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E8%A7%A3%E5%86%B3"><span class="toc-text">数据集成解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E8%A7%84%E5%88%92"><span class="toc-text">集成规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">设计解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90"><span class="toc-text">开发数据集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-text">度量指标</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#colllections"><span class="toc-text">colllections</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#namedtuple"><span class="toc-text">namedtuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deque"><span class="toc-text">deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defaultdict"><span class="toc-text">defaultdict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OrderedDict"><span class="toc-text">OrderedDict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChainMap"><span class="toc-text">ChainMap</span></a></li></ol></li></ol>
     </article>
   
   
