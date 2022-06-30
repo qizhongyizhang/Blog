@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-29">
+        content="2022-06-30">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>3.5k 字</span>
+      <span>3.8k 字</span>
     
   </div>
   
@@ -368,49 +368,61 @@
 <li><strong>touch</strong> 文件名：创建空文件，可一次创建多个文件；如果文件已存在，就修改文件的末次修改时间</li>
 </ul>
 <blockquote>
-<p>例：touch hello.txt helloword.txt</p>
+<p>例：touch hello.txt helloword.txt<br>例：touch /home/user/xxx.txt  ；允许级联创建</p>
 </blockquote>
 <ul>
-<li><strong>cp</strong> [选项] source(数据源) dest(目标位置)：复制文件到指定目录（copy）</li>
-</ul>
+<li><p><strong>rm</strong> [选项] 目录名或文件名：删除文件或目录（remove），默认有删除提示；删除后不能恢复；可以使用通配符</p>
 <blockquote>
 <p>选项：</p>
 <blockquote>
-<p>-r 递归复制整个文件夹<br>\cp 强制覆盖</p>
+<p>-r：递归删除整个文件夹<br>-f：强制删除不提示<br>-rf：强制递归删除整个文件夹不提示（慎用！！！）</p>
+<blockquote>
+<p>例：rm -r * 删除当前文件夹内的所有文件和目录</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>tree</strong> [选项] 目录名：以树状图列出文件目录结构；省略则输出当前文件夹的目录结构</p>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-d 只显示目录</p>
+<blockquote>
+<p> 例：tree -d ~，显示根目录下的目录树</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>cp</strong> [选项] source(数据源) dest(目标位置)：复制文件到指定目录（copy）</p>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-r 递归复制整个文件夹<br>-i 覆盖文件前给予提示</p>
 <blockquote>
 <p>例：cp -r test1/ test2/：将test1整个复制到test2里面</p>
 </blockquote>
 </blockquote>
 </blockquote>
-<ul>
-<li><strong>rm</strong> [选项] 目录名或文件名：删除文件或目录（remove），默认有删除提示；删除后不能恢复</li>
-</ul>
+</li>
+<li><p><strong>mv</strong> 移动或重命名文件或目录（move）</p>
 <blockquote>
-<p>选项：</p>
-<blockquote>
-<p>-r：递归删除整个文件夹<br>-f：强制删除不提示<br>-rf：强制递归删除整个文件夹不提示（慎用！！！）</p>
-</blockquote>
-</blockquote>
-<ul>
-<li><strong>mv</strong> 移动或重命名文件或目录（move）</li>
-</ul>
-<blockquote>
-<p>重命名</p>
-<blockquote>
-<p>文件：mv old_file_name new_file_name<br>文件夹：mv old_dictionary_name new_dictionary_name</p>
-</blockquote>
 <p>移动</p>
 <blockquote>
 <p>文件：mv file_name dictionary_name<br>文件夹：mv dictionary_name dictionary_name</p>
 </blockquote>
+<p>重命名</p>
+<blockquote>
+<p>文件：mv old_file_name new_file_name（如果存在同名，会覆盖；支持 -i 覆盖文件前给予提示）<br>文件夹：mv old_dictionary_name new_dictionary_name</p>
 </blockquote>
-<ul>
-<li><strong>cat</strong> [选项] 目录名：以只读的方式打开文件</li>
+</blockquote>
+</li>
+<li><p><strong>cat</strong> [选项] 目录名：以只读的方式打开文件；将文件一次性全部显示，适用于文件内容较少的文件</p>
+</li>
 </ul>
 <blockquote>
 <p>选项</p>
 <blockquote>
-<p>-n：显示行号</p>
+<p>-n：显示行号，包含空行<br>-b：显示行号，不包含空行</p>
 </blockquote>
 </blockquote>
 <ul>
@@ -446,12 +458,6 @@
 </blockquote>
 </blockquote>
 <ul>
-<li><strong>|</strong> 管道命令，将管道前面的内容，交给管道后面的指令进行显示</li>
-</ul>
-<blockquote>
-<p>例：cat -n hello.txt | more，以cat命令打开hello.txt，将内容以分页带有行号显示</p>
-</blockquote>
-<ul>
 <li><strong>less</strong> [选项] 文件名：功能同more，支持各种显示终端，根据显示需要动态加载内容，对显示大型文件有较高的效率</li>
 </ul>
 <blockquote>
@@ -464,12 +470,6 @@
 <li>q：退出less指令</li>
 </ul>
 </blockquote>
-</blockquote>
-<ul>
-<li><strong>&gt;</strong> / &gt;&gt;：输出重定向（将原来文件的内容覆盖）或追加到文件末尾</li>
-</ul>
-<blockquote>
-<p>ls -l &gt;   a.txt：将ls -l显示的内容覆盖写入到a.txt里面，如文件不存在，则创建文件<br>ls -l &gt;&gt; a.txt：将ls -l显示的内容追加写入到a.txt里面<br><strong>echo</strong> [选项]  [输出内容]：输出内容到控制台</p>
 </blockquote>
 <ul>
 <li><strong>head</strong> [-n] 文件名：显示文件开头部分内容，默认显示10行，n为正整数</li>
@@ -510,7 +510,17 @@
 <blockquote>
 <p>选项：</p>
 <blockquote>
-<p>-n：显示行号<br>-i：忽略大小写</p>
+<p>-n：显示行号<br>-i：忽略大小写<br>-v：返回不包含指定内容的行，包含空行</p>
+<blockquote>
+<p>例：grep -niv abc file_name ；返回 file_name 内包含 abc 的行，显示行号，同时忽略大小写</p>
+</blockquote>
+</blockquote>
+<p>模式查找：也成为正则表达式，可配合选项进行操作</p>
+<blockquote>
+<p>^a：查找以 a 开头的行<br>a$：查找以 a 结束的行</p>
+<blockquote>
+<p>例：grep -n ^a file_name</p>
+</blockquote>
 </blockquote>
 </blockquote>
 <h1 id="压缩解压"><a href="#压缩解压" class="headerlink" title="压缩解压"></a>压缩解压</h1><ul>
@@ -643,8 +653,21 @@
 </blockquote>
 </blockquote>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
-<li>ntsysv：查看系统自启动服务</li>
+<li><p><strong>ntsysv</strong>：查看系统自启动服务</p>
+</li>
+<li><p><strong>echo</strong> [选项]  [输出内容]：输出内容到控制台，常和重定向配合使用</p>
+</li>
+<li><p>**&gt; / &gt;&gt;**：输出重定向；将命令执行结果输出（将原来文件的内容覆盖）或追加到指定文件中</p>
+<blockquote>
+<p>echo hello &gt; a.txt  ；将 hello 写到 a.txt 中<br>ls -l <strong>&gt;</strong>   a.txt：将ls -l显示的内容<strong>覆盖写</strong>入到a.txt里面，如文件不存在，则创建文件<br>ls -l <strong>&gt;&gt;</strong> a.txt：将ls -l显示的内容<strong>追加写</strong>入到a.txt里面</p>
+</blockquote>
+</li>
+<li><p><strong>|</strong> 管道命令：可以将一个命令的输出作为另一个命令的输入</p>
+</li>
 </ul>
+<blockquote>
+<p>例：cat -n hello.txt | more，以cat命令打开hello.txt，将内容以分页带有行号显示</p>
+</blockquote>
 
   </div>
   <div>
