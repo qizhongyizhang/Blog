@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-30">
+        content="2022-07-03">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>3.8k 字</span>
+      <span>4.1k 字</span>
     
   </div>
   
@@ -480,7 +480,7 @@
 <p>-n：设置显示的文件内容行数，n为正整数<br>-f：实时监控文件的更新情况</p>
 </blockquote>
 <ul>
-<li><strong>ln</strong> -s [原文件或目录]  [连接名]：软连接，符号链接，类似于Windows的快捷方式，存放连接其他文件的路径</li>
+<li><strong>ln -s</strong> [原文件或目录]  [连接名]：软连接，符号链接，类似于Windows的快捷方式，存放连接其他文件的路径；使用绝对路径，-s 表示建立软连接，省略表示建立硬链接（删除源文件，硬链接仍可以访问）</li>
 <li><strong>history</strong> [n]：查看已经执行过的指令，也可以执行历史指令，n为正整数，显示最近执行的n条指令，使用 !n，可以执行历史编号为n的指令</li>
 </ul>
 <h1 id="时间日期"><a href="#时间日期" class="headerlink" title="时间日期"></a>时间日期</h1><ul>
@@ -493,7 +493,7 @@
 </blockquote>
 </blockquote>
 <ul>
-<li><strong>cal</strong> [时间]：默认显示当前月的日历，时间为年份，加上时间显示指定年份一整年的日历</li>
+<li><strong>cal</strong> [时间]：默认显示当前月的日历，时间为年份，加上时间显示指定年份一整年的日历；cal -y</li>
 </ul>
 <h1 id="搜索查找"><a href="#搜索查找" class="headerlink" title="搜索查找"></a>搜索查找</h1><ul>
 <li><strong>find</strong> [范围]  [选项]：从指定目录下递归遍历各个子目录，将满足条件的内容显示在终端</li>
@@ -501,7 +501,7 @@
 <blockquote>
 <p>选项：</p>
 <blockquote>
-<p>-name ：按照文件名进行查找，例：find / -name *.txt<br>-user：按照文件拥有者进行查找<br>-size [+/-]Size：按照文件大小进行查找，+表示大于，-表示小于，不写表示等于Size，Size表示文件大小，100k、20M</p>
+<p>-name ：按照文件名进行查找，例：find / -name *1.txt，查找文件名以 1 结尾的 txt 文件<br>-user：按照文件拥有者进行查找<br>-size [+/-]Size：按照文件大小进行查找，+表示大于，-表示小于，不写表示等于Size，Size表示文件大小，100k、20M</p>
 </blockquote>
 </blockquote>
 <ul>
@@ -524,23 +524,36 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<h1 id="压缩解压"><a href="#压缩解压" class="headerlink" title="压缩解压"></a>压缩解压</h1><ul>
-<li><strong>gzip/gunzip</strong> 文件名：gzip压缩文件，不保留源文件，gunzip解压文件，压缩文件为gz后缀</li>
+<h1 id="打包压缩"><a href="#打包压缩" class="headerlink" title="打包压缩"></a>打包压缩</h1><ul>
+<li><strong>tar</strong> [选项]  文件名：打包指令，不进行压缩，打包文件为 .tar 后缀</li>
+</ul>
+<blockquote>
+<p>选项：</p>
+<blockquote>
+<p>-c：创建打包文件，生成档案文件<br>-f：指定档案文件名称，必须放在最后<br>-v：列出打包或解包的详细过程，显示进度<br>-x：解开打包文件<br>-z：调用 gzip ，实现压缩和解压缩命令；打包压缩文件为 .tar.gz 后缀（用tar进行打包，gzip进行压缩）</p>
+<p>-j：调用 bzip2 ，实现压缩和解压缩命令；打包压缩文件为 .tar.bz2 后缀</p>
+<blockquote>
+<p>例：tar -cvf 1_tar.tar 1* ，将当前目录下的以 1 开头的文件打包为1_tar.tar；解包 tar -xvf 1_tar.tar</p>
+<p>例：tar -zcvf 1_tar.tar.gz 1* ，将当前目录下的以 1 开头的文件打包并压缩为1_tar.tar.gz；解压缩包 tar -zxvf 1_tar.tar.gz [-C] 指定解压缩的目录（目录必须存在）</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><p><strong>gzip/gunzip</strong> 文件名：gzip压缩文件，不保留源文件；gunzip解压文件，压缩文件为gz后缀</p>
+</li>
+<li><p><strong>bzip2</strong>：与 tar 命令结合实现打包压缩</p>
+</li>
+</ul>
+<blockquote>
+<p>例：tar -jcvf 1_tar.tar.bz2 1* </p>
+</blockquote>
+<ul>
 <li><strong>zip/unzip</strong> [选项] 文件名：压缩文件为zip后缀</li>
 </ul>
 <blockquote>
 <p>选项：</p>
 <blockquote>
 <p>-r：递归压缩，压缩文件目录，例：zip -r 文件名  目录/<br>-d 目录：指定解压目录，例：unzip -d /目录  文件名</p>
-</blockquote>
-</blockquote>
-<ul>
-<li><strong>tar</strong> [选项]  文件名：打包指令，压缩文件为tar.gz后缀</li>
-</ul>
-<blockquote>
-<p>选项：</p>
-<blockquote>
-<p>-c：压缩<br>-f：<br>-v：<br>-x：解压<br>-z：</p>
 </blockquote>
 </blockquote>
 <h1 id="定时机制"><a href="#定时机制" class="headerlink" title="定时机制"></a>定时机制</h1><p><strong>crontab</strong> [选项]</p>
@@ -557,16 +570,16 @@
 <p>第一个*：一小时中的第几分钟，取0-59<br>第二个*：一天的第几小时，取0-23<br>第三个*：一月中的第几天，取1-31<br>第四个*：一年中的低级月，取1-12<br>第五个*：一周中的星期几，取0-7（0、7代表星期天）<br>可用*代表任何时间，用,指定多个不连续的时间，例：1,3,6，表示仅1，3，6执行，用-表示范围，例：1-6，表示1至6都执行，用/n表示多久执行一次，例：*/1 * * * *，每分钟执行一次</p>
 </blockquote>
 <h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><ul>
-<li><strong>df</strong> [选项] ：查询系统整体磁盘使用情况</li>
+<li><strong>df</strong> [选项] ：disk free，查询系统整体磁盘剩余空间</li>
 </ul>
 <blockquote>
-<p>-l：以列表形式显示信息<br>-h：按照用户可理解的形式显示</p>
+<p>-l：以列表形式显示信息<br>-h：按照用户可理解的形式显示，带计量单位</p>
 </blockquote>
 <ul>
-<li><strong>du</strong> [选项]：查询指定目录的磁盘占用情况</li>
+<li><strong>du</strong> [选项]：disk useage，查询指定目录的磁盘占用情况</li>
 </ul>
 <blockquote>
-<p>-s：指定目录占用大小汇总<br>-h：带计量单位<br>-a：含文件<br>-c：列出明细的同时，增加汇总值<br>–max-depth = 1：子目录的深度<br>例：du -ach –max-depth = 1 /opt，统计/opt目录的磁盘占用情况，深度为1</p>
+<p>-s：指定目录占用大小汇总<br>-h：按照用户可理解的形式显示，带计量单位<br>-a：含文件<br>-c：列出明细的同时，增加汇总值<br>–max-depth = 1：子目录的深度<br>例：du -ach –max-depth = 1 /opt，统计/opt目录的磁盘占用情况，深度为1</p>
 </blockquote>
 <ul>
 <li><strong>常用</strong></li>
@@ -581,19 +594,32 @@
 <li>一般系统的服务都是以后台进程的方式存在，会常驻在系统中，知道关机结束</li>
 </ul>
 <h2 id="进程管理-进程"><a href="#进程管理-进程" class="headerlink" title="进程管理-进程"></a>进程管理-进程</h2><ul>
-<li><strong>ps</strong> [选项]：查看当前系统中正在执行的进程和其执行情况</li>
+<li><strong>ps</strong> [选项]：process status查看当前系统中正在执行的进程和其执行情况</li>
 </ul>
 <blockquote>
 <p>选项</p>
 <blockquote>
-<p>-a：当前终端的所有进程信息<br>-e：显示所有进程<br>-f：全格式显示<br>-u：以用户的格式显示进程信息<br>-x：显示后台进程<br>进程信息<br>USER：用户名<br>PID：进程识别号<br>%CPU：此进程占用CPU的百分比情况<br>%MEM：此进程占用内存的百分比情况<br>VSZ：此进程的虚拟内存占用情况<br>RSS：此进程的物理内存占用情况<br>TTY：终端机号<br>STAT：此进程的运行状态：S-休眠，s-表示此进程是会话的先导进程，R-运行，D-短期等待，Z-僵死进程，T-被跟踪或被停止的进程，N-表示此进程比普通进程的优先级更低<br>START：此进程的启动时间<br>TIME：此进程占用CPU的总时间<br>COMMAND：进程执行时的命令和参数</p>
+<p>-a：当前终端的所有进程信息<br>-f：全格式显示<br>-u：显示进程详细状态信息<br>-x：显示后台进程<br>进程信息<br>USER：用户名<br>PID：进程识别号<br>%CPU：此进程占用CPU的百分比情况<br>%MEM：此进程占用内存的百分比情况<br>VSZ：此进程的虚拟内存占用情况<br>RSS：此进程的物理内存占用情况<br>TTY：终端机号<br>STAT：此进程的运行状态：S-休眠，s-表示此进程是会话的先导进程，R-运行，D-短期等待，Z-僵死进程，T-被跟踪或被停止的进程，N-表示此进程比普通进程的优先级更低<br>START：此进程的启动时间<br>TIME：此进程占用CPU的总时间<br>COMMAND：进程执行时的命令和参数</p>
 <blockquote>
 <p>查看父进程：ps -ef | more，显示的PPID为父进程进程号<br>查看指定进程的父进程：ps -ef | sshd，查看sshd的父进程</p>
 </blockquote>
 </blockquote>
 </blockquote>
 <ul>
-<li><strong>pstree</strong> [选项]：查看进程树</li>
+<li><p><strong>top</strong> [选项]：显示正在执行的进程，top会在运行一段时间可以更新正在运行的进程</p>
+<blockquote>
+<p>选项</p>
+<blockquote>
+<p>-d n：指定n秒后自动更新，默认三秒<br>-i：不显示任何闲置或僵死进程<br>-p：通过指定进程ID进监控进程状态<br>交互说明<br>P：以CPU使用规律排序，默认选项<br>M：以内存使用率排序<br>N：以PID排序<br>q：退出top指令<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" alt="Service_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" class="lozad post-image"></p>
+</blockquote>
+<p>使用</p>
+<blockquote>
+<p>监控指定用户：先输入top，回车，在输入u，最后输入用户名<br>中止指定服务：先输入top，回车，在输入k，最后输入进程号</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>pstree</strong> [选项]：查看进程树</p>
+</li>
 </ul>
 <blockquote>
 <p>-p：显示进程的PID<br>-u：显示进程的所属用户</p>
@@ -633,17 +659,6 @@
 <p>查看所有服务：chkconfig –list<br>查看指定服务：</p>
 <blockquote>
 <p>chkconfig –list | grep 服务名<br>chkconfig 服务名 –list<br>修改指定服务指定运行级别的自启动状态：chkconfig –level 5 服务名 off/on，在所有运行级别下设置，直接省略–level<br>监控</p>
-</blockquote>
-</blockquote>
-<p><strong>top</strong> [选项]：显示正在执行的进程，top会在运行一段时间可以更新正在运行的进程</p>
-<blockquote>
-<p>选项</p>
-<blockquote>
-<p>-d n：指定n秒后自动更新，默认三秒<br>-i：不显示任何闲置或僵死进程<br>-p：通过指定进程ID进监控进程状态<br>交互说明<br>P：以CPU使用规律排序，默认选项<br>M：以内存使用率排序<br>N：以PID排序<br>q：退出top指令<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" alt="Service_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" class="lozad post-image"></p>
-</blockquote>
-<p>使用</p>
-<blockquote>
-<p>监控指定用户：先输入top，回车，在输入u，最后输入用户名<br>中止指定服务：先输入top，回车，在输入k，最后输入进程号</p>
 </blockquote>
 </blockquote>
 <p><strong>netstat</strong> [选项]：查看网络服务情况</p>
@@ -775,7 +790,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩解压</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9"><span class="toc-text">打包压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -823,7 +838,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩解压</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9"><span class="toc-text">打包压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
       </div>
     </article>
   
@@ -1038,7 +1053,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="toc-text">压缩解压</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-text">指定运行级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">帮助指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F"><span class="toc-text">时间日期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE"><span class="toc-text">搜索查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9"><span class="toc-text">打包压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E8%BF%9B%E7%A8%8B"><span class="toc-text">进程管理-进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86-%E6%9C%8D%E5%8A%A1"><span class="toc-text">进程管理-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-text">基本介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
     </article>
   
   

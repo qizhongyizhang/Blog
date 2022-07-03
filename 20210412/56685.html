@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-30">
+        content="2022-07-03">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>3.8k 字</span>
+      <span>4k 字</span>
     
   </div>
   
@@ -381,7 +381,7 @@
 </ul>
 <h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>Linux采用基层是的树状目录结构，在Linux世界里，万物皆是文件，包括鼠标、键盘等</p>
 <blockquote>
-<p>root：根目录，对顶级目录，系统管理员的主目录<br>/bin：二进制指令文件目录<br>/boot：存放启动Linux的核心文件，包括连接文件和镜像文件<br>/dev：设备管理目录，将硬件以文件形式存放<br>/etc：系统管理需要的配置文件和子目录<br>/home：普通用户的目录，Linux里每一个用户都有各自的 目录<br>/lib：系统开机所需最基本的动态链接共享库，类似于Window里面的DDL文件<br>/proc：是一个虚拟目录，是系统内存的映射，存放系统信息<br>/opt：安装软件管理目录<br>/sbin：高权限用户（系统管理员）使用的系统管理指令<br>/srv：service的缩写，存放服务启动之后需要提取的数据<br>/sys：存放2.6内核新出的文件系统ysfs<br>/tmp：存放临时文件<br>/usr：用户应用程序和文件的存放路径<br>/var：日志文件，存放不停变化的文件</p>
+<p>root：根目录，对顶级目录，系统管理员的主目录<br>/bin：二进制指令文件目录；主要用于主体应用<br>/boot：存放启动Linux的核心文件，包括连接文件和镜像文件<br>/dev：设备管理目录，将硬件以文件形式存放<br>/etc：系统管理需要的配置文件和子目录<br>/home：普通用户的目录，Linux里每一个用户都有各自的 目录<br>/lib：系统开机所需最基本的动态链接共享库，类似于Window里面的DDL文件<br>/proc：是一个虚拟目录，是系统内存的映射，存放系统信息<br>/opt：安装软件管理目录<br>/sbin：系统管理员专用的二进制指令文件目录，主要用于系统管理<br>/srv：service的缩写，存放服务启动之后需要提取的数据<br>/sys：存放2.6内核新出的文件系统ysfs<br>/tmp：存放临时文件<br>/usr：用户应用程序和文件的存放路径；/user/bin：后期安装的软件；/user/sbin 超级用户的一些管理程序<br>/var：日志文件，存放不停变化的文件</p>
 </blockquote>
 <h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><h3 id="分区方式"><a href="#分区方式" class="headerlink" title="分区方式"></a>分区方式</h3><p><strong>mbr分区</strong></p>
 <blockquote>
@@ -431,16 +431,18 @@
 <p>查看文件信息：ls -ahl；以列表形式将所有文件以方便用户查看的形式返回，会显示文件类型、文件权限、所有者、所在组、最新更新时间、文件大小的信息</p>
 </blockquote>
 <p><img src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" alt="File_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" class="lozad post-image"></p>
-<h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>Linux是一个多用户多任务的操作系统，任何一个用户必须使用合法的账号才能登入系统，每一个用户账号至少属于一个用户组，存储在/home目录下</p>
+<h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>Linux是一个多用户多任务的操作系统，任何一个用户必须使用合法的账号才能登入系统，每一个用户账号至少属于一个用户组，存储在/home目录下；用户信息位于 /etc/passwd 文件中；用户组信息位于 /etc/group 文件中</p>
 <ul>
 <li><p><strong>用户组</strong>：类似于角色，对有共性的多个用户进行统一的管理</p>
 <blockquote>
-<p>添加：groupadd groupname<br>删除：groupdel groupname</p>
+<p>添加：groupadd group_name<br>删除：groupdel group_name<br>查看：cat /etc/group<br>修改：chgrp -R group_name file_name/dir_name；-R 进行递归修改</p>
 </blockquote>
 </li>
 <li><p><strong>用户</strong>：登入系统进行操作的人员</p>
 <blockquote>
-<p><strong>添加</strong>：useradd [-g gorup_name]  &gt; user_name，不指定所属组时，会自动创建与用户名同名的用户组，也可以指定目录：useradd -d 路径 user_name<br><strong>删除</strong>：userdel user_name，会保留用户组，如果需要删除用户组，使用：userdel -r user_name，一般保留用户组<br><strong>修改用户所在组</strong>：usermod -g group_name user_name，将user_name的所在组改为group_name<br><strong>修改用户登陆的初始目录</strong>：useradd -d directory_name user_name<br><strong>查询</strong>：id user_name，返回uid（用户ID号），gid（所在用户组的ID号）和用户组名<br><strong>切换登录用户</strong>：su - user_name，撤销切换指令：exit，高权限用户切换到地权限用户不需要输入密码<br><strong>设定密码</strong>：passwd user_name，回车输入密码<br><strong>查看当前用户</strong>：whoami/who am i<br><strong>修改用户组</strong>：usermod -g gorup_name user_name</p>
+<p><strong>添加</strong>：useradd [-m -g gorup_name]  &gt; user_name； -m 自动创建家目录， -g 指定所属组，不指定所属组时，会自动创建与用户名同名的用户组，也可以指定目录：useradd -d 路径 user_name<br><strong>设定密码</strong>：passwd user_name，回车输入密码；输入密码后才能登陆<br><strong>删除</strong>：userdel user_name，会保留用户组，如果需要删除用户组，使用：userdel -r user_name，一般保留用户组<br><strong>修改用户登陆的初始目录</strong>：useradd -d directory_name user_name</p>
+<p><strong>查询</strong>：id user_name，返回uid（用户ID号），gid（所在用户组的ID号）和用户组名<br><strong>查看当前用户</strong>：whoami/who am i；who 查看当前登录的所有用户和登录信息<br><strong>修改用户组</strong>：usermod -g gorup_name user_name，修改用户的主组（创建用户时指定的组信息）；usermod -G gorup_name user_name，增加用户的附加组；usermod -s /bin/bash user_name；修改用户登录 Shell（默认为 dash）</p>
+<p><strong>超级用户</strong>：root 进行系统维护和管理，能够访问所有资源；以上操作都需要通过 root 用户操作<br><strong>切换登录用户</strong>：su [-] user_name，su 切换至另一个用户，带有 - 表示同时切换到对应用户的家目录，不指定用户名，切换至 root（不安全）exit：撤销切换指令，高权限用户切换到低权限用户不需要输入密码；sudo 使用另一个用户执行，默认为 root</p>
 </blockquote>
 </li>
 <li><p><strong>配置文件</strong></p>
@@ -455,7 +457,7 @@
 </blockquote>
 <p><strong>作用于目录</strong></p>
 <blockquote>
-<p>r：可读，可查看<br>w：可在目录内新建、删除、重命名文件或目录<br>x：可进入该目录</p>
+<p>r：可读，可进入目录查看<br>w：可在目录内新建、删除、重命名文件或目录<br>x：可进入该目录</p>
 </blockquote>
 <h2 id="管理-2"><a href="#管理-2" class="headerlink" title="管理"></a>管理</h2><blockquote>
 <p>修改权限：chmod（u：所有者、g：所有组、o：其他组、a：所有人）<br>+、-、=进行权限变更</p>
@@ -489,7 +491,7 @@
 <p><strong>查看</strong></p>
 <pre class="highlight"><span class="line">dpkg -l(查看全部)</span><br><span class="line">dpkg-l|grep name(查看特定)</span><br></pre>
 
-<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><p><strong>apt</strong>：Advanced Packaging Tool，是一个安装包管理管理工具，常用于Ubuntu中，用于软件包的安装、删除和管理，在/etc/apt/source.list中制定了官方的软件仓库地址（通常在美国）；当执行install时，安装相应的包，下载并更新，写入source.list文件；当执行update时，程序分析source.list文件是否有对应的Packages/Sources/lelease列表文件，如果有就下载，存入/var/lib/apt/lists/目录中<br><strong>修改镜像源</strong></p>
+<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><p><strong>apt</strong>：Advanced Packaging Tool，是一个安装包管理管理工具，常用于 Ubuntu 中，用于软件包的安装、删除和管理，在 /etc/apt/source.list 中制定了官方的软件仓库地址（通常在美国）；当执行 install 时，安装相应的包，下载并更新，写入 source.list 文件；当执行 update 时，程序分析 source.list 文件是否有对应的 Packages/Sources/lelease 列表文件，如果有就下载，存入 /var/lib/apt/lists/ 目录中<br><strong>修改镜像源</strong></p>
 <blockquote>
 <ol>
 <li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" class="lozad post-image"></li>
@@ -498,7 +500,7 @@
 </blockquote>
 <p><strong>管理</strong></p>
 <blockquote>
-<p>更新源：apt-get update<br>搜索：apt-cache search package_name<br>获取包信息：apt-cache show package_name，包括说明、大小、版本等<br>查看包依赖：apt-cache rdepends package_name<br>安装：apt-get install package_name<br>修复安装：apt-get -f install package_name<br>重装：apt-get install package_name –reinstall<br>升级更新：apt-get upgrade package_name<br>删除：apt-get remove package_name<br>安装编译环境：apt-get build_dep package_name<br>下载源码：apt-get source package_name<br>删除包和配置文件：apt-get remove package_name –purge<br>升级系统：apt-get dist_upgrade package_name<br>若提示权限不够，可在指令前面加上sudo或者切换到root目录下运行</p>
+<p>更新源：apt-get update<br>搜索：apt-cache search package_name<br>获取包信息：apt-cache show package_name，包括说明、大小、版本等<br>查看包依赖：apt-cache rdepends package_name<br><strong>安装</strong>：apt-get install package_name<br>修复安装：apt-get -f install package_name<br>重装：apt-get install package_name –reinstall<br><strong>升级</strong>：apt-get upgrade package_name<br><strong>删除</strong>：apt-get remove package_name<br>安装编译环境：apt-get build_dep package_name<br>下载源码：apt-get source package_name<br>删除包和配置文件：apt-get remove package_name –purge<br>升级系统：apt-get dist_upgrade package_name<br>若提示权限不够，可在指令前面加上sudo或者切换到root目录下运行</p>
 </blockquote>
 <pre class="highlight"><span class="line">例：安装sshd服务</span><br><span class="line">安装：sudo apt-get install openssh-server，默认安装服务器端和客户端</span><br><span class="line">启动服务：service sshd start</span><br><span class="line">本机测试：netstat -anp | more</span><br><span class="line">Windows测试：telnet ip port</span><br><span class="line">Linux测试：ssh user_name@ip，退出用exit 或 logout</span><br></pre>
 
@@ -521,6 +523,8 @@
 <li><p><strong>连通Windows和Linux</strong><br>安装vmtool</p>
 <pre class="highlight"><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></li>
 <li><p><strong>改变终端窗口字体</strong>：放大：ctrl + shift + = ; 缩小：ctrl + -c</p>
+</li>
+<li><p><strong>which</strong>：查看执行命令的所在位置</p>
 </li>
 </ul>
 
