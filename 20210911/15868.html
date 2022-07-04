@@ -49,7 +49,7 @@
         content="2021-09-11">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-01">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -352,7 +352,7 @@
 <li>当事务提交之后，undo log并不会被马上删除，而是放入待清理的链表，由purge线程判断undo段中表的上一个数据版本是否在使用，决定是否删除undo log的日志空间</li>
 </ul>
 </blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Logfile.png" alt="Data_Logfile" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Logfile.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Logfile.png" alt="Data_Logfile" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Logfile.png" class="lozad post-image"></p>
 <h2 id="表格类型"><a href="#表格类型" class="headerlink" title="表格类型"></a>表格类型</h2><h3 id="常见五种类型"><a href="#常见五种类型" class="headerlink" title="常见五种类型"></a>常见五种类型</h3><ul>
 <li><p>MyISAM</p>
 </li>
@@ -403,7 +403,7 @@
 </ul>
 <blockquote>
 <ul>
-<li>存储结构逻辑上可分为：<strong>表空间</strong>tablespace，<strong>段</strong>segment，<strong>区</strong>extent，<strong>页</strong>page，<strong>行</strong>row(一条记录)<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Save_Structure.png" alt="Data_Save_Structure" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Save_Structure.png" class="lozad post-image"></li>
+<li>存储结构逻辑上可分为：<strong>表空间</strong>tablespace，<strong>段</strong>segment，<strong>区</strong>extent，<strong>页</strong>page，<strong>行</strong>row(一条记录)<br><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Save_Structure.png" alt="Data_Save_Structure" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Save_Structure.png" class="lozad post-image"></li>
 </ul>
 <blockquote>
 <p><strong>表空间</strong></p>
@@ -433,7 +433,7 @@
 <ul>
 <li><strong>MEMORY</strong>：所有数据都存储在内存中，数据处理速度极快，安全性不高，容易丢失</li>
 </ul>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/search_engine.png" class="lozad post-image"></p>
 <blockquote>
 <ul>
 <li><strong>区别</strong></li>

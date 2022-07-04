@@ -49,7 +49,7 @@
         content="2021-05-15">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-25">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -336,7 +336,7 @@
 </ul>
 <pre class="highlight"><span class="line">create table [if not exists] tb_name(</span><br><span class="line">列定义</span><br><span class="line">) [表选项(引擎:engine|type,字符集:charset set,校对集:collate)]  [注释(comment)];</span><br><span class="line"></span><br><span class="line">create table if not exists tb_user_info( </span><br><span class="line">user_id int NOT NULL AUTO_INCREMENT,    -- 设置自增长</span><br><span class="line">user_name char(20) NOT NULL,</span><br><span class="line">user_sex boolean DEFAULT 1,        -- 设置默认值，即默认值约束</span><br><span class="line">user_address varchar(100),</span><br><span class="line">user_Email char(30) unique         -- 设置唯一值约束</span><br><span class="line">PRIMARY KEY(user_id),              -- 申明主键</span><br><span class="line">FULLTEXT(user_address)             -- 申明全文本索引</span><br><span class="line">)ENGINE &#x3D; InnoDB DEFAULT CHARSET&#x3D;utf8mb4 ROW_FORMAT&#x3D;DYNAMIC COMMENT &#x3D; &#39;客户信息表&#39;</span><br></pre>
 
-<h3 id="表选项"><a href="#表选项" class="headerlink" title="表选项"></a>表选项</h3><p><strong>引擎类型</strong>：ENGINE ，也叫表类型，指的是数据表的存储机制，索引方案等配套相关功能；具体管理和处理数据的内部引擎，引擎在内部处理 SQL请求；MySQL 具有多种引擎，都隐藏在MySQL服务器内，为不同的任务选择正确的引擎以获得良好的功能和灵活性<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/search_engine.png" class="lozad post-image"><br><strong>选择表的存储引擎的标准</strong></p>
+<h3 id="表选项"><a href="#表选项" class="headerlink" title="表选项"></a>表选项</h3><p><strong>引擎类型</strong>：ENGINE ，也叫表类型，指的是数据表的存储机制，索引方案等配套相关功能；具体管理和处理数据的内部引擎，引擎在内部处理 SQL请求；MySQL 具有多种引擎，都隐藏在MySQL服务器内，为不同的任务选择正确的引擎以获得良好的功能和灵活性<br><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/search_engine.png" alt="Search_Engine" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/search_engine.png" class="lozad post-image"><br><strong>选择表的存储引擎的标准</strong></p>
 <blockquote>
 <ul>
 <li>是否需要事务支持</li>
@@ -538,7 +538,7 @@
 </blockquote>
 <ul>
 <li><strong>替换</strong>： REPLACE INTO tb_name values (data_list);  存在更新，不存在插入。但如果表中的一个旧记录与一个用于PRIMARY KEY或一个UNIQUE索引的新记录具有相同的值，则在新记录被插入之前，旧记录被删除(替换原有记录)</li>
-<li><strong>数据更改操作流程</strong>：数据产生变更时，会先在内存更改数据，当在特定时期再写入磁盘(频繁的I/O操作会降低性能)<br><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" alt="Data_Change_Order" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" class="lozad post-image"></li>
+<li><strong>数据更改操作流程</strong>：数据产生变更时，会先在内存更改数据，当在特定时期再写入磁盘(频繁的I/O操作会降低性能)<br><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" alt="Data_Change_Order" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/Data_Change_Order.png" class="lozad post-image"></li>
 </ul>
 <p>脏页：指的是存储引擎内存中的数据与磁盘中的数据不一致，进行数据更改操作(增删改)时，会先写预写日志(WAL)，再更改内存中的数据，最后在合适时机进行脏页落盘</p>
 <ol>

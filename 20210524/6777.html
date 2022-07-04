@@ -49,7 +49,7 @@
         content="2021-05-24">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -309,8 +309,8 @@
 <span id="more"></span>
 
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Hive 是基于 Hadoop 的数据仓库工具，将结构化的数据文件映射为一张数据库表，并提供类SQL（HQL，底层使用 MapReduce 实现）的功能，进行数据操作<br>本质是将 SQL 转化为 MapReduce 任务进行运算，底层由HDFS提供数据存储，可以认为 Hive 是一个将 SQL 转化为 MapReduce 任务的工具，通过Hive元数据(默认存储在derby 中，可以用其他的结构化数据进行存储)记录表与文件的对应关系、表字段与文件字段的对应关系</p>
-<h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><p><img src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png" alt="HQL_Run_Step" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png" class="lozad post-image"><br><strong>用户接口</strong>：包括 CLI、JDBC/ODBC 和 WebGUI。CLI 是（Command Line Interface）是 shell 命令行，JDBC/ODBC 是 Hive 的 Java 实现，与传统数据库的 JDBC 相似，WebGUI 是通过浏览器进行访问 Hive<br><strong>元数据存储</strong>：通常 Hive 将元数据存储在关系型数据库 MySQL/Derby（默认）中，包括表名称、表字段和分区及其属性，表的属性（是否为外部表)和表所在目录等<br><strong>解析器</strong>：完成 HQL 语句的词法分析、语法分析、编译、优化和生成查询计划，查询计划存储到 HDFS 中，通过 MApReduce 调用执行</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>采用类 SQL 的语法操作数据，开发效率快<br>避免写 MapReduce 任务，降低开发人员的学习成本<br>较强的扩展功能<br>Hive与传统数据库都是用来做数据存储和数据分析，他们之间有一些区别如下：<br><img src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png" alt="Hive_RDBMS" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png" class="lozad post-image"></p>
+<h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><p><img src="https://qizhongyi.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png" alt="HQL_Run_Step" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/BigData/Hive/HQL_Run_Step.png" class="lozad post-image"><br><strong>用户接口</strong>：包括 CLI、JDBC/ODBC 和 WebGUI。CLI 是（Command Line Interface）是 shell 命令行，JDBC/ODBC 是 Hive 的 Java 实现，与传统数据库的 JDBC 相似，WebGUI 是通过浏览器进行访问 Hive<br><strong>元数据存储</strong>：通常 Hive 将元数据存储在关系型数据库 MySQL/Derby（默认）中，包括表名称、表字段和分区及其属性，表的属性（是否为外部表)和表所在目录等<br><strong>解析器</strong>：完成 HQL 语句的词法分析、语法分析、编译、优化和生成查询计划，查询计划存储到 HDFS 中，通过 MApReduce 调用执行</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>采用类 SQL 的语法操作数据，开发效率快<br>避免写 MapReduce 任务，降低开发人员的学习成本<br>较强的扩展功能<br>Hive与传统数据库都是用来做数据存储和数据分析，他们之间有一些区别如下：<br><img src="https://qizhongyi.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png" alt="Hive_RDBMS" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/BigData/Hive/Hive_RDBMS.png" class="lozad post-image"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装前一般安装关系型数据库存储 Hive 元数据</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="http://archive.apache.org/dist/hive"><font face = "微软雅黑" color = 1E90FF size = 5> 下载地址 </font></a>：选择合适的版本进行下载</li>

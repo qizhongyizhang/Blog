@@ -49,7 +49,7 @@
         content="2021-05-13">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-01">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -324,7 +324,7 @@
 </ul>
 </blockquote>
 <pre class="highlight"><span class="line">DECIMAL[(M[,D])]  [UNSIGNED]  [ZEROFILL]</span><br><span class="line">M表示总位数，D表示小数位数，可控制保存范围；M，D省略，默认为10,0；可以使用unsigned，但不会影响范围</span><br><span class="line">decimal(10,0) unsigned zerofill：总长10位，整数10位，存储范围是 -9999999999 到 9999999999，数据不会丢失，四舍五入截断；长度不够左边补零，不表示正负</span><br></pre>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DataType_Int.png" alt="MySQL_DataType_Int" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DataType_Int.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DataType_Int.png" alt="MySQL_DataType_Int" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DataType_Int.png" class="lozad post-image"></p>
 </li>
 </ul>
 <h1 id="时间日期"><a href="#时间日期" class="headerlink" title="时间日期"></a>时间日期</h1><ul>
@@ -339,7 +339,7 @@
 <blockquote>
 <p>DATETIME，DATE，TIMESTAMP 在保存数据时，会对数据格式的合法性进行验证，不验证日期时间的合法性；年月日时分秒的分隔符可以是任意的标点，甚至可以不使用，常用的是-和: ；可以使用2位的年，表示范围：1970-2069<br>TIMESTAMP：时间戳，年份是一个范围，在一定范围内的数均表示同一年</p>
 </blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DataType_DateTime.png" alt="MySQL_DataType_DateTime" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DataType_DateTime.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DataType_DateTime.png" alt="MySQL_DataType_DateTime" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DataType_DateTime.png" class="lozad post-image"></p>
 <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><ul>
 <li><p>**char(m)**：定长，限定长度，保存时如果字符串长度不够，则后边补足空字符串，超出设置的长度时，内容会被截断，效率快；但浪费空间</p>
 </li>
@@ -356,7 +356,7 @@
 <pre class="highlight"><span class="line">gender enum(&#39;female’, ’male’)</span><br></pre></li>
 <li><p><strong>set</strong>：集合类型/不定向选择Set(‘value1’,’value2’,…)，表示可以选择可用值的0个或多个组合，用每个数据的状态（0/1）保存，占用8个字节，展示64个状态</p>
 <pre class="highlight"><span class="line">hobby set(‘read’, ’sport’, ’cook’)</span><br></pre>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DateType_Text.png" alt="MySQL_DateType_Text" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataBase/MySQL/DateType_Text.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DateType_Text.png" alt="MySQL_DateType_Text" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataBase/MySQL/DateType_Text.png" class="lozad post-image"></p>
 </li>
 </ul>
 <h1 id="其他类型"><a href="#其他类型" class="headerlink" title="其他类型"></a>其他类型</h1><p>二进制：blob，binary，varbinary，用于保存一个二进制文件内容，如图片等<br>实型：real<br>用户指定：numeric<br>字符型大对象：clob</p>

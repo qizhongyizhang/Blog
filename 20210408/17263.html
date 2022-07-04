@@ -49,7 +49,7 @@
         content="2021-04-08">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-28">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -343,7 +343,7 @@
 <pre class="highlight"><span class="line">生成密钥：ssh-keygen -t rsa</span><br><span class="line">查看密钥：cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre>
 
 <ol start="3">
-<li>将密钥加入 Github、Gitee 的 ssh 公钥池里面，步骤如下图：<br><img src="https://alexedwardz.gitee.io/images/Tools/Git_sshKey.png" alt="Git_sshKey" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Tools/Git_sshKey.png" class="lozad post-image"></li>
+<li>将密钥加入 Github、Gitee 的 ssh 公钥池里面，步骤如下图：<br><img src="https://qizhongyi.gitee.io/images/Tools/Git_sshKey.png" alt="Git_sshKey" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Tools/Git_sshKey.png" class="lozad post-image"></li>
 </ol>
 <h2 id="推拉版本库"><a href="#推拉版本库" class="headerlink" title="推拉版本库"></a>推拉版本库</h2><ol>
 <li>新建目录：</li>
@@ -358,7 +358,7 @@
 <ol start="3">
 <li>建立远程仓库关联：推拉之前，需要建立本地仓库和远程仓库之间的联系；同时关联多个远程库时，关联时需要为每一个远程库取名</li>
 </ol>
-<pre class="highlight"><span class="line">git remote add d_name&#x2F;origin git@gitee.com:alexedwardz&#x2F;resource.git</span><br><span class="line">将本地仓库与 Github、Gitee 等远程仓库连接起来，默认是 origin</span><br><span class="line"></span><br><span class="line">git remote -v  ：查看远程库信息</span><br><span class="line">git remote rm d_name：删除远程库，解除本地和远程的绑定关系，并不是物理上删除远程库</span><br></pre>
+<pre class="highlight"><span class="line">git remote add d_name&#x2F;origin git@gitee.com:qizhongyi&#x2F;resource.git</span><br><span class="line">将本地仓库与 Github、Gitee 等远程仓库连接起来，默认是 origin</span><br><span class="line"></span><br><span class="line">git remote -v  ：查看远程库信息</span><br><span class="line">git remote rm d_name：删除远程库，解除本地和远程的绑定关系，并不是物理上删除远程库</span><br></pre>
 
 <ol start="4">
 <li>添加修改：</li>
@@ -378,7 +378,7 @@
 <ol start="7">
 <li>拉取：</li>
 </ol>
-<pre class="highlight"><span class="line">git pull origin master：拉取有关联远程仓库的 master 分支</span><br><span class="line">git clone git@gitee.com:alexedwardz&#x2F;resource.git：克隆没有关联的远程仓库到本地，git@ 采用的是 ssh 协议</span><br></pre>
+<pre class="highlight"><span class="line">git pull origin master：拉取有关联远程仓库的 master 分支</span><br><span class="line">git clone git@gitee.com:qizhongyi&#x2F;resource.git：克隆没有关联的远程仓库到本地，git@ 采用的是 ssh 协议</span><br></pre>
 
 <h2 id="返回版本"><a href="#返回版本" class="headerlink" title="返回版本"></a>返回版本</h2><p><strong>未添加</strong>：</p>
 <pre class="highlight"><span class="line">git checkout -- f_name</span><br><span class="line">撤销 f_name 文件未添加 git add 的修改；git checkout 用版本库里的版本替换工作区的版本</span><br></pre>
@@ -447,7 +447,7 @@
 <h2 id="仓库权限类"><a href="#仓库权限类" class="headerlink" title="仓库权限类"></a>仓库权限类</h2><p>问题1：远程关联已存在：remote origin already exists</p>
 <ol>
 <li>先删除远程 Git 仓库：git remote rm origin</li>
-<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#101;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#101;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>:alexedwardz/resource.git</li>
+<li>再添加远程 Git 仓库：git remote add origin <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#101;&#101;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#101;&#101;&#x2e;&#x63;&#111;&#109;</a>:qizhongyi/resource.git</li>
 </ol>
 <h2 id="日常操作类"><a href="#日常操作类" class="headerlink" title="日常操作类"></a>日常操作类</h2><p>问题1：Please commit your changes or stash them before you merge(拉取前先提交更新，或者隐藏). 本地分支和远程文件不一致，pull 时出现冲突</p>
 <ol>

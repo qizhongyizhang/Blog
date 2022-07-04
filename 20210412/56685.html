@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2022-07-03">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -347,7 +347,7 @@
 <h3 id="网络连接模式"><a href="#网络连接模式" class="headerlink" title="网络连接模式"></a>网络连接模式</h3><ul>
 <li><p><strong>桥连接模式</strong>：虚拟机IP与本机在同一个网端，通讯通畅，但是会出现IP冲突的危险</p>
 </li>
-<li><p><strong>NAT连接模式</strong>：网络地址转换方式，Linux可以访问外网，不会出现IP冲突<br><img src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" alt="NAT_Net_Model" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/NAT_Net_Model.png" class="lozad post-image"></p>
+<li><p><strong>NAT连接模式</strong>：网络地址转换方式，Linux可以访问外网，不会出现IP冲突<br><img src="https://qizhongyi.gitee.io/images/System/Linux/NAT_Net_Model.png" alt="NAT_Net_Model" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/NAT_Net_Model.png" class="lozad post-image"></p>
 <blockquote>
 <p>配置IP</p>
 <blockquote>
@@ -430,7 +430,7 @@
 <blockquote>
 <p>查看文件信息：ls -ahl；以列表形式将所有文件以方便用户查看的形式返回，会显示文件类型、文件权限、所有者、所在组、最新更新时间、文件大小的信息</p>
 </blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" alt="File_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/File_Info.png" class="lozad post-image"></p>
+<p><img src="https://qizhongyi.gitee.io/images/System/Linux/File_Info.png" alt="File_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/File_Info.png" class="lozad post-image"></p>
 <h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><p>Linux是一个多用户多任务的操作系统，任何一个用户必须使用合法的账号才能登入系统，每一个用户账号至少属于一个用户组，存储在/home目录下；用户信息位于 /etc/passwd 文件中；用户组信息位于 /etc/group 文件中</p>
 <ul>
 <li><p><strong>用户组</strong>：类似于角色，对有共性的多个用户进行统一的管理</p>
@@ -467,7 +467,7 @@
 </blockquote>
 <h1 id="Linux软件安装方式"><a href="#Linux软件安装方式" class="headerlink" title="Linux软件安装方式"></a>Linux软件安装方式</h1><h2 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h2><p><strong>rpm</strong>（RedHat Package Manager），用于互联网下载包的打包和安装工具，类似于Windows的setup.exe程序<br><strong>查看</strong></p>
 <pre class="highlight"><span class="line">查看全部：rpm -qa</span><br><span class="line">查看指定条件过滤：rpm -qa | grep RPM_packake_name</span><br><span class="line">查看软件包是否安装：rpm -q RPM_packake_name</span><br><span class="line">查看软件包信息：rpm -qi RPM_packake_name</span><br><span class="line">查询安装软件包的文件及存放目录：rpm -ql RPM_packake_name</span><br><span class="line">查询指定文件所属软件包：rpm -qf RPM_file_name</span><br></pre>
-<img src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" alt="RPM_Info" style="zoom:200%;" / srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/RPM_Info.png" class="lozad post-image">
+<img src="https://qizhongyi.gitee.io/images/System/Linux/RPM_Info.png" alt="RPM_Info" style="zoom:200%;" / srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/RPM_Info.png" class="lozad post-image">
 
 <p><strong>管理</strong></p>
 <blockquote>
@@ -494,7 +494,7 @@
 <h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><p><strong>apt</strong>：Advanced Packaging Tool，是一个安装包管理管理工具，常用于 Ubuntu 中，用于软件包的安装、删除和管理，在 /etc/apt/source.list 中制定了官方的软件仓库地址（通常在美国）；当执行 install 时，安装相应的包，下载并更新，写入 source.list 文件；当执行 update 时，程序分析 source.list 文件是否有对应的 Packages/Sources/lelease 列表文件，如果有就下载，存入 /var/lib/apt/lists/ 目录中<br><strong>修改镜像源</strong></p>
 <blockquote>
 <ol>
-<li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Ubuntu_apt_source.png" class="lozad post-image"></li>
+<li>使用前将美国的软件库地址改为清华的软件仓库镜像源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a><br><img src="https://qizhongyi.gitee.io/images/System/Linux/Ubuntu_apt_source.png" alt="Ubuntu_apt_source" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/Ubuntu_apt_source.png" class="lozad post-image"></li>
 <li>更新源：sudo apt-get update</li>
 </ol>
 </blockquote>

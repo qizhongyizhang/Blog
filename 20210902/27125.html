@@ -49,7 +49,7 @@
         content="2021-09-02">
       <meta 
         property="og:article:modified_time" 
-        content="2021-11-22">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -320,13 +320,13 @@
 <li><strong>Data Vault 模型</strong>：是 ER模型的衍生，建立一个可审计的基础数据层强调数据的历史性、可追溯性和原子性</li>
 </ul>
 <blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0201_DataValut%E6%A8%A1%E5%9E%8B.png" alt="0201_DataValut模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0201_DataValut%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"><br>Hub ：是企业的核心业务实体，由 实体 key 、数据仓库序列代理键、装载时间、数据来源组成<br>Link ：代表 Hub 之间的关系，与 ER 模型最大的区别是将关系作为一个独立的单元抽象，可以提升模型的扩展性；可以直接描述1：1、1：n、 n：n 关系，不需要做任何变更；由 Hub的代理键、装载时间、数据来源组成<br>Satellite ：是 Hub 的详细描述内容， 一个 Hub 可以有多个 Satellite；由 Hub 的代理键、装载时间、来源类型、详细的 Hub 描述信息组成</p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0201_DataValut%E6%A8%A1%E5%9E%8B.png" alt="0201_DataValut模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0201_DataValut%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"><br>Hub ：是企业的核心业务实体，由 实体 key 、数据仓库序列代理键、装载时间、数据来源组成<br>Link ：代表 Hub 之间的关系，与 ER 模型最大的区别是将关系作为一个独立的单元抽象，可以提升模型的扩展性；可以直接描述1：1、1：n、 n：n 关系，不需要做任何变更；由 Hub的代理键、装载时间、数据来源组成<br>Satellite ：是 Hub 的详细描述内容， 一个 Hub 可以有多个 Satellite；由 Hub 的代理键、装载时间、来源类型、详细的 Hub 描述信息组成</p>
 </blockquote>
 <ul>
 <li><strong>Anchor 模型</strong>：对 Data Vault 模型的进一步规范化处理，核心思想是所有的扩展只是添加而不是修改</li>
 </ul>
 <blockquote>
-<p><img src="https://alexedwardz.gitee.io/images//Data/DataManage/Ali_Practice/0202_Anchor%E6%A8%A1%E5%9E%8B.png" alt="0202_Anchor模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images//Data/DataManage/Ali_Practice/0202_Anchor%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"><br>Anchors ：类似于 Data Vault 的 Hub ，代表业务实体，且只有主键<br>Attributes ：类似于 Data Vault 的 Satellite ，更加规范化，将其全部 k-v 结构化， 一个表只有一个 Anchors 的属性描述<br>Ties ：描述 Anchors 之间的关系，单独用表来描述，类似于 Data Vault 的 Link ，可以提升整体模型关系的扩展能力<br>Knots ：代表可能会在多个 Anchors 中公用的属性的提炼，比如性别、状态等这种枚举类型且被公用的属性</p>
+<p><img src="https://qizhongyi.gitee.io/images//Data/DataManage/Ali_Practice/0202_Anchor%E6%A8%A1%E5%9E%8B.png" alt="0202_Anchor模型" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images//Data/DataManage/Ali_Practice/0202_Anchor%E6%A8%A1%E5%9E%8B.png" class="lozad post-image"><br>Anchors ：类似于 Data Vault 的 Hub ，代表业务实体，且只有主键<br>Attributes ：类似于 Data Vault 的 Satellite ，更加规范化，将其全部 k-v 结构化， 一个表只有一个 Anchors 的属性描述<br>Ties ：描述 Anchors 之间的关系，单独用表来描述，类似于 Data Vault 的 Link ，可以提升整体模型关系的扩展能力<br>Knots ：代表可能会在多个 Anchors 中公用的属性的提炼，比如性别、状态等这种枚举类型且被公用的属性</p>
 </blockquote>
 <h3 id="数据仓库建模过程"><a href="#数据仓库建模过程" class="headerlink" title="数据仓库建模过程"></a>数据仓库建模过程</h3><ul>
 <li><strong>第一阶段</strong>：完全应用驱动的时代，阿里巴巴的第一代数据仓库系统构建在 Oracle 上，数据完全以满足报表需求为目的，将数据以与源结构相同的方式同步到 Oracle （称作 ODS 层），数据工程师基于 ODS 数据进行统计，基本没有系统化的模型方法体系，完全基于对 Oracle数据库特性的利用进行数据存储和加工，部分采用 一些维度建模的缓慢化维方式进行历史数据处理；数据架构只有 ODS+DSS 两层</li>
@@ -336,10 +336,10 @@
 <h1 id="OneData"><a href="#OneData" class="headerlink" title="OneData"></a>OneData</h1><p><strong>OneData</strong>：是阿里巴巴内部进行数据整合及管理的方法体系和工具；建设统一的、规范化的数据接入层（ ODS ）和数据中间层（ DWD 和 DWS ），通过数据服务和数据产品，完成服务于阿里巴巴的大数据系统的数据公共层建设；提供标准化的（ Standard ）、共享的（ Shared ）、数据服务（ Service ）能力，降低数据互通成本，释放计算、存储、人力等资源，以消除业务和技术之痛</p>
 <p><strong>OneData体系架构</strong></p>
 <blockquote>
-<p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0203_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84.png" alt="0203_OneData体系架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0203_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84.png" class="lozad post-image"><br>业务板块：阿里巴巴集团业务生态庞大，根据业务的属性划分出几个相对独立的业务板块，业务板块之间的指标或业务重叠性较小；如电商业务板块涵盖淘系、 B2B系和 AliExp ess 系等<br>规范定义： 以维度建模作为理论基础构建总线矩阵，划分和定义数据域、业务过程、维度、度量/原子指标、修饰类型、修饰词、时间周期、派生指标<br>模型设计： 以维度建模理论为基础，基于维度建模总线架构，构建一致、规范定义的维度和事实；在落地表模型时，基于阿里自身业务特点，设计出一套表规范命名体系</p>
+<p><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0203_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84.png" alt="0203_OneData体系架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0203_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84.png" class="lozad post-image"><br>业务板块：阿里巴巴集团业务生态庞大，根据业务的属性划分出几个相对独立的业务板块，业务板块之间的指标或业务重叠性较小；如电商业务板块涵盖淘系、 B2B系和 AliExp ess 系等<br>规范定义： 以维度建模作为理论基础构建总线矩阵，划分和定义数据域、业务过程、维度、度量/原子指标、修饰类型、修饰词、时间周期、派生指标<br>模型设计： 以维度建模理论为基础，基于维度建模总线架构，构建一致、规范定义的维度和事实；在落地表模型时，基于阿里自身业务特点，设计出一套表规范命名体系</p>
 </blockquote>
 <h2 id="规范定义"><a href="#规范定义" class="headerlink" title="规范定义"></a>规范定义</h2><ul>
-<li><strong>规范定义实例</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0204_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E8%A7%84%E8%8C%83%E5%AE%9A%E4%B9%89.png" alt="0204_OneData体系架构_规范定义" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0204_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E8%A7%84%E8%8C%83%E5%AE%9A%E4%B9%89.png" class="lozad post-image"></li>
+<li><strong>规范定义实例</strong><br><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0204_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E8%A7%84%E8%8C%83%E5%AE%9A%E4%B9%89.png" alt="0204_OneData体系架构_规范定义" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0204_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E8%A7%84%E8%8C%83%E5%AE%9A%E4%B9%89.png" class="lozad post-image"></li>
 <li><strong>名词解释</strong></li>
 </ul>
 <blockquote>
@@ -378,7 +378,7 @@
 <p>上下层级派生指标同时存在时：如最近 天支付金额和最近 PC 端支付金额，建议使用前者，PC 端作为维度属性存放在物理表中体现<br>父子关系原子指标存在时：优先选择子原子指标；使用子原子指标创建派生指标</p>
 </blockquote>
 <h2 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h2><ul>
-<li><strong>模型设计架构</strong><br><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0205_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84.png" alt="0205_OneData体系架构_模型设计架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0205_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
+<li><strong>模型设计架构</strong><br><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0205_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84.png" alt="0205_OneData体系架构_模型设计架构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0205_OneData%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84_%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84.png" class="lozad post-image"></li>
 <li><strong>模型层次</strong>：操作数据层（ ODS ）、公共维度模型层（ CDM ）和应用数据层（ ADS ），其中公共维度模型层包括明细数据层（ DWD ）和汇总数据层（ DWS ）<br><strong>操作数据层（ ODS ）</strong>：把操作系统数据无处理地存放在数据仓库系统中</li>
 </ul>
 <blockquote>
@@ -580,7 +580,7 @@
 <blockquote>
 <p>当不同业务过程的度量比较相似、差异不大时，可采用类似<strong>淘宝收藏商品事务事实表</strong>的设计方式，使用同 个字段来表示 数据；在同一个周期内可能会存在多条记录<br>当不同业务过程的度量差异较大时，可采用类似<strong>淘宝交易事务事实表</strong>的设计方式，将不同业务过程的度量使用不同字段段冗余到表中，非当前业务过程则置零表示；度量字段零值较多</p>
 </blockquote>
-<h3 id="两种事实表对比"><a href="#两种事实表对比" class="headerlink" title="两种事实表对比"></a>两种事实表对比</h3><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0206_%E4%BA%8B%E5%AE%9E%E8%A1%A8%E5%B7%AE%E5%BC%82.png" alt="0206_事实表差异" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0206_%E4%BA%8B%E5%AE%9E%E8%A1%A8%E5%B7%AE%E5%BC%82.png" class="lozad post-image"></p>
+<h3 id="两种事实表对比"><a href="#两种事实表对比" class="headerlink" title="两种事实表对比"></a>两种事实表对比</h3><p><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0206_%E4%BA%8B%E5%AE%9E%E8%A1%A8%E5%B7%AE%E5%BC%82.png" alt="0206_事实表差异" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0206_%E4%BA%8B%E5%AE%9E%E8%A1%A8%E5%B7%AE%E5%BC%82.png" class="lozad post-image"></p>
 <h3 id="父子事实的处理方式"><a href="#父子事实的处理方式" class="headerlink" title="父子事实的处理方式"></a>父子事实的处理方式</h3><pre class="highlight"><span class="line">子订单下单全额 ＝ 下单商品数量 × 商品价格</span><br><span class="line">子订单分摊的有效下单全额 ＝ 下单商品数量 × 商品价格 ＋ 父订单邮费 × 下单分摊比例 - 子订单折扣 - 父订单折扣 × 下单分摊比例</span><br><span class="line">下单分摊比例 ＝（下单商品数量 × 原价 - 子订单折扣）&#x2F; sum（下单商品数量 × 原价 - 子订单折扣）</span><br><span class="line">子订单分摊的支付金额 ＝ 父订单支付金额 × 支付分摊比例</span><br><span class="line">支付分摊比例 ＝ （下单商品数量 × 原价 - 子订单折扣 ＋ 调价）&#x2F; sum（下单商品数量 × 原价 - 子订单折扣 ＋ 调价）</span><br></pre>
 
 <h3 id="事实的设计准则"><a href="#事实的设计准则" class="headerlink" title="事实的设计准则"></a>事实的设计准则</h3><ol>
@@ -655,7 +655,7 @@
 <blockquote>
 <p>使用相 关业务系统的业务实体的结束标志作为此业务系统的结束标志；如针对物流订单，可以使用交易订单（理论上交易订单完结，则物流订单完结）<br>和前端业务系统确定口径或使用前端归档策略</p>
 </blockquote>
-<h2 id="三种事实表的比较"><a href="#三种事实表的比较" class="headerlink" title="三种事实表的比较"></a>三种事实表的比较</h2><p><img src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0207_%E4%B8%89%E7%A7%8D%E4%BA%8B%E5%AE%9E%E8%A1%A8%E7%9A%84%E6%AF%94%E8%BE%83.png" alt="0207_三种事实表的比较" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/Data/DataManage/Ali_Practice/0207_%E4%B8%89%E7%A7%8D%E4%BA%8B%E5%AE%9E%E8%A1%A8%E7%9A%84%E6%AF%94%E8%BE%83.png" class="lozad post-image"></p>
+<h2 id="三种事实表的比较"><a href="#三种事实表的比较" class="headerlink" title="三种事实表的比较"></a>三种事实表的比较</h2><p><img src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0207_%E4%B8%89%E7%A7%8D%E4%BA%8B%E5%AE%9E%E8%A1%A8%E7%9A%84%E6%AF%94%E8%BE%83.png" alt="0207_三种事实表的比较" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/Data/DataManage/Ali_Practice/0207_%E4%B8%89%E7%A7%8D%E4%BA%8B%E5%AE%9E%E8%A1%A8%E7%9A%84%E6%AF%94%E8%BE%83.png" class="lozad post-image"></p>
 <blockquote>
 <p>事务事实表记录的事务层面的事实，用于跟踪业务过程的行为,支持几种描述行为的事实，保存的是最原子的数据，也称为“原子事实表”<br>周期快照事实表以具有规律性的、可预见的时间间隔来记录事实，如余额、库存、层级、温度等，时间间隔为每天、每月、每年等，如库存日快照表等<br>累积快照事实表被用来跟踪实体的一系列业务过程的进展情况，通常具有多 个日期字段，用于研究业务过程中的里程碑过程的时间间隔</p>
 </blockquote>

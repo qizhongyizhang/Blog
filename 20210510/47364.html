@@ -49,7 +49,7 @@
         content="2021-05-10">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-25">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -534,7 +534,7 @@
 <li>死锁：互相等待；饿死：持续等待</li>
 <li>两阶段封锁协议：增长阶段：只允许增加锁，不允许释放；消减阶段：只允许释放，不允许增加锁</li>
 </ul>
-<h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><p>字符集是一套字符与字符编码的集合，常用字符集见 <a target="_blank" rel="noopener" href="https://alexedwardz.gitee.io/20210410/16033.html"><font face = "微软雅黑" color = 1E90FF size = 5> 链接文档 </font></a> 的字符编码部分</p>
+<h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><p>字符集是一套字符与字符编码的集合，常用字符集见 <a href="https://qizhongyi.gitee.io/20210410/16033.html"><font face = "微软雅黑" color = 1E90FF size = 5> 链接文档 </font></a> 的字符编码部分</p>
 <pre class="highlight"><span class="line">Show character set; 可以获得支持的所有字符集</span><br><span class="line">character set gbk collate gbk_chinese_ci;设置字符集，也可在配置文件中修改</span><br><span class="line"> - character_set_database：默认数据库字符集（数据）</span><br><span class="line"> - character_set_sever：默认mysql服务器字符集</span><br><span class="line"> - character_set_system：标识符的字符集（库名，表名）</span><br></pre>
 
 <p>校对规则：当前字符集内，字符之间的比较关系。每一套字符集都有一套相应的校对规则/按照ASCLL码表大小比较规则（ci不区分大小写，cs区分大小写，bin二进制下区分，一般认为不区分），查看字符集：Show collation like ‘xxx’;</p>

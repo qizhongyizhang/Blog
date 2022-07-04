@@ -49,7 +49,7 @@
         content="2021-04-12">
       <meta 
         property="og:article:modified_time" 
-        content="2022-07-03">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -306,7 +306,7 @@
 <li>4：保留的运行级别</li>
 <li>5：图形界面</li>
 <li>6：重启<br>* 配置文件：/etc/inittab的 id:5:initdefault</li>
-<li>init 0/1/2/3/5/6<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Init_Process.png" alt="Init_Process" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Init_Process.png" class="lozad post-image"></li>
+<li>init 0/1/2/3/5/6<br><img src="https://qizhongyi.gitee.io/images/System/Linux/Init_Process.png" alt="Init_Process" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/Init_Process.png" class="lozad post-image"></li>
 </ul>
 </blockquote>
 <h1 id="帮助指令"><a href="#帮助指令" class="headerlink" title="帮助指令"></a>帮助指令</h1><ul>
@@ -610,7 +610,7 @@
 <blockquote>
 <p>选项</p>
 <blockquote>
-<p>-d n：指定n秒后自动更新，默认三秒<br>-i：不显示任何闲置或僵死进程<br>-p：通过指定进程ID进监控进程状态<br>交互说明<br>P：以CPU使用规律排序，默认选项<br>M：以内存使用率排序<br>N：以PID排序<br>q：退出top指令<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" alt="Service_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Service_Info.png" class="lozad post-image"></p>
+<p>-d n：指定n秒后自动更新，默认三秒<br>-i：不显示任何闲置或僵死进程<br>-p：通过指定进程ID进监控进程状态<br>交互说明<br>P：以CPU使用规律排序，默认选项<br>M：以内存使用率排序<br>N：以PID排序<br>q：退出top指令<br><img src="https://qizhongyi.gitee.io/images/System/Linux/Service_Info.png" alt="Service_Info" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/Service_Info.png" class="lozad post-image"></p>
 </blockquote>
 <p>使用</p>
 <blockquote>
@@ -642,7 +642,7 @@
 <blockquote>
 <p>sshd：远程登陆<br>bash：终端命令行窗口</p>
 </blockquote>
-<h2 id="进程管理-服务"><a href="#进程管理-服务" class="headerlink" title="进程管理-服务"></a>进程管理-服务</h2><h3 id="基本介绍-1"><a href="#基本介绍-1" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>服务（Service）的本质是后台运行的进程，通常会监听某一个端口，等待其他程序的请求，又叫守护进程，每一个服务都会在0-6的Linux运行级别下通过chkconfig设置是否自启动<br><img src="https://alexedwardz.gitee.io/images/System/Linux/Service_wrok.png" alt="Service_wrok" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://alexedwardz.gitee.io/images/System/Linux/Service_wrok.png" class="lozad post-image"></p>
+<h2 id="进程管理-服务"><a href="#进程管理-服务" class="headerlink" title="进程管理-服务"></a>进程管理-服务</h2><h3 id="基本介绍-1"><a href="#基本介绍-1" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>服务（Service）的本质是后台运行的进程，通常会监听某一个端口，等待其他程序的请求，又叫守护进程，每一个服务都会在0-6的Linux运行级别下通过chkconfig设置是否自启动<br><img src="https://qizhongyi.gitee.io/images/System/Linux/Service_wrok.png" alt="Service_wrok" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://qizhongyi.gitee.io/images/System/Linux/Service_wrok.png" class="lozad post-image"></p>
 <p><strong>service</strong> 服务名 start|stop|restart|reload|status</p>
 <blockquote>
 <p>CentOS 7.0以后使用systemctl，不再使用service</p>
