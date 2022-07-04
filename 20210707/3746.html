@@ -49,7 +49,7 @@
         content="2021-07-07">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-28">
+        content="2022-07-04">
       <meta 
         property="og:article:author" 
         content="戚中一">
@@ -265,7 +265,7 @@
     
     
       <span class="dot"></span>
-      <span>336 字</span>
+      <span>1.1k 字</span>
     
   </div>
   
@@ -295,22 +295,47 @@
     <p>写在前面：本文主要记录Python的简介、安装过程和通识使用知识介绍</p>
 <span id="more"></span>
 
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>创立者：Guido van Rossum，龟叔，1989年<br>开发环境：<br><a target="_blank" rel="noopener" href="http://www.python.org/downloads/">www.python.org/downloads/</a><br><a target="_blank" rel="noopener" href="https://python123.io/download">https://python123.io/download</a><br>Pip：第三方库安装工具</p>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p><strong>优点</strong>：优雅、明确、简单</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>创立者：Guido van Rossum，吉多，龟叔，1989年圣诞节期间编写，形成原型，于1991年诞生第一个 Python解释器，<a target="_blank" rel="noopener" href="https://www.python.org/downloads"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a></p>
+<h2 id="Python解释器"><a href="#Python解释器" class="headerlink" title="Python解释器"></a>Python解释器</h2><p><strong>解释器</strong>：将高级语言转换为计算机能识别的机器语言的工具，转换的方式为<strong>解释</strong>（在每一次运行时进行转换）就称为解释器</p>
+<p><strong>CPython</strong>：官方版本的解释器：CPython，用C语言开发，是使用最广的Python解释器；用 &gt;&gt;&gt; 作为提示符<br><strong>IPython</strong>：是基于CPython的一个交互式解释器，基于 BSD 开源；在交互方式上有所增强，但是执行Python代码的功能和CPython是完全一样；在终端输入 ipython 进入，用 In [序号]: 作为提示符</p>
 <blockquote>
-<p>简单、易学、免费、开源<br>面向对象、可移植性<br>层语言、规范的代码<br>解释性<br>可扩展性、丰富的库</p>
+<p>支持自动补全，自动缩进</p>
+<p>支持 bash shell 命令</p>
+</blockquote>
+<p><strong>PyPy</strong>：支持JIT即时编译，对Python代码进行动态编译，显著提高Python代码的执行速度；执行结果可能会与 CPython 有所不同，<br><strong>Jython</strong>：是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行<br><strong>IronPython</strong>：是运行在微软 .Net 平台上的Python解释器，可以直接把Python代码编译成 .Net 的字节码</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p><strong>优点</strong>：优雅、明确、简单、免费、开源；<strong>做一件事只用一种方法</strong></p>
+<blockquote>
+<p><strong>面向对象</strong>：一切皆对象，支持继承、重载、支持泛型设计<br><strong>强大标准库</strong>：提供系统管理、网络通信、文本处理、数据库接口、图形系统、XML处理等功能<br><strong>大量第三方模块</strong>：Python社区提供，覆盖 科学计算、人工智能、机器学习、Web开发、数据库接口、图形系统等<br><strong>可扩展性</strong>：可以编写 C 或 C++ 程序运行，提升运行效率或保密算法</p>
 </blockquote>
 <p><strong>缺点</strong></p>
 <blockquote>
 <p>执行效率慢<br>发布代码不能加密</p>
 </blockquote>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><strong>Python 2.x</strong>：2010年推出最后一个版本 python 2.7</p>
+<blockquote>
+<p>默认不支持中文，解释器为 python</p>
+</blockquote>
+<p><strong>Python 3.x</strong>：2008年发布 python 3.0，没有考虑向下兼容</p>
+<blockquote>
+<p>默认支持中文，解释器为 python3</p>
+</blockquote>
+<h3 id="集成开发环境"><a href="#集成开发环境" class="headerlink" title="集成开发环境"></a>集成开发环境</h3><p><strong>集成开发环境</strong>：IDE，Integrated Development Environment，集成开发软件所需的所有工具，通常具备以下功能：</p>
+<blockquote>
+<p>图形用户界面<br>代码编辑器，支持自动补全、自动缩进、错误提示等<br>编译器或解释器，调试器（支持断点、单步执行等）</p>
+</blockquote>
+<ul>
+<li><p><a href="https://alexedwardz.gitee.io/20210710/9972.html"><font face = "微软雅黑" color = 1E90FF size = 5> <strong>Anaconda</strong> </font></a>：是一个开源的Python发行版本，包含了conda、Python等180多个科学包及其依赖项、大量科学包</p>
+</li>
+<li><p><a href="https://alexedwardz.gitee.io/20210711/18374.html"><font face = "微软雅黑" color = 1E90FF size = 5> <strong>PyCharm</strong> </font></a>：支持 Django 框架下的专业 Web 开发，可以在 Windows、Linux、macOS 下使用</p>
+</li>
+</ul>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><strong>web应用开发</strong>：YouTube、Instagram、豆瓣<br><strong>数据分析</strong></p>
 <blockquote>
 <p>支持产品<br>支持运营<br>支持集团管理层<br>负责行业研究</p>
 </blockquote>
 <p><strong>系统网络运维</strong>：自动化运维<br><strong>界面开发</strong><br><strong>网络爬虫</strong><br><strong>人工智能</strong></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li><p>下载地址：<a target="_blank" rel="noopener" href="https://www.python.org/downloads"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a></p>
+<li><p>下载地址：<a target="_blank" rel="noopener" href="https://www.python.org/downloads"><font face = "微软雅黑" color = 1E90FF size = 5> 官网 </font></a>，<a target="_blank" rel="noopener" href="https://python123.io/download"><font face = "微软雅黑" color = 1E90FF size = 5> 其他网址 </font></a></p>
 </li>
 <li><p>选择合适的安装包</p>
 </li>
@@ -330,6 +355,26 @@
 <li><p>退出venv环境：deactivate</p>
 </li>
 </ol>
+<h2 id="安装第三方模块"><a href="#安装第三方模块" class="headerlink" title="安装第三方模块"></a>安装第三方模块</h2><p><strong>pip安装</strong>：在Python中，安装第三方模块，通过包管理工具pip完成，<a target="_blank" rel="noopener" href="https://pypi.org/"><font face = "微软雅黑" color = 1E90FF size = 5> 第三方库网址 </font></a></p>
+<pre class="highlight"><span class="line">pip install mod_name</span><br><span class="line">pip uninsatll mod_name</span><br><span class="line">pip list：列出当前系统已安装的第三方库</span><br><span class="line">pip show mod_name</span><br><span class="line">pip download mod_name</span><br><span class="line">pip search mod_name</span><br></pre>
+
+<p><strong>修改pip镜像源下载地址</strong></p>
+<blockquote>
+<p><strong>Windows</strong>：在用户主目录（C:\Users\user_name\AppData\Roaming）下新建pip文件夹，新建pip.ini文件：输入内容</p>
+<blockquote>
+<p>[global]<br>index-url=<a target="_blank" rel="noopener" href="https://pypi.doubanio.com/simple">https://pypi.doubanio.com/simple</a></p>
+<p>命令终端运行：pip config set global.index-url <a target="_blank" rel="noopener" href="https://pypi.doubanio.com/simple">https://pypi.doubanio.com/simple</a></p>
+</blockquote>
+<p><strong>Linux</strong>：在用户主目录（cd /home/user_name）下新建.pip文件夹，新建pip.conf文件：输入内容</p>
+<blockquote>
+<p>[global]<br>index-url=<a target="_blank" rel="noopener" href="https://pypi.doubanio.com/simple">https://pypi.doubanio.com/simple</a></p>
+<p>将安装依赖项导出文件：pip freeze &gt; requirements.txt<br>安装依赖项安装：pip install -r requirements.txt</p>
+</blockquote>
+<p><strong>常见镜像源</strong>：</p>
+<blockquote>
+<p>阿里 <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a><br>豆瓣 <a target="_blank" rel="noopener" href="http://pypi.douban.com/simple/">http://pypi.douban.com/simple/</a><br>清华大学 <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a><br>中国科技大学 <a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/simple/">http://pypi.mirrors.ustc.edu.cn/simple/</a></p>
+</blockquote>
+</blockquote>
 
   </div>
   <div>
@@ -436,7 +481,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">Python解释器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">集成开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -484,7 +529,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">Python解释器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">集成开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -699,7 +744,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">Python解释器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">集成开发环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#virtualenv"><span class="toc-text">virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">安装第三方模块</span></a></li></ol></li></ol>
     </article>
   
   
